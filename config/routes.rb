@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  resources :users
+
   get "user_sessions/new"
 
   resources :user_sessions
