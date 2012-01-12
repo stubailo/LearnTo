@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
     end
-
+    
     def current_user
       logger.debug "ApplicationController::current_user"
       return @current_user if defined?(@current_user)
