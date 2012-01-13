@@ -4,6 +4,7 @@
   %h1= @user.login
   %p= @user.email
   = link_to 'Show', @user, :class => "button" 
-  = link_to 'Edit', edit_user_path(@user), :class => "button"
+  = link_to 'Change Password', users_edit_password_path(@user), :class => "button"
+  = link_to 'Change Email', users_edit_email_path(@user), :class => "button"
   = link_to 'Destroy', @user, :confirm => 'Are you sure?', :method => :delete, :class => "button"
 

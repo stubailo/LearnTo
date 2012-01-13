@@ -1,14 +1,22 @@
 Classroom::Application.routes.draw do
 
-  resources :forums
 
-  resources :comments
 
-  resources :posts
+
+
+
+
+
+  get "users/edit_password"
+  
+  get "users/edit_email"
+
 
   resources :users
 
   get "user_sessions/new"
+  
+  get "user_sessions/new_ajax"
 
   resources :user_sessions
 

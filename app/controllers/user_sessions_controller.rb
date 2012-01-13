@@ -5,6 +5,11 @@ class UserSessionsController < ApplicationController
   def new
     @user_session = UserSession.new
   end
+  
+  def new_ajax
+	@user_session = UserSession.new
+	render :action => :new, :layout => false
+  end
 
   def create
     @user_session = UserSession.new(params[:user_session])
