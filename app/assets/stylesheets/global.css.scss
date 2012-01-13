@@ -189,5 +189,11 @@ form {
       font-weight: normal;
       margin-left: 5px;
     }
+
+    #recaptcha_widget_div label.error {
+      position: absolute;
+      top: 60px;
+      width: 200px;
+    }
   }
 }
