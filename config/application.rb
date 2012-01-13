@@ -55,5 +55,9 @@ module Classroom
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    ENV['RECAPTCHA_PUBLIC_KEY']  = '6LcRQswSAAAAAMuoq27FmObFhUfgLx7Odd70hIlx'
+    ENV['RECAPTCHA_PRIVATE_KEY'] = '6LcRQswSAAAAAGcQz4yfuLECAp0QX-_nRxtMJySe'
+
   end
 end
