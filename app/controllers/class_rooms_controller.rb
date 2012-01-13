@@ -14,6 +14,8 @@ class ClassRoomsController < ApplicationController
   # GET /class_rooms/1.json
   def show
     @class_room = ClassRoom.find(params[:id])
+    @creator = User.find(@class_room.creator_id)
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -77,12 +79,17 @@ class ClassRoomsController < ApplicationController
   # DELETE /class_rooms/1
   # DELETE /class_rooms/1.json
   def destroy
+    @user = current_user
     @class_room = ClassRoom.find(params[:id])
-    @class_room.destroy
-
-    respond_to do |format|
-      format.html { redirect_to class_rooms_url }
-      format.json { head :no_content }
-    end
+    if @class_room.creator_id == @user.id
+	  @class_room.destroy
+	  	
+	  respond_to do |format|
+	    format.html { redirect_to class_rooms_url }
+	    format.json { head :no_content }
+	  end
+	else
+	  redirect_to class_room_path(@class_room), :notice => "You do not have permission to modify this person's class"
+	end
   end
 end
