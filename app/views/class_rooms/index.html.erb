@@ -17,15 +17,14 @@
 <% @class_rooms.each do |class_room| %>
   <tr>
     <td><%= class_room.name %></td>
-    <td><%= class_room.creator_id %></td>
+    <% creator = User.find(class_room.creator_id) %>
+    <td><%= creator.login %></td>
     <td><%= class_room.occupancy %></td>
     <td><%= class_room.price %></td>
     <td><%= class_room.start_date %></td>
     <td><%= class_room.end_date %></td>
     <td><%= class_room.description_id %></td>
     <td><%= link_to 'Show', class_room %></td>
-    <td><%= link_to 'Edit', edit_class_room_path(class_room) %></td>
-    <td><%= link_to 'Destroy', class_room, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -14,6 +14,8 @@ class ClassRoomsController < ApplicationController
   # GET /class_rooms/1.json
   def show
     @class_room = ClassRoom.find(params[:id])
+    @creator = User.find(@class_room.creator_id)
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,11 +26,14 @@ class ClassRoomsController < ApplicationController
   # GET /class_rooms/new
   # GET /class_rooms/new.json
   def new
-    @class_room = ClassRoom.new
+    require_user
+    if current_user
+      @class_room = ClassRoom.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @class_room }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @class_room }
+      end
     end
   end
 
@@ -40,7 +45,9 @@ class ClassRoomsController < ApplicationController
   # POST /class_rooms
   # POST /class_rooms.json
   def create
+    @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
+    @class_room.creator_id = @user.id 
 
     respond_to do |format|
       if @class_room.save
@@ -72,12 +79,17 @@ class ClassRoomsController < ApplicationController
   # DELETE /class_rooms/1
   # DELETE /class_rooms/1.json
   def destroy
+    @user = current_user
     @class_room = ClassRoom.find(params[:id])
-    @class_room.destroy
-
-    respond_to do |format|
-      format.html { redirect_to class_rooms_url }
-      format.json { head :no_content }
-    end
+    if @class_room.creator_id == @user.id
+	  @class_room.destroy
+	  	
+	  respond_to do |format|
+	    format.html { redirect_to class_rooms_url }
+	    format.json { head :no_content }
+	  end
+	else
+	  redirect_to class_room_path(@class_room), :notice => "You do not have permission to modify this person's class"
+	end
   end
 end
