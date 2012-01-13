@@ -11,7 +11,49 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120113044844) do
+ActiveRecord::Schema.define(:version => 20120113181635) do
+
+  create_table "class_rooms", :force => true do |t|
+    t.string   "name"
+    t.integer  "creator_id"
+    t.integer  "occupancy"
+    t.decimal  "price",          :precision => 10, :scale => 0
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "description_id"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "rating"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "forums", :force => true do |t|
+    t.integer  "class_room_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_id"
+    t.text     "content"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                             :null => false

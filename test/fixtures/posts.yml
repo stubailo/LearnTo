@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user_id: MyString
-  title: MyString
+  user: 
+  forum: 
   content: MyText
+  title: MyString
 
 two:
-  user_id: MyString
-  title: MyString
+  user: 
+  forum: 
   content: MyText
+  title: MyString

@@ -1,5 +1,13 @@
 Classroom::Application.routes.draw do
 
+  get "post/new"
+
+  get "post/edit"
+
+  get "post/delete"
+
+  get "forum/show"
+
   resources :class_rooms
 
 
