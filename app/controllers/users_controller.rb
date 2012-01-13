@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
+      if (@user.valid? || verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save
         format.html { redirect_to user_url(@user), :notice => 'Registration successfull.' }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else

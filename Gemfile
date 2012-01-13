@@ -24,6 +24,8 @@ end
 
 gem 'jquery-rails'
 
+gem "recaptcha", :require => "recaptcha/rails"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
