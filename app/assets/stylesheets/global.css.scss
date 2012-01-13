@@ -1,0 +1,183 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+$orange: #f37800;
+$text-orange: saturate(darken($orange, 10%), 40%);
+$light-grey: #ccc;
+$dark-grey: #444;
+
+strong {
+    font-weight: bold;
+}
+
+.ui-button-text-only, .ui-button-text {
+    padding: 0;
+}
+
+.ui-icon.float-left {
+    float:left;
+    margin-top: -1px;
+    margin-left:-4px;
+    padding:0;
+}
+
+body
+{
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+a {
+    color: $text-orange;
+}
+
+.clear {
+  clear:both;
+}
+
+$global-padding: 10px;
+$side-margins: $global-padding*3;
+$left-bar-padding: $global-padding;
+
+header {
+    background: $light-grey;
+    border-bottom: 1px solid $dark-grey;
+
+    .logo {
+      float: left;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: $dark-grey;
+        padding: $global-padding;
+        margin-left: $side-margins;
+    }
+
+    .user_nav {
+      float: right;
+      padding: $global-padding;
+      margin-right: $side-margins;
+    }
+}
+
+#content
+{
+    min-width: 800px;
+    margin: 0 $side-margins;
+}
+
+hr {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 8px auto;
+  width: 100%;
+  clear: both;
+  border: none;
+  border-top: 1px solid $light-grey;
+  font-size: 1px;
+  line-height: 0;
+  overflow: visible;
+}
+
+.content {
+
+  padding: $global-padding;
+
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: $global-padding 0 $global-padding*1.5 0;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: $global-padding*.7 0;
+  }
+}
+
+#error_explanation {
+  position: relative;
+  
+  padding: $global-padding;
+  padding-left: 16px + $global-padding*2;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .ui-icon {
+    position: absolute;
+    top: $global-padding;
+    left: $global-padding;
+  }
+}
+
+form {
+  .field {
+    margin: $global-padding 0;
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: $global-padding * .5;
+    }
+    
+    .hint {
+      margin: $global-padding*0.5 0;
+      color: $dark-grey;
+    }
+
+    input {
+      font-size: 1.2em;
+      padding: $global-padding*.5;
+    }
+  }
+}
