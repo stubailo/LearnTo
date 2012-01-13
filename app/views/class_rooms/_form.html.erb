@@ -1,0 +1,45 @@
+<%= form_for(@class_room) do |f| %>
+  <% if @class_room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@class_room.errors.count, "error") %> prohibited this class_room from being saved:</h2>
+
+      <ul>
+      <% @class_room.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :creator_id %><br />
+    <%= f.number_field :creator_id %>
+  </div>
+  <div class="field">
+    <%= f.label :occupancy %><br />
+    <%= f.number_field :occupancy %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.datetime_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :description_id %><br />
+    <%= f.number_field :description_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

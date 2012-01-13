@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @class_room.name %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%= @class_room.creator_id %>
+</p>
+
+<p>
+  <b>Occupancy:</b>
+  <%= @class_room.occupancy %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @class_room.price %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @class_room.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @class_room.end_date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @class_room.description_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_class_room_path(@class_room) %> |
+<%= link_to 'Back', class_rooms_path %>

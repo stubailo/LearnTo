@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  resources :class_rooms
+
   get "users/edit_password"
   
   get "users/edit_email"
