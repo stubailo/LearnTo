@@ -1,0 +1,34 @@
+<h1>Listing class_rooms</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Creator</th>
+    <th>Occupancy</th>
+    <th>Price</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @class_rooms.each do |class_room| %>
+  <tr>
+    <td><%= class_room.name %></td>
+    <% creator = User.find(class_room.creator_id) %>
+    <td><%= creator.login %></td>
+    <td><%= class_room.occupancy %></td>
+    <td><%= class_room.price %></td>
+    <td><%= class_room.start_date %></td>
+    <td><%= class_room.end_date %></td>
+    <td><%= class_room.description_id %></td>
+    <td><%= link_to 'Show', class_room %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Class room', new_class_room_path %>
