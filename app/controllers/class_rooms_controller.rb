@@ -24,11 +24,14 @@ class ClassRoomsController < ApplicationController
   # GET /class_rooms/new
   # GET /class_rooms/new.json
   def new
-    @class_room = ClassRoom.new
+    require_user
+    if current_user
+      @class_room = ClassRoom.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @class_room }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @class_room }
+      end
     end
   end
 
@@ -40,7 +43,9 @@ class ClassRoomsController < ApplicationController
   # POST /class_rooms
   # POST /class_rooms.json
   def create
+    @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
+    @class_room.creator_id = @user.id 
 
     respond_to do |format|
       if @class_room.save

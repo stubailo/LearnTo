@@ -7,7 +7,8 @@
 
 <p>
   <b>Creator:</b>
-  <%= @class_room.creator_id %>
+  <% creator = User.find(@class_room.creator_id) %>
+  <%= creator.login %>
 </p>
 
 <p>
