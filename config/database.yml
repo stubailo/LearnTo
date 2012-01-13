@@ -40,4 +40,3 @@ production:
   username: root
   password: classroom
   socket: /var/run/mysqld/mysqld.sock
-
