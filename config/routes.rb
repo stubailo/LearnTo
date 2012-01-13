@@ -7,6 +7,8 @@ Classroom::Application.routes.draw do
 
 
 
+  resources :tags
+
   get "users/edit_password"
   
   get "users/edit_email"
