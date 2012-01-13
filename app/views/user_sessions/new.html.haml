@@ -2,15 +2,16 @@
 
 = form_for @user_session, :url => {:action => "create"} do |f|
   = f.error_messages
-  %div
+  .section
     = f.label :email
-    = f.text_field :email
-  %div
+    = f.text_field :email, :class => "text"
+  .section
     = f.label :password
-    = f.password_field :password
-  %div
-    = f.check_box :remember_me
+    = f.password_field :password, :class => "text"
+  .section
+    = f.check_box :remember_me, :class => "checkbox"
     = f.label :remember_me
+    %div.clear
   %div
-    = f.submit "Login"
+    = f.submit "Submit", :class => "button"
 
