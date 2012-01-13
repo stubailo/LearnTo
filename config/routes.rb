@@ -1,13 +1,7 @@
 Classroom::Application.routes.draw do
 
+  resources :class_rooms
 
-
-
-
-
-
-
-  resources :tags
 
   get "users/edit_password"
   

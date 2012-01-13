@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  creator_id: 1
+  occupancy: 1
+  price: 9.99
+  start_date: 2012-01-13 02:44:33
+  end_date: 2012-01-13 02:44:33
+  description_id: 1
+
+two:
+  name: MyString
+  creator_id: 1
+  occupancy: 1
+  price: 9.99
+  start_date: 2012-01-13 02:44:33
+  end_date: 2012-01-13 02:44:33
+  description_id: 1
