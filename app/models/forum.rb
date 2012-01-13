@@ -1,3 +1,4 @@
 class Forum < ActiveRecord::Base
-  belongs_to :class
+  has_many :posts
+  belongs_to :class_room
 end
