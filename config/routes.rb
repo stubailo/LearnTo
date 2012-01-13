@@ -7,6 +7,8 @@ Classroom::Application.routes.draw do
   resources :users
 
   get "user_sessions/new"
+  
+  get "user_sessions/new_ajax"
 
   resources :user_sessions
 
