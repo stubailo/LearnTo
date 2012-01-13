@@ -179,5 +179,15 @@ form {
       font-size: 1.2em;
       padding: $global-padding*.5;
     }
+
+    label.error {
+      margin: none;
+      display: inline-block;
+      position: relative;
+      background: #fdd;
+      padding: $global-padding*.5;
+      font-weight: normal;
+      margin-left: 5px;
+    }
   }
 }

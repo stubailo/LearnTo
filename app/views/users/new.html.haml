@@ -1,4 +1,5 @@
 .content
+
   %h1 Create an Account
 
   %p Get ready to join our vibrant learning community!
@@ -16,19 +17,19 @@
     .field
       = f.label :login, "Display Name"
       %p.hint Other people will see this name when you enroll in classes and post in discussion boards.
-      = f.text_field :login
+      = f.text_field :login, :class => "required"
     .field
       = f.label :email
       %p.hint We will send a confirmation link to this address after you submit the form. You will also use this to log in.
-      = f.text_field :email
+      = f.text_field :email, :class => "required email"
     .field
       = f.label :password
       %p.hint Must be at least 8 characters long.
-      = f.password_field :password
+      = f.password_field :password, :class => "required"
     .field
       = f.label :password_confirmation
       %p.hint Must match the previous password.
-      = f.password_field :password_confirmation
+      = f.password_field :password_confirmation, :class => "required"
     
     %br/
     .field
