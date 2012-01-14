@@ -1,24 +1,52 @@
 @import "rounded";
 
+.javascript_show {
+  display: none;
+}
+
+.media-resource{
+  display: block;
+  margin: 10px;
+
+  border: 1px solid #ddd;
+  border-style: dashed none;
+
+  padding: 10px 15px;
+  
+  .title {
+    padding-bottom: 5px;
+  }
+
+  .caption {
+    padding-top: 5px;
+  }
+}
+
 .media-resource.media-image {
-    float: left;
-    background: #f6f6f6;
-    padding: 3px;
-    border: 1px solid #ddd;
-    margin: 10px;
-
-    @include rounded(3px);
-
-    .caption {
-        text-align: center;
-        margin: 3px auto;
-        font-size: .9em;
-        color: #444;
-        line-height: 1.3em;
-    }
 }
 
 .media-resource.media-audio {
-  margin: 10px;
-  float: left;
+
+  .caption {
+    margin-top: 3px;
+  }
+
+  .title {
+    margin-bottom: 3px;
+  }
+}
+
+.media-resource.media-video {
+  
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .caption {
+    margin-top: 10px;
+  }
+  
+  iframe {
+    margin: 0 auto;
+  }
 }

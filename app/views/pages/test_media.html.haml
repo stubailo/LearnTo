@@ -1,0 +1,67 @@
+-# important to put the width of the image in the caption, so it doesn't overflow.
+%div.content(style="width: 650px; margin: 0 auto;")
+  
+  %h1 Test Page for Embedding Media
+
+  %p There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+  
+  -# %div.media-resource.media-image
+    .title
+      %strong Image
+      \-
+      = link_to "ttlogosm.jpg", "/ttlogosm.jpg"
+    = link_to (image_tag "/ttlogosm.jpg"), "/ttlogosm.jpg"
+    %div.caption(style="width: 300px;") Click image to enlarge.  This caption is really long and likely to be longer than the image.
+
+  :javascript
+    $(function() {
+      AudioPlayer.embed("audio_player_1", {
+        soundFile: "/song.mp3",
+        titles: "Test Song",
+        artists: "sashko"
+      });
+    });
+  %div.media-resource.media-audio
+    .title
+      %strong Audio
+      \-
+      = link_to "song.mp3", "/song.mp3"
+    .no_javascript
+      Please enable JavaScript and Flash to listen to the audio file.
+    .javascript_show
+      %p#audio_player_1.media-audio-player-container
+        = link_to "Audio File", "/song.mp3"
+    .caption
+      This is a song to test the wrapper for audio files.
+  .clear
+
+  %h2 Another Section
+
+  %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+  .media-resource.media-document
+    .title
+      %strong Word Document
+      \-
+      = link_to "iceland.pptx", "/iceland.pptx"
+    .no_javascript
+      Please enable JavaScript to see the embedded document.
+    .javascript_show
+      %iframe{:width => "100%", :height => "500px", :frameBorded => 0, :src => "http://docs.google.com/viewer?embedded=true&url=" + root_url + "/pptd.ppt"}
+
+  %h2 Now We Have a Video
+
+  %p The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+  .media-resource.media-video.media-video-youtube
+    .title
+      %strong YouTube Video
+      \-
+      = link_to "m7G6LJ66e4I", "http://www.youtube.com/embed/m7G6LJ66e4I"
+    .javascript_show
+      %center
+        %iframe(width="560" height="315" src="http://www.youtube.com/embed/m7G6LJ66e4I" frameborder="0" allowfullscreen)
+    .no_javascript
+      Please enable JavaScript and Flash to see the embedded video.
+    .caption
+      This is a video to test video embedding.
