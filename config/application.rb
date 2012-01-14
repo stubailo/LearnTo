@@ -59,5 +59,8 @@ module Classroom
     ENV['RECAPTCHA_PUBLIC_KEY']  = '6LcRQswSAAAAAMuoq27FmObFhUfgLx7Odd70hIlx'
     ENV['RECAPTCHA_PRIVATE_KEY'] = '6LcRQswSAAAAAGcQz4yfuLECAp0QX-_nRxtMJySe'
 
+    # Will serve files from the public folder
+    config.serve_static_assets = true
+
   end
 end
