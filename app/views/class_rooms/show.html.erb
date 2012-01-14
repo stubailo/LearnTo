@@ -33,7 +33,10 @@
   <%= @class_room.description_id %>
 </p>
 
-
-<%= link_to 'Edit', edit_class_room_path(@class_room) %> |
-<%= link_to 'Destroy', @class_room, confirm: 'Are you sure?', method: :delete %> |
+<% if @user.id == @creator.id %>
+  <%= link_to 'Edit', edit_class_room_path(@class_room) %> |
+  <%= link_to 'Destroy', @class_room, confirm: 'Are you sure?', method: :delete %> |
+<% else %>
+  <%= link_to 'Join' %>
+<% end %>
 <%= link_to 'Back', class_rooms_path %>

@@ -8,14 +8,14 @@ Classroom::Application.routes.draw do
 
   get "forum/show"
 
-  resources :class_rooms
-
-
   get "users/edit_password"
   
   get "users/edit_email"
 
+  post "class_rooms/add_user"
 
+  resources :class_rooms
+  
   resources :users
 
   get "user_sessions/new"
