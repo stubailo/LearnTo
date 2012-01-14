@@ -6,5 +6,11 @@ class HomeController < ApplicationController
 	end
   end
 
+  def media_test
+	if current_user
+		@user = current_user
+	end
+  end
+
 end
 

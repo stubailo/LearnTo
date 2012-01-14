@@ -34,4 +34,7 @@ Classroom::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Will serve files from the public folder
+  config.serve_static_assets = true
 end

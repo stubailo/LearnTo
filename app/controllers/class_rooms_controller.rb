@@ -9,6 +9,12 @@ class ClassRoomsController < ApplicationController
       format.json { render json: @class_rooms }
     end
   end
+  
+  
+  def add_user
+    @user = current_user
+    @class_room = ClassRoom.find(params[:id])
+  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json

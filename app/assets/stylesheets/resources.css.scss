@@ -1,0 +1,24 @@
+@import "rounded";
+
+.media-resource.media-image {
+    float: left;
+    background: #f6f6f6;
+    padding: 3px;
+    border: 1px solid #ddd;
+    margin: 10px;
+
+    @include rounded(3px);
+
+    .caption {
+        text-align: center;
+        margin: 3px auto;
+        font-size: .9em;
+        color: #444;
+        line-height: 1.3em;
+    }
+}
+
+.media-resource.media-audio {
+  margin: 10px;
+  float: left;
+}

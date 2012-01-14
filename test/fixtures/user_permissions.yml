@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  class_room: 
+  permission_type: MyString
+
+two:
+  user: 
+  class_room: 
+  permission_type: MyString

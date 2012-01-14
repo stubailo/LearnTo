@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :class_rooms
+  has_many :user_permissions
+  has_many :class_rooms, :through => :user_permissions
 
   acts_as_authentic do |c| c.login_field = :email end
   validates :login,  :presence => true
