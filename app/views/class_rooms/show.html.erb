@@ -33,10 +33,22 @@
   <%= @class_room.description_id %>
 </p>
 
+<p>
+  <b>Members: </b>
+  <ul>
+  <% for user in @users do %>
+    <li> <%= user.login %> </li>
+  <% end %>
+  </ul>
+</p>
+
 <% if @user.id == @creator.id %>
   <%= link_to 'Edit', edit_class_room_path(@class_room) %> |
   <%= link_to 'Destroy', @class_room, confirm: 'Are you sure?', method: :delete %> |
 <% else %>
-  <%= link_to 'Join' %>
+  <%= form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f| %>
+    <%= f.hidden_field :class_room_id, :value => @class_room.id %>
+    <%= f.submit "Join Class" %>
+  <% end %>
 <% end %>
 <%= link_to 'Back', class_rooms_path %>

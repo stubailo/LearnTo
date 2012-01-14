@@ -13,19 +13,34 @@ class ClassRoomsController < ApplicationController
   
   def add_user
     @user = current_user
-    @class_room = ClassRoom.find(params[:id])
+    @user_permission = UserPermission.new(params[:user_permission])
+    @class_room = ClassRoom.find(@user_permission.class_room_id)
+    @user_permission.user_id = @user.id
+    @user_permission.permission_type = "student"
+    respond_to do |format|
+      if @user_permission.save
+        format.html { redirect_to class_room_path(@class_room) , notice: 'Joined class successfully' }
+      else
+        format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class' } }
+      end
+    end
   end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
   def show
-    @class_room = ClassRoom.find(params[:id])
-    @creator = User.find(@class_room.creator_id)
-    @user = current_user
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @class_room }
+    require_user
+    if current_user
+			@class_room = ClassRoom.find(params[:id])
+			@creator = User.find(@class_room.creator_id)
+			@user = current_user
+			@user_permission = UserPermission.new
+			@users = @class_room.users
+		
+			respond_to do |format|
+				format.html # show.html.erb
+				format.json { render json: @class_room }
+			end
     end
   end
 
@@ -95,7 +110,7 @@ class ClassRoomsController < ApplicationController
 	    format.json { head :no_content }
 	  end
 	else
-	  redirect_to class_room_path(@class_room), :notice => "You do not have permission to modify this person's class"
+	  redirect_to class_room_path(@class_room), :flash => { :fail => "You do not have permission to modify this person's class" }
 	end
   end
 end
