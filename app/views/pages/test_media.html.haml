@@ -55,13 +55,17 @@
 
   .media-resource.media-video.media-video-youtube
     .title
-      %strong YouTube Video
-      \-
-      = link_to "m7G6LJ66e4I", "http://www.youtube.com/embed/m7G6LJ66e4I"
-    .javascript_show
-      %center
-        %iframe(width="560" height="315" src="http://www.youtube.com/embed/m7G6LJ66e4I" frameborder="0" allowfullscreen)
-    .no_javascript
-      Please enable JavaScript and Flash to see the embedded video.
-    .caption
-      This is a video to test video embedding.
+      .left
+        %strong YouTube Video
+        \-
+        = link_to "m7G6LJ66e4I", "http://www.youtube.com/embed/m7G6LJ66e4I"
+      .right.javascript_show
+        %a{:href => "#", :class => "expand"} expand
+    .media_content
+      .javascript_show
+        %center
+          %iframe(width="560" height="315" src="http://www.youtube.com/embed/m7G6LJ66e4I" frameborder="0" allowfullscreen)
+      .no_javascript
+        Please enable JavaScript and Flash to see the embedded video.
+      .caption
+        This is a video to test video embedding.

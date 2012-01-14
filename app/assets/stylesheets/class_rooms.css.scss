@@ -1,3 +1,134 @@
 // Place all the styles related to the class_rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.class_page {
+  padding: 0 10px;
+}
+
+$orange: #f37800;
+$text-orange: saturate(darken($orange, 10%), 40%);
+$light-grey: #ccc;
+$dark-grey: #444;
+
+$left-bar-padding: 10px;
+
+$left-sidebar-width: 250px;
+
+#left-bar
+{
+    height: 100%;
+    width: $left-sidebar-width;
+    border-right: solid 2px $light-grey;
+    float: left;
+
+    h1 {
+        font-weight: bold;
+        line-height: 1.5em;
+        font-size: 1.5em;
+        padding-top: $left-bar-padding;
+    }
+
+    p.subtitle {
+        padding: $left-bar-padding 0;
+        padding-top: 0;
+    }
+
+    ul.class-info {
+
+        padding-right: $left-bar-padding*1.5;
+
+        li {
+            text-transform: lowercase;
+            padding: $left-bar-padding 0;
+            border-top: solid 1px lighten($light-grey, 5%);
+        }
+    }
+
+    nav {
+        margin-top: 20px;
+
+        li a {
+            display: block;
+            padding: $left-bar-padding*0.5 $left-bar-padding;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: $dark-grey;
+            border: 1px solid white;
+
+            margin-left: -10px;
+
+            &:hover {
+                color: $orange;
+            }
+        }
+
+        li a.active {
+            margin: $left-bar-padding*0.3 0;
+
+            margin-left: -10px;            
+
+            padding: $left-bar-padding;
+            border-color: $light-grey;
+            margin-right: -2px;
+            position: relative;
+            border-right-width: 1px;
+            border-right-color: white;
+       
+            $gradient-color: rgb(230,230,230);
+            $grad-stop-one: 4%;
+            $grad-stop-two: 26%;
+        
+            background-image: linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -o-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -moz-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -webkit-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -ms-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+
+            background-image: -webkit-gradient(
+                linear,
+                right bottom,
+                left bottom,
+                color-stop(0.04, rgb(255,255,255)),
+                color-stop(0.26, $gradient-color)
+            ); 
+        
+        }
+    }
+}
+
+$center-side-margins: 20px;
+
+#center-page {
+   
+    padding-top: 20px;
+    padding-left: $left-sidebar-width + $center-side-margins;
+
+    section {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 2em;
+        font-weight: bold;
+        border-bottom: $light-grey 1px solid;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+
+    article {
+
+        margin: 1.2em 0;
+
+        border-left: 2px solid $light-grey;
+        padding-left: .8em;
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: .2em;
+        }
+    }
+}

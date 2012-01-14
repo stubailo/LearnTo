@@ -47,6 +47,8 @@ table {
     border-spacing: 0;
 }
 
+@import "rounded";
+
 $orange: #f37800;
 $text-orange: saturate(darken($orange, 10%), 40%);
 $light-grey: #ccc;
@@ -96,6 +98,10 @@ $left-bar-padding: $global-padding;
 }
 
 .header {
+    position: relative;
+    z-index: 5;
+
+    color: $light-grey;
     display: block;
     
     width: 100%;
@@ -133,6 +139,23 @@ $left-bar-padding: $global-padding;
       float: right;
       padding: $global-padding;
     }
+
+    .search_box {
+      float: right;
+      padding: $global-padding;
+      border-right: 1px solid #555;
+
+      .search_field {
+        margin: -1px;
+        margin-right: 0;
+        background: #fff;
+
+        input.text {
+          border: none;
+          outline: none;
+        }
+      }
+    }
 }
 
 hr {
@@ -168,6 +191,7 @@ hr {
   p {
     line-height: 1.5em;
     padding: $global-padding;
+    text-align: justify;
   }
 }
 

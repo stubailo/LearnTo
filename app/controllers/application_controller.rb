@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   private
+    before_filter :global_vars
+
+    def global_vars
+      @website_name = "ClassBox"
+    end
+    
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
       return @current_user_session if defined?(@current_user_session)
@@ -20,7 +26,7 @@ class ApplicationController < ActionController::Base
       logger.debug "ApplicationController::require_user"
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        flash[:fail] = "You must be logged in to access that page"
         redirect_to new_user_session_url
         return false
       end
