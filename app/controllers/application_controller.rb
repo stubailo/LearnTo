@@ -26,8 +26,8 @@ class ApplicationController < ActionController::Base
       logger.debug "ApplicationController::require_user"
       unless current_user
         store_location
-        flash[:fail] = "You must be logged in to access that page"
-        redirect_to new_user_session_url
+        flash[:fail] = "You must be logged in to access this page."
+        redirect_to login_path
         return false
       end
     end
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
       logger.debug "ApplicationController::require_no_user"
       if current_user
         store_location
-        flash[:fail] = "You must be logged out to access this page"
+        flash[:fail] = "You must be logged out to access this page."
         redirect_to root_url
         return false
       end

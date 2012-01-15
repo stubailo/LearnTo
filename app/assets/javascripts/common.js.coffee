@@ -17,3 +17,4 @@ $ -> AudioPlayer.setup("/player.swf", {width: "100%", animation: "no"})
 $ ->
   $(".javascript_show").show();
   $(".no_javascript").hide();
+

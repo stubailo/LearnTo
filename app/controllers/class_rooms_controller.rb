@@ -19,9 +19,9 @@ class ClassRoomsController < ApplicationController
     @user_permission.permission_type = "student"
     respond_to do |format|
       if @user_permission.save
-        format.html { redirect_to class_room_path(@class_room) , notice: 'Joined class successfully' }
+        format.html { redirect_to class_room_path(@class_room) , notice: 'Class joined successfully!' }
       else
-        format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class' } }
+        format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class.' } }
       end
     end
   end
@@ -72,7 +72,7 @@ class ClassRoomsController < ApplicationController
 
     respond_to do |format|
       if @class_room.save
-        format.html { redirect_to @class_room, notice: 'Class room was successfully created.' }
+        format.html { redirect_to @class_room, notice: 'Class was successfully created.' }
         format.json { render json: @class_room, status: :created, location: @class_room }
       else
         format.html { render action: "new" }
@@ -88,7 +88,7 @@ class ClassRoomsController < ApplicationController
 
     respond_to do |format|
       if @class_room.update_attributes(params[:class_room])
-        format.html { redirect_to @class_room, notice: 'Class room was successfully updated.' }
+        format.html { redirect_to @class_room, notice: 'Class was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -110,7 +110,7 @@ class ClassRoomsController < ApplicationController
 	    format.json { head :no_content }
 	  end
 	else
-	  redirect_to class_room_path(@class_room), :flash => { :fail => "You do not have permission to modify this person's class" }
+	  redirect_to class_room_path(@class_room), :flash => { :fail => "You do not have permission to modify this class." }
 	end
   end
 end
