@@ -5,27 +5,32 @@
     = javascript_include_tag(:application)
 
   %body
-    %header
-      %div.logo ClassBox
-      = link_to "home", root_path
-      %div.user_nav
-        - if current_user
-          - @user = current_user
-          Signed in as #{link_to(current_user.email, user_path(@user)).html_safe}.
-          Not you? #{link_to "Sign out", logout_path}
-        - else
-          = link_to "Sign in", new_user_session_path, :id => "sign_in_button"
-          = link_to "Register", new_user_path
-      %div.clear
-
-    %div#content
-    
-      - flash.each do |key, msg| 
-        = content_tag :div, msg, :class => [key, " message"], :id => "notice_ #{key}"       
-
-
-
-      = yield
+    .header
+      %header
+        .top_level
+          = link_to "home", root_path, :class => "logo"
+          
+          
+          %div.user_nav
+            - if current_user
+              - @user = current_user
+              = link_to current_user.login, user_path(@user), :class => "button"
+              = link_to "Sign out", logout_path, :class => "button"
+            - else
+              = link_to "Sign in", login_path, :id => "sign_in_button", :class => "button"
+              = link_to "Register", new_user_path, :class => "button"
+          %div.search_box
+            .search_field
+              = form_tag "/search", :method => "get" do
+                = text_field_tag :q, "", :class => "text"
+                = submit_tag "Search", :class => "button"
+          %div.clear
+    .top_level
+      %div#content
+        - if flash[:fail]
+          .flash.ui-state-highlight= flash[:fail]
+               
+        = yield
 
     %div#login_dialog
       %p Loading... 

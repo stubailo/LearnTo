@@ -1,4 +1,7 @@
 Classroom::Application.routes.draw do
+  resources :resources
+
+  match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
 
   get "post/new"
 
@@ -7,14 +10,20 @@ Classroom::Application.routes.draw do
   get "post/delete"
 
   get "forum/show"
-
+ 
   get "users/edit_password"
   
   get "users/edit_email"
+  
+  get "users/resend_activation"
 
   post "class_rooms/add_user"
 
   resources :class_rooms
+  
+  resources :forums
+  
+  resources :posts
   
   resources :users
 
@@ -25,6 +34,7 @@ Classroom::Application.routes.draw do
   resources :user_sessions
 
   match 'login' => "user_sessions#new",      :as => :login
+  match 'login_ajax' => "user_sessions#new_ajax",      :as => :login_ajax
   match 'logout' => "user_sessions#destroy", :as => :logout
  
   resources :pages, :only => :show

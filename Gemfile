@@ -12,6 +12,9 @@ gem "rails3-generators"
 gem 'haml'
 gem 'execjs'
 gem 'therubyracer'
+gem 'mail'
+
+gem "paperclip", "~> 2.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,6 +28,8 @@ end
 gem 'jquery-rails'
 
 gem "recaptcha", :require => "recaptcha/rails"
+
+gem "youtube_it"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
