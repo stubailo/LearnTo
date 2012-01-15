@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   private
+    before_filter :global_vars
+
+    def global_vars
+      @website_name = "ClassBox"
+    end
+    
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
       return @current_user_session if defined?(@current_user_session)

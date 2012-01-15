@@ -1,0 +1,17 @@
+.topper
+  .left
+    %h1 Find an Online Class
+    %p #{@website_name}
+  .right
+    %h1 Teach an Online Class
+    %p About any subject
+  .clear
+
+
+
+- if current_user
+  = link_to 'Create a new class!', new_class_room_path
+- else
+  %div Register to use our site!
+
+= link_to 'Browse existing classes', class_rooms_path
