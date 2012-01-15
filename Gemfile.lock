@@ -118,6 +118,7 @@ DEPENDENCIES
   execjs
   haml
   jquery-rails
+  mail
   mysql2
   rails (= 3.2.0.rc2)
   rails3-generators

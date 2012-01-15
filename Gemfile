@@ -12,6 +12,7 @@ gem "rails3-generators"
 gem 'haml'
 gem 'execjs'
 gem 'therubyracer'
+gem 'mail'
 
 # Gems used only for assets and not required
 # in production environments by default.
