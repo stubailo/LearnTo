@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Login successful!"
+      flash[:notice] = "Sign in successful!"
       redirect_back_or_default root_url
     elsif @user_session.attempted_record && !@user_session.invalid_password? && !@user_session.attempted_record.active?
       flash[:fail] = render_to_string(:partial => 'user_sessions/not_active.html.erb', :locals => { :user => @user_session.attempted_record }).html_safe
@@ -26,7 +26,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = "Logout successful!"
+    flash[:notice] = "Sign out successful!"
     redirect_back_or_default root_url
   end
 end

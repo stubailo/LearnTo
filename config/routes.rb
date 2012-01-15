@@ -29,6 +29,7 @@ Classroom::Application.routes.draw do
   resources :user_sessions
 
   match 'login' => "user_sessions#new",      :as => :login
+  match 'login_ajax' => "user_sessions#new_ajax",      :as => :login_ajax
   match 'logout' => "user_sessions#destroy", :as => :logout
  
   resources :pages, :only => :show
