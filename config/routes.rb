@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  resources :resources
+
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
 
   get "post/new"
