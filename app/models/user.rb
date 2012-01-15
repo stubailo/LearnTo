@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
   
-  attr_accessible :active
-  
   def activate!
     self.active = true
     save(:validate => false)
