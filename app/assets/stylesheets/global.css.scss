@@ -47,6 +47,8 @@ table {
     border-spacing: 0;
 }
 
+@import "rounded";
+
 $orange: #f37800;
 $text-orange: saturate(darken($orange, 10%), 40%);
 $light-grey: #ccc;
@@ -78,6 +80,10 @@ a {
     color: $text-orange;
 }
 
+iframe {
+  border: none;
+}
+
 .clear {
   clear:both;
 }
@@ -86,31 +92,70 @@ $global-padding: 10px;
 $side-margins: $global-padding*4;
 $left-bar-padding: $global-padding;
 
-header {
+.top_level {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.header {
+    position: relative;
+    z-index: 5;
+
+    color: $light-grey;
+    display: block;
+    
+    width: 100%;
     background: $light-grey;
-    border-bottom: 1px solid $dark-grey;
+    border-bottom: 1px solid black;
+
+    -moz-box-shadow: 0 0 8px #888;
+    -webkit-box-shadow: 0 0 8px #888;
+    box-shadow: 0 0 8px #888;
+
+    background: #333333; /* Old browsers */
+    background: -moz-linear-gradient(top, #333333 0%, #555555 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333333), color-stop(100%,#555555)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #333333 0%,#555555 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #333333 0%,#555555 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #333333 0%,#555555 100%); /* IE10+ */
+    background: linear-gradient(top, #333333 0%,#555555 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#555555',GradientType=0 ); /* IE6-9 */
 
     .logo {
       float: left;
         text-transform: uppercase;
         font-size: 1.2em;
         font-weight: bold;
-        color: $dark-grey;
-        padding: $global-padding;
-        margin-left: $side-margins;
+        text-decoration: none;
+        color: $light-grey;
+        padding: $global-padding+3px;
+        
+        &:hover {
+          text-decoration: underline;
+        }
     }
 
     .user_nav {
       float: right;
       padding: $global-padding;
-      margin-right: $side-margins;
     }
-}
 
-#content
-{
-    min-width: 800px;
-    margin: 0 $side-margins;
+    .search_box {
+      float: right;
+      padding: $global-padding;
+      border-right: 1px solid #555;
+
+      .search_field {
+        margin: -1px;
+        margin-right: 0;
+        background: #fff;
+
+        input.text {
+          border: none;
+          outline: none;
+        }
+      }
+    }
 }
 
 hr {
@@ -134,13 +179,19 @@ hr {
   h1 {
     font-size: 2em;
     font-weight: bold;
-    margin: $global-padding 0 $global-padding*1.5 0;
+    margin: $global-padding*2 $global-padding $global-padding*1.5 $global-padding;
   }
 
   h2 {
     font-size: 1.3em;
     font-weight: bold;
-    margin: $global-padding*.7 0;
+    margin:  $global-padding*2 $global-padding $global-padding*.7 $global-padding;
+  }
+
+  p {
+    line-height: 1.5em;
+    padding: $global-padding;
+    text-align: justify;
   }
 }
 
@@ -197,31 +248,4 @@ form {
       width: 200px;
     }
   }
-}
-
-#login_dialog
-{
-  display: none;
-
-  h1 {
-    display: none;
-  }
-
-  label {
-    font-size: .8em;
-    display: block;
-    margin-top: $global-padding;
-  }
-
-  input.text {
-    padding: $global-padding*.5;
-    display: block;
-  }
-
-  input.checkbox {
-    float: left;
-    position: relative;
-    top: -4px;
-  }
-
 }

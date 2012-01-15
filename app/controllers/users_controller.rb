@@ -7,14 +7,27 @@ class UsersController < ApplicationController
   def new
 	@user = User.new
   end
+  
+  def resend_activation
+		if params[:login]
+			@user = User.find_by_login params[:login]
+			if @user && !@user.active?
+				@user.deliver_activation_instructions!
+				flash[:fail] = "Please check your e-mail for your account activation instructions"
+				redirect_to root_path
+			end
+		end
+	end
+
 
   def create
     @user = User.new(params[:user])
 
     respond_to do |format|
     @user.valid?
-      if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save
-        format.html { redirect_to user_url(@user), :notice => 'Registration successfull.' }
+      if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
+        @user.deliver_activation_instructions!
+        format.html { redirect_to root_url, :flash => { :fail => 'Account created.  Please check your email for account activation instructions.' } }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

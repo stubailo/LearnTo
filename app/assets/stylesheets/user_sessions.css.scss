@@ -1,3 +1,40 @@
 // Place all the styles related to the UserSessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$global-padding: 10px;
+
+.login_box
+{
+  label {
+    display: block;
+    margin-top: $global-padding;
+  }
+
+  input.text {
+    padding: $global-padding*.5;
+    display: block;
+  }
+
+  input.checkbox {
+    float: left;
+    position: relative;
+    top: -4px;
+  }
+
+  margin: 0 auto;
+} 
+
+#login_dialog
+{
+  display: none;
+  h1 {
+    display: none;
+  }
+  hr {
+    display: none;
+  }
+  p {
+    display: none;
+  }
+}
+
