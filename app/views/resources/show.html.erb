@@ -12,7 +12,7 @@
 
 <p>
   <b>Url:</b>
-  <%= @resource.url %>
+  <%= @resource.file.url %>
 </p>
 
 <p>
@@ -20,7 +20,7 @@
   <%= @resource.file_content_type %>
 </p>
 
-<%= image_tag @resource.file.url %>
+<%= image_tag @resource.file.url(:thumb) %>
 
 
 <%= link_to 'Edit', edit_resource_path(@resource) %> |

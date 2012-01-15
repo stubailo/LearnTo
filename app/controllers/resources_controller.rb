@@ -52,7 +52,6 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       if @resource.save
-				@resource.add_url
         format.html { redirect_to @resource, :flash => { :fail => 'Resource was successfully created.' } }
         format.json { render json: @resource, status: :created, location: @resource }
       else
