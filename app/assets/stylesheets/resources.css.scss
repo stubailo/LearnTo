@@ -1,5 +1,21 @@
 @import "rounded";
 
+.resource-inline-container {
+  padding: 3px;
+  margin: -3px;
+  background: #fff;
+  border: 1px solid #f8f8f8;
+
+  position: relative;
+
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+
+  &:hover {
+    background: #f8f8f8;
+  }
+}
+
 .javascript_show {
   display: none;
 }
