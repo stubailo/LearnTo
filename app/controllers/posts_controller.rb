@@ -39,6 +39,10 @@ class PostsController < ApplicationController
     @post.forum_id = params[:forum_id]
     @post.save
     
+    params[:tags][:content].split(" ").each do |tag|
+      @post.tags.new(:content => tag, :post_id => @post.id).save
+    end
+    
     redirect_to root_url + "forums/" + params[:forum_id]
   end
 
@@ -61,12 +65,15 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
+    @post = Post.find(params[:post_id])
+    @tags = @post.tags
+    
+    if @tags
+      @post.tags.delete(@tags)
     end
+    
+    @post.destroy
+    
+    redirect_to root_url + "forums/" + params[:forum_id]
   end
 end

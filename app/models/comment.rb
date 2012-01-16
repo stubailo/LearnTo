@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :post
-  has_many :ratings
+  has_many :ratings, :dependent => :destroy
   validates :post_id, :presence => true
   validates :user_id, :presence => true
   

@@ -7,12 +7,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.post_id = params[:post_id]
     @comment.user_id = current_user.id
-    @comment.rating = 0
     @comment.save
     redirect_to root_url + "forums/"+ params[:forum_id]
   end
 
   def destroy
+    @comment = Comment.find(params[:comment_id])
+    @comment.destroy
+    redirect_to root_url + "forums/" + params[:forum_id]
   end
   
   def plus1
