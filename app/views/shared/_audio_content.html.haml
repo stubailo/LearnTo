@@ -1,0 +1,13 @@
+:javascript
+  $(function() {
+    AudioPlayer.embed("audio_player_#{res.id}", {
+      soundFile: "#{url_for res.file.url}",
+      titles: "#{res.name}"
+    });
+  });
+
+
+.no_javascript
+  Please enable JavaScript and Flash to listen to the audio file.
+.javascript_show
+  %p.media-audio-player-container{ :id => "audio_player_#{res.id}" }

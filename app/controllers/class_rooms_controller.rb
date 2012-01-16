@@ -35,21 +35,21 @@ class ClassRoomsController < ApplicationController
   def show
     require_user
     if current_user
-	  @class_room = ClassRoom.find(params[:id])
-	  @creator = User.find(@class_room.creator_id)
-	  @user = current_user
-	  @show_join = false
-	  
-	  if(!UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first)
-	    @user_permission = UserPermission.new
-	    @show_join = true
-	  end
-	  @users = @class_room.users
-		
-	  respond_to do |format|
-	  	format.html # show.html.erb
-		format.json { render json: @class_room }
-	  end
+      @class_room = ClassRoom.find(params[:id])
+      @creator = User.find(@class_room.creator_id)
+      @user = current_user
+      @show_join = false
+      
+      if(!UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first)
+        @user_permission = UserPermission.new
+        @show_join = true
+      end
+      @users = @class_room.users
+      
+      respond_to do |format|
+        format.html { render :layout => "show_class_room" }
+        format.json { render json: @class_room }
+      end
     end
   end
 

@@ -30,7 +30,7 @@
         - if flash[:fail]
           .flash.ui-state-highlight= flash[:fail]
                
-        = yield
+        = content_for?(:content) ? yield(:content) : yield
 
     %div#login_dialog
       %p Loading... 

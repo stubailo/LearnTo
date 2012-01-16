@@ -1,0 +1,7 @@
+.content
+  %h1 Resource
+
+  = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed"}
+
+  = link_to 'Edit', edit_resource_path(@resource)
+  = link_to 'Back', resources_path

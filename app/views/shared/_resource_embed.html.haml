@@ -1,0 +1,31 @@
+- if defined? style and defined? res
+  - icon_class = "file_#{File.extname(res.file.url).split("?")[0].downcase[1..-1]}"
+  - if style == "inline_link"
+    %span.resource-inline-container
+      - link_class = "resource-inline-link include-file-type-icon #{icon_class}"
+      %a{:class => link_class, :href => url_for(res.file.url), :title => res.caption}
+        = res.name
+  - if style == "big_embed"
+    %div.media-resource
+      .title
+        %strong{:class => icon_class + " include-file-type-icon"}= res.name 
+        \-
+        = link_to "download", res.file.url
+        = "(#{res.file.content_type})"
+      -if res.caption != ""
+        .caption
+          = res.caption
+      -type = res.file.content_type
+      -if type == "application/pdf"    
+        = render :partial => "shared/pdf_content", :locals => {:res => res}
+      -if type.start_with? "text"
+        = render :partial => "shared/code_content", :locals => {:res => res}
+      -if ["audio/mpeg", "audio/mp4", "audio/ogg", "audio/mp3"].include? type
+        = render :partial => "shared/audio_content", :locals => {:res => res}
+      -if ["application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.ms-powerpoint",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].include? type
+        = render :partial => "shared/msdoc_content", :locals => {:res => res}

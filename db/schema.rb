@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116061822) do
+ActiveRecord::Schema.define(:version => 20120116071504) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120116061822) do
     t.integer  "class_room_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "file_type"
   end
 
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"
