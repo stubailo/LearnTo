@@ -47,6 +47,12 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(params[:resource])
     @user = current_user
     @resource.user_id = @user.id
+    if @resource.file_file_name
+      @resource.file_type = @resource.file.content_type
+      @resource.url = @resource.file.url
+    else
+      @resource.file_type = "internet"
+    end
     #@resource.file_file_name = + user id
 
 
