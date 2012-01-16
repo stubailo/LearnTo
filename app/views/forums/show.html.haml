@@ -1,4 +1,3 @@
-%p.notice= notice
 - @posts.each do |post|
   %p
     %b Title:
@@ -7,12 +6,14 @@
     %b Content:
     = post.content
   %h2 Comments:
-  - post.comments.each do |comment|
+  - (post.comments.order(:rating)).each do |comment|
     %p
-      %b Commenter:
-      = comment.user_id
+      = @user.login + ':'
+      = comment.content
       %br
-        = comment.content
+      = comment.rating(current_user.id)
+      = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post
+      = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post      
   = render :partial => "newComment", :locals => { :post => post }
   %br
 = render 'newPost'
