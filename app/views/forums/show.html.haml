@@ -1,0 +1,18 @@
+%p.notice= notice
+- @posts.each do |post|
+  %p
+    %b Title:
+    = post.title
+  %p
+    %b Content:
+    = post.content
+  %h2 Comments:
+  - post.comments.each do |comment|
+    %p
+      %b Commenter:
+      = comment.user_id
+      %br
+        = comment.content
+  = render :partial => "newComment", :locals => { :post => post }
+  %br
+= render 'newPost'
