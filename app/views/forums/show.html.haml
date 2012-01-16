@@ -6,7 +6,7 @@
     %b Content:
     = post.content
   %h2 Comments:
-  - (post.comments.order(:rating)).each do |comment|
+  - (post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
     %p
       = @user.login + ':'
       = comment.content
