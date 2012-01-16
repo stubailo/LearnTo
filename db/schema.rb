@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120115111657) do
+ActiveRecord::Schema.define(:version => 20120116061822) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(:version => 20120115111657) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "ratings", ["comment_id"], :name => "index_ratings_on_comment_id"
+  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
 
   create_table "resources", :force => true do |t|
     t.string   "file_file_name"
