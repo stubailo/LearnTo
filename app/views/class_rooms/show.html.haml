@@ -6,9 +6,10 @@
       = link_to @creator.login, user_path(@creator)
     %ul.class-info
       %li
-        = form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f|
-          = f.hidden_field :class_room_id, :value => @class_room.id
-          = f.submit "Join Class", :class => "button"
+        -if @show_join
+          = form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f|
+            = f.hidden_field :class_room_id, :value => @class_room.id
+            = f.submit "Join Class", :class => "button"
 
         &nbsp; #{pluralize @users.count, "student"}
       %li Runs #{l @class_room.start_date} to #{l @class_room.end_date}

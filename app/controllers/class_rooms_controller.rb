@@ -15,14 +15,18 @@ class ClassRoomsController < ApplicationController
     @user = current_user
     @user_permission = UserPermission.new(params[:user_permission])
     @class_room = ClassRoom.find(@user_permission.class_room_id)
-    @user_permission.user_id = @user.id
-    @user_permission.permission_type = "student"
-    respond_to do |format|
-      if @user_permission.save
-        format.html { redirect_to class_room_path(@class_room) , notice: 'Class joined successfully!' }
-      else
-        format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class.' } }
-      end
+    if(!UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first)
+			@user_permission.user_id = @user.id
+			@user_permission.permission_type = "student"
+			respond_to do |format|
+				if @user_permission.save
+					format.html { redirect_to class_room_path(@class_room) , notice: 'Class joined successfully!' }
+				else
+					format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class.' } }
+				end
+			end
+    else
+      redirect_to class_rooms_path , flash => { :fail => 'You can\'t join a class more than once!' }
     end
   end
 
@@ -31,16 +35,21 @@ class ClassRoomsController < ApplicationController
   def show
     require_user
     if current_user
-			@class_room = ClassRoom.find(params[:id])
-			@creator = User.find(@class_room.creator_id)
-			@user = current_user
-			@user_permission = UserPermission.new
-			@users = @class_room.users
+	  @class_room = ClassRoom.find(params[:id])
+	  @creator = User.find(@class_room.creator_id)
+	  @user = current_user
+	  @show_join = false
+	  
+	  if(!UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first)
+	    @user_permission = UserPermission.new
+	    @show_join = true
+	  end
+	  @users = @class_room.users
 		
-			respond_to do |format|
-				format.html # show.html.erb
-				format.json { render json: @class_room }
-			end
+	  respond_to do |format|
+	  	format.html # show.html.erb
+		format.json { render json: @class_room }
+	  end
     end
   end
 
