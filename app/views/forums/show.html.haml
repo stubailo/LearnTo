@@ -6,14 +6,14 @@
     %b Content:
     = post.content
   %h2 Comments:
-  - (post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
+  - (post.comments.order(:rating)).each do |comment|
     %p
       = @user.login + ':'
       = comment.content
       %br
-      = comment.rating
-      = button_to "+1", {:controller => :comments,:action => 'plus1', :id => comment.id, :forum_id => @forum.id }, :method => :post
-      = button_to "-1", {:controller => :comments,:action => 'minus1', :id => comment.id, :forum_id => @forum.id }, :method => :post      
+      = comment.rating(current_user.id)
+      = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post
+      = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post      
   = render :partial => "newComment", :locals => { :post => post }
   %br
 = render 'newPost'
