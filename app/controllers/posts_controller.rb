@@ -34,10 +34,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
-    @post.save!
+    @post = Post.new(params[:post], :forum_id => params[:forum_id])
+    @post.user_id = 1
+    @post.forum_id = params[:forum_id]
+    @post.save
     
-    redirect_to root_url
+    redirect_to root_url + "forums/" + params[:forum_id]
   end
 
   # PUT /posts/1

@@ -25,6 +25,8 @@ Classroom::Application.routes.draw do
   
   resources :posts
   
+  resources :comments
+  
   resources :users
 
   get "user_sessions/new"
