@@ -1,7 +1,10 @@
+<%= @class_room.name %>
+<%= @user.login %>
+
 <%= form_for @resource do |f| %>
   <% if @resource.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited this resource from being saved:</h2>
+      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited your new homework from being saved:</h2>
 
       <ul>
       <% @resource.errors.full_messages.each do |msg| %>
@@ -28,6 +31,8 @@
     <%= f.file_field :file %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Post" %>
   </div>
 <% end %>
+
+<%= link_to "Back to class", class_room_path(@class_room) %>

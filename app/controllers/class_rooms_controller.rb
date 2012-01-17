@@ -45,8 +45,8 @@ class ClassRoomsController < ApplicationController
   def set_vars
     @creator = User.find(@class_room.creator_id)
     @user = current_user
-    @show_join = false
     @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+    @users = @class_room.users
   end
 
   # GET /class_rooms/1
@@ -56,12 +56,12 @@ class ClassRoomsController < ApplicationController
     if current_user
       @class_room = ClassRoom.find(params[:id])
       set_vars
+      @show_join = false
       
       if(!@user_permission)
         @user_permission = UserPermission.new
         @show_join = true
       end
-      @users = @class_room.users
       
       respond_to do |format|
         format.html { render :layout => "show_class_room" }

@@ -32,11 +32,11 @@
       %nav
         %ul
           %li
-            %a.active{:href => "#"} Home
+            = link_to "Home", class_room_path(@class_room)
           %li
             %a{:href => "#"} Lessons
           %li
-            %a{:href => "#"} Homework
+            = link_to "Homework", class_room_homeworks_path(@class_room)
           %li
             %a{:href => "#"} Materials
           %li
