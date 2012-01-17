@@ -1,7 +1,13 @@
 .content
   %h1 Resource
+  %p= link_to 'Back to resource list', resources_path
 
-  = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed"}
+  = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
 
-  = link_to 'Edit', edit_resource_path(@resource)
-  = link_to 'Back', resources_path
+  %p
+    Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
+    - if @resource.updated_at?
+      and updated at #{l @resource.updated_at}.
+  %p
+    = link_to 'Edit', edit_resource_path(@resource), :class => "button"
+    = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
