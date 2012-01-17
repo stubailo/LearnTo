@@ -1,0 +1,1 @@
+//= require tinymce/jquery.tinymce
