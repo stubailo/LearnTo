@@ -13,6 +13,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /posts/new
@@ -35,11 +37,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post], :forum_id => params[:forum_id])
-    @post.user_id = 1
+    @post.user_id = current_user.id
     @post.forum_id = params[:forum_id]
     @post.save
     
-    redirect_to root_url + "forums/" + params[:forum_id]
+    redirect_to :back
   end
 
   # PUT /posts/1
@@ -61,12 +63,9 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])    
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-    end
+    
+    redirect_to :back
   end
 end

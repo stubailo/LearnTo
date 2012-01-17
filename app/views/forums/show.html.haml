@@ -1,18 +1,23 @@
-%p.notice= notice
 - @posts.each do |post|
   %p
-    %b Title:
-    = post.title
+    = link_to post.title, post_path(post)
+    - if post.user_id == current_user.id
+      = link_to "Delete post", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete
   %p
-    %b Content:
     = post.content
+  = "Tags:"
+  = post.tag_list.join(", ")
   %h2 Comments:
-  - post.comments.each do |comment|
+  - (post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
     %p
-      %b Commenter:
-      = comment.user_id
+      = @user.login + ':'
+      = comment.content
+      - if comment.user_id == current_user.id
+        = link_to "Delete comment", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete
       %br
-        = comment.content
+      = comment.rating(current_user.id)
+      = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post
+      = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post      
   = render :partial => "newComment", :locals => { :post => post }
   %br
 = render 'newPost'

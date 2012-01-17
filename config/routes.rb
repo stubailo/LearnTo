@@ -4,12 +4,6 @@ Classroom::Application.routes.draw do
 
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
 
-  get "post/new"
-
-  get "post/edit"
-
-  get "post/delete"
-
   get "forum/show"
  
   get "users/edit_password"
@@ -31,6 +25,10 @@ Classroom::Application.routes.draw do
   resources :posts
   
   resources :comments
+  
+  post "comments/plus1"
+  
+  post "comments/minus1"
   
   resources :users
 
