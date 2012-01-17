@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
       rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     end
     rating.save
-    redirect_to root_url + "forums/" + params[:forum_id]
+    redirect_to :back
   end
   
   def minus1
@@ -37,6 +37,6 @@ class CommentsController < ApplicationController
       rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => -1)
     end
     rating.save
-    redirect_to root_url + "forums/" + params[:forum_id]
+    redirect_to :back
   end
 end
