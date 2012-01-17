@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20120117093143) do
 
   create_table "class_rooms", :force => true do |t|
@@ -117,6 +118,16 @@ ActiveRecord::Schema.define(:version => 20120117093143) do
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"
   add_index "resources", ["document_id"], :name => "index_resources_on_document_id"
   add_index "resources", ["user_id"], :name => "index_resources_on_user_id"
+
+  create_table "subcomments", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "comment_id"
+  end
+
+  add_index "subcomments", ["user_id"], :name => "index_subcomments_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

@@ -1,6 +1,5 @@
 = form_for @comment, :url => {:controller => "comments", :action => "create" } do |f|
   = hidden_field_tag("post_id", post.id)
-  = hidden_field_tag("forum_id", @forum.id)
   = f.text_area :content, :size => "20x4"
   %br
-    = f.submit "Submit Comment"
+  = f.submit "Submit Response"

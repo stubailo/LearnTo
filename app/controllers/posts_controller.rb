@@ -14,7 +14,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    @subcomment = Subcomment.new
     @comment = Comment.new
+    @user = current_user
   end
 
   # GET /posts/new
