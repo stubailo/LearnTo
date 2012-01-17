@@ -26,8 +26,27 @@ class ClassRoomsController < ApplicationController
 				end
 			end
     else
-      redirect_to class_rooms_path , flash => { :fail => 'You can\'t join a class more than once!' }
+      redirect_to class_rooms_path , :flash => { :fail => 'You can\'t join a class more than once!' }
     end
+  end
+  
+  def del_user
+    @user_permission=UserPermission.find(params[:perm_id])
+    @user = current_user
+    @class_room = ClassRoom.find(@user_permission.class_room_id)
+    if @user.id == @user_permission.user_id
+			@user_permission.destroy
+			redirect_to class_room_path(@class_room)
+	  else
+	    redirect_to class_room_path(@class_room), :flash => { :fail => 'You can only remove yourself from a class' }
+	  end
+  end
+  
+  def set_vars
+    @creator = User.find(@class_room.creator_id)
+    @user = current_user
+    @show_join = false
+    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
   end
 
   # GET /class_rooms/1
@@ -36,11 +55,9 @@ class ClassRoomsController < ApplicationController
     require_user
     if current_user
       @class_room = ClassRoom.find(params[:id])
-      @creator = User.find(@class_room.creator_id)
-      @user = current_user
-      @show_join = false
+      set_vars
       
-      if(!UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first)
+      if(!@user_permission)
         @user_permission = UserPermission.new
         @show_join = true
       end

@@ -7,6 +7,9 @@ class ClassRoom < ActiveRecord::Base
   
   has_many :user_permissions
   has_many :users, :through => :user_permissions
+  
+  has_many :homeworks
+  has_many :homework_sections, :through => :homeworks
 
   has_one :forum
 

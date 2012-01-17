@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  class_room: 
+  order: 1
+  homework_section: 
+
+two:
+  class_room: 
+  order: 1
+  homework_section: 

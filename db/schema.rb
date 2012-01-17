@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120116071504) do
+ActiveRecord::Schema.define(:version => 20120117093143) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -34,11 +34,49 @@ ActiveRecord::Schema.define(:version => 20120116071504) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "documents", :force => true do |t|
+    t.integer  "resource_id"
+    t.string   "title"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "content"
+  end
+
+  add_index "documents", ["resource_id"], :name => "index_documents_on_resource_id"
+
   create_table "forums", :force => true do |t|
     t.integer  "class_room_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "homework_resources", :force => true do |t|
+    t.integer  "homework_id"
+    t.integer  "resource_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "homework_resources", ["homework_id"], :name => "index_homework_resources_on_homework_id"
+  add_index "homework_resources", ["resource_id"], :name => "index_homework_resources_on_resource_id"
+
+  create_table "homework_sections", :force => true do |t|
+    t.integer  "order"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "homeworks", :force => true do |t|
+    t.integer  "class_room_id"
+    t.integer  "order"
+    t.integer  "homework_section_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "homeworks", ["class_room_id"], :name => "index_homeworks_on_class_room_id"
+  add_index "homeworks", ["homework_section_id"], :name => "index_homeworks_on_homework_section_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -63,9 +101,11 @@ ActiveRecord::Schema.define(:version => 20120116071504) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "file_type"
+    t.integer  "document_id"
   end
 
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"
+  add_index "resources", ["document_id"], :name => "index_resources_on_document_id"
   add_index "resources", ["user_id"], :name => "index_resources_on_user_id"
 
   create_table "tags", :force => true do |t|
