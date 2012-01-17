@@ -1,5 +1,7 @@
 - if defined? style and defined? res
-  - icon_class = "file_#{File.extname(res.file.url).split("?")[0].downcase[1..-1]}"
+  - file_extension = File.extname(res.file.url).split("?")[0].downcase[1..-1] 
+  - icon_class = "file_#{file_extension}"
+  - hidden = false unless ( defined? hidden and hidden == true )
   - if style == "inline_link"
     %span.resource-inline-container
       - link_class = "resource-inline-link include-file-type-icon #{icon_class}"
@@ -10,22 +12,26 @@
       .title
         %strong{:class => icon_class + " include-file-type-icon"}= res.name 
         \-
-        = link_to "download", res.file.url
+        = link_to res.file_file_name, res.file.url
         = "(#{res.file.content_type})"
       -if res.caption != ""
         .caption
           = res.caption
-      -type = res.file.content_type
-      -if type == "application/pdf"    
-        = render :partial => "shared/pdf_content", :locals => {:res => res}
-      -if type.start_with? "text"
-        = render :partial => "shared/code_content", :locals => {:res => res}
-      -if ["audio/mpeg", "audio/mp4", "audio/ogg", "audio/mp3"].include? type
-        = render :partial => "shared/audio_content", :locals => {:res => res}
-      -if ["application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "application/vnd.ms-powerpoint",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-            "application/msword",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].include? type
-        = render :partial => "shared/msdoc_content", :locals => {:res => res}
+      .inside{ :style => hidden ? "display: none;" : "" }
+        -type = res.file.content_type
+        -if type.start_with? "text" or ["bsh", "c", "cc", "cpp", "cs", "csh",
+                                        'cyc', 'cv', 'htm', 'html', 'java',
+                                        'js', 'm', 'mxml', 'perl', 'pl', 'pm',
+                                        'py', 'rb', "sh", "xhtml", "xml", "xsl",
+                                        "ini"].include? file_extension
+          = render :partial => "shared/code_content", :locals => {:res => res, :extension => file_extension}
+        -if ["audio/mpeg", "audio/mp4", "audio/ogg", "audio/mp3"].include? type
+          = render :partial => "shared/audio_content", :locals => {:res => res}
+        -if [ "application/pdf",
+              "application/vnd.ms-excel",
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+              "application/vnd.ms-powerpoint",
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+              "application/msword",
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].include? type or ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"].include? file_extension
+          = render :partial => "shared/doc_content", :locals => {:res => res}
