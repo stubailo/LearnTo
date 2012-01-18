@@ -11,7 +11,5 @@ class ClassRoom < ActiveRecord::Base
   has_many :homeworks
   has_many :homework_sections, :through => :homeworks
 
-  has_one :forum
-
-
+  has_one :forum, :dependent => :destroy
 end
