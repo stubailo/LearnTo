@@ -8,4 +8,5 @@
 
 <%= render :partial => "resources/form", :locals => { :create_url => { :controller => "homeworks", :action => "create", :class_room_id => @class_room.id, :method => :post }, :resource => @resource } %>
 
+
 <%= link_to "Back to class", class_room_path(@class_room) %>
