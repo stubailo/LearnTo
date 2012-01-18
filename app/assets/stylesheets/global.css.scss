@@ -215,7 +215,7 @@ hr {
   }
 }
 
-form {
+.form_page {
   .field {
     margin: $global-padding 0;
 
@@ -230,7 +230,7 @@ form {
       color: $dark-grey;
     }
 
-    input {
+    input.text {
       font-size: 1.2em;
       padding: $global-padding*.5;
     }
@@ -252,3 +252,4 @@ form {
     }
   }
 }
+
