@@ -29,6 +29,8 @@ Classroom::Application.routes.draw do
   
   resources :comments
   
+  resources :subcomments
+  
   post "comments/plus1"
   
   post "comments/minus1"
