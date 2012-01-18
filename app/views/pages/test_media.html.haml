@@ -23,10 +23,17 @@
       external_link_list_url : "lists/link_list.js",
       external_image_list_url : "lists/image_list.js",
       media_external_list_url : "lists/media_list.js",
+
     });
   }); 
 
 .content
   %h1 Editing Document
+
+  %p
+    %button.button Insert Image
+    %button.button Insert Media / Other File
+    %button.button Insert Code
+
   .padding10px
     %textarea.tinymce{:id=>"tinymce_area", :style=>"width: 100%"}

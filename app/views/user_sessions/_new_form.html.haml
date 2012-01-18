@@ -1,0 +1,26 @@
+.login_box.form_page
+  %h1 Sign in
+  %p.hint
+    Don't have an account yet?
+    = link_to "Click here to register.", new_user_path
+  %hr
+  = form_for @user_session, :url => {:action => "create"} do |f|
+    - if (defined? failed_login) && failed_login
+      #error_explanation.ui-state-error.ui-corner-all
+        .ui-icon.ui-icon-alert.icon-in-info
+        %h2 Login Error
+        %ul
+          %li Invalid username or password.
+    .field
+      = f.label :email
+      = f.text_field :email, :class => "text"
+    .field
+      = f.label :password
+      = f.password_field :password, :class => "text"
+    .field
+      = f.check_box :remember_me, :class => "checkbox"
+      = f.label :remember_me
+      %div.clear
+    %div
+      = f.submit "Submit", :class => "button"
+

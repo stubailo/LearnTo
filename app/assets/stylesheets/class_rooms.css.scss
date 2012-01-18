@@ -36,6 +36,8 @@ $left-sidebar-width: 250px;
 
     .enroll-button-container {
       float: left;
+      margin-top: -4px;
+      margin-right: 5px;
     }
 
     ul.class-info {
@@ -107,7 +109,7 @@ $center-side-margins: 20px;
 
 #center-page {
    
-    padding-top: 20px;
+    padding-top: 5px;
     padding-left: $left-sidebar-width + $center-side-margins;
 
     section {
