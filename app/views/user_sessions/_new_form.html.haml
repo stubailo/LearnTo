@@ -5,7 +5,7 @@
     = link_to "Click here to register.", new_user_path
   %hr
   = form_for @user_session, :url => {:action => "create"} do |f|
-    - if (defined? failed_login) && failed_login
+    - if @user_session.errors.any?
       #error_explanation.ui-state-error.ui-corner-all
         .ui-icon.ui-icon-alert.icon-in-info
         %h2 Login Error
