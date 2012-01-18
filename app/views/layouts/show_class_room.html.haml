@@ -24,23 +24,26 @@
           Price:
           = number_to_currency @class_room.price
       %nav
+        - if not defined? which_tab
+          - which_tab = "none"
         %ul
           %li
-            = link_to "Home", class_room_path(@class_room)
+            = link_to "Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
           %li
             %a{:href => "#"} Lessons
           %li
-            = link_to "Homework", class_room_homeworks_path(@class_room)
+            = link_to "Homework", class_room_homeworks_path(@class_room), :class => which_tab == "homework" ? "active" : ""
           %li
             %a{:href => "#"} Materials
           %li
             %a{:href => "#"} Tests / Quizzes
           %li
-            %a{:href => forum_path(@class_room.id)} Discussion
+            = link_to "Discussion", forum_path(@class_room.id), :class => which_tab == "discussion" ? "active" : ""
           %li
             %a{:href => "#"} Students
 
     %div#center-page
       = content_for?(:class_room_content) ? yield(:class_room_content) : yield
+  .clear
 
 = render :template => "layouts/application"

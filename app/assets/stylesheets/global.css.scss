@@ -162,6 +162,10 @@ $left-bar-padding: $global-padding;
     }
 }
 
+#content, .class_page{
+  overflow: hidden;
+}
+
 hr {
   display: block;
   position: relative;

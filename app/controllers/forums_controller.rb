@@ -21,7 +21,7 @@ class ForumsController < ApplicationController
       @post = Post.new
       @comment = Comment.new
       @posts = Post.find(:all, :conditions => ['forum_id = ?', @forum.id])
-      render :layout => "layouts/show_class_room"
+      render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
     else
       redirect_to :back
     end
