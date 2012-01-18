@@ -1,6 +1,8 @@
 .content
   %h1 Resource
-  %p= link_to 'Back to resource list', resources_path
+  - if @resource.source_call == "homework"
+    = link_to 'Back to assignments', class_room_homeworks_path(@class_room)
+  
 
   = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
 

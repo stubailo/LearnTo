@@ -17,6 +17,8 @@ class Resource < ActiveRecord::Base
 	end
   end
   
+  TYPES = ['upload', 'link to internet', 'new document']
+  
   validates_attachment_size :file, less_than: 5.megabyte
   
 end

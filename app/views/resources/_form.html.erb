@@ -1,7 +1,7 @@
-<%= form_for @resource do |f| %>
-  <% if @resource.errors.any? %>
+<%= form_for resource, :url => create_url do |f|  %>
+  <% if resource.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited this resource from being saved:</h2>
+      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited your new homework from being saved:</h2>
 
       <ul>
       <% @resource.errors.full_messages.each do |msg| %>
@@ -20,6 +20,10 @@
     <%= f.text_field :caption %>
   </div>
   <div class="field">
+    <%= f.label :type %><br />
+	<%= Resource::TYPES.map { |type| (f.radio_button :file_type, type) + (label_tag type) }.join.html_safe %>
+  </div>  
+  <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </div>
@@ -28,6 +32,6 @@
     <%= f.file_field :file %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Post" %>
   </div>
 <% end %>

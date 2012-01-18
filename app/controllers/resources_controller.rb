@@ -14,6 +14,7 @@ class ResourcesController < ApplicationController
   # GET /resources/1.json
   def show
     @resource = Resource.find(params[:id])
+    @class_room = ClassRoom.find(@resource.class_room_id)
 
     respond_to do |format|
       format.html # show.html.erb

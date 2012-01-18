@@ -1,38 +1,11 @@
-<%= @class_room.name %>
-<%= @user.login %>
-
-<%= form_for @resource do |f| %>
-  <% if @resource.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited your new homework from being saved:</h2>
-
-      <ul>
-      <% @resource.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<% @homework_sections.each do |section| %>
+  <%= section.title %>
+  <% homeworks = section.homeworks.sort_by { |hw| hw.order } %>
+  <% section.homeworks.each do |homework| %>
+    <%= link_to "#{homework.resource.name} - Sashko maybe put a thumbnail here?", resource_path(homework.resource) %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :file %><br />
-    <%= f.file_field :file %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Post" %>
-  </div>
 <% end %>
+
+<%= render :partial => "resources/form", :locals => { :create_url => { :controller => "homeworks", :action => "create", :class_room_id => @class_room.id, :method => :post }, :resource => @resource } %>
 
 <%= link_to "Back to class", class_room_path(@class_room) %>

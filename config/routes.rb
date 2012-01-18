@@ -18,15 +18,16 @@ Classroom::Application.routes.draw do
 
   resources :class_rooms do
     resources :homeworks
+    post "homeworks/create"
   end
+  
+  match ':controller/:action/:class_room_id', :via => [:get, :post]
   
   resources :forums
   
   resources :posts
   
   resources :comments
-  
-  resources :subcomments
   
   post "comments/plus1"
   
