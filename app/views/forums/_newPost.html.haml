@@ -11,7 +11,7 @@
   = label_tag(:tag_list, "Tags:")
   %br
   = f.text_field :tag_list, :size => 30
-  = select("post", "tag_list", @tags.collect{|c| [c.name, c.id]})
+  = #select("post", "tag_list", @tags.collect{|c| [c.name, c.id]})
   = f.submit "Create"
   %br
   %br
