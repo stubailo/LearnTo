@@ -53,8 +53,10 @@ class HomeworksController < ApplicationController
 			#sets the homework's homework_section to all homework if there wasn't one when it was created
 			@homework.homework_section_id = @homework_section.id
 	    else
-	      redirect_to class_room_homeworks_path(@class_room), :flash => {:fail => "You created your homework with an improper section."}
+	      redirect_to class_room_homeworks_path(@class_room), :flash => { :fail => "You created your homework with an improper section." }
 	    end
+	  else
+	    @homework.homework_section_id = @homework_sections.first.id
 	  end
 	  
 	  #Makes the homework-resource relationship if the homework and resource are both valid -- need to put in validations
