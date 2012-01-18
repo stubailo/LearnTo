@@ -6,7 +6,7 @@
   = @post.content
 = "Tags:"
 = @post.tag_list.join(", ")
-%h2 Comments:
+%h2 Responses:
 - (@post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
   %p
     = link_to @user.login, user_path(@user)

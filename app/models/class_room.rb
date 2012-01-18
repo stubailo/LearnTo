@@ -8,7 +8,5 @@ class ClassRoom < ActiveRecord::Base
   has_many :user_permissions
   has_many :users, :through => :user_permissions
 
-  has_one :forum
-
-
+  has_one :forum, :dependent => :destroy
 end
