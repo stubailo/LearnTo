@@ -20,7 +20,7 @@ class UserSessionsController < ApplicationController
       flash[:fail] = render_to_string(:partial => 'user_sessions/not_active.html.erb', :locals => { :user => @user_session.attempted_record }).html_safe
       redirect_to :action => :new
     else
-      render :action => :new
+      render :action => :new, :locals => {:failed_login => true}
     end
   end
 

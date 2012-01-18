@@ -13,19 +13,13 @@
                 = f.hidden_field :class_room_id, :value => @class_room.id
                 = f.submit "Join Class", :class => "button"
           -else
-            = link_to "Leave Class", @user_permission, confirm: 'Are you sure?', method: :delete
+            .enroll-button-container
+              = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete, :class => "button"
 
           #{pluralize @users.count, "student"}
         %li Runs #{l @class_room.start_date} to #{l @class_room.end_date}
         %li
-          Click to rate: &nbsp;
-          %span.plus-minus
-            %input.plus#plus-rating{:type => "radio", :name => "rating"}
-            %label{:for => "plus-rating"}
-              %strong 48
-            %input.minus#minus-rating{:type => "radio", :name => "rating"}
-            %label{:for => "minus-rating"}
-              %strong 12
+          Click to rate:
         %li
           Price:
           = number_to_currency @class_room.price
@@ -42,7 +36,7 @@
           %li
             %a{:href => "#"} Tests / Quizzes
           %li
-            %a{:href => "#"} Discussion
+            %a{:href => forum_path(@class_room.id)} Discussion
           %li
             %a{:href => "#"} Students
 
