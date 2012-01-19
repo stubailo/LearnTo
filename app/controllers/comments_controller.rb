@@ -10,8 +10,8 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       @post.last_updated = Time.now
+      @post.save
     end
-    
     redirect_to :back
   end
 
@@ -22,6 +22,27 @@ class CommentsController < ApplicationController
     end
     @comment.destroy
     redirect_to :back
+  end
+  
+  def ajaxCreate
+    @comment = Comment.new(params[:comment])
+    @post = Post.find(params[:post_id])
+    @comment.post_id = @post.id
+    @comment.user_id = current_user.id
+    if @comment.save
+      @post.last_updated = Time.now
+      @post.save
+    end
+    return "ok"
+  end
+  
+  def ajaxDelete
+    @comment = Comment.find(params[:comment_id])
+    if @comment.user_id != current_user.id
+      redirect_to root_url
+    end
+    @comment.destroy
+    return "ok"
   end
   
   def plus1

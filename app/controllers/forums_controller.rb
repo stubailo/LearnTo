@@ -34,6 +34,7 @@ class ForumsController < ApplicationController
   
   def search_by_tag
     @posts = Post.search_by_tag(params[:tag_term], params[:forum_id])
+    render 'search'
   end
 
   def set_vars
