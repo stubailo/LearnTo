@@ -1,15 +1,19 @@
-.content
-  %h1 Resource
-  - if @resource.source_call == "homework"
-    = link_to 'Back to assignments', class_room_homeworks_path(@class_room)
-  
-  - if @resource.file_type == "upload"
-    = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
+.full_width_page
+  .content
+    %h1 Resource
+    - if @resource.source_call == "homework"
+      = link_to 'Back to assignments', class_room_homeworks_path(@class_room)
+    
+    - if @resource.file_type == "upload"
+      = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
 
-  %p
-    Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
-    - if @resource.updated_at?
-      and updated at #{l @resource.updated_at}.
-  %p
-    = link_to 'Edit', edit_resource_path(@resource), :class => "button"
-    = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
+    - if @resource.file_type == "document"
+      = render :partial => "shared/document_embed", :locals => {:res => @resource, :style => "full_page"}
+
+    %p
+      Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
+      - if @resource.updated_at?
+        and updated at #{l @resource.updated_at}.
+    %p
+      = link_to 'Edit', edit_resource_path(@resource), :class => "button"
+      = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
