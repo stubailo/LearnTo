@@ -1,5 +1,17 @@
 Classroom::Application.routes.draw do
 
+  get "document/show"
+
+  get "document/edit"
+
+  get "document/update"
+
+  get "document/new"
+
+  get "document/create"
+
+  get "document/destroy"
+
   resources :resources
 
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account

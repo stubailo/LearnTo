@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120119060837) do
+ActiveRecord::Schema.define(:version => 20120119124324) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120119060837) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "summary"
+    t.string   "tag_line"
   end
 
   create_table "comments", :force => true do |t|
@@ -37,9 +38,11 @@ ActiveRecord::Schema.define(:version => 20120119060837) do
   create_table "documents", :force => true do |t|
     t.integer  "resource_id"
     t.string   "title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.text     "content"
+    t.boolean  "dirty"
+    t.text     "parsed_content"
   end
 
   add_index "documents", ["resource_id"], :name => "index_documents_on_resource_id"
@@ -116,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20120119060837) do
     t.string   "file_type"
     t.integer  "document_id"
     t.string   "source_call"
+    t.boolean  "hidden"
   end
 
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"
