@@ -25,6 +25,14 @@ class HomeworksController < ApplicationController
 	
 	end
 	
+	def edit
+
+	end
+	
+	def update
+	
+	end
+	
 	def new
 	
 	end
@@ -47,7 +55,13 @@ class HomeworksController < ApplicationController
 	  @resource.source_call = "homework"
 	  @resource.user_id = @user.id 
 	  @resource.class_room_id = @class_room.id
+	  @resource.hidden = false
 	  
+	  #handle documents
+	  if @resource.file_type == "document"
+	    @document = Document.new
+	    @resource.hidden = true
+	  end
 	  
 	  #Makes the homework-resource relationship if the homework and resource are both valid -- need to put in validations
 	  if(@resource.valid? && @homework.valid?)
@@ -56,7 +70,16 @@ class HomeworksController < ApplicationController
 	    @homework_resource.homework_id = @homework.id
 	    @homework_resource.resource_id = @resource.id
 	    @homework_resource.save
-	    redirect_to class_room_homeworks_path(@class_room)
+	    if @resource.file_type == "document"
+	      @document = Document.new
+	      @resource.hidden = true
+	      @document.resource_id = @resource.id
+	      @document.dirty = false
+	      @document.save
+	      redirect_to edit_resource_path(@resource)
+	    else
+	      redirect_to class_room_homeworks_path(@class_room)
+	    end
 	  end
 	
 	end
