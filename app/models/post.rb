@@ -17,6 +17,7 @@ class Post < ActiveRecord::Base
   
   def self.search(search, forum_id)
     search_condition = "%" + search + "%"
-    Post.where("forum_id = ?", forum_id).where('title LIKE ? OR content LIKE ?', search_condition, search_condition)
+    Post.where("forum_id = ?", forum_id)
+    .where('lower(title) LIKE ? OR lower(content) LIKE ?', search_condition.downcase, search_condition.downcase)
   end
 end

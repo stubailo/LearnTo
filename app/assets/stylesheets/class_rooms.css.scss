@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .class_page {
+  
+  padding: 0 20px;
+  margin: 0 -20px;
+  overflow: hidden;
+
 }
 
 $orange: #f37800;
@@ -23,8 +28,10 @@ $left-sidebar-width: 250px;
     width: $left-sidebar-width - 10px;
     float: left;
 
-    padding-bottom: 1000px;
-    margin-bottom: -1000px;
+    overflow: hidden;
+
+    padding-left: 100px;
+    margin-left: -90px;
 
     #class-name-info {
       margin-right: $left-bar-padding*1.5;
@@ -33,7 +40,52 @@ $left-sidebar-width: 250px;
       margin-top: 10px;
       border-radius: 5px;
       -moz-border-radius: 5px;
+    
+      &.home_page {
+        background: #fff;
+        margin: 0;
+        border-radius: 0 0 0 3px;
+        -moz-border-radius: 0 0 0 3px;
+        padding-right: $left-bar-padding*1.5 + 10;
+        padding-top: 20px;
+        padding-left: 10px;
+        margin-left: -10px;
+        padding-bottom: 10px;
+        -moz-box-shadow: 0 0 8px $shadow-color;
+        -webkit-box-shadow: 0 0 8px $shadow-color;
+        box-shadow: 0 0 8px $shadow-color;
+
+        li {
+          border-color: #ccc;
+        }
+
+        margin-bottom: -10px;
+
+        a.home_link {
+
+            border-top: 1px dashed #ddd;
+
+            display: block;
+
+            margin-top: 20px;
+            padding-top: 10px;
+            
+            font-size: 1.3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #222;
+
+            &:hover {
+                color: $orange;
+            }
+
+        }
+      }
+
     }
+
+
 
     h1 {
         font-weight: bold;
@@ -126,6 +178,8 @@ $left-sidebar-width: 250px;
 $center-side-margins: 10px;
 
 #center-page {
+
+    min-height: 500px;
 
     -moz-box-shadow: 0 0 8px $shadow-color;
     -webkit-box-shadow: 0 0 8px $shadow-color;

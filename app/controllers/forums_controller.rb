@@ -20,7 +20,7 @@ class ForumsController < ApplicationController
     if @forum != nil && @user != nil
       @post = Post.new
       @comment = Comment.new
-      @posts = Post.find(:all, :conditions => ['forum_id = ?', @forum.id])
+      @posts = Post.where('forum_id = ?', @forum.id).order("last_updated DESC")
       render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
     else
       redirect_to :back
@@ -34,6 +34,7 @@ class ForumsController < ApplicationController
   
   def search_by_tag
     @posts = Post.search_by_tag(params[:tag_term], params[:forum_id])
+    render 'search'
   end
 
   def set_vars

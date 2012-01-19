@@ -87,8 +87,9 @@ ActiveRecord::Schema.define(:version => 20120119124324) do
     t.integer  "forum_id"
     t.text     "content"
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.datetime "last_updated"
   end
 
   create_table "ratings", :force => true do |t|
