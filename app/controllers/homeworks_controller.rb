@@ -7,7 +7,7 @@ class HomeworksController < ApplicationController
 		@homework_sections = @class_room.homework_sections.sort_by { |hws| hws.order }
 		set_vars
 		respond_to do |format|
-			format.html { render :layout => "show_class_room" }
+			format.html { render :layout => "show_class_room", :locals => {:which_tab => "homework"} }
 			format.json { render json: @class_room }
 		end
 	  end

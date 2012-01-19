@@ -20,6 +20,9 @@
     = f.label :end_date
     = f.date_select :end_date
   .field
+    = f.label :short_description
+    = f.text_area :summary
+  .field
     = f.label :price
     $
     = f.text_field :price, :value => "0.00"
