@@ -10,4 +10,13 @@ class Post < ActiveRecord::Base
   
   validates :title, :presence => true
   validates :content, :presence => true
+  
+  def self.search_by_tag(tag, forum_id)
+    Post.tagged_with(tag).where("forum_id = ?", forum_id)
+  end
+  
+  def self.search(search, forum_id)
+    search_condition = "%" + search + "%"
+    Post.where("forum_id = ?", forum_id).where('title LIKE ? OR content LIKE ?', search_condition, search_condition)
+  end
 end
