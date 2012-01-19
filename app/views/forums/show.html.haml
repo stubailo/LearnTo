@@ -1,35 +1,39 @@
 = form_tag(:controller => :forums, :action => 'search', :method => "get", :forum_id => @forum.id) do
-  = label_tag(:search_term, "Search for:")
+  = label_tag(:search_term, "Search forum:")
   = text_field_tag(:search_term)
   = submit_tag("Search")
 
 - @posts.each do |post|
-  %p
-    = link_to post.title, post_path(post)
-    - if post.user_id == current_user.id
-      = link_to "Delete post", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete
-  %p
-    = post.content
-  = "Tags:"
-  = post.tag_list.join(", ")
-  %h2 Responses:
-  - (post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
-    %p
-      = link_to @user.login, user_path(@user)
-      = comment.content
-      - if comment.user_id == current_user.id
-        = link_to "Delete response", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete
-      %br
-      = comment.rating(current_user.id)
-      = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post
-      = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post
-      - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
-        = link_to @user.login, user_path(@user)
-        = subcomment.content
-        - if subcomment.user_id == @user.id
-          = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
-        %br
-      = render :partial => "newSubcomment", :locals => { :comment => comment }
-  = render :partial => "newComment", :locals => { :post => post }
+  .forum_post_container
+    .forum_post
+      %h3
+        = link_to post.title, post_path(post)
+        - if post.user_id == current_user.id
+          = link_to "Delete post", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete
+        Posted at #{l post.created_at}
+      %p
+        = post.content
+      = "Tags:"
+      = post.tag_list.join(", ")
+    .forum_post_responses
+      %h2 Responses:
+      - (post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
+        %p
+          = link_to @user.login, user_path(@user)
+          = comment.content
+          - if comment.user_id == current_user.id
+            = link_to "Delete response", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete
+          %br
+          = comment.rating(current_user.id)
+          = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post
+          = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post
+          - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
+            = link_to @user.login, user_path(@user)
+            = subcomment.content
+            - if subcomment.user_id == @user.id
+              = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
+            %br
+          = render :partial => "newSubcomment", :locals => { :comment => comment }
+      = render :partial => "newComment", :locals => { :post => post }
 = render :partial => "newPost"
 = @tags

@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .class_page {
-  padding: 0 10px;
 }
 
 $orange: #f37800;
@@ -19,7 +18,6 @@ $left-sidebar-width: 250px;
 {
     height: 100%;
     width: $left-sidebar-width;
-    border-right: solid 2px $light-grey;
     float: left;
 
     padding-bottom: 1000px;
@@ -65,7 +63,6 @@ $left-sidebar-width: 250px;
             text-transform: uppercase;
             text-decoration: none;
             color: $dark-grey;
-            border: 1px solid white;
 
             margin-left: -10px;
 
@@ -85,8 +82,15 @@ $left-sidebar-width: 250px;
             position: relative;
             border-right-width: 1px;
             border-right-color: white;
-       
-            $gradient-color: rgb(230,230,230);
+      
+            border-radius: 3px 0 0 3px;
+            -moz-border-radius: 3px 0 0 3px;
+
+            -moz-box-shadow: 0 0 8px #888;
+            -webkit-box-shadow: 0 0 8px #888;
+            box-shadow: 0 0 8px #888;
+ 
+            $gradient-color: rgb(240,240,240);
             $grad-stop-one: 4%;
             $grad-stop-two: 26%;
         
@@ -108,11 +112,18 @@ $left-sidebar-width: 250px;
     }
 }
 
-$center-side-margins: 20px;
+$center-side-margins: 10px;
 
 #center-page {
-   
-    padding-top: 5px;
-    padding-left: $left-sidebar-width + $center-side-margins;
 
+    -moz-box-shadow: 0 0 8px #888;
+    -webkit-box-shadow: 0 0 8px #888;
+    box-shadow: 0 0 8px #888;
+
+    
+    background: #fff;
+    padding-top: 10px;
+    margin-left: $left-sidebar-width;
+    padding-left: $center-side-margins;
+    padding-right: $center-side-margins;
 }

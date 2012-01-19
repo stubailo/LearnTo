@@ -1,3 +1,24 @@
 // Place all the styles related to the Forums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.forum_post_container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.forum_post {
+  border: 1px solid #ccc;
+
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: #eee;
+}
+
+.forum_post_responses {
+  margin-left: 3em;
+  margin-right: 1em;
+  border-style: none solid solid solid;
+  border-color: #ccc;
+  border-width: 1px;
+}

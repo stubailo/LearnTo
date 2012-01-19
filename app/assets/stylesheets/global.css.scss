@@ -74,6 +74,7 @@ body
     font-family: sans-serif;
     font-size: 14px;
     min-width: 960px;
+    background: #ccc;
 }
 
 a {
@@ -160,10 +161,6 @@ $left-bar-padding: $global-padding;
         }
       }
     }
-}
-
-#content, .class_page{
-  overflow: hidden;
 }
 
 hr {
