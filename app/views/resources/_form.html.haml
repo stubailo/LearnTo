@@ -1,0 +1,32 @@
+= form_for resource, :url => create_url do |f|
+  - if resource.errors.any?
+    #error_explanation
+      %h2 #{pluralize(resource.errors.count, "error")} prohibited your new item from being saved:
+
+      %ul
+      - resource.errors.full_messages.each do |msg|
+        %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name, :class => "text"
+  .field
+    = f.label :caption
+    = f.text_field :caption, :class => "text"
+  .field
+    = f.label :type, "Content Type"
+    .type_radio_buttons
+      = Resource::TYPES.map { |type| (f.radio_button :file_type, type, :value => type) + (label_tag "resource_file_type_" + type, type) }.join.html_safe
+ 
+  .field#upload_tab_contents
+    = f.label :file, "Upload File Here"
+    = f.file_field :file
+  .field#link_tab_contents
+    = f.label :url, "Paste URL Here"
+    = f.text_field :url, :class => "text"
+  .field#document_tab_contents
+    = f.label :url, "Paste URL Here"
+    = f.text_field :url, :class => "text"
+
+  .actions
+    = f.submit "Save"

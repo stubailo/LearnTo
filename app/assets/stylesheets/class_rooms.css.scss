@@ -22,6 +22,9 @@ $left-sidebar-width: 250px;
     border-right: solid 2px $light-grey;
     float: left;
 
+    padding-bottom: 1000px;
+    margin-botton: -1000px;
+
     h1 {
         font-weight: bold;
         line-height: 1.5em;
@@ -112,29 +115,4 @@ $center-side-margins: 20px;
     padding-top: 5px;
     padding-left: $left-sidebar-width + $center-side-margins;
 
-    section {
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        font-size: 2em;
-        font-weight: bold;
-        border-bottom: $light-grey 1px solid;
-        padding-bottom: 5px;
-        margin-bottom: 10px;
-    }
-
-    article {
-
-        margin: 1.2em 0;
-
-        border-left: 2px solid $light-grey;
-        padding-left: .8em;
-
-        h3 {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: .2em;
-        }
-    }
 }

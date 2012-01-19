@@ -64,7 +64,7 @@ class ClassRoomsController < ApplicationController
       end
       
       respond_to do |format|
-        format.html { render :layout => "show_class_room" }
+        format.html { render :layout => "show_class_room", :locals => {:which_tab => "home"} }
         format.json { render json: @class_room }
       end
     end

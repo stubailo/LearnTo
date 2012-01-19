@@ -162,6 +162,10 @@ $left-bar-padding: $global-padding;
     }
 }
 
+#content, .class_page{
+  overflow: hidden;
+}
+
 hr {
   display: block;
   position: relative;
@@ -215,7 +219,7 @@ hr {
   }
 }
 
-form {
+.form_page {
   .field {
     margin: $global-padding 0;
 
@@ -230,7 +234,7 @@ form {
       color: $dark-grey;
     }
 
-    input {
+    input.text {
       font-size: 1.2em;
       padding: $global-padding*.5;
     }
@@ -252,3 +256,4 @@ form {
     }
   }
 }
+
