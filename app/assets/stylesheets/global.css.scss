@@ -223,7 +223,7 @@ hr {
   .field {
     margin: $global-padding 0;
 
-    label {
+    label.main {
       font-weight: bold;
       display: block;
       margin-bottom: $global-padding * .5;
