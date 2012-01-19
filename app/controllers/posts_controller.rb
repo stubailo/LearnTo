@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    @forum = Forum.find(@post.forum_id)
     if @post
       @subcomment = Subcomment.new
       @comment = Comment.new

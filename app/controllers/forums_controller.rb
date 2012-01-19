@@ -29,12 +29,15 @@ class ForumsController < ApplicationController
   
   def search
     @posts = Post.search(params[:search_term], params[:forum_id])
-    render 'search'
+    @forum = Forum.find(params[:forum_id])
+    @class_room = ClassRoom.find(params[:forum_id])
+    @post = Post.new
+    @comment = Comment.new
+    set_vars
   end
   
   def search_by_tag
     @posts = Post.search_by_tag(params[:tag_term], params[:forum_id])
-    render 'search'
   end
 
   def set_vars
