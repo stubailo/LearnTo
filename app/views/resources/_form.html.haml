@@ -8,8 +8,8 @@
         %li= msg
 
   .field
-    = label_tag :section, :class => "main"
-    = text_field :section, :class => "text"
+    = label_tag :resource, :Section, :class => "main"
+    = collection_select(:homework_section, :id, homework_sections, :id, :title)
   .field
     = f.label :name, :class => "main"
     = f.text_field :name, :class => "text"
