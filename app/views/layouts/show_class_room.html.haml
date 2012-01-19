@@ -1,28 +1,29 @@
 - content_for :content do
   .class_page
     %div#left-bar
-      %h1= @class_room.name
-      %p.subtitle
-        by
-        = link_to @creator.login, user_path(@creator)
-      %ul.class-info
-        %li
-          -if @show_join
-            .enroll-button-container
-              = form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f|
-                = f.hidden_field :class_room_id, :value => @class_room.id
-                = f.submit "Join Class", :class => "button"
-          -else
-            .enroll-button-container
-              = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete, :class => "button"
+      #class-name-info
+        %h1= @class_room.name
+        %p.subtitle
+          by
+          = link_to @creator.login, user_path(@creator)
+        %ul.class-info
+          %li
+            -if @show_join
+              .enroll-button-container
+                = form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f|
+                  = f.hidden_field :class_room_id, :value => @class_room.id
+                  = f.submit "Join Class", :class => "button"
+            -else
+              .enroll-button-container
+                = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete, :class => "button"
 
-          #{pluralize @users.count, "student"}
-        %li Runs #{l @class_room.start_date} to #{l @class_room.end_date}
-        %li
-          Click to rate:
-        %li
-          Price:
-          = number_to_currency @class_room.price
+            #{pluralize @users.count, "student"}
+          %li Runs #{l @class_room.start_date} to #{l @class_room.end_date}
+          %li
+            Click to rate:
+          %li
+            Price:
+            = number_to_currency @class_room.price
       %nav
         - if not defined? which_tab
           - which_tab = "none"
