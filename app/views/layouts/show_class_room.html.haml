@@ -1,7 +1,7 @@
 - content_for :content do
   .class_page
     %div#left-bar
-      #class-name-info
+      #class-name-info{ :class => which_tab == "home" ? "home_page" : "" }
         %h1= @class_room.name
         %p.subtitle
           by
@@ -16,20 +16,12 @@
             -else
               .enroll-button-container
                 = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete, :class => "button"
-
-            #{pluralize @users.count, "student"}
-          %li Runs #{l @class_room.start_date} to #{l @class_room.end_date}
-          %li
-            Click to rate:
-          %li
-            Price:
-            = number_to_currency @class_room.price
       %nav
         - if not defined? which_tab
           - which_tab = "none"
         %ul
           %li
-            = link_to "Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
+            = link_to "Home", class_room_path(@class_room)
           %li
             %a{:href => "#"} Lessons
           %li
