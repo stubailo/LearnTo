@@ -1,3 +1,18 @@
+= form_for @homework_section, :url => {:controller => "homeworks", :action => "create_section", :class_room_id => @class_room.id, :method => :post } do |f|
+  - if @homework_section.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@homework_section.errors.count, "error")} prohibited your new item from being saved:
+
+      %ul
+      - @homework_section.errors.full_messages.each do |msg|
+        %li= msg
+ 
+  .field
+    = f.label :title, :class => "main"
+    = f.text_field :title, :class => "text"  
+  .actions
+    = f.submit "Save"
+    
 
 %h1 Homework
 .upload_box
@@ -14,13 +29,14 @@
   %div{:class => "add_resource_form " + ("no_javascript" unless @resource.errors.any?) }
     = render :partial => "resources/form",
         :locals => { :create_url => { :controller => "homeworks", :action => "create", :class_room_id => @class_room.id, :method => :post },
-        :resource => @resource,
+        :resource => @resource, :homework_sections => @homework_sections,
         :style => "small_resource_form"}
-
-- @homework_sections.each do |section|
-  = section.title
-  - homeworks = section.homeworks.sort_by { |hw| hw.order }
-  - section.homeworks.each do |homework|
-    = link_to "#{homework.resource.name} - Sashko maybe put a thumbnail here?", resource_path(homework.resource)
-
-
+        
+%ul
+  - @homework_sections.each do |section|  
+    %li
+      = section.title
+      - homeworks = section.homeworks.sort_by { |hw| hw.order }
+      %ul
+        - section.homeworks.each do |homework|
+          %li= link_to "#{homework.resource.name} - Sashko maybe put a thumbnail here?", resource_path(homework.resource)

@@ -3,6 +3,7 @@ class HomeworksController < ApplicationController
 	def index
 	  if current_user
 		@resource = Resource.new
+		@homework_section = HomeworkSection.new
 		@class_room = ClassRoom.find(params[:class_room_id])
 		@homework_sections = @class_room.homework_sections.sort_by { |hws| hws.order }
 		set_vars
@@ -31,36 +32,25 @@ class HomeworksController < ApplicationController
 	def create
 	  @resource = Resource.new(params[:resource])
 	  @class_room = ClassRoom.find(params[:class_room_id])
+	  homework_section_id = params[:homework_section][:id]
 	  set_vars
 	  
 	  #Creates homework 
 	  @homework = @class_room.homeworks.new
-	  @homework.order = @class_room.homeworks.length
+	  section = HomeworkSection.find(homework_section_id)
+	  homeworks = section.homeworks.sort_by { |hw| hw.order }
+	  @homework.order = homeworks.length>1? homeworks.last.order + 1 : 0
 	  @homework_resource = HomeworkResource.new
+	  @homework.homework_section_id = homework_section_id
 	  
 	  #set resource info not from form
 	  @resource.source_call = "homework"
 	  @resource.user_id = @user.id 
 	  @resource.class_room_id = @class_room.id
 	  
-	  #deals with homework_sections
-	  @homework_sections = @class_room.homework_sections
-	  if(@homework_sections.length < 1)
-	    @homework_section = HomeworkSection.new
-	    @homework_section.title = "All Homework"
-	    @homework_section.order = 0
-	    if(@homework_section.save)
-			#sets the homework's homework_section to all homework if there wasn't one when it was created
-			@homework.homework_section_id = @homework_section.id
-	    else
-	      redirect_to class_room_homeworks_path(@class_room), :flash => { :fail => "You created your homework with an improper section." }
-	    end
-	  else
-	    @homework.homework_section_id = @homework_sections.first.id
-	  end
 	  
 	  #Makes the homework-resource relationship if the homework and resource are both valid -- need to put in validations
-	  if(@resource.valid? && @homework.valid? && @homework_section.save)
+	  if(@resource.valid? && @homework.valid?)
 	    @resource.save
 	    @homework.save
 	    @homework_resource.homework_id = @homework.id
@@ -69,6 +59,19 @@ class HomeworksController < ApplicationController
 	    redirect_to class_room_homeworks_path(@class_room)
 	  end
 	
+	end
+	
+	def create_section
+	  @homework_section = HomeworkSection.new(params[:homework_section])
+	  class_room = ClassRoom.find(params[:class_room_id])
+	  homework_sections = class_room.homework_sections.sort_by { |hws| hws.order }
+	  @homework_section.order = homework_sections.last.order + 1
+	  @homework_section.class_room_id = class_room.id
+	  if(@homework_section.save)
+	    redirect_to class_room_homeworks_path(@class_room)
+	  else
+	    redirect_to class_room_homeworks_path(@class_room)
+	  end
 	end
 	
 	def destroy

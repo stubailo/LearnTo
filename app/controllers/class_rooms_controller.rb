@@ -98,6 +98,8 @@ class ClassRoomsController < ApplicationController
 
     respond_to do |format|
       if @class_room.save
+        @homework_section = HomeworkSection.new(:class_room_id => @class_room.id, :order => 0, :title => "All Homework")
+        @homework_section.save
         @forum = Forum.new(:class_room_id => @class_room.id)
         @forum.save
         format.html { redirect_to @class_room, notice: 'Class was successfully created.' }

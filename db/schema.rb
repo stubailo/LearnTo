@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118080027) do
+ActiveRecord::Schema.define(:version => 20120119060837) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -63,19 +63,20 @@ ActiveRecord::Schema.define(:version => 20120118080027) do
   create_table "homework_sections", :force => true do |t|
     t.integer  "order"
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "class_room_id"
   end
 
+  add_index "homework_sections", ["class_room_id"], :name => "index_homework_sections_on_class_room_id"
+
   create_table "homeworks", :force => true do |t|
-    t.integer  "class_room_id"
     t.integer  "order"
     t.integer  "homework_section_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "homeworks", ["class_room_id"], :name => "index_homeworks_on_class_room_id"
   add_index "homeworks", ["homework_section_id"], :name => "index_homeworks_on_homework_section_id"
 
   create_table "posts", :force => true do |t|
