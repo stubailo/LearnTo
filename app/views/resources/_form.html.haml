@@ -8,27 +8,27 @@
         %li= msg
 
   .field
-    = label_tag :section
+    = label_tag :section, :class => "main"
     = text_field :section, :class => "text"
   .field
-    = f.label :name
+    = f.label :name, :class => "main"
     = f.text_field :name, :class => "text"
   .field
-    = f.label :caption
+    = f.label :caption, :class => "main"
     = f.text_field :caption, :class => "text"
   .field
-    = f.label :type, "Content Type"
+    = f.label :type, "Content Type", :class => "main"
     .type_radio_buttons
       = Resource::TYPES.map { |type| (f.radio_button :file_type, type, :value => type) + (label_tag "resource_file_type_" + type, type) }.join.html_safe
  
   .field#upload_tab_contents
-    = f.label :file, "Upload File Here"
+    = f.label :file, "Upload File", :class => "main"
     = f.file_field :file
   .field#link_tab_contents
-    = f.label :url, "Paste URL Here"
+    = f.label :url, "Paste URL Here", :class => "main"
     = f.text_field :url, :class => "text"
   .field#document_tab_contents
-    = f.label :url, "Paste URL Here"
+    = f.label :url, "Paste URL Here", :class => "main"
     = f.text_field :url, :class => "text"
 
   .actions
