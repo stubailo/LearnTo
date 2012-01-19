@@ -1,0 +1,6 @@
+- @posts.each do |post|
+  %p
+    = link_to post.title, post_path(post)
+  %p
+    = post.content
+  = "Tags:"
