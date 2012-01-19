@@ -74,11 +74,16 @@ body
     font-family: sans-serif;
     font-size: 14px;
     min-width: 960px;
-    background: #ccc;
+    background: #ddd;
 }
 
 a {
     color: $text-orange;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
 }
 
 iframe {
