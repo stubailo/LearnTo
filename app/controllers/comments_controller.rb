@@ -5,9 +5,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comment])
-    @comment.post_id = params[:post_id]
+    @post = Post.find(params[:post_id])
+    @comment.post_id = @post.id
     @comment.user_id = current_user.id
-    @comment.save
+    if @comment.save
+      @post.last_updated = Time.now
+    end
     
     redirect_to :back
   end

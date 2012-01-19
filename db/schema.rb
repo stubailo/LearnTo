@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118080027) do
+ActiveRecord::Schema.define(:version => 20120119055258) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -83,8 +83,9 @@ ActiveRecord::Schema.define(:version => 20120118080027) do
     t.integer  "forum_id"
     t.text     "content"
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.datetime "last_updated"
   end
 
   create_table "ratings", :force => true do |t|
