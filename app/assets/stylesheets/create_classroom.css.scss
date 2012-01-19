@@ -1,0 +1,71 @@
+
+$orange: #f37800;
+
+.new_class_header {
+
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+
+  h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0 0 7px 0;
+  }
+
+  p.hint {
+    color: #444;
+    padding: 0 0 20px 0;
+  }
+
+  .learn_to_big, .summary_big {
+    position: relative;
+    margin: 40px;
+    padding: 20px;
+  }
+
+  .learn_to_big label {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .summary_big label {
+    display: none;
+  }
+
+  .learn_to_big input {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+   
+    border: 1px dashed #ccc;
+
+    text-transform: uppercase;
+
+    color: $orange;
+
+    font-size: 4em;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+  }
+
+  .summary_big textarea {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+   
+    border: 1px dashed #ccc;
+
+    text-transform: uppercase;
+
+    color: #777;
+
+    font-size: 1.5em;
+    display: block;
+    width: 100%;
+    height: 100px;
+  }
+}
+

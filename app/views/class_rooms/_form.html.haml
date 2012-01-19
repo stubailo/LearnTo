@@ -6,25 +6,36 @@
       - @class_room.errors.full_messages.each do |msg|
         %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :occupancy, "Maximum Enrollment"
-    %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
-    = f.number_field :occupancy, :value => 0
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :short_description
-    = f.text_area :summary
-  .field
-    = f.label :price
-    $
-    = f.text_field :price, :value => "0.00"
-  .actions
-    = f.submit "Create your class!"
+  .new_class_header
+    .field.learn_to_big
+      %h3 Step 1: Pick a Tagline
+      %p.hint What will I learn from your class?  Don't worry about grammar - phrases like "learn to math" are perfectly fine.
+      = f.label :tag_line, "Learn To"
+      = f.text_field :tag_line
+    .field.summary_big
+      %h3 Step 2: Write a Short Description
+      %p.hint Now that I'm hooked, give me some details about what I should expect.  You could start with a phrase like "This class will cover..." or "This class will teach you how to..."
+      = f.label :short_description
+      = f.text_area :summary
+  %hr
+  .form_page
+    .field
+      = f.label :name, "Official Name", :class => "main"
+      %p.hint This is the name that will show up for your class when people search.
+      = f.text_field :name, :class => "text"
+    .field
+      = f.label :occupancy, "Maximum Enrollment", :class => "main"
+      %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
+      = f.number_field :occupancy, :value => 0, :class => "text"
+    .field
+      = f.label :start_date, :class => "main"
+      = f.date_select :start_date
+    .field
+      = f.label :end_date, :class => "main"
+      = f.date_select :end_date
+    .field
+      = f.label :price, :class => "main"
+      $
+      = f.text_field :price, :value => "0.00", :class => "text"
+    .actions
+      = f.submit "Create your class!"
