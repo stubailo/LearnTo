@@ -14,9 +14,13 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @subcomment = Subcomment.new
-    @comment = Comment.new
-    @user = current_user
+    if @post
+      @subcomment = Subcomment.new
+      @comment = Comment.new
+      @user = current_user
+    else
+      redirect_to :back
+    end
   end
 
   # GET /posts/new
@@ -65,9 +69,22 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:post_id])    
+    @post = Post.find(params[:post_id])   
+    @forum_id = @post.forum_id 
+    if @post.user_id != current_user.id
+      redirect_to root_url
+    end
     @post.destroy
     
-    redirect_to :back
+    redirect_to forum_path(@forum_id)
   end
+  
 end
+
+
+
+
+
+
+
+

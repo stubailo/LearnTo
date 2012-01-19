@@ -1,3 +1,8 @@
+= form_tag(:controller => :forums, :action => 'search', :method => "get", :forum_id => @forum.id) do
+  = label_tag(:search_term, "Search for:")
+  = text_field_tag(:search_term)
+  = submit_tag("Search")
+
 - @posts.each do |post|
   %p
     = link_to post.title, post_path(post)
@@ -27,3 +32,4 @@
       = render :partial => "newSubcomment", :locals => { :comment => comment }
   = render :partial => "newComment", :locals => { :post => post }
 = render :partial => "newPost"
+= @tags
