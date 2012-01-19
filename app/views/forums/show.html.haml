@@ -6,27 +6,26 @@
 - @posts.each do |post|
   .forum_post_container
     .forum_post
+      - if post.user_id == current_user.id
+        = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
       %h3
         = link_to post.title, post_path(post)
-        - if post.user_id == current_user.id
-          = link_to "Delete post", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete
-        Posted at #{l post.created_at}
       %p
         = post.content
-      = "Tags:"
-      = post.tag_list.join(", ")
+      %div.bottom Posted at #{l post.created_at} by #{link_to post.user.login, post.user} #{post.tag_list.map {|tag| "#"  + tag}.join(" ")}
     .forum_post_responses
-      %h2 Responses:
       - (post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
-        %p
-          = link_to @user.login, user_path(@user)
-          = comment.content
+        .response
+          .up-down-widget
+            = link_to "+", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top"
+            %span.udw-middle= comment.rating(current_user.id)
+            = link_to "-", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post, :class => "udw-bottom"
           - if comment.user_id == current_user.id
-            = link_to "Delete response", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete
+            = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
+          %h4= link_to @user.login, user_path(@user)
+          %p= comment.content
           %br
-          = comment.rating(current_user.id)
-          = button_to "+1", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post
-          = button_to "-1", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post
+
           - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
             = link_to @user.login, user_path(@user)
             = subcomment.content
@@ -34,6 +33,7 @@
               = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
             %br
           = render :partial => "newSubcomment", :locals => { :comment => comment }
-      = render :partial => "newComment", :locals => { :post => post }
+      .post_response_form
+        = render :partial => "newComment", :locals => { :post => post }
 = render :partial => "newPost"
 = @tags

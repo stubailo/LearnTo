@@ -9,6 +9,7 @@ $orange: #f37800;
 $text-orange: saturate(darken($orange, 10%), 40%);
 $light-grey: #ccc;
 $dark-grey: #444;
+$shadow-color: #999;
 
 $left-bar-padding: 10px;
 
@@ -16,23 +17,33 @@ $left-sidebar-width: 250px;
 
 #left-bar
 {
+    margin-left: 10px;
+
     height: 100%;
-    width: $left-sidebar-width;
+    width: $left-sidebar-width - 10px;
     float: left;
 
     padding-bottom: 1000px;
-    margin-botton: -1000px;
+    margin-bottom: -1000px;
+
+    #class-name-info {
+      margin-right: $left-bar-padding*1.5;
+      padding: 10px;
+      padding-left: 0;
+      margin-top: 10px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+    }
 
     h1 {
         font-weight: bold;
-        line-height: 1.5em;
+        line-height: 1.2em;
         font-size: 1.5em;
-        padding-top: $left-bar-padding;
     }
 
     p.subtitle {
         padding: $left-bar-padding 0;
-        padding-top: 0;
+        padding-top: 5px;
     }
 
     .enroll-button-container {
@@ -43,17 +54,22 @@ $left-sidebar-width: 250px;
 
     ul.class-info {
 
-        padding-right: $left-bar-padding*1.5;
 
         li {
             text-transform: lowercase;
             padding: $left-bar-padding 0;
-            border-top: solid 1px lighten($light-grey, 5%);
+            border-top: solid 1px #bbb;
         }
     }
 
     nav {
         margin-top: 20px;
+
+        li {
+            overflow: hidden;
+            padding-left: 20px;
+            margin-left: -20px;
+        }
 
         li a {
             display: block;
@@ -62,7 +78,7 @@ $left-sidebar-width: 250px;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
-            color: $dark-grey;
+            color: #222;
 
             margin-left: -10px;
 
@@ -77,18 +93,13 @@ $left-sidebar-width: 250px;
             margin-left: -10px;            
 
             padding: $left-bar-padding;
-            border-color: $light-grey;
-            margin-right: -2px;
-            position: relative;
-            border-right-width: 1px;
-            border-right-color: white;
       
             border-radius: 3px 0 0 3px;
             -moz-border-radius: 3px 0 0 3px;
 
-            -moz-box-shadow: 0 0 8px #888;
-            -webkit-box-shadow: 0 0 8px #888;
-            box-shadow: 0 0 8px #888;
+            -moz-box-shadow: 0 0 8px $shadow-color;
+            -webkit-box-shadow: 0 0 8px $shadow-color;
+            box-shadow: 0 0 8px $shadow-color;
  
             $gradient-color: rgb(240,240,240);
             $grad-stop-one: 4%;
@@ -116,13 +127,13 @@ $center-side-margins: 10px;
 
 #center-page {
 
-    -moz-box-shadow: 0 0 8px #888;
-    -webkit-box-shadow: 0 0 8px #888;
-    box-shadow: 0 0 8px #888;
+    -moz-box-shadow: 0 0 8px $shadow-color;
+    -webkit-box-shadow: 0 0 8px $shadow-color;
+    box-shadow: 0 0 8px $shadow-color;
 
     
     background: #fff;
-    padding-top: 10px;
+    padding-top: 20px;
     margin-left: $left-sidebar-width;
     padding-left: $center-side-margins;
     padding-right: $center-side-margins;
