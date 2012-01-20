@@ -8,11 +8,14 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment.post_id = @post.id
     @comment.user_id = current_user.id
+    
     if @comment.save
       @post.last_updated = Time.now
+      @rating = Rating.new(:user_id => current_user.id, :comment_id => @comment.id, :value => 1)
+      @rating.save
       @post.save
     end
-    redirect_to :back
+     redirect_to :back
   end
 
   def destroy
