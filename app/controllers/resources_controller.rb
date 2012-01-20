@@ -78,6 +78,7 @@ class ResourcesController < ApplicationController
 	@resource.class_room_id = @class_room.id
 	@resource.section_id = @section.id
 	@resource.hidden = false
+	@resource.order = @section.resources.length
 	  
 	#handle documents
 	if @resource.file_type == "document"
