@@ -19,6 +19,10 @@ class HomeworksController < ApplicationController
 		@user = current_user
 		@users = @class_room.users
 		@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+		if(!@user_permission)
+			@user_permission = UserPermission.new
+			@show_join = true
+		end
     end
 	
 	def show

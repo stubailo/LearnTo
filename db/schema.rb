@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120119124324) do
+ActiveRecord::Schema.define(:version => 20120120053400) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -53,35 +53,6 @@ ActiveRecord::Schema.define(:version => 20120119124324) do
     t.datetime "updated_at",    :null => false
   end
 
-  create_table "homework_resources", :force => true do |t|
-    t.integer  "homework_id"
-    t.integer  "resource_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "homework_resources", ["homework_id"], :name => "index_homework_resources_on_homework_id"
-  add_index "homework_resources", ["resource_id"], :name => "index_homework_resources_on_resource_id"
-
-  create_table "homework_sections", :force => true do |t|
-    t.integer  "order"
-    t.string   "title"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "class_room_id"
-  end
-
-  add_index "homework_sections", ["class_room_id"], :name => "index_homework_sections_on_class_room_id"
-
-  create_table "homeworks", :force => true do |t|
-    t.integer  "order"
-    t.integer  "homework_section_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "homeworks", ["homework_section_id"], :name => "index_homeworks_on_homework_section_id"
-
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "forum_id"
@@ -103,6 +74,15 @@ ActiveRecord::Schema.define(:version => 20120119124324) do
   add_index "ratings", ["comment_id"], :name => "index_ratings_on_comment_id"
   add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
 
+  create_table "resource_pages", :force => true do |t|
+    t.string   "section"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "class_room_id"
+  end
+
+  add_index "resource_pages", ["class_room_id"], :name => "index_resource_pages_on_class_room_id"
+
   create_table "resources", :force => true do |t|
     t.string   "file_file_name"
     t.string   "file_content_type"
@@ -120,11 +100,24 @@ ActiveRecord::Schema.define(:version => 20120119124324) do
     t.integer  "document_id"
     t.string   "source_call"
     t.boolean  "hidden"
+    t.integer  "order"
+    t.integer  "section_id"
   end
 
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"
   add_index "resources", ["document_id"], :name => "index_resources_on_document_id"
+  add_index "resources", ["section_id"], :name => "index_resources_on_section_id"
   add_index "resources", ["user_id"], :name => "index_resources_on_user_id"
+
+  create_table "sections", :force => true do |t|
+    t.integer  "order"
+    t.string   "title"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "resource_page_id"
+  end
+
+  add_index "sections", ["resource_page_id"], :name => "index_sections_on_resource_page_id"
 
   create_table "subcomments", :force => true do |t|
     t.integer  "user_id"

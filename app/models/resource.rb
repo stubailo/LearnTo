@@ -3,8 +3,8 @@ class Resource < ActiveRecord::Base
   belongs_to :user
   belongs_to :document
   belongs_to :resource
+  belongs_to :section
   has_one :document
-  has_one :homework_resource
   
   has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }
   

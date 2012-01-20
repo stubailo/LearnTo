@@ -1,4 +1,4 @@
-= form_for resource, :url => create_url do |f|
+= form_for [class_room, resource_page, section, resource] do |f|
   - if resource.errors.any?
     #error_explanation
       %h2 #{pluralize(resource.errors.count, "error")} prohibited your new item from being saved:
@@ -9,7 +9,7 @@
 
   .field
     = label_tag :resource, :Section, :class => "main"
-    = collection_select(:homework_section, :id, homework_sections, :id, :title)
+    = collection_select(:section, :id, sections, :id, :title)
   .field
     = f.label :name, :class => "main"
     = f.text_field :name, :class => "text"
