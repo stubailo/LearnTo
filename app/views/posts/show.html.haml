@@ -17,9 +17,10 @@
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response{:id => "forum_response_" + comment.id.to_s}
         .up-down-widget
-          = link_to "+", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top"
+          - rbu = comment.rating_by_user(current_user.id)
+          = link_to "+", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
           %span.udw-middle= comment.rating
-          = link_to "-", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post, :class => "udw-bottom"
+          = link_to "-", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
         - if comment.user_id == current_user.id
           = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
         %h4 
