@@ -9,7 +9,7 @@ class ResourcePagesController < ApplicationController
 	  @sections = @resource_page.sections.sort_by { |hws| hws.order }
 	  set_vars
       respond_to do |format|
-		format.html { render :layout => "show_class_room", :locals => {:which_tab => "homework"} }
+		format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
 		format.json { render json: @class_room }
 	  end
     end
