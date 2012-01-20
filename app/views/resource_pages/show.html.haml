@@ -1,4 +1,4 @@
-= form_for @section, :url => {:controller => "homeworks", :action => "create_section", :class_room_id => @class_room.id, :method => :post } do |f|
+= form_for [@class_room, @resource_page, @section]  do |f|
   - if @section.errors.any?
     #error_explanation
       %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
@@ -14,10 +14,9 @@
     = f.submit "Save"
     
 
-%h1 @resource_page.section.capitalize
 .upload_box
   .title
-    Add new @resource_page.section.singularize assignment:
+    Add new #{@resource_page.section.singularize}:
     %span{:class => "upload_links " + ("javascript_show" unless @resource.errors.any?),
           :style => @resource.errors.any? ? "display: none" : ""}
       %a{:href => "#", :id => "resource_upload"} Upload File
@@ -28,14 +27,15 @@
 
   %div{:class => "add_resource_form " + ("no_javascript" unless @resource.errors.any?) }
     = render :partial => "resources/form",
-        :locals => { :resource => @resource, :sections => @sections,
-        :style => "small_resource_form"}
+      :locals => { :resource => @resource, :resource_page => @resource_page, :section => @sections.first, 
+      :class_room => @class_room, :sections => @sections,
+      :style => "small_resource_form"}
         
 %ul
   - @sections.each do |section|  
     %li
       = section.title
-      - homeworks = section.resources.sort_by { |hw| hw.order }
+      - resources = section.resources.sort_by { |res| res.order }
       %ul
         - section.resources.each do |resource|
           %li= link_to "#{resource.name} - Sashko maybe put a thumbnail here?", resource_path(resource)
