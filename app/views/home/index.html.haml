@@ -10,7 +10,19 @@
 
 
 - if current_user
+  %h1 Most recent updates:
+  - @class_rooms.each do |class_room|
+    = link_to class_room.name+":", class_room
+    <br />
+    - resources = class_room.resources.sort_by { |res| res.updated_at }.reverse
+    - resources = get_top_three(resources)
+    - resources.each do |rec_pair|
+      = link_to rec_pair[0].name, rec_pair[1]
+      = " - " + rec_pair[1][1].section
+      <br />
+
   = link_to 'Create a new class!', new_class_room_path
+  
 - else
   %div Register to use our site!
 
