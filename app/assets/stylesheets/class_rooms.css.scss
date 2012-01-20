@@ -160,7 +160,9 @@ $center-side-margins: 10px;
     }
 
     .tag_line {
+      margin-top: 5px;
       display: block;
+      line-height: .9em;
       font-size: 6em;
       font-weight: bold;
       text-transform: uppercase;
