@@ -9,5 +9,9 @@ $ ->
     event.stopPropagation()
     event.preventDefault()
     response_id = $(this).parents(".response").attr("id").split("_")[2]
-    $.post(plus_response_url + response_id, (data) -> alert(data["rating"]))
+    $.post( plus_response_url + response_id, (data) ->
+      $("#forum_response_" + response_id).find(".udw-middle").html(data["rating"])
+      $("#forum_response_" + response_id).find(".udw-top").addClass("active")
+      $("#forum_response_" + response_id).find(".udw-bottom").removeClass("active")
+    )
   )

@@ -15,7 +15,7 @@
         = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
   .forum_post_responses
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
-      .response
+      .response{:id => "forum_response_" + comment.id.to_s}
         .up-down-widget
           = link_to "+", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top"
           %span.udw-middle= comment.rating
