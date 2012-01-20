@@ -14,4 +14,6 @@ class ClassRoom < ActiveRecord::Base
   has_many :resources
 
   has_one :forum, :dependent => :destroy
+
+  belongs_to :creator, {:class_name => :User}
 end

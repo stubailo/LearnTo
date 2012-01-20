@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .class_page {
   padding: 0 20px;
   margin: 0 -20px;
@@ -147,4 +148,23 @@ $center-side-margins: 10px;
     margin-left: $left-sidebar-width;
     padding-left: $center-side-margins;
     padding-right: $center-side-margins;
+}
+.class_home {
+  h1 {
+    margin: 20px 40px;
+    .learn_to {
+      display: block;
+      font-size: 5em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .tag_line {
+      display: block;
+      font-size: 6em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $orange;
+    }
+  }
 }

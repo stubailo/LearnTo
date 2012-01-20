@@ -53,7 +53,10 @@ class CommentsController < ApplicationController
       rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     end
     rating.save
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => Comment.find(params[:comment_id]).rating } }
+    end
   end
   
   def minus1
