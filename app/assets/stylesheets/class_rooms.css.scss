@@ -82,13 +82,14 @@ $left-sidebar-width: 170px;
 
         li a {
             display: block;
-            padding: $left-bar-padding*0.5 $left-bar-padding;
+            padding: $left-bar-padding*.3 $left-bar-padding;
             font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
             color: #222;
 
+            margin: $left-bar-padding*0.3 0;
             margin-left: -10px;
 
             &:hover {
@@ -97,18 +98,14 @@ $left-sidebar-width: 170px;
         }
 
         li a.active {
-            margin: $left-bar-padding*0.3 0;
-
-            margin-left: -10px;            
-
-            padding: $left-bar-padding;
+            padding: $left-bar-padding $left-bar-padding;
       
             border-radius: 3px 0 0 3px;
             -moz-border-radius: 3px 0 0 3px;
 
-            -moz-box-shadow: 0 0 8px $shadow-color;
-            -webkit-box-shadow: 0 0 8px $shadow-color;
-            box-shadow: 0 0 8px $shadow-color;
+            -moz-box-shadow: 0 0 8px lighten($shadow-color, 10%);
+            -webkit-box-shadow: 0 0 8px lighten($shadow-color, 10%);
+            box-shadow: 0 0 8px lighten($shadow-color, 10%);
  
             $gradient-color: rgb(240,240,240);
             $grad-stop-one: 4%;
