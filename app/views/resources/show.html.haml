@@ -1,7 +1,7 @@
 .content
   %h1 Resource
   - if @resource.source_call == "homework"
-    = link_to 'Back to assignments', class_room_resource_pages_path(@class_room)
+    = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
   
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
