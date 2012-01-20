@@ -19,7 +19,8 @@ class PostsController < ApplicationController
       @subcomment = Subcomment.new
       @comment = Comment.new
       @user = current_user
-      set_vars(@forum.class_room)
+      @class_room = @forum.class_room
+      set_vars
       render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
     else
       redirect_to :back
