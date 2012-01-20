@@ -12,8 +12,6 @@ Classroom::Application.routes.draw do
 
   get "document/destroy"
 
-  resources :resources
-
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
  
   get "users/edit_password"
@@ -27,11 +25,12 @@ Classroom::Application.routes.draw do
   resources :user_permissions
 
   resources :class_rooms do
-    resources :homeworks
-    post "homeworks/create"
+    resources :resource_pages do
+      resources :sections do
+        resources :resources
+      end
+    end
   end
-  
-  match ':controller/:action/:class_room_id', :via => [:get, :post]
   
   get "forums/search_by_tag"
   

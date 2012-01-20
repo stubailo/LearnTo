@@ -1,6 +1,6 @@
 class CreateHomeworkSections < ActiveRecord::Migration
   def change
-    create_table :homework_sections do |t|
+    create_table :sections do |t|
       t.integer :order
       t.string :title
 

@@ -74,6 +74,10 @@
 
 .post_response_form {
   padding: 10px;
+
+  textarea {
+    width: 98%;
+  }
 }
 
 .up-down-widget {
@@ -86,8 +90,6 @@
 
   border-radius: 5px;
   -moz-border-radius: 5px;
-
-  border: 1px solid #ccc;
 
   min-width: 30px;
 
@@ -105,13 +107,18 @@
       text-decoration: none;
       background: #eee;
     }
+    &.active {
+      background: #f37800;
+      color: #fff;
+    }
   }
 
   .udw-middle {
     display: block;
     background: #f8f8f8;
     padding: 1px;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
+    border-style: none solid;
   }
 
   .udw-bottom {
@@ -121,9 +128,14 @@
     -moz-border-radius: 0 0 3px 3px;
     color: #777;
     font-weight: bold;
+    
     &:hover {
       text-decoration: none;
       background: #eee;
+    }
+    &.active {
+      background: #f37800;
+      color: #fff;
     }
   }
 }

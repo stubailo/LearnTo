@@ -34,10 +34,13 @@ class CommentsController < ApplicationController
   end
   
   def ajaxCreate
-    @comment = Comment.new(params[:comment])
     @post = Post.find(params[:post_id])
+    
+    @comment = Comment.new
+    @comment.content = params[:comment_text]
     @comment.post_id = @post.id
     @comment.user_id = current_user.id
+    
     if @comment.save
       @post.last_updated = Time.now
       @post.save
@@ -76,6 +79,9 @@ class CommentsController < ApplicationController
       rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => -1)
     end
     rating.save
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => Comment.find(params[:comment_id]).rating } }
+    end
   end
 end

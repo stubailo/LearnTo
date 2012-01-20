@@ -1,4 +1,4 @@
-= form_for(@resource) do |f|
+= form_for [@class_room, @resource_page, @section, @resource] do |f|
   - if @resource.errors.any?
     #error_explanation
       %h2= "#{pluralize(@class_room.errors.count, "error")} prohibited this class_room from being saved:"

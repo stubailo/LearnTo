@@ -43,10 +43,15 @@ class ClassRoomsController < ApplicationController
   end
   
   def set_vars
+    @resource_pages = @class_room.resource_pages
     @creator = User.find(@class_room.creator_id)
     @user = current_user
     @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
     @users = @class_room.users
+    if(!@user_permission)
+      @user_permission = UserPermission.new
+      @show_join = true
+    end
   end
 
   # GET /class_rooms/1
@@ -98,10 +103,14 @@ class ClassRoomsController < ApplicationController
 
     respond_to do |format|
       if @class_room.save
-        @homework_section = HomeworkSection.new(:class_room_id => @class_room.id, :order => 0, :title => "All Homework")
-        @homework_section.save
-        @forum = Forum.new(:class_room_id => @class_room.id)
-        @forum.save
+        ResourcePage::SECTIONS.each do |type|
+          resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type)
+          resource_page.save
+          section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type)
+          section.save
+        end
+        forum = Forum.new(:class_room_id => @class_room.id)
+        forum.save
         format.html { redirect_to @class_room, notice: 'Class was successfully created.' }
         format.json { render json: @class_room, status: :created, location: @class_room }
       else

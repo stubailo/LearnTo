@@ -1,7 +1,7 @@
 .content
   %h1 Resource
   - if @resource.source_call == "homework"
-    = link_to 'Back to assignments', class_room_homeworks_path(@class_room)
+    = link_to 'Back to assignments', class_room_resource_pages_path(@class_room)
   
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
@@ -14,5 +14,6 @@
     - if @resource.updated_at?
       and updated at #{l @resource.updated_at}.
   %p
-    = link_to 'Edit', edit_resource_path(@resource), :class => "button"
+    = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
+     :class => "button"
     = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"

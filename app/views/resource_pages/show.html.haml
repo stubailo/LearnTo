@@ -1,0 +1,41 @@
+= form_for [@class_room, @resource_page, @section]  do |f|
+  - if @section.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
+
+      %ul
+      - @section.errors.full_messages.each do |msg|
+        %li= msg
+ 
+  .field
+    = f.label :title, :class => "main"
+    = f.text_field :title, :class => "text"  
+  .actions
+    = f.submit "Save"
+    
+
+.upload_box
+  .title
+    Add new #{@resource_page.section.singularize}:
+    %span{:class => "upload_links " + ("javascript_show" unless @resource.errors.any?),
+          :style => @resource.errors.any? ? "display: none" : ""}
+      %a{:href => "#", :id => "resource_upload"} Upload File
+      |
+      %a{:href => "#", :id => "resource_link"} Paste Link
+      |
+      %a{:href => "#", :id => "resource_document"} Write New Document
+
+  %div{:class => "add_resource_form " + ("no_javascript" unless @resource.errors.any?) }
+    = render :partial => "resources/form",
+      :locals => { :resource => @resource, :resource_page => @resource_page, :section => @sections.first, 
+      :class_room => @class_room, :sections => @sections,
+      :style => "small_resource_form"}
+        
+%ul
+  - @sections.each do |section|  
+    %li
+      = section.title
+      - resources = section.resources.sort_by { |res| res.order }
+      %ul
+        - section.resources.each do |resource|
+          %li= link_to "#{resource.name} - Sashko maybe put a thumbnail here?", resource_path(resource)
