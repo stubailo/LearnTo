@@ -3,10 +3,16 @@
     %span.learn_to Learn To
     %span.tag_line= @class_room.tag_line.upcase
 
-  %div.below_tagline
+  .below_tagline
     .info
       Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
 
-  %hr
+  %h2= @class_room.summary
 
-  %p Edit this document!
+  %br
+  %br
+  %br
+  %br
+  %br
+  Down here there should be a document embedded
+
