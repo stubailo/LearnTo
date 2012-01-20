@@ -1,15 +1,15 @@
-= form_for [class_room, resource_page, section, resource] do |f|
-  - if resource.errors.any?
+= form_for [@class_room, @resource_page, @section, @resource] do |f|
+  - if @resource.errors.any?
     #error_explanation
-      %h2 #{pluralize(resource.errors.count, "error")} prohibited your new item from being saved:
+      %h2 #{pluralize(@resource.errors.count, "error")} prohibited your new item from being saved:
 
       %ul
-      - resource.errors.full_messages.each do |msg|
+      - @resource.errors.full_messages.each do |msg|
         %li= msg
 
   .field
     = label_tag :resource, :Section, :class => "main"
-    = collection_select(:section, :id, sections, :id, :title)
+    = collection_select(:section, :id, @sections, :id, :title)
   .field
     = f.label :name, :class => "main"
     = f.text_field :name, :class => "text"

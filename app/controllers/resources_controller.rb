@@ -51,6 +51,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
     get_path_vars
     set_vars
+    @sections = @class_room.sections
     if(@resource.file_type == "document")
       @document = @resource.document
     end
