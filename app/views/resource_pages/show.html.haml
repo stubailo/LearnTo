@@ -38,4 +38,4 @@
       - resources = section.resources.sort_by { |res| res.order }
       %ul
         - section.resources.each do |resource|
-          %li= link_to "#{resource.name} - Sashko maybe put a thumbnail here?", resource_path(resource)
+          %li= link_to "#{resource.name} - Sashko maybe put a thumbnail here?", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
