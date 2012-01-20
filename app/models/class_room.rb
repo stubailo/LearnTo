@@ -15,3 +15,4 @@ class ClassRoom < ActiveRecord::Base
 
   has_one :forum, :dependent => :destroy
 end
+
