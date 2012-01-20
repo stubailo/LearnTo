@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .class_page {
-  
   padding: 0 20px;
   margin: 0 -20px;
   overflow: hidden;
@@ -16,9 +15,9 @@ $light-grey: #ccc;
 $dark-grey: #444;
 $shadow-color: #999;
 
-$left-bar-padding: 10px;
+$left-bar-padding: 8px;
 
-$left-sidebar-width: 250px;
+$left-sidebar-width: 170px;
 
 #left-bar
 {
@@ -34,7 +33,7 @@ $left-sidebar-width: 250px;
     margin-left: -90px;
 
     #class-name-info {
-      margin-right: $left-bar-padding*1.5;
+      margin-right: $left-bar-padding;
       padding: 10px;
       padding-left: 0;
       margin-top: 10px;
@@ -89,8 +88,7 @@ $left-sidebar-width: 250px;
 
     h1 {
         font-weight: bold;
-        line-height: 1.2em;
-        font-size: 1.5em;
+        font-size: 1.1em;
     }
 
     p.subtitle {
@@ -126,7 +124,7 @@ $left-sidebar-width: 250px;
         li a {
             display: block;
             padding: $left-bar-padding*0.5 $left-bar-padding;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
