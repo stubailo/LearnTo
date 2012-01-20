@@ -15,7 +15,8 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Sign in successful!"
-      redirect_back_or_default root_url
+      @user = @user_session.user
+      redirect_to user_path(@user)
     elsif @user_session.attempted_record && !@user_session.invalid_password? && !@user_session.attempted_record.active?
       flash[:fail] = render_to_string(:partial => 'user_sessions/not_active.html.erb', :locals => { :user => @user_session.attempted_record }).html_safe
       redirect_to :action => :new

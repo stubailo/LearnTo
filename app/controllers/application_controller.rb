@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
+
   private
     before_filter :global_vars
 
@@ -30,6 +31,14 @@ class ApplicationController < ActionController::Base
         redirect_to login_path
         return false
       end
+    end
+  
+    def set_vars(class_room)
+      @class_room = class_room
+      @creator = User.find(class_room.creator_id)
+      @user = current_user
+      @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, class_room.id).first
+      @users = class_room.users
     end
 
     def require_no_user

@@ -81,7 +81,7 @@
 .upload_box {
   border: 1px solid #eee;
   padding: 5px;
-  margin: 10px;
+  margin: 10px 0;
 
   border-radius: 5px;
   -moz-border-radius: 5px;
@@ -89,15 +89,6 @@
   &.active {
     border: 1px solid #aaa;
     
-    background: rgb(238,238,238); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(238,238,238,1) 1%, rgba(255,255,255,1) 40%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(238,238,238,1)), color-stop(40%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(238,238,238,1) 1%,rgba(255,255,255,1) 40%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(238,238,238,1) 1%,rgba(255,255,255,1) 40%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(238,238,238,1) 1%,rgba(255,255,255,1) 40%); /* IE10+ */
-    background: linear-gradient(top, rgba(238,238,238,1) 1%,rgba(255,255,255,1) 40%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-
     -moz-box-shadow:    0 0 2px 2px #eee;
     -webkit-box-shadow: 0 0 2px 2px #eee;
     box-shadow:         0 0 2px 2px #eee;

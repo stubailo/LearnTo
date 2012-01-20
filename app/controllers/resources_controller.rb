@@ -10,16 +10,25 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def set_vars
+    @creator = User.find(@class_room.creator_id)
+	@user = current_user
+	@users = @class_room.users
+	@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+  end
+	
+
   # GET /resources/1
   # GET /resources/1.json
   def show
     @resource = Resource.find(params[:id])
     @class_room = ClassRoom.find(@resource.class_room_id)
+    set_vars
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @resource }
-    end
+	  format.html { render :layout => "show_class_room", :locals => {:which_tab => "homework"} }
+	  format.json { render json: @resource }
+	end
   end
 
   # GET /resources/new
@@ -40,6 +49,15 @@ class ResourcesController < ApplicationController
   # GET /resources/1/edit
   def edit
     @resource = Resource.find(params[:id])
+    @class_room = ClassRoom.find(@resource.class_room_id)
+    set_vars
+    if(@resource.file_type == "document")
+      @document = @resource.document
+    end
+    respond_to do |format|
+	  format.html { render :layout => "show_class_room", :locals => {:which_tab => "homework"} }
+	  format.json { render json: @resource }
+	end
   end
 
   # POST /resources
@@ -75,6 +93,12 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       if @resource.update_attributes(params[:resource])
+        if(@resource.file_type == "document")
+          @document = @resource.document
+          @document.content = params[:document][:content]
+          @document.dirty = true
+          @document.save
+        end
         format.html { redirect_to @resource, notice: 'Resource was successfully updated.' }
         format.json { head :no_content }
       else

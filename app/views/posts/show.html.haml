@@ -1,3 +1,5 @@
+= link_to "<- Back to forum", @forum
+
 .forum_post_container
   .forum_post
     - if @post.user_id == current_user.id
@@ -7,30 +9,33 @@
     %p
       = simple_format(@post.content)
     %div.bottom 
+      #{time_ago_in_words(@post.last_updated.to_time, include_seconds = true)} ago by #{link_to @post.user.login, @post.user},
+      tags: 
       - @post.tag_list.each do |x|
-        = link_to x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
-      Originally posted #{@post.created_at.strftime("%B %e, %Y")} by #{link_to @post.user.login, @post.user} #{@post.tag_list.map {|tag| "#"  + tag}.join(" ")}
-      %br
-      Last updated #{ time_ago_in_words(@post.last_updated.to_time, include_seconds = true)} ago
+        = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
   .forum_post_responses
-    - (@post.comments.sort { |c1, c2| c2.rating(current_user.id) <=> c1.rating(current_user.id) }).each do |comment|
+    - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response
         .up-down-widget
           = link_to "+", {:controller => :comments,:action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top"
-          %span.udw-middle= comment.rating(current_user.id)
+          %span.udw-middle= comment.rating
           = link_to "-", {:controller => :comments,:action => 'minus1', :comment_id => comment.id}, :method => :post, :class => "udw-bottom"
         - if comment.user_id == current_user.id
           = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
-        %h4= link_to @user.login, user_path(@user)
-        %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))
-        %br
-
-        - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
+        %h4 
           = link_to @user.login, user_path(@user)
-          = subcomment.content
-          - if subcomment.user_id == @user.id
-            = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
-          %br
-        = render :partial => "newSubcomment", :locals => { :comment => comment }
+        %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))
+        
+        .bottom #{time_ago_in_words(comment.created_at, include_seconds = true)} ago
+        
+        .sub_comments
+
+          - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
+            = link_to @user.login, user_path(@user)
+            = subcomment.content
+            - if subcomment.user_id == @user.id
+              = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
+            %br
+          = render :partial => "newSubcomment", :locals => { :comment => comment }
     .post_response_form
       = render :partial => "newComment", :locals => { :post => @post }
