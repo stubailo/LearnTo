@@ -9,4 +9,13 @@ class Comment < ActiveRecord::Base
   def rating
     return self.ratings.sum(:value)
   end
+  
+  def rating_by_user(user_id)
+    a = Rating.where("user_id = ? AND comment_id = ?", user_id, self.id).first
+    if a
+      return a.value
+    else
+      return 0
+    end
+  end
 end

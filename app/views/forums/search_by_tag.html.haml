@@ -1,6 +1,19 @@
+= form_tag(:action => 'search', :method => :get, :forum_id => @forum.id) do
+  = label_tag(:search_term, "Search forum:")
+  = text_field_tag(:search_term)
+  = submit_tag("Search")
+
 - @posts.each do |post|
-  %p
-    = link_to post.title, post_path(post)
-  %p
-    = post.content
-  = "Tags:"
+  .forum_post_container
+    .forum_post
+      - if post.user_id == current_user.id
+        = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
+      %h3
+        = link_to post.title, post_path(post)
+      %p= simple_format(post.content)
+      %div.bottom 
+        last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago,
+        = link_to(pluralize(post.comments.count, "response"), post_path(post)) + ", "
+        tags: 
+        -post.tag_list.each do |x|
+          = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
