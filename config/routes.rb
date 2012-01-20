@@ -32,21 +32,21 @@ Classroom::Application.routes.draw do
     end
   end
   
-  match ':controller/:action/:class_room_id', :via => [:get, :post]
+  get "forums/search_by_tag"
+  
+  post "forums/search" 
   
   resources :forums
   
   resources :posts
   
-  resources :comments
-  
-  resources :subcomments
-  
   post "comments/plus1"
   
   post "comments/minus1"
   
-  post "forums/search"
+  resources :comments
+  
+  resources :subcomments
   
   resources :users
 

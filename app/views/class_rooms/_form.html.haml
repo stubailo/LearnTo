@@ -17,8 +17,9 @@
       %p.hint Now that I'm hooked, give me some details about what I should expect.  You could start with a phrase like "This class will cover..." or "This class will teach you how to..."
       = f.label :short_description
       = f.text_area :summary
-  %hr
-  .form_page
+  .form_page.other_info
+    %h3 Step 3: Other Info
+    %p.class_create_hint You're almost done - we just need a little more information.
     .field
       = f.label :name, "Official Name", :class => "main"
       %p.hint This is the name that will show up for your class when people search.

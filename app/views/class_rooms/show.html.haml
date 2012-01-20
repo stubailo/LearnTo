@@ -1,4 +1,12 @@
-.content
-  %h1 Class Description
+.class_home
+  %h1
+    %span.learn_to Learn To
+    %span.tag_line= @class_room.tag_line.upcase
+
+  %div.below_tagline
+    .info
+      Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
+
+  %hr
 
   %p Edit this document!

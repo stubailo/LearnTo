@@ -2,8 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .class_page {
-  
   padding: 0 20px;
   margin: 0 -20px;
   overflow: hidden;
@@ -16,9 +16,9 @@ $light-grey: #ccc;
 $dark-grey: #444;
 $shadow-color: #999;
 
-$left-bar-padding: 10px;
+$left-bar-padding: 8px;
 
-$left-sidebar-width: 250px;
+$left-sidebar-width: 170px;
 
 #left-bar
 {
@@ -34,63 +34,20 @@ $left-sidebar-width: 250px;
     margin-left: -90px;
 
     #class-name-info {
-      margin-right: $left-bar-padding*1.5;
+      margin-right: $left-bar-padding;
       padding: 10px;
       padding-left: 0;
       margin-top: 10px;
       border-radius: 5px;
       -moz-border-radius: 5px;
     
-      &.home_page {
-        background: #fff;
-        margin: 0;
-        border-radius: 0 0 0 3px;
-        -moz-border-radius: 0 0 0 3px;
-        padding-right: $left-bar-padding*1.5 + 10;
-        padding-top: 20px;
-        padding-left: 10px;
-        margin-left: -10px;
-        padding-bottom: 10px;
-        -moz-box-shadow: 0 0 8px $shadow-color;
-        -webkit-box-shadow: 0 0 8px $shadow-color;
-        box-shadow: 0 0 8px $shadow-color;
-
-        li {
-          border-color: #ccc;
-        }
-
-        margin-bottom: -10px;
-
-        a.home_link {
-
-            border-top: 1px dashed #ddd;
-
-            display: block;
-
-            margin-top: 20px;
-            padding-top: 10px;
-            
-            font-size: 1.3em;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #222;
-
-            &:hover {
-                color: $orange;
-            }
-
-        }
-      }
-
     }
 
 
 
     h1 {
         font-weight: bold;
-        line-height: 1.2em;
-        font-size: 1.5em;
+        font-size: 1.1em;
     }
 
     p.subtitle {
@@ -126,7 +83,7 @@ $left-sidebar-width: 250px;
         li a {
             display: block;
             padding: $left-bar-padding*0.5 $left-bar-padding;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
@@ -191,4 +148,23 @@ $center-side-margins: 10px;
     margin-left: $left-sidebar-width;
     padding-left: $center-side-margins;
     padding-right: $center-side-margins;
+}
+.class_home {
+  h1 {
+    margin: 20px 40px;
+    .learn_to {
+      display: block;
+      font-size: 5em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .tag_line {
+      display: block;
+      font-size: 6em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $orange;
+    }
+  }
 }

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.0rc2'
 
-gem 'rack', '>= 1.4.0'
+gem 'rack', :git => "https://github.com/rack/rack.git"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -36,6 +36,8 @@ gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 
 gem "omniauth-facebook", :git => 'git://github.com/mkdynamic/omniauth-facebook.git'
 gem "omniauth-google"
+
+gem 'thinking-sphinx', '2.0.10'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

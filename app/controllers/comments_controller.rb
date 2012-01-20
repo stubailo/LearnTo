@@ -24,6 +24,15 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
   
+  def ajaxEdit
+    id = params[:id]
+    content = params[:content]
+    
+    @comment = Comment.find(params[:id])
+    @comment.content = content
+    @comment.save
+  end
+  
   def ajaxCreate
     @comment = Comment.new(params[:comment])
     @post = Post.find(params[:post_id])
@@ -53,7 +62,10 @@ class CommentsController < ApplicationController
       rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     end
     rating.save
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => Comment.find(params[:comment_id]).rating } }
+    end
   end
   
   def minus1

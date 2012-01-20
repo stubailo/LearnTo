@@ -1,0 +1,43 @@
+.admin_edit
+  %h2 Edit This Page
+  .add_new_section
+    = form_for @homework_section, :url => {:controller => "homeworks", :action => "create_section", :class_room_id => @class_room.id, :method => :post } do |f|
+      - if @homework_section.errors.any?
+        #error_explanation
+          %h2 #{pluralize(@homework_section.errors.count, "error")} prohibited your new item from being saved:
+
+          %ul
+          - @homework_section.errors.full_messages.each do |msg|
+            %li= msg
+      = f.label :title, "Add new section:", :class => "main"
+      = f.text_field :title, :class => "text"  
+      = f.submit "Save"
+      
+
+  .upload_box
+    .title
+      Add new homework assignment:
+      %span{:class => "upload_links " + ("javascript_show" unless @resource.errors.any?),
+            :style => @resource.errors.any? ? "display: none" : ""}
+        %a{:href => "#", :id => "resource_upload"} Upload File
+        |
+        %a{:href => "#", :id => "resource_link"} Paste Link
+        |
+        %a{:href => "#", :id => "resource_document"} Write New Document
+
+    %div{:class => "add_resource_form " + ("no_javascript" unless @resource.errors.any?) }
+      = render :partial => "resources/form",
+          :locals => { :create_url => { :controller => "homeworks", :action => "create", :class_room_id => @class_room.id, :method => :post },
+          :resource => @resource, :homework_sections => @homework_sections,
+          :style => "small_resource_form"}
+        
+%ul.materials_sections
+  - @homework_sections.each do |section|  
+    %li.materials_section
+      %h3= section.title
+      - if section.homeworks.length > 0
+        - homeworks = section.homeworks.sort_by { |hw| hw.order }
+        %ul
+          - section.homeworks.each do |homework|
+            %li
+              = link_to homework.resource.name, resource_path(homework.resource)

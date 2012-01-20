@@ -6,6 +6,9 @@
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
 
+  - if @resource.file_type == "document"
+    = render :partial => "shared/document_embed", :locals => {:res => @resource, :style => "full_page"}
+
   %p
     Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
     - if @resource.updated_at?
