@@ -9,7 +9,7 @@
     %p
       = simple_format(@post.content)
     %div.bottom 
-      #{time_ago_in_words(@post.last_updated.to_time, include_seconds = true)} ago by #{link_to @post.user.login, @post.user},
+      posted #{time_ago_in_words(@post.created_at.to_time, include_seconds = true)} ago by #{link_to @post.user.login, @post.user},
       tags: 
       - @post.tag_list.each do |x|
         = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
@@ -31,9 +31,10 @@
         
         .sub_comments
 
-          - (comment.subcomments.sort { |c1, c2| c1.created_at <=> c2.created_at }).each do |subcomment|
-            = link_to @user.login, user_path(@user)
+          - comment.subcomments.order(:created_at).each do |subcomment|
             = subcomment.content
+            = " - "
+            = link_to @user.login, user_path(@user)
             - if subcomment.user_id == @user.id
               = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
             %br
