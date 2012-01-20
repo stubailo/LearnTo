@@ -35,6 +35,10 @@
   - @sections.each do |section|  
     %li.materials_section
       %h3= section.title
+      - if @sections.length > 1 
+        = link_to "Delete section", [@class_room, @resource_page, section], 
+        :confirm => "Are you sure? This will delete all #{@resource_page.section} associated with this section as well", 
+        :method => :delete
       - resources = section.resources.sort_by { |res| res.order }
       - if resources.length > 0
         %ul

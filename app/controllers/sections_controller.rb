@@ -37,5 +37,20 @@ class SectionsController < ApplicationController
 	  redirect_to class_room_resource_page_path(class_room, resource_page)
 	end
   end
+  
+  def destroy
+    @section = Section.find(params[:id])
+    @resources = @section.resources
+    resource_page = ResourcePage.find(params[:resource_page_id])
+    class_room = ClassRoom.find(params[:class_room_id])
+    if resource_page.sections.length > 1
+      @section.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to class_room_resource_page_path(class_room, resource_page) }
+      format.json { head :no_content }
+    end
+  end
 
 end

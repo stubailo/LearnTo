@@ -8,7 +8,7 @@ class ClassRoom < ActiveRecord::Base
   has_many :user_permissions
   has_many :users, :through => :user_permissions
   
-  has_many :resource_pages
+  has_many :resource_pages, :dependent => :destroy
   has_many :sections, :through => :resource_pages
   has_many :resources
 
