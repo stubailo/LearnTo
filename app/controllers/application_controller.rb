@@ -33,13 +33,17 @@ class ApplicationController < ActionController::Base
       end
     end
   
-    def set_vars(class_room)
-      @class_room = class_room
-      @creator = User.find(class_room.creator_id)
-      @user = current_user
-      @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, class_room.id).first
-      @users = class_room.users
+  def set_vars
+    @resource_pages = @class_room.resource_pages
+    @creator = User.find(@class_room.creator_id)
+    @user = current_user
+    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+    @users = @class_room.users
+    if(!@user_permission)
+      @user_permission = UserPermission.new
+      @show_join = true
     end
+  end  
 
     def require_no_user
       logger.debug "ApplicationController::require_no_user"

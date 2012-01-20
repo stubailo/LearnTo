@@ -10,18 +10,6 @@ class ResourcesController < ApplicationController
     end
   end
 
-  def set_vars
-    @resource_pages = @class_room.resource_pages
-    @creator = User.find(@class_room.creator_id)
-	@user = current_user
-	@users = @class_room.users
-	@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
-    if(!@user_permission)
-      @user_permission = UserPermission.new
-      @show_join = true
-    end
-  end
-  
   def get_path_vars	
     @class_room = ClassRoom.find(@resource.class_room_id)
     @section = @resource.section
