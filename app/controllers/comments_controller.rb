@@ -24,6 +24,15 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
   
+  def ajaxEdit
+    id = params[:id]
+    content = params[:content]
+    
+    @comment = Comment.find(params[:id])
+    @comment.content = content
+    @comment.save
+  end
+  
   def ajaxCreate
     @comment = Comment.new(params[:comment])
     @post = Post.find(params[:post_id])
