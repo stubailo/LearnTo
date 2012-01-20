@@ -18,4 +18,6 @@ class Comment < ActiveRecord::Base
       return 0
     end
   end
+  
+  
 end
