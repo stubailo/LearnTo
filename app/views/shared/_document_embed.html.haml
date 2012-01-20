@@ -1,0 +1,17 @@
+- if defined? style and defined? res
+  - file_extension = File.extname(res.file.url).split("?")[0].downcase[1..-1] 
+  - icon_class = "file_#{file_extension}"
+  - hidden = false unless ( defined? hidden and hidden == true )
+  - if style == "inline_link"
+    %span.resource-inline-container
+      - link_class = "resource-inline-link include-file-type-icon #{icon_class}"
+      %a{:class => link_class, :href => url_for(res.file.url), :title => res.caption}
+        = res.name
+  - if style == "full_page"
+    %div.document-resource
+      %h2= res.name 
+      -if res.caption != ""
+        .caption
+          = res.caption
+      .inside{ :style => hidden ? "display: none;" : "" }
+        =res.document.content.html_safe
