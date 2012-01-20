@@ -41,6 +41,26 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
+  
+  def ajaxEdit
+    id = params[:id]
+    title = params[:title]
+    content = params[:content]
+    
+    @post = Comment.find(params[:id])
+    @post.title = title
+    @post.content = content
+    @post.save
+  end
+  
+  def ajaxDelete
+    @post = Post.find(params[:post_id])
+    if @post.user_id != current_user.id
+      redirect_to root_url
+    end
+    @post.destroy
+    return "ok"
+  end
 
   # POST /posts
   # POST /posts.json
