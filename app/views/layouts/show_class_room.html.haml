@@ -21,7 +21,7 @@
           - which_tab = "none"
         %ul
           %li
-            = link_to "Home", class_room_path(@class_room)
+            = link_to "Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
           %li
             %a{:href => "#"} Lessons
           %li

@@ -40,48 +40,6 @@ $left-sidebar-width: 170px;
       border-radius: 5px;
       -moz-border-radius: 5px;
     
-      &.home_page {
-        background: #fff;
-        margin: 0;
-        border-radius: 0 0 0 3px;
-        -moz-border-radius: 0 0 0 3px;
-        padding-right: $left-bar-padding*1.5 + 10;
-        padding-top: 20px;
-        padding-left: 10px;
-        margin-left: -10px;
-        padding-bottom: 10px;
-        -moz-box-shadow: 0 0 8px $shadow-color;
-        -webkit-box-shadow: 0 0 8px $shadow-color;
-        box-shadow: 0 0 8px $shadow-color;
-
-        li {
-          border-color: #ccc;
-        }
-
-        margin-bottom: -10px;
-
-        a.home_link {
-
-            border-top: 1px dashed #ddd;
-
-            display: block;
-
-            margin-top: 20px;
-            padding-top: 10px;
-            
-            font-size: 1.3em;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #222;
-
-            &:hover {
-                color: $orange;
-            }
-
-        }
-      }
-
     }
 
 
