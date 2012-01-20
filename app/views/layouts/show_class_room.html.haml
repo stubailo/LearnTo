@@ -31,7 +31,7 @@
           %li
             %a{:href => "#"} Tests / Quizzes
           %li
-            = link_to "Discussion", forum_path(@class_room.id), :class => which_tab == "discussion" ? "active" : ""
+            = link_to "Discussion", @class_room.forum, :class => which_tab == "discussion" ? "active" : ""
           %li
             %a{:href => "#"} Students
 

@@ -4,7 +4,7 @@
 
 .forum_post_container {
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .delete_link {
@@ -15,24 +15,25 @@
   h3 {
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   p {
-    padding: 5px 0;
   }
 
   .bottom {
-    color: #444;
+    color: #777;
     font-size: .9em;
+    margin-top: 10px;
   }
 
-  background: #f2f2f2;
+  background: #f7f7f7;
 
   padding: 10px;
 
   border: #ddd 1px solid;
-  border-style: solid none;
+  moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .forum_post_responses {
@@ -46,16 +47,29 @@
 .response {
   h4 {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   p {
     font-size: .9em;
   }
+
+  .bottom {
+    font-size: .8em;
+    color: #777;
+    margin-top: 10px;
+  }
   padding: 10px;
   border-bottom: 1px dashed #ddd;
 
   padding-left: 50px;
+
+  .sub_comments {
+    margin-top: 10px;
+    border-left: #aaa 1px solid;
+    padding-left: 10px;
+  }
+
 }
 
 .post_response_form {
