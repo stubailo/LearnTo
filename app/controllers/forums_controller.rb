@@ -39,11 +39,4 @@ class ForumsController < ApplicationController
     @posts = Post.search_by_tag(params[:tag_term], params[:forum_id])
     @forum = Forum.find(params[:forum_id])
   end
-
-  def set_vars
-    @creator = User.find(@class_room.creator_id)
-    @user = current_user
-    @users = @class_room.users
-    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
-  end  
 end
