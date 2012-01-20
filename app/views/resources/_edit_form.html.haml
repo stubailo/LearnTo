@@ -42,9 +42,9 @@
 
       });
     }); 
-
-  .field
-    = label_tag :document, :Content, :class => "main"
-    = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
+  - if@resource.file_type == "document"
+    .field
+      = label_tag :document, :Content, :class => "main"
+      = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
   .actions
-    = f.submit "Update your document"
+    = f.submit "Update"

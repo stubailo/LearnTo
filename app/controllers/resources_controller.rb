@@ -68,13 +68,14 @@ class ResourcesController < ApplicationController
 	@resource = Resource.new(params[:resource])
 	@class_room = ClassRoom.find(params[:class_room_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
+    @section = Section.find(params[:section][:id])
     set_vars
 
 	#set resource info not from form
 	@resource.source_call = @resource_page.section
 	@resource.user_id = @user.id 
 	@resource.class_room_id = @class_room.id
-	@resource.section_id = params[:section][:id]
+	@resource.section_id = @section.id
 	@resource.hidden = false
 	  
 	#handle documents
