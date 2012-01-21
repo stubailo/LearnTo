@@ -8,10 +8,12 @@
   .forum_post_container
     .forum_post
       - if post.user_id == current_user.id
-        = #link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
+        = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
       %h3
         = link_to post.title, post_path(post)
       %div.bottom
+        posted by #{link_to post.user.login, post.user} 
+        %br
         last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago,
         = link_to(pluralize(post.comments.count, "response"), post_path(post)) + ", "
         tags: 
