@@ -23,7 +23,7 @@
                                         'cyc', 'cv', 'htm', 'html', 'java',
                                         'js', 'm', 'mxml', 'perl', 'pl', 'pm',
                                         'py', 'rb', "sh", "xhtml", "xml", "xsl",
-                                        "ini"].include? file_extension
+                                        "h", "ini"].include? file_extension
           = render :partial => "shared/code_content", :locals => {:res => res, :extension => file_extension}
         -if ["audio/mpeg", "audio/mp4", "audio/ogg", "audio/mp3"].include? type
           = render :partial => "shared/audio_content", :locals => {:res => res}

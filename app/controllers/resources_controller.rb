@@ -23,12 +23,10 @@ class ResourcesController < ApplicationController
     get_path_vars
     set_vars
 
-    if @resource.source_call == "homework"
-      respond_to do |format|
-	    format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
-	    format.json { render json: @resource }
-	  end
-	end
+    respond_to do |format|
+      format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
+      format.json { render json: @resource }
+    end
   end
 
   # GET /resources/new
