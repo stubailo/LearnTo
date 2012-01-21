@@ -5,6 +5,9 @@ gem 'rails', '>= 3.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'thin'
+gem 'heroku'
+
 gem 'mysql2'
 gem 'pg'
 
