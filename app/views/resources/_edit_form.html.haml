@@ -17,13 +17,15 @@
 
   .actions
     = f.submit "Save"
-    %button Insert Image
-    %button Insert Media / File
+
+    %span.button#insert_image Insert Image
+    %span.button#insert_media Insert Media / File
+    %span.button#insert_code Insert Code
 
   - if@resource.file_type == "document"
     :javascript
       $().ready(function() {
-        $('textarea.tinymce').tinymce({
+        $('#tinymce_area').tinymce({
           // Location of TinyMCE script
           script_url : '/assets/tinymce/tiny_mce.js',
           theme : "advanced",
