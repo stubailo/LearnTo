@@ -2,7 +2,7 @@
   .actions
     = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
      :class => "button"
-    = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
+    = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
   .info #{@resource_page.section} #{">"} #{@section.title} #{">"} #{@resource.name}
 
