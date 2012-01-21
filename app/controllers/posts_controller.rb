@@ -47,10 +47,15 @@ class PostsController < ApplicationController
     title = params[:title]
     content = params[:content]
     
-    @post = Comment.find(params[:id])
+    @post = Post.find(params[:id])
     @post.title = title
     @post.content = content
     @post.save
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:post => @post } }
+    end
   end
   
   def ajaxDelete
