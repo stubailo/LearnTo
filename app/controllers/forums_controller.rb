@@ -30,7 +30,7 @@ class ForumsController < ApplicationController
   
   def search
     @posts = Post.search(params[:search_term], params[:forum_id])
-    @forum = Forum.find(params[:forum_id])
+    @forum = Forum.find(1)
     @class_room = @forum.class_room
     set_vars
     render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
