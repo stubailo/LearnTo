@@ -1,4 +1,4 @@
-= form_tag(:action => 'search', :method => "get", :forum_id => @forum.id) do
+= form_tag('search', :method => :get, :forum_id => @forum.id) do
   = label_tag(:search_term, "Search forum:")
   = text_field_tag(:search_term)
   = submit_tag("Search")
