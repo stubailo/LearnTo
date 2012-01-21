@@ -20,3 +20,13 @@ $ ->
   $(".javascript_show").show();
   $(".no_javascript").hide();
 
+$ ->
+  search_box = $(".search_box").find("input.text")
+  search_box.addClass("inactive").val("find a class...")
+    .focus ->
+      if search_box.hasClass("inactive")
+        search_box.val("").addClass("active").removeClass("inactive")
+    .blur ->
+      if search_box.val() == ""
+        search_box.addClass("inactive").removeClass("active").val("find a class...")
+      

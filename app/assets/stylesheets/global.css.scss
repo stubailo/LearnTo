@@ -159,13 +159,36 @@ $left-bar-padding: $global-padding;
       border-right: 1px solid #555;
 
       .search_field {
-        margin: -1px;
         margin-right: 0;
-        background: #fff;
+        background: #eee;
+
+        padding: 1px;
+
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+
+        -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+        -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+
+        .button {
+          display: none;
+        }
 
         input.text {
           border: none;
           outline: none;
+          background: none;
+
+          padding: 0 3px;
+
+          &.inactive {
+            color: #777;
+          }
+
+          &.active {
+            color: #000;
+          }
         }
       }
     }
