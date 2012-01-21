@@ -27,9 +27,7 @@
 
     %div{:class => "add_resource_form " + ("no_javascript" unless @resource.errors.any?) }
       = render :partial => "resources/form",
-        :locals => { :resource => @resource, :resource_page => @resource_page, :section => @sections.first, 
-        :class_room => @class_room, :sections => @sections,
-        :style => "small_resource_form"}
+        :locals => { :style => "small_resource_form"}
         
 %ul
   - @sections.each do |section|  

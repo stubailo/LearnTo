@@ -61,12 +61,6 @@ class ClassRoomsController < ApplicationController
     if current_user
       @class_room = ClassRoom.find(params[:id])
       set_vars
-      @show_join = false
-      
-      if(!@user_permission)
-        @user_permission = UserPermission.new
-        @show_join = true
-      end
       
       respond_to do |format|
         format.html { render :layout => "show_class_room", :locals => {:which_tab => "home"} }
