@@ -13,6 +13,13 @@ Classroom::Application.configure do
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
 
+  # Cares if the mailer can't send
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  #Default host for action mailer
+  config.action_mailer.default_url_options = {:host => "localhost:3000"} #CHANGE TO OUR WEB DOMAIN
+
 
   # Code is not reloaded between requests
   config.cache_classes = true
