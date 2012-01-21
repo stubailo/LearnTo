@@ -1,0 +1,118 @@
+body.mceContentBody, .document_content {
+  /* http://meyerweb.com/eric/tools/css/reset/ 
+     v2.0 | 20110126
+     License: none (public domain)
+  */
+  /* HTML5 display-role reset for older browsers */
+  background: #fff;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #222;
+  font-family: "Helvetica", "Arial", sans-serif; }
+  body.mceContentBody html, body.mceContentBody body, body.mceContentBody div, body.mceContentBody span, body.mceContentBody applet, body.mceContentBody object, body.mceContentBody iframe,
+  body.mceContentBody h1, body.mceContentBody h2, body.mceContentBody h3, body.mceContentBody h4, body.mceContentBody h5, body.mceContentBody h6, body.mceContentBody p, body.mceContentBody blockquote, body.mceContentBody pre,
+  body.mceContentBody a, body.mceContentBody abbr, body.mceContentBody acronym, body.mceContentBody address, body.mceContentBody big, body.mceContentBody cite, body.mceContentBody code,
+  body.mceContentBody del, body.mceContentBody dfn, body.mceContentBody em, body.mceContentBody img, body.mceContentBody ins, body.mceContentBody kbd, body.mceContentBody q, body.mceContentBody s, body.mceContentBody samp,
+  body.mceContentBody small, body.mceContentBody strike, body.mceContentBody strong, body.mceContentBody sub, body.mceContentBody sup, body.mceContentBody tt, body.mceContentBody var,
+  body.mceContentBody b, body.mceContentBody u, body.mceContentBody i, body.mceContentBody center,
+  body.mceContentBody dl, body.mceContentBody dt, body.mceContentBody dd, body.mceContentBody ol, body.mceContentBody ul, body.mceContentBody li,
+  body.mceContentBody fieldset, body.mceContentBody form, body.mceContentBody label, body.mceContentBody legend,
+  body.mceContentBody table, body.mceContentBody caption, body.mceContentBody tbody, body.mceContentBody tfoot, body.mceContentBody thead, body.mceContentBody tr, body.mceContentBody th, body.mceContentBody td,
+  body.mceContentBody article, body.mceContentBody aside, body.mceContentBody canvas, body.mceContentBody details, body.mceContentBody embed,
+  body.mceContentBody figure, body.mceContentBody figcaption, body.mceContentBody footer, body.mceContentBody header, body.mceContentBody hgroup,
+  body.mceContentBody menu, body.mceContentBody nav, body.mceContentBody output, body.mceContentBody ruby, body.mceContentBody section, body.mceContentBody summary,
+  body.mceContentBody time, body.mceContentBody mark, body.mceContentBody audio, body.mceContentBody video, .document_content html, .document_content body, .document_content div, .document_content span, .document_content applet, .document_content object, .document_content iframe, .document_content h1, .document_content h2, .document_content h3, .document_content h4, .document_content h5, .document_content h6, .document_content p, .document_content blockquote, .document_content pre, .document_content a, .document_content abbr, .document_content acronym, .document_content address, .document_content big, .document_content cite, .document_content code, .document_content del, .document_content dfn, .document_content em, .document_content img, .document_content ins, .document_content kbd, .document_content q, .document_content s, .document_content samp, .document_content small, .document_content strike, .document_content strong, .document_content sub, .document_content sup, .document_content tt, .document_content var, .document_content b, .document_content u, .document_content i, .document_content center, .document_content dl, .document_content dt, .document_content dd, .document_content ol, .document_content ul, .document_content li, .document_content fieldset, .document_content form, .document_content label, .document_content legend, .document_content table, .document_content caption, .document_content tbody, .document_content tfoot, .document_content thead, .document_content tr, .document_content th, .document_content td, .document_content article, .document_content aside, .document_content canvas, .document_content details, .document_content embed, .document_content figure, .document_content figcaption, .document_content footer, .document_content header, .document_content hgroup, .document_content menu, .document_content nav, .document_content output, .document_content ruby, .document_content section, .document_content summary, .document_content time, .document_content mark, .document_content audio, .document_content video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+  body.mceContentBody article, body.mceContentBody aside, body.mceContentBody details, body.mceContentBody figcaption, body.mceContentBody figure,
+  body.mceContentBody footer, body.mceContentBody header, body.mceContentBody hgroup, body.mceContentBody menu, body.mceContentBody nav, body.mceContentBody section, .document_content article, .document_content aside, .document_content details, .document_content figcaption, .document_content figure, .document_content footer, .document_content header, .document_content hgroup, .document_content menu, .document_content nav, .document_content section {
+    display: block; }
+  body.mceContentBody body, .document_content body {
+    line-height: 1; }
+  body.mceContentBody ol, body.mceContentBody ul, .document_content ol, .document_content ul {
+    list-style: none; }
+  body.mceContentBody blockquote, body.mceContentBody q, .document_content blockquote, .document_content q {
+    quotes: none; }
+  body.mceContentBody blockquote:before, body.mceContentBody blockquote:after,
+  body.mceContentBody q:before, body.mceContentBody q:after, .document_content blockquote:before, .document_content blockquote:after, .document_content q:before, .document_content q:after {
+    content: '';
+    content: none; }
+  body.mceContentBody table, .document_content table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  body.mceContentBody h1, .document_content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 20px 0; }
+  body.mceContentBody h2, .document_content h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 15px 0; }
+  body.mceContentBody h3, .document_content h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 12px 0; }
+  body.mceContentBody h4, .document_content h4 {
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #555; }
+  body.mceContentBody h5, .document_content h5 {
+    font-size: .8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 8px 0;
+    color: #555; }
+  body.mceContentBody h6, .document_content h6 {
+    font-size: .8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 6px 0;
+    color: #777; }
+  body.mceContentBody p, .document_content p {
+    text-align: justify;
+    margin-bottom: 15px; }
+  body.mceContentBody blockquote, .document_content blockquote {
+    border-left: 3px solid #eee;
+    margin: 0 30px;
+    padding-left: 20px;
+    font-style: italic; }
+  body.mceContentBody sub, body.mceContentBody sup, .document_content sub, .document_content sup {
+    font-size: .8em; }
+  body.mceContentBody sup, .document_content sup {
+    vertical-align: super; }
+  body.mceContentBody sub, .document_content sub {
+    vertical-align: sub; }
+  body.mceContentBody strong, .document_content strong {
+    font-weight: bold; }
+  body.mceContentBody em, .document_content em {
+    font-style: italic; }
+  body.mceContentBody strike, .document_content strike {
+    text-decoration: line-through; }
+  body.mceContentBody ul, .document_content ul {
+    padding-left: 30px;
+    margin-bottom: 10px; }
+    body.mceContentBody ul li, .document_content ul li {
+      list-style: disc; }
+  body.mceContentBody ol, .document_content ol {
+    padding-left: 30px;
+    margin-bottom: 10px; }
+    body.mceContentBody ol li, .document_content ol li {
+      list-style: decimal; }
+  body.mceContentBody hr, .document_content hr {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 15px auto;
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ddd;
+    font-size: 1px;
+    line-height: 0;
+    overflow: visible; }
