@@ -9,10 +9,10 @@ class ForumsController < ApplicationController
       @ids.push(x.id)
     end
     Tagging.select("tag_id as 'tag_id',max(created_at) as 'created_at',taggable_type as 'taggable_type',context as 'context'")
-     .where(:taggable_type => "Post")
+     .where(:taggable_type => 'Post')
      .where(:taggable_id => @ids)
-     .group("tag_id")
-     .order("created_at DESC")
+     .group('tag_id')
+     .order('created_at DESC')
      .limit(6).each do |x|
       @tags.push(x.tag.name)
     end
