@@ -18,7 +18,7 @@ Classroom::Application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   #Default host for action mailer
-  config.action_mailer.default_url_options = {:host => "localhost:3000"} #CHANGE TO OUR WEB DOMAIN
+  config.action_mailer.default_url_options = {:host => "gentle-stream-8865.herokuapp.com"} #CHANGE TO OUR WEB DOMAIN
 
 
   # Code is not reloaded between requests
