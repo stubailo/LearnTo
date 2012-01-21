@@ -34,12 +34,3 @@
 %br
 = "Recent posts:"
 %br
-- @posts.each do |post|
-  .forum_post_container
-    .forum_post
-      %h3
-        = link_to post.title, post_path(post)
-      %div.bottom
-        In #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-        %br
-        last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago
