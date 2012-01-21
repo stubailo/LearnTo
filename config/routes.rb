@@ -34,7 +34,7 @@ Classroom::Application.routes.draw do
   
   get "forums/search_by_tag"
   
-  post "forums/search" 
+  get "forums/search" 
   
   resources :forums
   

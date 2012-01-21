@@ -8,7 +8,9 @@ class ForumsController < ApplicationController
     Post.select(:id).where(:forum_id => @forum.id).each do |x|
       @ids.push(x.id)
     end
-    Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
+    
+    Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,\"context\" as context")
+     .where(:context => "tags")
      .where(:taggable_type => "Post")
      .where(:taggable_id => @ids)
      .group("tag_id")
