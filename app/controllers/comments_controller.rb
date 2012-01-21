@@ -34,6 +34,12 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.content = content
     @comment.save
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:comment => @comment } }
+    end
+    
   end
   
   def ajaxCreate
@@ -70,7 +76,19 @@ class CommentsController < ApplicationController
     rating.save
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render :json => {:rating => Comment.find(params[:comment_id]).rating } }
+      format.json { render :json => {:rating => rating } }
+    end
+  end
+  
+  def clear1
+    rating = Rating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    if rating != nil
+      rating.value = 1
+    end
+    rating.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => rating } }
     end
   end
   
@@ -88,3 +106,28 @@ class CommentsController < ApplicationController
     end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
