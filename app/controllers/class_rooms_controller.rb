@@ -43,7 +43,7 @@ class ClassRoomsController < ApplicationController
   end
   
   def set_vars
-    @resource_pages = @class_room.resource_pages
+    @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
     @creator = User.find(@class_room.creator_id)
     @user = current_user
     @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first

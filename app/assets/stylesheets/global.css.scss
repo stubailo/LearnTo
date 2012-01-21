@@ -75,6 +75,7 @@ body
     font-size: 14px;
     min-width: 960px;
     background: #ddd;
+    background: url("/assets/paper.png");
 }
 
 a {
@@ -166,6 +167,14 @@ $left-bar-padding: $global-padding;
         }
       }
     }
+}
+
+
+.footer {
+  margin-top: 20px;
+  font-size: .9em;
+  color: #777;
+  text-align: center;
 }
 
 hr {
