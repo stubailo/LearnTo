@@ -15,8 +15,13 @@ class Post < ActiveRecord::Base
   end
   
   def self.search(search, forum_id)
-    search_condition = "%" + search + "%"
-    Post.where("forum_id = ?", forum_id)
-    .where('lower(title) LIKE ? OR lower(content) LIKE ?', search_condition.downcase, search_condition.downcase)
+    @result = []
+    tokenize = search.scan(/"[^"]*"|[^"'\s]+/)
+    tokenize = tokenize.map {|x| '%' + x.strip.gsub(/"/, '') + '%'}
+    tokenize.each do |x|
+      @result += Post.where("forum_id = ?", forum_id)
+      .where('lower(title) Like ? OR lower(content) LIKE ?', x, x)
+    end
+    return @result
   end
 end
