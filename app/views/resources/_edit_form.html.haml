@@ -13,38 +13,28 @@
     = f.label :caption, :class => "main"
     = f.text_field :caption, :class => "text"
 
+  %br
 
-  :javascript
-    $().ready(function() {
-      $('textarea.tinymce').tinymce({
-        // Location of TinyMCE script
-        script_url : '/assets/tinymce/tiny_mce.js',
-
-        // General options
-        theme : "advanced",
-        plugins : "autolink,lists,layer,table,save,advimage,advlink,inlinepopups,preview,media,searchreplace,contextmenu,paste,noneditable,template",
-
-        // Theme options
-        theme_advanced_buttons1 : "save,|,bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,formatselect,|,forecolor,backcolor,pastetext,pasteword,|,undo,redo,|,link,unlink,|,hr,charmap",
-        theme_advanced_buttons2 : "",
-        theme_advanced_buttons3 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-
-        // Example content CSS (should be your site CSS)
-        content_css : "css/content.css",
-
-        // Drop lists for link/image/media/template dialogs
-        template_external_list_url : "lists/template_list.js",
-        external_link_list_url : "lists/link_list.js",
-        external_image_list_url : "lists/image_list.js",
-        media_external_list_url : "lists/media_list.js",
-
-      });
-    }); 
-  - if@resource.file_type == "document"
-    .field
-      = label_tag :document, :Content, :class => "main"
-      = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
   .actions
-    = f.submit "Update"
+    = f.submit "Save"
+    %button Insert Image
+    %button Insert Media / File
+
+  - if@resource.file_type == "document"
+    :javascript
+      $().ready(function() {
+        $('textarea.tinymce').tinymce({
+          // Location of TinyMCE script
+          script_url : '/assets/tinymce/tiny_mce.js',
+          theme : "advanced",
+          plugins : "autolink,lists,layer,table,save,advimage,advlink,inlinepopups,preview,media,searchreplace,contextmenu,paste,noneditable,template",
+          theme_advanced_buttons1 : ",bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,formatselect,|,forecolor,pastetext,pasteword,|,undo,redo,|,link,unlink,|,hr,charmap",
+          theme_advanced_buttons2 : "",
+          theme_advanced_buttons3 : "",
+          theme_advanced_toolbar_location : "top",
+          theme_advanced_toolbar_align : "left",
+          content_css : "/assets/document_content.css",
+        });
+      }); 
+    .field
+      = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"

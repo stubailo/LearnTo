@@ -4,7 +4,11 @@
      :class => "button"
     = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
-  .info #{@resource_page.section} #{">"} #{@section.title} #{">"} #{@resource.name}
+  .info #{@resource_page.section.capitalize} #{">"} #{@section.title} #{">"} #{@resource.name}
+  .info
+    Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
+    - if @resource.updated_at?
+      and updated at #{l @resource.updated_at}.
 
   - if @resource.source_call == "homework"
     = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
@@ -15,7 +19,3 @@
   - if @resource.file_type == "document"
     = render :partial => "shared/document_embed", :locals => {:res => @resource, :style => "full_page"}
 
-  .info
-    Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
-    - if @resource.updated_at?
-      and updated at #{l @resource.updated_at}.

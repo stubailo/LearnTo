@@ -34,7 +34,7 @@ $ -> $(".media-resource").each (index, element) ->
 $ -> 
   $(".type_radio_buttons").buttonset()
   $(".add_resource_form").addClass("form_page")
-  $(".upload_box .title").append($("<a href='#' id='cancel_button' style='float: right'>Cancel</button>").hide())
+  $(".upload_box .title").append($("<a href='#' id='cancel_button' style='float: right'>Cancel</a>").hide())
   $("[id$=_tab_contents]").hide();
   $(".upload_links a").click (event) ->
     $(".upload_box").addClass("active")
