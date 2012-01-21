@@ -3,7 +3,7 @@
 .forum_post_container
   .forum_post
     - if @post.user_id == current_user.id
-      = link_to "edit", {:controller => :posts, :action => 'editAjax', :post_id => @post.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
+      = #link_to "edit", {:controller => :posts, :action => 'editAjax', :post_id => @post.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
       = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => @post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
     %h3
       = link_to @post.title, post_path(@post)

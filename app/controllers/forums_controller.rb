@@ -15,6 +15,7 @@ class ForumsController < ApplicationController
      .order('created_at DESC')
      .limit(6).each do |x|
       @tags.push(x.tag.name)
+      #, \"id\" as id, \"taggable_id\" as taggable_id, \"tagger_id\" as tagger_id, \"tagger_type\" as tagger_type
     end
     if @forum != nil && @user != nil
       @post = Post.new
