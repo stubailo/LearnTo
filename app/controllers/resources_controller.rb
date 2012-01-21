@@ -53,12 +53,10 @@ class ResourcesController < ApplicationController
     if(@resource.file_type == "document")
       @document = @resource.document
     end
-    if @resource.source_call == "homework"
-      respond_to do |format|
+    respond_to do |format|
 	    format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
 	    format.json { render json: @resource }
 	  end
-	end
   end
 
   # POST /resources

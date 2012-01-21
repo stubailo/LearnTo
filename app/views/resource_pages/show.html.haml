@@ -33,13 +33,14 @@
   - @sections.each do |section|  
     %li.materials_section
       %h3 
-        = section.title
+        %span= section.title
         - if @sections.length > 1 
           = link_to "delete section", [@class_room, @resource_page, section], 
-            :confirm => "Are you sure you want to deleted this section? This will delete all #{@resource_page.section} associated with this section.  Move them to a different section if you want to keep them.", 
+            :confirm => "Are you sure you want to delete this section? This will delete all #{@resource_page.section} associated with this section.  Move them to a different section if you want to keep them.", 
             :method => :delete, :class => "delete_section_link"
-      - resources = section.resources.sort_by { |res| res.order }
+      - resources = section.resources
       - if resources.length > 0
+        -# resources = resources.sort_by { |res| res.order }
         %ul
           - section.resources.each do |resource|
             %li

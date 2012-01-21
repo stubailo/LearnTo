@@ -119,9 +119,11 @@ $left-bar-padding: $global-padding;
     background: $light-grey;
     border-bottom: 1px solid black;
 
-    -moz-box-shadow: 0 0 8px #888;
-    -webkit-box-shadow: 0 0 8px #888;
-    box-shadow: 0 0 8px #888;
+    $header-shadow-color: rgba(0,0,0,0.6);
+
+    -moz-box-shadow: 0 0 8px  $header-shadow-color;
+    -webkit-box-shadow: 0 0 8px $header-shadow-color;
+    box-shadow: 0 0 8px $header-shadow-color;
 
     background: #333333; /* Old browsers */
     background: -moz-linear-gradient(top, #333333 0%, #555555 100%); /* FF3.6+ */
