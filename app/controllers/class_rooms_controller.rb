@@ -60,6 +60,7 @@ class ClassRoomsController < ApplicationController
     require_user
     if current_user
       @class_room = ClassRoom.find(params[:id])
+      @announcement = @class_room.announcements.order('created_at DESC').first
       set_vars
       
       respond_to do |format|

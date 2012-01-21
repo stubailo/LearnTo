@@ -21,7 +21,7 @@
           - which_tab = "none"
         %ul
           %li
-            = link_to "Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
+            = link_to "Class Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
           %li
             = link_to "Lessons", class_room_resource_page_path(@class_room, @resource_pages[0]), :class => which_tab == "lessons" ? "active" : ""
           %li

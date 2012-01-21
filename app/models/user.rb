@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
+  has_many :announcements
   
   def activate!
     self.active = true
