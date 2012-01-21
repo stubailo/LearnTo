@@ -6,7 +6,6 @@
 .class_page {
   padding: 0 20px;
   margin: 0 -20px;
-  overflow: hidden;
 
 }
 
@@ -107,7 +106,7 @@ $left-sidebar-width: 170px;
             -webkit-box-shadow: 0 0 8px lighten($shadow-color, 10%);
             box-shadow: 0 0 8px lighten($shadow-color, 10%);
  
-            $gradient-color: rgb(240,240,240);
+            $gradient-color: rgb(250,250,250);
             $grad-stop-one: 4%;
             $grad-stop-two: 26%;
         
@@ -135,11 +134,14 @@ $center-side-margins: 10px;
 
     min-height: 500px;
 
-    -moz-box-shadow: 0 0 8px $shadow-color;
-    -webkit-box-shadow: 0 0 8px $shadow-color;
-    box-shadow: 0 0 8px $shadow-color;
+    -moz-box-shadow: 0 0 6px $shadow-color;
+    -webkit-box-shadow: 0 0 6px $shadow-color;
+    box-shadow: 0 0 6px $shadow-color;
 
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
     
+
     background: #fff;
     padding-top: 20px;
     margin-left: $left-sidebar-width;

@@ -1,6 +1,13 @@
-.content
-  %h1 Resource
-  = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
+.resource_show_page
+  .actions
+    = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
+     :class => "button"
+    = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
+
+  .info #{@resource_page.section} #{">"} #{@section.title} #{">"} #{@resource.name}
+
+  - if @resource.source_call == "homework"
+    = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
   
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
@@ -8,11 +15,7 @@
   - if @resource.file_type == "document"
     = render :partial => "shared/document_embed", :locals => {:res => @resource, :style => "full_page"}
 
-  %p
+  .info
     Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
     - if @resource.updated_at?
       and updated at #{l @resource.updated_at}.
-  %p
-    = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
-     :class => "button"
-    = link_to 'Delete', @resource, confirm: 'Are you sure?', method: :delete, :class => "button"
