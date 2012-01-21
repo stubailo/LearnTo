@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(:version => 20120120053400) do
     t.string   "name"
     t.integer  "creator_id"
     t.integer  "occupancy"
-    t.decimal  "price",          :precision => 10, :scale => 0
+    t.decimal  "price"
     t.integer  "description_id"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.date     "start_date"
     t.date     "end_date"
     t.text     "summary"
