@@ -5,9 +5,9 @@
 
 $ ->
 
-  $(".list_of_sections").find("form").hide()
   
   $(".list_of_sections").sortable({
+    axis: "y",
     stop: (event, ui) ->
       action_path = ui.item.find("form").attr("action")
       index = $(ui.item.parent()).find("li").index(ui.item)
@@ -15,13 +15,13 @@ $ ->
   });
 
   $(".lists_to_connect").sortable({
+    axis: "y",
     connectWith: ".lists_to_connect",
-    start: (event, ui) ->
-      $(".lists_to_connect").not(":has(li)").show().height(50)
     stop: (event, ui) ->
       action_path = ui.item.find("form").attr("action")
       section_id = $(ui.item.parent()).attr("id").split("-")[1]
       index = $(ui.item.parent()).find("li").index(ui.item)
       $.post(action_path, {"section[id]" : section_id, "resource[order]" : index})
-      $(".lists_to_connect").not(":has(li)")
   })
+  
+  $(".list_of_sections").find("form").hide()
