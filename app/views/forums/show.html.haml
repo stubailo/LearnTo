@@ -3,7 +3,7 @@
   = label_tag(:search_term, "Search forum:")
   = text_field_tag(:search_term)
   = submit_tag("Search")
-
+= render "newPost"
 - @posts.each do |post|
   .forum_post_container
     .forum_post
@@ -19,6 +19,3 @@
           tags: 
           -post.tag_list.each do |x|
             = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
-        
-= render :partial => "newPost"
-
