@@ -6,16 +6,14 @@
 $ ->
 
   $(".lists_to_connect").find("form").hide()
+  
+  $(".list_of_sections").sortable();
 
   $(".lists_to_connect").sortable({
     connectWith: ".lists_to_connect",
-  }).droppable({
-    drop: (event, ui) -> 
-      section_id = $(this).attr("id").split("-")[1]
-      resource_id = ui.draggable.attr("id").split("-")[1]
-      index = $(this).index(ui.draggable)
-      action_path = ui.draggable.find("form").attr("action")
-      
+    stop: (event, ui) ->
+      action_path = ui.item.find("form").attr("action")
+      section_id = $(ui.item.parent()).attr("id").split("-")[1]
+      index = $(ui.item.parent()).find("li").index(ui.item)
       $.post(action_path, {"section[id]" : section_id, "resource[order]" : index})
   })
-
