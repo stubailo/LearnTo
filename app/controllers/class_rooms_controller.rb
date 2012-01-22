@@ -61,6 +61,7 @@ class ClassRoomsController < ApplicationController
     if current_user
       @class_room = ClassRoom.find(params[:id])
       @announcement = @class_room.announcements.order('created_at DESC').first
+      @new_announcement = Announcement.new
       set_vars
       
       respond_to do |format|

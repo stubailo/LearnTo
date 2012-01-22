@@ -6,18 +6,23 @@
   .below_tagline
     .info
       Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
+  
 
   %h2
     = @class_room.summary
   
-  %h6
-    = "Announcements, "
-    = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
-    %br
+  .announcements_box
+    %h4
+      = "Announcements"
+      = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
+      %a{:href=>"#", :id => "post_new"} post new
+    .new_announcement_form
+      %h4 Editing New Announcement
+      = render 'new_announcement'
     -if @announcement
-      = link_to @announcement.title, announcements_path(@announcement)
-      %br
-      = @announcement.content
+      .announcement
+        %h3= link_to @announcement.title, announcements_path(@announcement)
+        %p= @announcement.content
 
   %br
   %br
