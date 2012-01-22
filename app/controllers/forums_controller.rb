@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-  def show
+  def show 
     @forum = Forum.find(params[:id])
     @class_room = @forum.class_room
     @tags = []
