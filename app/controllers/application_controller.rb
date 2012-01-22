@@ -33,9 +33,9 @@ class ApplicationController < ActionController::Base
       end
     end
     
-    def is_creator(class_room)
+    def is_creator(item)
       user = current_user
-      if user.id == class_room.creator_id
+      if user.id == item.creator_id
         return true
       end
       return false

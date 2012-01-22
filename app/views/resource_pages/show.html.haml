@@ -41,9 +41,9 @@
       - resources = section.resources
       - if resources.length > 0
         - resources = resources.sort_by { |res| res.order }
-        %ul
+        %ul.lists_to_connect{:id => "section-" + section.id.to_s}
           - resources.each do |resource|
-            %li
+            %li{:id => "resource-" + resource.id.to_s}
               .resource_list_name 
                 =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                 %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
