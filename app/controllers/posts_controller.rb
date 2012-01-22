@@ -72,7 +72,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post], :forum_id => params[:forum_id])
     @post.user_id = current_user.id
-    @post.forum_id = params[:forum_id]
     @post.last_updated = Time.now
     @post.save    
     redirect_to :back
