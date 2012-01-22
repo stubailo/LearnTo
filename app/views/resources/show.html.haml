@@ -11,8 +11,7 @@
     - if @resource.updated_at?
       and updated at #{l @resource.updated_at}.
 
-  - if @resource.source_call == "homework"
-    = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
+  = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
   
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}
