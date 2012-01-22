@@ -1,0 +1,12 @@
+development:
+  bucket: bucket-dev
+  access_key_id: AKIAJMRGW7JB4EKDMTHA
+  secret_access_key: 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
+test:
+  bucket: bucket-test
+  access_key_id: AKIAJMRGW7JB4EKDMTHA
+  secret_access_key: 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
+production:
+  bucket: bucket-pro
+  access_key_id: AKIAJMRGW7JB4EKDMTHA
+  secret_access_key: 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
