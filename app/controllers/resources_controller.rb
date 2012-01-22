@@ -158,7 +158,36 @@ class ResourcesController < ApplicationController
     new_order = params[:resource][:order].to_i
     old_order = @resource.order
     old_sec = @resource.section
+    old_sec_recs = old_sec.resources.sort_by { |rec| rec.order }
+    new_sec_recs = section.resources.sort_by { |rec| rec.order }
+    
+    if old_sec.id == section.id #stays in same section
+      old_sec_recs.delete_at(old_order)
+      if new_order >= old_sec_recs.length
+        new_order = old_sec_recs.length
+      end
+      old_sec_recs.insert(new_order, @resource)
+      old_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+    else
+      old_sec_recs.delete_at(old_order)
+      if new_order >= new_sec_recs.length
+        new_order = new_sec_recs.length
+      end
+      new_sec_recs.insert(new_order, @resource)
+      old_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+      @resource.update_attribute(:section_id, section.id)
+      new_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+    end
+    
+=begin
     if old_sec.id == section.id
+      organized_recs = []
       old_sec.resources.each do |res|
         if res.order < old_order
           if res.order >= new_order
@@ -183,6 +212,7 @@ class ResourcesController < ApplicationController
       end
     end
     @resource.update_attributes(:section_id => section.id, :order => new_order)
+=end
     
     #Turn timestamps back on    
     Resource.record_timestamps = true

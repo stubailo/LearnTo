@@ -105,6 +105,13 @@ class ClassRoomsController < ApplicationController
           resource_page.save
           section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type.capitalize)
           section.save
+          if type == "materials"
+            resource = Resource.new(:name => "Class Description", :user_id => @user.id, :class_room_id => @class_room.id,
+              :file_type => "document", :source_call => "materials", :hidden => false, :order => 0, :section_id => section.id)
+            resource.save
+            document = Document.new(:resource_id => resource.id)
+            document.save
+          end
         end
         forum = Forum.new(:class_room_id => @class_room.id)
         forum.save
