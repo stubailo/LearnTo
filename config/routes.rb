@@ -28,7 +28,10 @@ Classroom::Application.routes.draw do
     resources :resource_pages do
       resources :sections do
         resources :resources
+        match 'resources/:id/change_hidden' => "resources#change_hidden", :as => :publish
+        match 'resources/:id/change_order' => "resources#change_order", :as => :rearrange
       end
+      match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
     end
   end
   

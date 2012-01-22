@@ -5,26 +5,26 @@
 
   .below_tagline
     .info
-      Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
+      Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
+  
 
   %h2
     = @class_room.summary
   
-  %h6
-    = "Announcements, "
-    = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
-    %br
+  .announcements_box
+    %h4
+      = "Announcements"
+      = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
+      %a{:href=>"#", :id => "post_new"} post new
+    .new_announcement_form
+      %h4 Editing New Announcement
+      = render 'new_announcement'
     -if @announcement
-      = link_to @announcement.title, announcements_path(@announcement)
-      %br
-      = @announcement.content
-      
-      = render 'newAnnouncement'
+      .announcement
+        %h3= link_to @announcement.title, announcements_path(@announcement)
+        %p= @announcement.content
 
-  %br
-  %br
-  %br
-  %br
-  %br
-  Down here there should be a document embedded
-
+  - unless @class_room.resource.hidden
+    %div{:style => "margin: 0 30px"}
+      = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@resource.section.resource_page.class_room, @resource.section.resource_page, @resource.section, @resource)
+      = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }

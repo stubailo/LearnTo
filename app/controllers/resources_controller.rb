@@ -129,7 +129,98 @@ class ResourcesController < ApplicationController
       end
     end
   end
-
+  
+  def change_hidden
+    #make sure we don't update updated_at when just changing order or publishing
+    Resource.record_timestamps = false
+    
+    get_path_vars
+    @resource = Resource.find(params[:id])
+    if @resource.hidden
+      @resource.update_attribute(:hidden, false)
+    else
+      @resource.update_attribute(:hidden, true)
+    end
+    
+    #Turn timestamps back on    
+    Resource.record_timestamps = true
+    
+    redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource) 
+  end
+  
+  def change_order
+    #make sure we don't update updated_at when just changing order or publishing
+    Resource.record_timestamps = false
+    
+    get_path_vars
+    @resource = Resource.find(params[:id])
+    section = Section.find(params[:section][:id])
+    new_order = params[:resource][:order].to_i
+    old_order = @resource.order
+    old_sec = @resource.section
+    old_sec_recs = old_sec.resources.sort_by { |rec| rec.order }
+    new_sec_recs = section.resources.sort_by { |rec| rec.order }
+    
+    if old_sec.id == section.id #stays in same section
+      old_sec_recs.delete_at(old_order)
+      if new_order >= old_sec_recs.length
+        new_order = old_sec_recs.length
+      end
+      old_sec_recs.insert(new_order, @resource)
+      old_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+    else
+      old_sec_recs.delete_at(old_order)
+      if new_order >= new_sec_recs.length
+        new_order = new_sec_recs.length
+      end
+      new_sec_recs.insert(new_order, @resource)
+      old_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+      @resource.update_attribute(:section_id, section.id)
+      new_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+    end
+    
+=begin
+    if old_sec.id == section.id
+      organized_recs = []
+      old_sec.resources.each do |res|
+        if res.order < old_order
+          if res.order >= new_order
+            res.update_attribute(:order, res.order+1)
+          end
+        elsif res.order > old_order
+          if res.order <= new_order
+            res.update_attribute(:order, res.order-1)
+          end
+        end
+      end
+    else
+      old_sec.resources.each do |res|
+        if res.order > old_order
+          res.update_attribute(:order, res.order - 1)
+        end
+      end
+      section.resources.each do |res|
+        if res.order >= new_order
+          res.update_attribute(:order, res.order + 1)
+        end
+      end
+    end
+    @resource.update_attributes(:section_id => section.id, :order => new_order)
+=end
+    
+    #Turn timestamps back on    
+    Resource.record_timestamps = true
+    
+    redirect_to class_room_resource_page_path(@class_room, @resource_page)
+        
+  end
+  
   # DELETE /resources/1
   # DELETE /resources/1.json
   def destroy

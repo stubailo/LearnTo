@@ -1,5 +1,6 @@
 .resource_show_page
   .actions
+    = link_to @resource.hidden ? 'Publish' : 'Take off display', class_room_resource_page_section_publish_path(@class_room, @resource_page, @section, @resource)
     = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
      :class => "button"
     = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
@@ -10,8 +11,7 @@
     - if @resource.updated_at?
       and updated at #{l @resource.updated_at}.
 
-  - if @resource.source_call == "homework"
-    = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
+  = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
   
   - if @resource.file_type == "upload"
     = render :partial => "shared/resource_embed", :locals => {:res => @resource, :style => "big_embed", :hidden => false}

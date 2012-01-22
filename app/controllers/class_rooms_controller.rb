@@ -41,18 +41,6 @@ class ClassRoomsController < ApplicationController
 	    redirect_to class_room_path(@class_room), :flash => { :fail => 'You can only remove yourself from a class' }
 	  end
   end
-  
-  def set_vars
-    @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
-    @creator = User.find(@class_room.creator_id)
-    @user = current_user
-    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
-    @users = @class_room.users
-    if(!@user_permission)
-      @user_permission = UserPermission.new
-      @show_join = true
-    end
-  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
@@ -61,7 +49,8 @@ class ClassRoomsController < ApplicationController
     if current_user
       @class_room = ClassRoom.find(params[:id])
       @announcement = @class_room.announcements.order('created_at DESC').first
-      @ann = Announcement.new
+      @new_announcement = Announcement.new
+      @resource = @class_room.resource
       set_vars
       
       respond_to do |format|
@@ -95,7 +84,7 @@ class ClassRoomsController < ApplicationController
   def create
     @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
-    @class_room.creator_id = @user.id
+    @class_room.user_id = @user.id
     @class_room.tag_line = @class_room.tag_line.upcase
 
     respond_to do |format|
@@ -105,6 +94,14 @@ class ClassRoomsController < ApplicationController
           resource_page.save
           section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type.capitalize)
           section.save
+          if type == "materials"
+            resource = Resource.new(:name => "Class Description", :user_id => @user.id, :class_room_id => @class_room.id,
+              :file_type => "document", :source_call => "materials", :hidden => false, :order => 0, :section_id => section.id)
+            resource.save
+            document = Document.new(:resource_id => resource.id, :content => "Edit this document with a description of your class!")
+            document.save
+            @class_room.update_attribute(:description_id, resource.id)
+          end
         end
         forum = Forum.new(:class_room_id => @class_room.id)
         forum.save
@@ -138,11 +135,11 @@ class ClassRoomsController < ApplicationController
   def destroy
     @user = current_user
     @class_room = ClassRoom.find(params[:id])
-    if @class_room.creator_id == @user.id
+    if @class_room.user_id == @user.id
 	  @class_room.destroy
 	  	
 	  respond_to do |format|
-	    format.html { redirect_to class_rooms_url }
+	    format.html { redirect_to root_path }
 	    format.json { head :no_content }
 	  end
 	else

@@ -1,19 +1,4 @@
 .admin_edit
-  %h2 Edit This Page
-  .add_new_section
-    = form_for [@class_room, @resource_page, @section]  do |f|
-      - if @section.errors.any?
-        #error_explanation
-          %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
-
-          %ul
-          - @section.errors.full_messages.each do |msg|
-            %li= msg
-      = f.label :title, "Add new section: ", :class => "main"
-      = f.text_field :title, :class => "text"  
-      = f.submit "Save"
-      
-
   .upload_box
     .title
       Add new #{@resource_page.section.singularize}:
@@ -29,7 +14,7 @@
       = render :partial => "resources/form",
         :locals => { :style => "small_resource_form"}
         
-%ul
+%ul.list_of_sections
   - @sections.each do |section|  
     %li.materials_section
       %h3 
@@ -38,13 +23,38 @@
           = link_to "delete section", [@class_room, @resource_page, section], 
             :confirm => "Are you sure you want to delete this section? This will delete all #{@resource_page.section} associated with this section.  Move them to a different section if you want to keep them.", 
             :method => :delete, :class => "delete_section_link"
+      = form_for section, :url => class_room_resource_page_rearrange_path(@class_room, @resource_page, section) do |f|
+        .field
+          = label_tag :section, :Location, :class => "main"
+          = text_field(:section, :order)
+        = f.submit "Change order"
       - resources = section.resources
-      - if resources.length > 0
-        -# resources = resources.sort_by { |res| res.order }
-        %ul
-          - section.resources.each do |resource|
-            %li
+      %ul.lists_to_connect{:id => "section-" + section.id.to_s}
+        - if resources.length > 0
+          - resources = resources.sort_by { |res| res.order }
+          - resources.each do |resource|
+            %li{:id => "resource-" + resource.id.to_s}
               .resource_list_name 
                 =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                 %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
+                = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
+                  .field
+                    = label_tag :resource, :Section, :class => "main"
+                    = collection_select(:section, :id, @sections, :id, :title)
+                    -# want to get resources from the selected section before submitting :/
+                  .field
+                    = label_tag :resource, :Location, :class => "main"
+                    = text_field(:resource, :order)
+                  = f.submit "Change order"
               .resource_list_info #{resource.caption}
+.add_new_section
+  = form_for [@class_room, @resource_page, @section]  do |f|
+    - if @section.errors.any?
+      #error_explanation
+        %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
+
+        %ul
+        - @section.errors.full_messages.each do |msg|
+          %li= msg
+    = f.text_field :title, :class => "text"  
+    = f.submit "Add New Section"

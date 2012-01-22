@@ -8,11 +8,6 @@ class AnnouncementsController < ApplicationController
   
   def create
     
-    @na = Announcement.new(params[:announcement])
-    @na.user_id = current_user.id
-    @na.class_room_id = params[:class_room_id]
-    @na.save
-    redirect_to :back
   end
   
   def ajaxDelete
@@ -22,14 +17,6 @@ class AnnouncementsController < ApplicationController
     end
     @post.destroy
     return "ok"
-  end
-  
-  def announcementsSince
-    dateTime = Datetime.parse(params[:date_time])
-    @announcements = Announcements.where("updated_at > ?", dateTime)
-    respond_to do |format|
-      format.json { render json: @announcements }
-    end
   end
 
   def destroy

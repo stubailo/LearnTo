@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     before_filter :global_vars
 
     def global_vars
-      @website_name = "ClassBox"
+      @website_name = "LearnTo"
     end
     
     def current_user_session
@@ -32,10 +32,19 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    
+    def is_creator(item)
+      user = current_user
+      if user.id == item.user_id
+        return true
+      end
+      return false
+    end
   
   def set_vars
     @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
-    @creator = User.find(@class_room.creator_id)
+    @creator = User.find(@class_room.user_id)
+    @is_creator = is_creator(@class_room)
     @user = current_user
     @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
     @users = @class_room.users

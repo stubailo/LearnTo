@@ -10,6 +10,33 @@ class SectionsController < ApplicationController
     end
   end
   
+  def change_order
+    #make sure we don't update updated_at when just changing order or publishing
+    Section.record_timestamps = false
+    
+    @section = Section.find(params[:id])
+    @resource_page = @section.resource_page
+    @class_room = @resource_page.class_room
+    new_order = params[:section][:order].to_i
+    old_order = @section.order
+    order_sections = @resource_page.sections.sort_by { |sec| sec.order }
+    
+    order_sections.delete_at(old_order)
+    if new_order >= order_sections.length
+      new_order = order_sections.length
+    end
+    order_sections.insert(new_order, @section)
+    order_sections.each_with_index do |sec, i|
+      sec.update_attribute(:order, i)
+    end
+    
+    #Turn timestamps back on    
+    Section.record_timestamps = true
+    
+    redirect_to class_room_resource_page_path(@class_room, @resource_page)
+    
+  end
+  
   def index
 	if current_user
 	  @resource = Resource.new
