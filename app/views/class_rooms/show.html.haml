@@ -5,7 +5,7 @@
 
   .below_tagline
     .info
-      Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
+      Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
   
 
   %h2

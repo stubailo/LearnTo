@@ -41,18 +41,6 @@ class ClassRoomsController < ApplicationController
 	    redirect_to class_room_path(@class_room), :flash => { :fail => 'You can only remove yourself from a class' }
 	  end
   end
-  
-  def set_vars
-    @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
-    @creator = User.find(@class_room.creator_id)
-    @user = current_user
-    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
-    @users = @class_room.users
-    if(!@user_permission)
-      @user_permission = UserPermission.new
-      @show_join = true
-    end
-  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
@@ -95,7 +83,7 @@ class ClassRoomsController < ApplicationController
   def create
     @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
-    @class_room.creator_id = @user.id
+    @class_room.user_id = @user.id
     @class_room.tag_line = @class_room.tag_line.upcase
 
     respond_to do |format|
@@ -145,11 +133,11 @@ class ClassRoomsController < ApplicationController
   def destroy
     @user = current_user
     @class_room = ClassRoom.find(params[:id])
-    if @class_room.creator_id == @user.id
+    if @class_room.user_id == @user.id
 	  @class_room.destroy
 	  	
 	  respond_to do |format|
-	    format.html { redirect_to class_rooms_url }
+	    format.html { redirect_to root_path }
 	    format.json { head :no_content }
 	  end
 	else

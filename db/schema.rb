@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121185315) do
+ActiveRecord::Schema.define(:version => 20120122103602) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(:version => 20120121185315) do
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
-    t.integer  "creator_id"
     t.integer  "occupancy"
     t.decimal  "price"
     t.integer  "description_id"
@@ -37,7 +36,10 @@ ActiveRecord::Schema.define(:version => 20120121185315) do
     t.date     "end_date"
     t.text     "summary"
     t.string   "tag_line"
+    t.integer  "user_id"
   end
+
+  add_index "class_rooms", ["user_id"], :name => "index_class_rooms_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -49,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20120121185315) do
 
   create_table "documents", :force => true do |t|
     t.integer  "resource_id"
-    t.string   "title"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.text     "content"

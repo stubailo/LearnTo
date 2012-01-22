@@ -10,6 +10,26 @@ class SectionsController < ApplicationController
     end
   end
   
+  def change_order
+    #make sure we don't update updated_at when just changing order or publishing
+    Resource.record_timestamps = false
+    
+    @section = Section.find(params[:id])
+    new_order = params[:section][:order].to_i
+    old_order = @section.order
+    
+    if old_sec.id == section.id #stays in same section
+      old_sec_recs.delete_at(old_order)
+      if new_order >= old_sec_recs.length
+        new_order = old_sec_recs.length
+      end
+      old_sec_recs.insert(new_order, @resource)
+      old_sec_recs.each_with_index do |rec, i|
+        rec.update_attribute(:order, i)
+      end
+    end
+  end
+  
   def index
 	if current_user
 	  @resource = Resource.new
