@@ -77,6 +77,14 @@ class PostsController < ApplicationController
     redirect_to :back
   end
 
+  def postsSince
+    @ids = current_user.class_rooms.map {|x| x.id}
+    dateTime = Datetime.parse(params[:date_time])
+    @posts = Post.where("last_updated > ? AND id IN ?", dateTime, @ids)
+    respond_to do |format|
+      format.json { render json: @posts }
+    end
+  end
 
   # DELETE /posts/1
   # DELETE /posts/1.json

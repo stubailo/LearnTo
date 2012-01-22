@@ -23,6 +23,14 @@ class AnnouncementsController < ApplicationController
     @post.destroy
     return "ok"
   end
+  
+  def announcementsSince
+    dateTime = Datetime.parse(params[:date_time])
+    @announcements = Announcements.where("updated_at > ?", dateTime)
+    respond_to do |format|
+      format.json { render json: @announcements }
+    end
+  end
 
   def destroy
     @announcement = Announcement.find(params[:announcement_id])
