@@ -42,3 +42,17 @@
         In #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
         %br
         last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago
+        
+%br
+%br
+%br
+= "Announcements in your classes:"
+- @announcements.each do |announcement|
+  .forum_post_container
+    .forum_post
+      %h3
+        = link_to announcement.title, announcements_path(announcement)
+      %div.bottom
+        In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
+        %br
+        posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
