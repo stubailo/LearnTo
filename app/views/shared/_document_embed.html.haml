@@ -7,4 +7,4 @@
         - if res.document.content
           .document_content
             %h1= res.name 
-            =res.document.content.html_safe
+            ~ res.document.content.html_safe
