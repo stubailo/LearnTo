@@ -8,9 +8,9 @@
   %br
   = f.text_area :content, :size => "60x12"
   %br
-  = label_tag(:tag_list, "Tags:")
+  = label_tag(:new_tags, "Tags:")
   %br
-  = f.text_field :tag_list, :size => 30, :value => @tags.join(", ")
+  = text_field_tag :new_tags
   = #select("post", "tag_list", @tags.collect{|c| [c.name, c.id]})
   = f.submit "Create"
   %br

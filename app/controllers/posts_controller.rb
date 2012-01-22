@@ -70,6 +70,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    break
     @post = Post.new(params[:post])
     @post.forum_id = params[:forum_id]
     @post.user_id = current_user.id

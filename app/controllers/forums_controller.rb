@@ -38,3 +38,4 @@ class ForumsController < ApplicationController
     @forum = Forum.find(params[:forum_id])
   end
 end
+
