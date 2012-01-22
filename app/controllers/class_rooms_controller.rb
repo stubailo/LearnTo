@@ -95,14 +95,15 @@ class ClassRoomsController < ApplicationController
   def create
     @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
-    @class_room.creator_id = @user.id 
+    @class_room.creator_id = @user.id
+    @class_room.tag_line = @class_room.tag_line.upcase
 
     respond_to do |format|
       if @class_room.save
         ResourcePage::SECTIONS.each do |type|
-          resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type)
+          resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type.capitalize)
           resource_page.save
-          section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type)
+          section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type.capitalize)
           section.save
         end
         forum = Forum.new(:class_room_id => @class_room.id)

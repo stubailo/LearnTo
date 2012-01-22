@@ -21,22 +21,12 @@
     %span.button#insert_image Insert Image
     %span.button#insert_media Insert Media / File
     %span.button#insert_code Insert Code
+    %span.button#toggle_editor Toggle Editor
+
+    #insert_code_form{:title => "Paste Code Here", :style => "display: none"}
+      %textarea{:style => "width: 100%; font-family: monospace", :rows => "10"}
+      %button Insert
 
   - if@resource.file_type == "document"
-    :javascript
-      $().ready(function() {
-        $('#tinymce_area').tinymce({
-          // Location of TinyMCE script
-          script_url : '/assets/tinymce/tiny_mce.js',
-          theme : "advanced",
-          plugins : "autolink,lists,layer,table,save,advimage,advlink,inlinepopups,preview,media,searchreplace,contextmenu,paste,noneditable,template",
-          theme_advanced_buttons1 : ",bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,formatselect,|,forecolor,pastetext,pasteword,|,undo,redo,|,link,unlink,|,hr,charmap",
-          theme_advanced_buttons2 : "",
-          theme_advanced_buttons3 : "",
-          theme_advanced_toolbar_location : "top",
-          theme_advanced_toolbar_align : "left",
-          content_css : "/assets/document_content.css",
-        });
-      }); 
     .field
       = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
