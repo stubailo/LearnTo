@@ -15,18 +15,19 @@ class SectionsController < ApplicationController
     Resource.record_timestamps = false
     
     @section = Section.find(params[:id])
+    @resource_page = @section.resource_page
+    @class_room = @section.class_room
     new_order = params[:section][:order].to_i
     old_order = @section.order
+    sections = @resource_page.sections
     
-    if old_sec.id == section.id #stays in same section
-      old_sec_recs.delete_at(old_order)
-      if new_order >= old_sec_recs.length
-        new_order = old_sec_recs.length
-      end
-      old_sec_recs.insert(new_order, @resource)
-      old_sec_recs.each_with_index do |rec, i|
-        rec.update_attribute(:order, i)
-      end
+    sections.delete_at(old_order)
+    if new_order >= sections.length
+      new_order = sections.length
+    end
+    sections.insert(new_order, @section)
+    sections.each_with_index do |sec, i|
+      sec.update_attribute(:order, i)
     end
   end
   
