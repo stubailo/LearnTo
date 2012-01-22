@@ -8,11 +8,10 @@ class HomeController < ApplicationController
   		@class_rooms = @user.class_rooms.sort_by { |class_room| class_room.updated_at }.reverse
   		@user.class_rooms.each do |classroom|
   		  @posts += classroom.forum.posts.limit(6) 
-  		  @announcements += classroom.announcements.order('created_at DESC').limit(1)
+  		  @announcements += classroom.announcements.order('created_at DESC').limit(6)
   		end
-  		@posts.sort_by! { |post| post.last_updated}.reverse!.first(6)
-  		@announcements.sort_by! { |a| a.created_at}.reverse!.first(6)
-  		
+  		@posts = @posts.sort_by! { |post| post.last_updated}.reverse!.first(6)
+  		@announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)
   	end
   end        
 
