@@ -11,7 +11,8 @@ class ClassRoom < ActiveRecord::Base
   has_many :resource_pages, :dependent => :destroy
   has_many :sections, :through => :resource_pages
   has_many :resources
-
+  
+  has_many :announcements, :dependent => :destroy
   has_one :forum, :dependent => :destroy
 
   belongs_to :creator, {:class_name => :User}

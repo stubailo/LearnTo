@@ -7,7 +7,17 @@
     .info
       Taught by #{link_to @class_room.creator.login, @class_room.creator}, #{pluralize @class_room.users.length, "student"} enrolled
 
-  %h2= @class_room.summary
+  %h2
+    = @class_room.summary
+  
+  %h6
+    = "Announcements, "
+    = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
+    %br
+    -if @announcement
+      = link_to @announcement.title, announcements_path(@announcement)
+      %br
+      = @announcement.content
 
   %br
   %br
