@@ -19,14 +19,14 @@ class SectionsController < ApplicationController
     @class_room = @resource_page.class_room
     new_order = params[:section][:order].to_i
     old_order = @section.order
-    sections = @resource_page.sections.sort_by { |sec| sec.order }
+    order_sections = @resource_page.sections.sort_by { |sec| sec.order }
     
-    sections.delete_at(old_order)
-    if new_order >= sections.length
-      new_order = sections.length
+    order_sections.delete_at(old_order)
+    if new_order >= order_sections.length
+      new_order = order_sections.length
     end
-    sections.insert(new_order, @section)
-    sections.each_with_index do |sec, i|
+    order_sections.insert(new_order, @section)
+    order_sections.each_with_index do |sec, i|
       sec.update_attribute(:order, i)
     end
     

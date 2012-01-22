@@ -26,4 +26,5 @@
 
   - unless @class_room.resource.hidden
     %div{:style => "margin: 0 30px"}
+      = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@class_room, @class_room.resource.section.resource_page, @class_room.resource.section, @class_room.resource)
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }
