@@ -1,12 +1,12 @@
 development:
-  bucket: bucket-dev
+  bucket: LearnTo-dev
   access_key_id: AKIAJMRGW7JB4EKDMTHA
   secret_access_key: 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
 test:
-  bucket: bucket-test
+  bucket: LearnTo-test
   access_key_id: AKIAJMRGW7JB4EKDMTHA
   secret_access_key: 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
 production:
-  bucket: bucket-pro
+  bucket: LearnTo-prod
   access_key_id: AKIAJMRGW7JB4EKDMTHA
   secret_access_key: 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
