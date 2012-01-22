@@ -101,7 +101,7 @@ class ClassRoomsController < ApplicationController
         ResourcePage::SECTIONS.each do |type|
           resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type.capitalize)
           resource_page.save
-          section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type)
+          section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type.capitalize)
           section.save
         end
         forum = Forum.new(:class_room_id => @class_room.id)
