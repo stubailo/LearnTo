@@ -1,5 +1,6 @@
 .resource_show_page
   .actions
+    = link_to @resource.hidden ? 'Publish' : 'Take off display', class_room_resource_page_section_publish_path(@class_room, @resource_page, @section, @resource)
     = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
      :class => "button"
     = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"

@@ -32,6 +32,14 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    
+    def is_creator(class_room)
+      user = current_user
+      if user.id == class_room.creator_id
+        return true
+      end
+      return false
+    end
   
   def set_vars
     @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}

@@ -40,11 +40,20 @@
             :method => :delete, :class => "delete_section_link"
       - resources = section.resources
       - if resources.length > 0
-        -# resources = resources.sort_by { |res| res.order }
+        - resources = resources.sort_by { |res| res.order }
         %ul
-          - section.resources.each do |resource|
+          - resources.each do |resource|
             %li
               .resource_list_name 
                 =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                 %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
+                = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
+                  .field
+                    = label_tag :resource, :Section, :class => "main"
+                    = collection_select(:section, :id, @sections, :id, :title)
+                    -# want to get resources from the selected section before submitting :/
+                  .field
+                    = label_tag :resource, :Location, :class => "main"
+                    = text_field(:resource, :order)
+                  = f.submit "Change order"
               .resource_list_info #{resource.caption}
