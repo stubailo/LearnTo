@@ -24,10 +24,6 @@
         %h3= link_to @announcement.title, announcements_path(@announcement)
         %p= @announcement.content
 
-  %br
-  %br
-  %br
-  %br
-  %br
-  Down here there should be a document embedded
-
+  - unless @class_room.resource.hidden
+    %div{:style => "margin: 0 30px"}
+      = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }

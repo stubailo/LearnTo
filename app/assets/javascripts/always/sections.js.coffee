@@ -5,9 +5,14 @@
 
 $ ->
 
-  $(".lists_to_connect").find("form").hide()
+  $(".list_of_sections").find("form").hide()
   
-  $(".list_of_sections").sortable();
+  $(".list_of_sections").sortable({
+    stop: (event, ui) ->
+      action_path = ui.item.find("form").attr("action")
+      index = $(ui.item.parent()).find("li").index(ui.item)
+      $.post(action_path, {"section[order]" : index})
+  });
 
   $(".lists_to_connect").sortable({
     connectWith: ".lists_to_connect",
