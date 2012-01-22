@@ -50,6 +50,7 @@ class ClassRoomsController < ApplicationController
       @class_room = ClassRoom.find(params[:id])
       @announcement = @class_room.announcements.order('created_at DESC').first
       @new_announcement = Announcement.new
+      @resource = @class_room.resource
       set_vars
       
       respond_to do |format|
