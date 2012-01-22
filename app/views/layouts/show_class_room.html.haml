@@ -23,13 +23,13 @@
           %li
             = link_to "Class Home", class_room_path(@class_room), :class => which_tab == "home" ? "active" : ""
           %li
-            = link_to "Lessons", class_room_resource_page_path(@class_room, @resource_pages[0]), :class => which_tab == "lessons" ? "active" : ""
+            = link_to "Lessons", class_room_resource_page_path(@class_room, @resource_pages[0]), :class => which_tab == "Lessons" ? "active" : ""
           %li
-            = link_to "Homework", class_room_resource_page_path(@class_room, @resource_pages[1]), :class => which_tab == "homework" ? "active" : ""
+            = link_to "Homework", class_room_resource_page_path(@class_room, @resource_pages[1]), :class => which_tab == "Homework" ? "active" : ""
           %li
-            = link_to "Materials", class_room_resource_page_path(@class_room, @resource_pages[2]), :class => which_tab == "materials" ? "active" : ""
+            = link_to "Materials", class_room_resource_page_path(@class_room, @resource_pages[2]), :class => which_tab == "Materials" ? "active" : ""
           %li
-            = link_to "Tests/Quizzes", class_room_resource_page_path(@class_room, @resource_pages[3]), :class => which_tab == "quizzes" ? "active" : ""
+            = link_to "Tests/Quizzes", class_room_resource_page_path(@class_room, @resource_pages[3]), :class => which_tab == "Quizzes" ? "active" : ""
           %li
             = link_to "Discussion", @class_room.forum, :class => which_tab == "discussion" ? "active" : ""
           %li
