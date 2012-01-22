@@ -2,22 +2,19 @@ class ForumsController < ApplicationController
   def show
     @forum = Forum.find(params[:id])
     @class_room = @forum.class_room
-    @tags = Array.new
-    @ids = Array.new
+    @tags = []
+    @ids = []
     set_vars
-    Post.select(:id).where(:forum_id => @forum.id).each do |x|
-      @ids.push(x.id)
-    end
+    
+    Post.select(:id).where(:forum_id => @forum.id).each { |x| @ids.push(x.id) }
     
     Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
      .where(:taggable_type => "Post")
      .where(:taggable_id => @ids)
      .group("tag_id")
      .order('created_at DESC')
-     .limit(6).each do |x|
-      @tags.push(x.tag.name)
-      #, \"id\" as id, \"taggable_id\" as taggable_id, \"tagger_id\" as tagger_id, \"tagger_type\" as tagger_type
-    end
+     .limit(6).each { |x| @tags.push(x.tag.name) }
+      
     if @forum != nil && @user != nil
       @post = Post.new
       @comment = Comment.new
