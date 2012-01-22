@@ -1,17 +1,5 @@
 .admin_edit
   %h2 Edit This Page
-  .add_new_section
-    = form_for [@class_room, @resource_page, @section]  do |f|
-      - if @section.errors.any?
-        #error_explanation
-          %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
-
-          %ul
-          - @section.errors.full_messages.each do |msg|
-            %li= msg
-      = f.label :title, "Add new section: ", :class => "main"
-      = f.text_field :title, :class => "text"  
-      = f.submit "Save"
       
 
   .upload_box
@@ -39,9 +27,9 @@
             :confirm => "Are you sure you want to delete this section? This will delete all #{@resource_page.section} associated with this section.  Move them to a different section if you want to keep them.", 
             :method => :delete, :class => "delete_section_link"
       - resources = section.resources
-      - if resources.length > 0
-        - resources = resources.sort_by { |res| res.order }
-        %ul.lists_to_connect{:id => "section-" + section.id.to_s}
+      %ul.lists_to_connect{:id => "section-" + section.id.to_s}
+        - if resources.length > 0
+          - resources = resources.sort_by { |res| res.order }
           - resources.each do |resource|
             %li{:id => "resource-" + resource.id.to_s}
               .resource_list_name 
@@ -57,3 +45,14 @@
                     = text_field(:resource, :order)
                   = f.submit "Change order"
               .resource_list_info #{resource.caption}
+.add_new_section
+  = form_for [@class_room, @resource_page, @section]  do |f|
+    - if @section.errors.any?
+      #error_explanation
+        %h2 #{pluralize(@section.errors.count, "error")} prohibited your new item from being saved:
+
+        %ul
+        - @section.errors.full_messages.each do |msg|
+          %li= msg
+    = f.text_field :title, :class => "text"  
+    = f.submit "Add New Section"
