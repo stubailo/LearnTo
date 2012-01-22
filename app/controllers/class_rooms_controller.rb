@@ -100,7 +100,7 @@ class ClassRoomsController < ApplicationController
     respond_to do |format|
       if @class_room.save
         ResourcePage::SECTIONS.each do |type|
-          resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type.capitalize)
+          resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type)
           resource_page.save
           section = Section.new(:resource_page_id => resource_page.id, :order => 0, :title => "All " + type.capitalize)
           section.save
