@@ -20,6 +20,6 @@ class Resource < ActiveRecord::Base
   # never change these names, or the order, ever :D
   TYPES = ['upload', 'link', 'document']
   
-  validates_attachment_size :file, less_than: 5.megabyte
+  validates_attachment_size :file, less_than: 10.megabyte
   
 end
