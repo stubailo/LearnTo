@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :announcements
   has_many :authentications
   
+  ACCOUNT_TYPES = ["internal", "external"]
+  
   def activate!
     self.active = true
     save(:validate => false)
@@ -17,6 +19,15 @@ class User < ActiveRecord::Base
   def deliver_welcome!
     reset_perishable_token!
     Notifier.welcome(self).deliver
+  end
+  
+  def self.create_from_hash(auth_hash)
+    puts hash.to_yaml
+    user = User.new(:login => auth_hash['info']['first_name'], :email => auth_hash['info']['email'], :crypted_password => "000", 
+    :password_salt => "000", :active => true, :account_type => "external" )
+    user.save(:validations => false) #create the user without performing validations. This is because most of the fields are not set.
+    user.reset_persistence_token! #set persistence_token else sessions will not be created
+    user
   end
 
   acts_as_authentic do |c| c.login_field = :email end

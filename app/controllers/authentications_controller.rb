@@ -5,11 +5,23 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
-    flash[:notice] = "Authentication successful."
-    redirect_to authentications_path
-  end 
+    omniauth = request.env['omniauth.auth'] #this is where you get all the data from your provider through omniauth
+    @auth = Authentication.find_from_hash(omniauth)
+    if current_user
+      flash[:notice] = "Successfully added #{omniauth['provider']} authentication"
+      current_user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid']) #Add an auth to existing user
+      redirect_to root_path
+    elsif @auth
+      flash[:notice] = "Welcome back #{omniauth['provider']} user"
+      UserSession.create(@auth.user, true) #User is present. Login the user with his social account
+      redirect_to root_url
+    else
+      @new_auth = Authentication.create_from_hash(omniauth, current_user) #Create a new user
+      flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
+      UserSession.create(@new_auth.user, true) #Log the authorizing user in.
+      redirect_to root_url
+    end
+  end
  
   def destroy
     @authentication = current_user.authentications.find(params[:id])

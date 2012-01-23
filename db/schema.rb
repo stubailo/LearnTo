@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123061729) do
+ActiveRecord::Schema.define(:version => 20120123151556) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20120123061729) do
     t.datetime "updated_at",                            :null => false
     t.boolean  "active",             :default => false, :null => false
     t.string   "perishable_token",   :default => "",    :null => false
+    t.string   "account_type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -12,6 +12,7 @@ gem 'mysql2'
 gem 'pg'
 
 gem "authlogic"
+#gem "devise"
 gem "rails3-generators"
 gem 'haml'
 gem 'execjs'
