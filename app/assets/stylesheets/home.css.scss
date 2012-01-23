@@ -2,6 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.topper {
+.user_home_top {
+  border: 1px solid #ccc;
+  background: #ccc;
   
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+
+  min-height: 70px;
+
+}
+
+.center_page {
+  margin-left: 195px;
+  margin-right: 260px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.left_column {
+  float: left;
+  width: 175px;
+
+  margin-left: 10px;
+
+  background: #fff;
+  border: 1px solid #ccc;
+
+  .user_nav li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+  }
+}
+
+.right_column {
+  float: right;
+  width: 240px;
+
+  margin-right: 10px;
+ 
+  background: #fff;
+
+  .forum_post_container {
+    font-size: .9em;
+    margin: 10px;
+
+    .bottom {
+      border-top: 1px dashed #ddd;
+      padding-top: 3px;
+      margin-top: 5px;
+    }
+  }
+
+  h3 {
+    font-weight: bold;
+    margin: 10px;
+  }
+
+  h4 {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+
+  border: 1px solid #ccc;
+
 }
