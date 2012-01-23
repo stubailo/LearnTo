@@ -1,5 +1,4 @@
-<a href="/auth/facebook" class="auth_provider">
-  <%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
-</a>
+%a{:href=>"/auth/facebook", :class=>"auth_provider"}
+  = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
 
 = render :partial => "new_form"
