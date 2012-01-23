@@ -70,6 +70,8 @@ class CommentsController < ApplicationController
     rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating != nil
       rating.value = 1
+    elsif rating.value == 1
+      rating.value = 0
     else
       rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     end
