@@ -54,15 +54,15 @@
     margin-right: 20px;
  
     border: 1px solid #ccc;
-    border-bottom-width: 2px;
+    border-bottom-width: 1px;
     
     border-top: none;
 
     li {
       border-bottom: 1px solid #ccc;
       padding: 10px;
-
-      margin-bottom: -1px;
+      border-top: 1px solid #ccc;
+      margin-top: -1px;
 
       background: #fff;
 

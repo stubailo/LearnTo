@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user
 
-
   private
     before_filter :global_vars
 

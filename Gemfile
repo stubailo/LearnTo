@@ -34,3 +34,6 @@ end
 gem 'jquery-rails'
 
 gem "recaptcha", :require => "recaptcha/rails"
+
+gem "omniauth"
+gem "omniauth-facebook"

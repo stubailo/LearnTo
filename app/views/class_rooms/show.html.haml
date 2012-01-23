@@ -23,7 +23,10 @@
       .announcement
         %h3= link_to @announcement.title, announcements_path(@announcement)
         %p= @announcement.content
-
+    -else
+      .placeholder
+        No announcements yet!  Click 'post new' above to make an announcement.
+  
   - unless @class_room.resource.hidden
     %div{:style => "margin: 0 30px"}
       = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@resource.section.resource_page.class_room, @resource.section.resource_page, @resource.section, @resource)
