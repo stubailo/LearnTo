@@ -1,0 +1,51 @@
+
+.user_home_top
+  %h2 Hi, #{current_user.login}!
+
+.left_column
+  %ul.user_nav
+    %li
+      %a{:href => "#"} Recent Updates
+    %li
+      %a{:href => "#"} Manage Classes
+    %li
+      %a{:href => "#"} Friends
+    %li
+      %a{:href => "#"} Teach a Class
+
+.right_column
+  .new_posts
+    %h3 Discussion Updates
+    - @posts.each do |post|
+      .forum_post_container
+        .forum_post
+          %h4
+            = link_to post.title, post_path(post)
+          %div.bottom
+            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+            %br
+            last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago
+       
+.center_page
+  %h1 Class Updates
+  - @class_rooms.each do |class_room|
+    = link_to class_room.name+":", class_room
+    <br />
+    - resources = class_room.resources.sort_by { |res| res.updated_at }.reverse
+    - resources = get_top_three(resources)
+    - resources.each do |rec_pair|
+      = link_to rec_pair[0].name, rec_pair[1]
+      = " - " + rec_pair[1][1].section
+      <br />
+
+  = link_to 'Create a new class!', new_class_room_path
+  = link_to 'Browse existing classes', class_rooms_path
+
+  = "Announcements in your classes:"
+  - @announcements.each do |announcement|
+    %h4
+      = link_to announcement.title, announcements_path(announcement)
+    %div.bottom
+      In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
+      %br
+      posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
