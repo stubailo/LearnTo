@@ -35,5 +35,9 @@ gem 'jquery-rails'
 
 gem "recaptcha", :require => "recaptcha/rails"
 
-gem "omniauth"
+gem "rack", git: "https://github.com/rack/rack.git", ref: "e20baec005238f9876281c0d083fe5a4e01aa034" 
+
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 gem "omniauth-facebook"
+gem "omniauth-google"
+gem "omniauth-twitter"

@@ -1,5 +1,13 @@
 Classroom::Application.routes.draw do
 
+  match '/auth/:provider/callback' => 'authentications#create'
+
+  get "authentications/index"
+
+  get "authentications/create"
+
+  get "authentications/destroy"
+
   get "document/show"
 
   get "document/edit"
@@ -34,6 +42,8 @@ Classroom::Application.routes.draw do
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
     end
   end
+  
+  resources :authentications
   
   get "forums/search_by_tag"
   
