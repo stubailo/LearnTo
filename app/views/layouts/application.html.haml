@@ -17,8 +17,8 @@
               = link_to current_user.login, user_path(@user), :class => "button"
               = link_to "Sign out", logout_path, :class => "button"
             - else
-              = link_to "Sign in", new_user_sessions_path, :id => "sign_in_button", :class => "button"
-              = link_to "Register", authentications_path, :class => "button"
+              = link_to "Sign in", new_user_session_path, :id => "sign_in_button", :class => "button"
+              = link_to "Register", new_user_path, :class => "button"
           %div.search_box
             .search_field
               = form_tag "/search", :method => "get" do
