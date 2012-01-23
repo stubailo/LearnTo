@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     respond_to do |format|
     @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
-        @user.account_type = "internal"
+        @user.update_attribute(account_type, "internal")
         @user.deliver_activation_instructions!
         format.html { redirect_to root_url, :flash => { :fail => 'Account created.  Please check your email for account activation instructions.' } }
         format.xml { render :xml => @user, :status => :created, :location => @user }

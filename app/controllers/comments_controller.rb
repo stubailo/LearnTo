@@ -68,12 +68,14 @@ class CommentsController < ApplicationController
   
   def plus1
     rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
-    if rating != nil
+    if rating == nil
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
+    if rating.value = 0
       rating.value = 1
     elsif rating.value == 1
       rating.value = 0
     else
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
+      #some type of error
     end
     rating.save
     respond_to do |format|
@@ -84,12 +86,14 @@ class CommentsController < ApplicationController
   
   def minus1
     rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
-    if rating != nil
+    if rating == nil
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
+    if rating.value = 0
       rating.value = -1
     elsif rating.value == -1
       rating.value = 0
     else
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => -1)
+      #some type of error
     end
     rating.save
     respond_to do |format|
