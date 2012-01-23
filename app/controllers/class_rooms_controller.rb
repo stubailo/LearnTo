@@ -151,20 +151,10 @@ class ClassRoomsController < ApplicationController
     rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
     if rating != nil
       rating.value = 1
+    elsif rating.value == 1
+      rating.value = 0
     else
       rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:class_room_id], :value => 1)
-    end
-    rating.save
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { render :json => {:rating => rating } }
-    end
-  end
-  
-  def clear1
-    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
-    if rating != nil
-      rating.value = 1
     end
     rating.save
     respond_to do |format|
@@ -177,6 +167,8 @@ class ClassRoomsController < ApplicationController
     rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
     if rating != nil
       rating.value = -1
+    elsif rating.value == 1
+      rating.value = 0
     else
       rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:class_room_id], :value => -1)
     end
