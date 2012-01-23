@@ -1,0 +1,18 @@
+- if defined? style and defined? res
+  - info = res.get_info
+  - hidden = false unless ( defined? hidden and hidden == true )
+  - if style == "inline_link"
+    %span.resource-inline-container
+      - link_class = "resource-inline-link include-file-type-icon #{icon_class}"
+      %a{:class => link_class, :href => url_for(res.file.url), :title => res.caption}
+        = res.name
+  - if style == "full_page"
+    %h2= res.name
+    %p= res.caption
+
+    - if info[:media_type] == "unknown"
+      .full_page_link_container
+        =link_to res.url, res.url
+    - if info[:media_type] == "video" and info[:video][:source] == "youtube"
+      .youtube_full_page_container
+        %iframe{:width=>"853", :height=>"505", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
