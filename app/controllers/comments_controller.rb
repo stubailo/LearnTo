@@ -70,7 +70,7 @@ class CommentsController < ApplicationController
     rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating == nil
       rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
-    if rating.value = 0
+    elsif rating.value = 0
       rating.value = 1
     elsif rating.value == 1
       rating.value = 0
@@ -88,7 +88,7 @@ class CommentsController < ApplicationController
     rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating == nil
       rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
-    if rating.value = 0
+    elsif rating.value = 0
       rating.value = -1
     elsif rating.value == -1
       rating.value = 0
@@ -102,28 +102,3 @@ class CommentsController < ApplicationController
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
