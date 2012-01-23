@@ -26,7 +26,7 @@ $ ->
     content = $("#insert_code_form").find("textarea").val()
     alert(content)
     if content
-      $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, "<pre>" + htmlEncode(content) + "</pre>")
+      $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, "<pre>" + htmlEncode(content) + "</pre><p></p>")
       $("#insert_code_form").find("textarea").val("")
 
 
