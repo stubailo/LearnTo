@@ -3,17 +3,14 @@ class User < ActiveRecord::Base
   has_many :class_rooms, :through => :user_permissions
   
   has_many :announcements
-<<<<<<< HEAD
   has_many :posts
   
   has_many :post_ratings
   has_many :class_room_ratings
   
-=======
   has_many :authentications
   
   ACCOUNT_TYPES = ["internal", "external"]
->>>>>>> f60d475e0d3d8296941a91f6ef16a3377aeb7ae3
   
   def activate!
     self.active = true

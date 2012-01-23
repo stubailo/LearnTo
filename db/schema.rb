@@ -11,12 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120123120750) do
-=======
 ActiveRecord::Schema.define(:version => 20120123151556) do
->>>>>>> f60d475e0d3d8296941a91f6ef16a3377aeb7ae3
-
+  
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
     t.integer  "class_room_id"
@@ -29,7 +25,6 @@ ActiveRecord::Schema.define(:version => 20120123151556) do
   add_index "announcements", ["class_room_id"], :name => "index_announcements_on_class_room_id"
   add_index "announcements", ["user_id"], :name => "index_announcements_on_user_id"
 
-<<<<<<< HEAD
   create_table "class_room_ratings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "class_room_id"
@@ -41,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20120123151556) do
   add_index "class_room_ratings", ["class_room_id"], :name => "index_class_room_ratings_on_class_room_id"
   add_index "class_room_ratings", ["user_id"], :name => "index_class_room_ratings_on_user_id"
 
-=======
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -50,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20120123151556) do
     t.datetime "updated_at", :null => false
   end
 
->>>>>>> f60d475e0d3d8296941a91f6ef16a3377aeb7ae3
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
     t.integer  "occupancy"
