@@ -1,0 +1,11 @@
+.new_posts
+    %h3 Students Enrolled in #{ link_to @, class_room_path(post.forum.class_room.id)}
+    - @students.each do |student|
+      .forum_post_container
+        .forum_post
+          %h4
+            = link_to student.login, user_path(student)
+          %div.bottom
+            =#in #{ link_to @class_room.name, class_room_path(@class_room.id)}
+            %br
+            =#last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago
