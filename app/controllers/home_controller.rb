@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   		end
   		@posts = @posts.sort_by! { |post| post.last_updated}.reverse!.first(6)
   		@announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)
-      render :action => "user_index"
+      #render :action => "user_index"
     end
   end        
 
