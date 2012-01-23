@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  get "students/show"
+
   match '/auth/:provider/callback' => 'authentications#create'
 
   get "authentications/index"

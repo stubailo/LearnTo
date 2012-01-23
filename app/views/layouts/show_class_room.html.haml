@@ -36,7 +36,8 @@
           %li
             = link_to "Discussion", @class_room.forum, :class => which_tab == "discussion" ? "active" : ""
           %li
-            %a{:href => "#"} Students
+            = link_to "Students", students_show_path(@class_room), :class => which_tab == "students" ? "active" : ""
+          %li
 
     %div#center-page
       = content_for?(:class_room_content) ? yield(:class_room_content) : yield
