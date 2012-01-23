@@ -29,7 +29,7 @@ class UserSessionsController < ApplicationController
 				render :action => :new, :locals => {:failed_login => true}
 			end
 		else
-			redirect_to authentications_path, :flash => { :fail => 'Cannot submit local login form if account created from facebook'}
+			redirect_to authentications_path, :flash => { :fail => 'Cannot submit local login form if your account was created using facebook'}
 		end
   end
 
