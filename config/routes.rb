@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  get "students/show"
+
   match '/auth/:provider/callback' => 'authentications#create'
 
   get "authentications/index"
@@ -74,6 +76,8 @@ Classroom::Application.routes.draw do
   match 'login' => "user_sessions#new",      :as => :login
   match 'login_ajax' => "user_sessions#new_ajax",      :as => :login_ajax
   match 'logout' => "user_sessions#destroy", :as => :logout
+  
+  get "auth/facebook"
  
   resources :pages, :only => :show
 
