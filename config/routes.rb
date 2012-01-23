@@ -32,6 +32,10 @@ Classroom::Application.routes.draw do
 
   post "class_rooms/add_user"
   
+  post "class_rooms/plus1"
+  
+  post "class_rooms/minus1"
+  
   resources :user_permissions
 
   resources :class_rooms do
@@ -58,6 +62,8 @@ Classroom::Application.routes.draw do
   post "comments/plus1"
   
   post "comments/minus1"
+  
+  
   
   resources :comments
   
