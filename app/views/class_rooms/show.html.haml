@@ -1,4 +1,11 @@
 .class_home
+  .response{:id => "forum_response_" + @class_room.id.to_s}
+    .up-down-widget
+      - rbu = @class_room.rating_by_user(current_user.id)
+      = link_to "+", {:controller => :class_rooms, :action => 'plus1', :class_room_id => @class_room.id}, :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
+      %span.udw-middle= @class_room.rating
+      = link_to "-", {:controller => :class_rooms, :action => 'minus1', :class_room_id => @class_room.id}, :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
+  
   %h1
     %span.learn_to Learn To
     %span.tag_line= @class_room.tag_line.upcase
@@ -7,7 +14,6 @@
     .info
       Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
   
-
   %h2
     = @class_room.summary
   

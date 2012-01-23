@@ -1,4 +1,3 @@
-
 .user_home_top
   %h2 Hi, #{current_user.login}!
 
@@ -49,3 +48,9 @@
       In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
       %br
       posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+      
+      
+  = "Try a new class!"
+  = link_to @random_class_room.name, @random_class_room
+
+

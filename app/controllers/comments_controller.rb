@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     
     if @comment.save
       @post.last_updated = Time.now
-      @rating = Rating.new(:user_id => current_user.id, :comment_id => @comment.id, :value => 1)
+      @rating = PostRating.new(:user_id => current_user.id, :comment_id => @comment.id, :value => 0)
       @rating.save
       @post.save
     end
@@ -67,11 +67,11 @@ class CommentsController < ApplicationController
   end
   
   def plus1
-    rating = Rating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating != nil
       rating.value = 1
     else
-      rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     end
     rating.save
     respond_to do |format|
@@ -81,7 +81,7 @@ class CommentsController < ApplicationController
   end
   
   def clear1
-    rating = Rating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating != nil
       rating.value = 1
     end
@@ -93,16 +93,16 @@ class CommentsController < ApplicationController
   end
   
   def minus1
-    rating = Rating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating != nil
       rating.value = -1
     else
-      rating = Rating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => -1)
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => -1)
     end
     rating.save
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render :json => {:rating => Comment.find(params[:comment_id]).rating } }
+      format.json { render :json => {:rating => rating } }
     end
   end
 end

@@ -6,7 +6,14 @@ class Resource < ActiveRecord::Base
   belongs_to :section
   has_one :document
   
-  has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }
+  if Rails.env == "Production"
+    has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }, 
+      :storage => :s3, 
+      :s3_credentials => "#{Rails.root}/config/s3.yml", 
+      :path => "/:style/:id/:filename"
+  else
+    has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }
+  end
   
   def file_styles(a)
     type = a.content_type

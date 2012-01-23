@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122103602) do
+ActiveRecord::Schema.define(:version => 20120123120750) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20120122103602) do
 
   add_index "announcements", ["class_room_id"], :name => "index_announcements_on_class_room_id"
   add_index "announcements", ["user_id"], :name => "index_announcements_on_user_id"
+
+  create_table "class_room_ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "class_room_id"
+    t.integer  "value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "class_room_ratings", ["class_room_id"], :name => "index_class_room_ratings_on_class_room_id"
+  add_index "class_room_ratings", ["user_id"], :name => "index_class_room_ratings_on_user_id"
 
   create_table "class_rooms", :force => true do |t|
     t.string   "name"
@@ -66,6 +77,17 @@ ActiveRecord::Schema.define(:version => 20120122103602) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "post_ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "post_ratings", ["comment_id"], :name => "index_ratings_on_comment_id"
+  add_index "post_ratings", ["user_id"], :name => "index_ratings_on_user_id"
+
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "forum_id"
@@ -75,17 +97,6 @@ ActiveRecord::Schema.define(:version => 20120122103602) do
     t.datetime "updated_at",   :null => false
     t.datetime "last_updated"
   end
-
-  create_table "ratings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "comment_id"
-    t.integer  "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "ratings", ["comment_id"], :name => "index_ratings_on_comment_id"
-  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
 
   create_table "resource_pages", :force => true do |t|
     t.string   "section"

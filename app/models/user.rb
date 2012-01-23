@@ -1,7 +1,13 @@
 class User < ActiveRecord::Base
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
+  
   has_many :announcements
+  has_many :posts
+  
+  has_many :post_ratings
+  has_many :class_room_ratings
+  
   
   def activate!
     self.active = true
@@ -23,6 +29,6 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   validates :password, :presence => true,
                     :length => { :minimum => 5 }
-  has_many :posts
+  
 end
 
