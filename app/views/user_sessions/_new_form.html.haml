@@ -2,7 +2,7 @@
   %h1 Sign in
   %p.hint
     Don't have an account yet?
-    = link_to "Click here to register.", new_user_path
+    = link_to "Click here to register.", authentications_path
   %hr
   = form_for @user_session, :url => {:action => "create"} do |f|
     - if @user_session.errors.any?

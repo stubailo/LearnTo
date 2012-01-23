@@ -16,6 +16,7 @@ class HomeController < ApplicationController
   		@announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)      
     #There is no user logged in
     else
+      #render :action => "user_index"
     end
     @random_class_room = random
     render :action => "user_index"
