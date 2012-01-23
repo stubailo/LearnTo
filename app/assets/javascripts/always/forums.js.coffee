@@ -32,7 +32,7 @@ pm_event_handler = (plus_or_minus) ->
     event.preventDefault()
     response_id = $(event.target).parents(".response").attr("id").split("_")[2]
     unless $("#forum_response_" + response_id).find(".udw-" + bottom_or_top).hasClass("active")
-      $.post( "/comments/" + plus_or_minus + "1.json?comment_id=" + response_id, (data) ->
+      $.post( $(this).attr("href"), (data) ->
         middle = $("#forum_response_" + response_id).find(".udw-middle")
         increment *= 2 if $("#forum_response_" + response_id).find(".udw-" + opposite).hasClass("active")
         middle.text(parseInt(middle.text()) + increment)
