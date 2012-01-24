@@ -9,25 +9,34 @@ htmlEncode = (str) ->
 $ ->
 
   insert_embed_from_response = (file, response) ->
-    alert(response)
+    $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, '<p><a class="media_replace" href="' + response.id + '">' + file + '</a></p>')
+
+  insert_embed_from_link = (url) ->
+    (response) ->
+      $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, '<p><a class="media_replace" href="' + response.id + '">' + url + '</a></p>')
+      
 
   check_file = (file, extension) ->
     return true
-
-  upload_object = new AjaxUpload('insert_file', {
-    action: $("#link_to_embed_in_document").attr("href"),
-    name: "resource[file]",
-    data: { "resource[file_type]": "upload" },
-    autoSubmit: true,
-    responseType: "json",
-    onSubmit: check_file,
-    onComplete: insert_embed_from_response
-  })
-
-  $("#insert_file").click ->
-    $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, '<p><a class="media_replace" href="#">Link</a></p>')
+  if $("#insert_file").length > 0
+    upload_object = new AjaxUpload('insert_file', {
+      action: $("#link_to_embed_in_document").attr("href") + ".json",
+      name: "resource[file]",
+      data: { "resource[file_type]": "upload" },
+      autoSubmit: true,
+      responseType: "json",
+      onSubmit: check_file,
+      onComplete: insert_embed_from_response
+    })
 
   $("#insert_code_form").dialog({
+    autoOpen: false,
+    width: 600,
+    modal: true,
+    resizable: false
+  })
+  
+  $("#insert_link_form").dialog({
     autoOpen: false,
     width: 600,
     modal: true,
@@ -41,11 +50,27 @@ $ ->
   $("#insert_code_form").find("button").click ->
     $("#insert_code_form").dialog("close")
     content = $("#insert_code_form").find("textarea").val()
-    alert(content)
     if content
       $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, "<pre>" + htmlEncode(content) + "</pre><p></p>")
       $("#insert_code_form").find("textarea").val("")
 
+  $("#insert_link").click ->
+    $("#insert_link_form").dialog("open")
+    $("#insert_link_form").find("input").val("")
+
+  $("#insert_link_form").find("button").click ->
+    $("#insert_link_form").dialog("close")
+    url = $("#insert_link_form").find("input").val()
+    if url
+      $.post( $("#link_to_embed_in_document").attr("href") + ".json",
+        data = { 
+          "resource[file_type]": "link",
+          "resource[url]":url
+        },
+        success = insert_embed_from_link(url)
+      )
+
+      $("#insert_code_form").find("textarea").val("")
 
   $("#toggle_editor").toggle(
     -> $("#tinymce_area").tinymce().hide(),

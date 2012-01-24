@@ -15,4 +15,4 @@
         =link_to res.url, res.url
     - if info[:media_type] == "video" and info[:video][:source] == "youtube"
       .youtube_full_page_container
-        %iframe{:width=>"853", :height=>"505", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
+        %iframe{:width=>"640", :height=>"385", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}

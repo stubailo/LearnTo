@@ -48,11 +48,4 @@
       %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
       .clear 
   
-  - if @resource.file_type == "upload"
-    = render :partial => "shared/resource_embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "big_embed", :hidden => false}
-
-  - if @resource.file_type == "document"
-    = render :partial => "shared/document_embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page"}
-
-  - if @resource.file_type == "link"
-    = render :partial => "shared/link_embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page"}
+  = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "big_embed", :hidden => false}

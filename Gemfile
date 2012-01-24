@@ -42,3 +42,5 @@ gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
 gem "omniauth-facebook"
 gem "omniauth-google"
 gem "omniauth-twitter"
+
+gem "nokogiri"

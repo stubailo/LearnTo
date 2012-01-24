@@ -22,6 +22,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
     get_path_vars
     set_vars
+    
+
 
     respond_to do |format|
       format.html #{ render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
@@ -117,7 +119,17 @@ class ResourcesController < ApplicationController
         if(@resource.file_type == "document")
           @document = @resource.document
           @document.content = params[:document][:content]
-          @document.dirty = true
+
+          xml_doc = Nokogiri::HTML(@document.content)
+          xml_doc.css('a.media_replace').each do |link| 
+            res = Resource.find(link.attribute("href").value)
+            link.replace(
+              render_to_string :partial => "shared/embed",
+                  :locals => {:res => res, :info => @resource.get_info, :style => "big_embed", :hidden => false}
+            )
+          end
+          
+          @document.parsed_content = xml_doc.to_s
           @document.save
         end
         unless @resource.hidden
