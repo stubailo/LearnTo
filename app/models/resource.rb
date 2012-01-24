@@ -1,6 +1,16 @@
 require 'uri'
 
 class Resource < ActiveRecord::Base
+  validates :file_file_name, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
+  validates :file_content_type, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
+  validates :file_file_size, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
+  validates :file_updated_at, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
+  validates :name, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
+  validates :url, :presence => true, :if => lambda { |res| res.try(:source_call) =="link" }
+  validates :user_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
+  validates :class_room_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
+
+
   belongs_to :class_room
   belongs_to :user
   belongs_to :document

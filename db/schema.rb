@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123151556) do
+ActiveRecord::Schema.define(:version => 20120124142158) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20120123151556) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.text     "content"
-    t.boolean  "dirty"
     t.text     "parsed_content"
   end
 

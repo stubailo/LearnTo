@@ -86,7 +86,7 @@ class ClassRoomsController < ApplicationController
 		@class_room = ClassRoom.new(params[:class_room])
 		@class_room.user_id = @user.id
 		@class_room.tag_line = @class_room.tag_line.upcase
-
+		
 		respond_to do |format|
 			if @class_room.save
 				ResourcePage::SECTIONS.each do |type|
@@ -98,7 +98,7 @@ class ClassRoomsController < ApplicationController
 						resource = Resource.new(:name => "Class Description", :user_id => @user.id, :class_room_id => @class_room.id,
 							:file_type => "document", :source_call => "materials", :hidden => false, :order => 0, :section_id => section.id)
 						resource.save
-						document = Document.new(:resource_id => resource.id, :content => "Edit this document with a description of your class!")
+						document = Document.new(:resource_id => resource.id, :content => "Edit this document with a description of your class!", :parsed_content => "Edit this document with a description of your class!")
 						document.save
 						@class_room.update_attribute(:description_id, resource.id)
 					end
@@ -118,15 +118,20 @@ class ClassRoomsController < ApplicationController
 	# PUT /class_rooms/1.json
 	def update
 		@class_room = ClassRoom.find(params[:id])
+		
+		if is_creator(@class_room)
 
-		respond_to do |format|
-			if @class_room.update_attributes(params[:class_room])
-				format.html { redirect_to @class_room, notice: 'Class was successfully updated.' }
-				format.json { head :no_content }
-			else
-				format.html { render action: "edit" }
-				format.json { render json: @class_room.errors, status: :unprocessable_entity }
+			respond_to do |format|
+				if @class_room.update_attributes(params[:class_room])
+					format.html { redirect_to @class_room, notice: 'Class was successfully updated.' }
+					format.json { head :no_content }
+				else
+					format.html { render action: "edit" }
+					format.json { render json: @class_room.errors, status: :unprocessable_entity }
+				end
 			end
+		else
+		  redirect_back_or_default @class_room
 		end
 	end
 
