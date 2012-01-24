@@ -15,7 +15,11 @@ class CommentsController < ApplicationController
       @rating.save
       @post.save
     end
-     redirect_to :back
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:comment => @comment, :user_link => link_to(@comment.user) } }
+    end
   end
 
   def destroy
