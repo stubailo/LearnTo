@@ -182,4 +182,9 @@ class ClassRoomsController < ApplicationController
       format.json { render :json => {:rating => rating } }
     end
   end
+  
+  def search
+    @class_rooms = ClassRoom.search(params[:search_term])
+  end
+  
 end

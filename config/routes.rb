@@ -1,6 +1,12 @@
 Classroom::Application.routes.draw do
 
   get "students/show"
+  
+  get "forums/search_by_tag"
+  
+  get "forums/search" 
+  
+  get "class_rooms/search"
 
   match '/auth/:provider/callback' => 'authentications#create'
 
@@ -50,10 +56,6 @@ Classroom::Application.routes.draw do
   end
   
   resources :authentications
-  
-  get "forums/search_by_tag"
-  
-  get "forums/search" 
   
   resources :forums
   
