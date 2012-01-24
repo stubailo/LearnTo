@@ -205,6 +205,7 @@ DEPENDENCIES
   jquery-rails
   mail
   mysql2
+  nokogiri
   omniauth!
   omniauth-facebook
   omniauth-google

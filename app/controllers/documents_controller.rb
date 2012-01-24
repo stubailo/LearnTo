@@ -16,7 +16,10 @@ class DocumentsController < ApplicationController
 					
 				#Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
 				if @new_resource.save
-					redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @path_resource)
+          respond_to do |format|
+					  format.html { redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @path_resource) }
+            format.json { render json: @new_resource }
+          end
 				end
 		  else
 				redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @path_resource), :flash => { :fail => "Error embedding resource.."}

@@ -22,6 +22,8 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
     get_path_vars
     set_vars
+    
+
 
     respond_to do |format|
       format.html #{ render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
@@ -110,27 +112,37 @@ class ResourcesController < ApplicationController
     @class_room = ClassRoom.find(@resource.class_room_id)
     @resource_page = ResourcePage.find(params[:resource_page_id])
     @section = Section.find(params[:section_id])
-		
+
 		if is_creator(@class_room)
-			respond_to do |format|
-				if @resource.update_attributes(params[:resource])
-					if(@resource.file_type == "document")
-						@document = @resource.document
-						@document.content = params[:document][:content]
-						@document.dirty = true
-						@document.save
-					end
-					unless @resource.hidden
-						@class_room.update_attribute(:updated_at, Time.now.to_datetime)
-					end
-					format.html { redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
-					 notice: 'Resource was successfully updated.' }
-					format.json { head :no_content }
-				else
-					format.html { render action: "edit" }
-					format.json { render json: @resource.errors, status: :unprocessable_entity }
-				end
-			end
+      respond_to do |format|
+        if @resource.update_attributes(params[:resource])
+          if(@resource.file_type == "document")
+            @document = @resource.document
+            @document.content = params[:document][:content]
+
+            xml_doc = Nokogiri::HTML(@document.content)
+            xml_doc.css('a.media_replace').each do |link| 
+              res = Resource.find(link.attribute("href").value)
+              link.replace(
+                render_to_string :partial => "shared/embed",
+                    :locals => {:res => res, :info => @resource.get_info, :style => "big_embed", :hidden => false}
+              )
+            end
+            
+            @document.parsed_content = xml_doc.to_s
+            @document.save
+          end
+          unless @resource.hidden
+            @class_room.update_attribute(:updated_at, Time.now.to_datetime)
+          end
+          format.html { redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
+           notice: 'Resource was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
+        end
+      end
 		else
 		  redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
 		   :flash => { :fail => "You must be the creator of the class to modify uploaded documents" }

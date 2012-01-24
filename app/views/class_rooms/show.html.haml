@@ -9,18 +9,19 @@
   
   %h1
     %span.learn_to Learn To
-    %span.tag_line= @class_room.tag_line.upcase
+    - size = [7-@class_room.tag_line.length/7, 3].max
+    %span.tag_line{:style => "font-size: #{size}em"}= @class_room.tag_line.upcase
 
+  
+  %h2
+    = @class_room.summary
   .below_tagline
     .info
       Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
   
-  %h2
-    = @class_room.summary
-  
   .announcements_box
     %h4
-      = "Announcements"
+      = "Most Recent Announcement"
       = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
       - if @is_creator
         %a{:href=>"#", :id => "post_new"} post new

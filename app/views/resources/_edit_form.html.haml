@@ -19,14 +19,19 @@
     = f.submit "Save"
 
     %span.button#insert_image Insert Image
-    %span.button#insert_media Insert Media / File
+    %span.button#insert_link Embed Internet Media
+    %span.button#insert_file Embed File From Computer
     %span.button#insert_code Insert Code
     %span.button#toggle_editor Toggle Editor
 
     #insert_code_form{:title => "Paste Code Here", :style => "display: none"}
       %textarea{:style => "width: 100%; font-family: monospace", :rows => "10"}
       %button Insert
+    #insert_link_form{:title => "Paste Link Here", :style => "display: none"}
+      %input{:style => "width: 100%"}
+      %button Embed
 
   - if @resource.file_type == "document"
     .field
       = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
+    = link_to "put embedded resource", class_room_resource_page_section_resource_doc_rec_path(@class_room, @resource_page, @section, @resource, @document), :method => 'post', :id => "link_to_embed_in_document", :style => "display: none"
