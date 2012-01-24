@@ -19,7 +19,8 @@
               = link_to "Sign out", logout_path, :class => "button"
             - else
               %a{:href=>"/auth/facebook", :class=>"auth_provider"}
-                = image_tag "facebook_32.png", :size => "32x32", :alt => "Facebook" 
+                = image_tag "facebooklogin.png", :alt => "Facebook Login" 
+              
               = link_to "Sign in", login_path, :id => "sign_in_button", :class => "button"
               = link_to "Register", new_user_path, :class => "button"
           %div.search_box

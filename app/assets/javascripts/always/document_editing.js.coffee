@@ -7,7 +7,26 @@ htmlEncode = (str) ->
 
 
 $ ->
-  $("#insert_media").click ->
+
+  insert_embed_from_response = (file, response) ->
+    alert(response)
+
+  check_file = (file, extension) ->
+    return true
+
+  new AjaxUpload('insert_file', {
+    action: $("#insert_file").attr("name"),
+    name: "resource[file]",
+    data: {
+      "resource[file_type]": "upload"
+    }
+    autoSubmit: true,
+    responseType: "json",
+    onSubmit: check_file,
+    onComplete: insert_embed_from_response
+  }
+
+  $("#insert_file").click ->
     $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, '<p><a class="media_replace" href="#">Link</a></p>')
 
   $("#insert_code_form").dialog({

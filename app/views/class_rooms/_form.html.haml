@@ -18,25 +18,24 @@
       = f.label :short_description
       = f.text_area :summary
   .form_page.other_info
-    %h3 Step 3: Other Info
-    %p.class_create_hint You're almost done - we just need a little more information.
+    %h3 Step 3: Official Name
+    %p.class_create_hint This is the name that will show up for your class when people search.
     .field
-      = f.label :name, "Official Name", :class => "main"
-      %p.hint This is the name that will show up for your class when people search.
       = f.text_field :name, :class => "text"
-    .field
-      = f.label :occupancy, "Maximum Enrollment", :class => "main"
-      %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
-      = f.number_field :occupancy, :value => 0, :class => "text"
-    .field
-      = f.label :start_date, :class => "main"
-      = f.date_select :start_date
-    .field
-      = f.label :end_date, :class => "main"
-      = f.date_select :end_date
-    .field
-      = f.label :price, :class => "main"
-      $
-      = f.text_field :price, :value => "0.00", :class => "text"
+    %div{:style => "display: hidden"}
+      .field
+        = f.label :occupancy, "Maximum Enrollment", :class => "main"
+        %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
+        = f.number_field :occupancy, :value => 0, :class => "text"
+      .field
+        = f.label :start_date, :class => "main"
+        = f.date_select :start_date
+      .field
+        = f.label :end_date, :class => "main"
+        = f.date_select :end_date
+      .field
+        = f.label :price, :class => "main"
+        $
+        = f.text_field :price, :value => "0.00", :class => "text"
     .actions
       = f.submit "Create your class!"

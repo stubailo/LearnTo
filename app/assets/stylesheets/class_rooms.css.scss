@@ -191,14 +191,15 @@ $center-side-margins: 20px;
 
   .info {
     margin: 10px 40px;
-    border-bottom: 1px #ddd solid;
-    padding-bottom: 10px;
+    color: #777;
+    margin-top: 20px;
   }
 
   h2 {
-    font-size: 2em;
+    font-size: 1.8em;
     color: #888;
     margin: 10px 40px;
+    line-height: 1.1em;
   }
 
   .announcements_box {

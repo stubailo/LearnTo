@@ -9,14 +9,15 @@
   
   %h1
     %span.learn_to Learn To
-    %span.tag_line= @class_room.tag_line.upcase
+    - size = [7-@class_room.tag_line.length/7, 3].max
+    %span.tag_line{:style => "font-size: #{size}em"}= @class_room.tag_line.upcase
 
-  .below_tagline
-    .info
-      Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
   
   %h2
     = @class_room.summary
+  .below_tagline
+    .info
+      Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
   
   .announcements_box
     %h4
@@ -36,5 +37,5 @@
   
   - unless @class_room.resource.hidden
     %div{:style => "margin: 0 30px"}
-      = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@resource.section.resource_page.class_room, @resource.section.resource_page, @resource.section, @resource)
+      -#= link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@resource.section.resource_page.class_room, @resource.section.resource_page, @resource.section, @resource)
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }

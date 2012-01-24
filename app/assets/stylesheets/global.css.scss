@@ -151,6 +151,12 @@ $left-bar-padding: $global-padding;
     .user_nav {
       float: right;
       padding: $global-padding;
+      .auth_provider {
+        img {
+          margin-bottom: -6px;
+        }
+        margin-right: 3px;
+      }
     }
 
     .search_box {
