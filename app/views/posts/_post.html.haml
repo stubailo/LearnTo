@@ -8,4 +8,4 @@
   posted #{time_ago_in_words(post.created_at.to_time, include_seconds = true)} ago by #{link_to post.user.login, post.user},
   tags: 
   - post.tag_list.each do |x|
-    = link_to "#" + x, forums_search_by_ tag_path(:tag_term => x, :forum_id => @forum.id)
+    = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => forum.id)

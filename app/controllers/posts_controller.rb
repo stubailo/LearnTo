@@ -46,8 +46,8 @@ class PostsController < ApplicationController
     @post.save
     respond_to do |format|
       if @post.save
-        format.html  { redirect_to(@post, :notice => 'Post was successfully created.') }
-        partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
+        format.html  { redirect_to :back }
+        partial = render_to_string :partial => "posts/post", :locals => {:post => @post, :forum => @post.forum}
         format.json  { render :json => {:new_post => partial} }
       else
         format.html  { render :back }

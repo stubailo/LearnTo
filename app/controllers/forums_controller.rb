@@ -36,6 +36,9 @@ class ForumsController < ApplicationController
   def search_by_tag
     @posts = Post.search_by_tag(params[:tag_term], params[:forum_id])
     @forum = Forum.find(params[:forum_id])
+    @class_room = @forum.class_room
+    set_vars
+    render 'search', :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
   end
 end
 
