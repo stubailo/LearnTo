@@ -51,9 +51,9 @@ class CommentsController < ApplicationController
   end
   
   def plus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating == nil
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     elsif rating.value == 0
       rating.value = 1
     elsif rating.value == 1
@@ -69,9 +69,9 @@ class CommentsController < ApplicationController
   end
   
   def minus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
     if rating == nil
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
     elsif rating.value == 0
       rating.value = -1
     elsif rating.value == -1
