@@ -14,17 +14,15 @@ $ ->
   check_file = (file, extension) ->
     return true
 
-  new AjaxUpload('insert_file', {
-    action: $("#insert_file").attr("name"),
+  upload_object = new AjaxUpload('insert_file', {
+    action: $("#link_to_embed_in_document").attr("href"),
     name: "resource[file]",
-    data: {
-      "resource[file_type]": "upload"
-    }
+    data: { "resource[file_type]": "upload" },
     autoSubmit: true,
     responseType: "json",
     onSubmit: check_file,
     onComplete: insert_embed_from_response
-  }
+  })
 
   $("#insert_file").click ->
     $("#tinymce_area").tinymce().execCommand('mceInsertContent', false, '<p><a class="media_replace" href="#">Link</a></p>')

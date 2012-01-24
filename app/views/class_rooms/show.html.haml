@@ -23,19 +23,22 @@
     %h4
       = "Announcements"
       = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
-      %a{:href=>"#", :id => "post_new"} post new
+      - if @is_creator
+        %a{:href=>"#", :id => "post_new"} post new
     .new_announcement_form
-      %h4 Editing New Announcement
-      = render 'new_announcement'
+      -if @is_creator
+        %h4 Editing New Announcement
+        = render 'new_announcement'
     -if @announcement
       .announcement
-        %h3= link_to @announcement.title, announcements_path(@announcement)
+        %h3= link_to @announcement.title, :controller => :announcements, :action => :show, :class_room_id => @class_room.id
         %p= @announcement.content
-    -else
+    -elsif @is_creator
       .placeholder
         No announcements yet!  Click 'post new' above to make an announcement.
   
-  - unless @class_room.resource.hidden
+  - unless @class_room.resource.hidden && !@is_creator
     %div{:style => "margin: 0 30px"}
-      -#= link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@resource.section.resource_page.class_room, @resource.section.resource_page, @resource.section, @resource)
+      - if @is_creator
+        = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description)
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }

@@ -2,44 +2,14 @@
 
 .forum_post_container
   .forum_post
-    - if @post.user_id == current_user.id
-      = #link_to "edit", {:controller => :posts, :action => 'editAjax', :post_id => @post.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
-      = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => @post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
-    %h3
-      = link_to @post.title, post_path(@post)
-    %p
-      = simple_format(@post.content)
-    %div.bottom 
-      posted #{time_ago_in_words(@post.created_at.to_time, include_seconds = true)} ago by #{link_to @post.user.login, @post.user},
-      tags: 
-      - @post.tag_list.each do |x|
-        = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
+    = render :partial => "post", :locals => { :post => @post }
   .forum_post_responses
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response{:id => "forum_response_" + comment.id.to_s}
-        .up-down-widget
-          - rbu = comment.rating_by_user(current_user.id)
-          = link_to "+", comments_plus1_path(comment), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
-          %span.udw-middle= comment.rating
-          = link_to "-", comments_minus1_path(comment), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
-        - if comment.user_id == current_user.id
-          = #link_to "edit", {:controller => :comments, :action => 'ajaxEdit', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
-          = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
-        %h4 
-          = link_to @user.login, user_path(@user)
-        %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))
-        
-        .bottom #{time_ago_in_words(comment.created_at, include_seconds = true)} ago
-        
+        = render :partial => "comments/comment", :locals => {:comment => comment}
         .sub_comments
-
           - comment.subcomments.order(:created_at).each do |subcomment|
-            = subcomment.content
-            = " - "
-            = link_to @user.login, user_path(@user)
-            - if subcomment.user_id == @user.id
-              = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
-            %br
+            = render :partial => "subcomments/subcomment", :locals => {:subcomment => subcomment}
           = render :partial => "newSubcomment", :locals => { :comment => comment }
     .post_response_form
       = render :partial => "newComment", :locals => { :post => @post }

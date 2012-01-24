@@ -30,3 +30,4 @@
   - if @resource.file_type == "document"
     .field
       = text_area :document, :content, :id => "tinymce_area", :class => "tinymce"
+    = link_to "put embedded resource", class_room_resource_page_section_resource_doc_rec_path(@class_room, @resource_page, @section, @resource, @document), :method => 'post', :id => "link_to_embed_in_document", :style => "display: none"

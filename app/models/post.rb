@@ -39,4 +39,5 @@ class Post < ActiveRecord::Base
     end
     return @result
   end
+  
 end

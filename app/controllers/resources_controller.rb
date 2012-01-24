@@ -61,46 +61,49 @@ class ResourcesController < ApplicationController
 
   # POST /resources
   # POST /resources.json
-  def create
-	@resource = Resource.new(params[:resource])
-	@class_room = ClassRoom.find(params[:class_room_id])
-    @resource_page = ResourcePage.find(params[:resource_page_id])
-    @section = Section.find(params[:section][:id])
-    set_vars
-
-	#set resource info not from form
-	@resource.source_call = @resource_page.section
-	@resource.user_id = @user.id 
-	@resource.class_room_id = @class_room.id
-	@resource.section_id = @section.id
-	@resource.hidden = false
-	@resource.order = @section.resources.length
-	  
-	#handle documents
-	if @resource.file_type == "document"
-	  @document = Document.new
-	  @resource.hidden = true
-	end
-	  
-	#Makes the homework-resource relationship if the homework and resource are both valid -- need to put in validations
-    if @resource.save
-      unless @resource.hidden
-        @class_room.update_attribute(:updated_at, Time.now.to_datetime)
-      end
-      if @resource.file_type == "document"
-	    @document = Document.new
-	    @document.resource_id = @resource.id
-	    @document.dirty = false
-	    @document.save
-	    redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
-	  else
-	    redirect_to class_room_resource_page_path(@class_room, @resource_page)
-	  end
-	else
-	  redirect_to class_room_resource_page_path(@class_room, @resource_page)
-	end
+  def create	
+		@resource = Resource.new(params[:resource])
+		@class_room = ClassRoom.find(params[:class_room_id])
+		@resource_page = ResourcePage.find(params[:resource_page_id])
+		@section = Section.find(params[:section][:id])
+	  set_vars
+	  if @is_creator
+			#set resource info not from form
+			@resource.source_call = @resource_page.section
+			@resource.user_id = @user.id 
+			@resource.class_room_id = @class_room.id
+			@resource.section_id = @section.id
+			@resource.hidden = false
+			@resource.order = @section.resources.length
+				
+			#handle documents
+			if @resource.file_type == "document"
+				@document = Document.new
+				@resource.hidden = true
+			end
+				
+			#Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
+				if @resource.save
+					unless @resource.hidden
+						@class_room.update_attribute(:updated_at, Time.now.to_datetime)
+					end
+					if @resource.file_type == "document"
+					@document = Document.new
+					@document.resource_id = @resource.id
+					@document.dirty = false
+					@document.save
+					redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
+				else
+					redirect_to class_room_resource_page_path(@class_room, @resource_page)
+				end
+			else
+				redirect_to class_room_resource_page_path(@class_room, @resource_page)
+			end
+		else
+		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+		end
   end
-
+  
   # PUT /resources/1
   # PUT /resources/1.json
   def update
@@ -184,36 +187,7 @@ class ResourcesController < ApplicationController
         rec.update_attribute(:order, i)
       end
     end
-    
-=begin
-    if old_sec.id == section.id
-      organized_recs = []
-      old_sec.resources.each do |res|
-        if res.order < old_order
-          if res.order >= new_order
-            res.update_attribute(:order, res.order+1)
-          end
-        elsif res.order > old_order
-          if res.order <= new_order
-            res.update_attribute(:order, res.order-1)
-          end
-        end
-      end
-    else
-      old_sec.resources.each do |res|
-        if res.order > old_order
-          res.update_attribute(:order, res.order - 1)
-        end
-      end
-      section.resources.each do |res|
-        if res.order >= new_order
-          res.update_attribute(:order, res.order + 1)
-        end
-      end
-    end
-    @resource.update_attributes(:section_id => section.id, :order => new_order)
-=end
-    
+
     #Turn timestamps back on    
     Resource.record_timestamps = true
     

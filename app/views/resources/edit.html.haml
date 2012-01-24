@@ -3,7 +3,6 @@
   %p.hint Located at: #{@section.title} #{">"} #{@resource.name} 
 
   %hr
-
   - if @resource.file_type == "document"
     = render 'edit_form'
   - else

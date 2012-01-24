@@ -13,11 +13,7 @@ class HomeController < ApplicationController
   		  @announcements += classroom.announcements.order('created_at DESC').limit(6)
   		end
   		@posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
-  		@announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)
-
-
-
-      
+  		@announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)      
     #There is no user logged in
     else
       @random_class_room = random
