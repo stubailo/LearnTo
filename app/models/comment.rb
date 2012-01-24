@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :post
+  belongs_to :user
   has_many :post_ratings, :dependent => :destroy
   has_many :subcomments, :dependent => :destroy
   validates :post_id, :presence => true
