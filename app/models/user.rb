@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   
   def self.create_from_hash(auth_hash)
     puts hash.to_yaml
-    user = User.new(:login => auth_hash['info']['first_name'], :email => auth_hash['info']['email'], :crypted_password => "000", 
+    user = User.new(:login => auth_hash['info']['name'], :email => auth_hash['info']['email'], :crypted_password => "000", 
     :password_salt => "000", :active => true, :account_type => "external" )
     user.save(:validations => false) #create the user without performing validations. This is because most of the fields are not set.
     user.reset_persistence_token! #set persistence_token else sessions will not be created
