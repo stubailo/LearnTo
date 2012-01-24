@@ -59,8 +59,7 @@ class PostsController < ApplicationController
       end
     end
   end
-
-
+  
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -70,7 +69,6 @@ class PostsController < ApplicationController
       redirect_to root_url
     end
     @post.destroy
-    
     redirect_to forum_path(@forum_id)
   end
   

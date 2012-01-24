@@ -39,4 +39,14 @@ class Post < ActiveRecord::Base
     end
     return @result
   end
+  
+  def since_datetime(datetime, user_id)
+    ids = []
+    current_user.class_rooms.each do |x|
+      ids.push(x.id)
+    end
+    t = Datetime.parse(datetime)
+    return Post.where("created_at > ?", t).where("forum_id IN ?", ids)
+  end
+  
 end
