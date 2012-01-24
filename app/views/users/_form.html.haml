@@ -1,29 +1,36 @@
 = form_for(@user) do |f|
   - if @user.errors.any?
     #error_explanation.ui-state-error.ui-corner-all
-      .ui-icon.ui-icon-alert.icon-in-info
-      %h2= "There #{@user.errors.count==1?"is":"are"} #{pluralize(@user.errors.count, "error")} in the form:"
+    .ui-icon.ui-icon-alert.icon-in-info
+      %h2= "There are #{pluralize(@user.errors.count, "error")} in the form:"
       %ul
       - @user.errors.full_messages.each do |msg|
         %li= msg
   .field
-    = f.label :login, "Display Name"
+    = f.label :login, "Display Name", :class => "main"
     %p.hint Other people will see this name when you enroll in classes and post in discussion boards.
-    = f.text_field :login
+    = f.text_field :login, :class => "required text"
   .field
-    = f.label :email
+    = f.label :email, :class => "main"
     %p.hint We will send a confirmation link to this address after you submit the form. You will also use this to log in.
-    = f.text_field :email
+    = f.text_field :email, :class => "required email text"
   .field
-    = f.label :password
+    = f.label :password, :class => "main"
     %p.hint Must be at least 8 characters long.
-    = f.password_field :password
+    = f.password_field :password, :class => "required text"
   .field
-    = f.label :password_confirmation
+    = f.label :password_confirmation, :class => "main"
     %p.hint Must match the previous password.
-    = f.password_field :password_confirmation
-
-  = @user.login
-
+    = f.password_field :password_confirmation, :class => "required text"
+      
+  %br/
+  .field
+    %p.hint Please confim you're not a robot by typing the text below.
+    = raw recaptcha_tags
+      
+  %br/
+  %br/
   .actions
-    = f.submit
+    = f.submit "Create Account"
+
+= recaptcha_tags
