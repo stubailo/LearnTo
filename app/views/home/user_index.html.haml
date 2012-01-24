@@ -52,6 +52,10 @@
       In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
       %br
       posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+  - if @user.account_type == "internal"
+    %h2 Connect to facebook!
+    %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+      = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
       
       
   = #"Try a new class!"
