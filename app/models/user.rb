@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+  acts_as_authentic do |c| c.login_field = :email end
+  validates :login,  :presence => true
+  validates :email, :presence => true
+  validates :password, :presence => true,
+                    :length => { :minimum => 5 }
+
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
   has_many :taught_classes, :as => :class_rooms
@@ -36,12 +42,6 @@ class User < ActiveRecord::Base
     user.reset_persistence_token! #set persistence_token else sessions will not be created
     user
   end
-
-  acts_as_authentic do |c| c.login_field = :email end
-  validates :login,  :presence => true
-  validates :email, :presence => true
-  validates :password, :presence => true,
-                    :length => { :minimum => 5 }
   
 end
 
