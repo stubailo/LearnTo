@@ -14,6 +14,7 @@ ajax_response_submit_handler = (event) ->
     data = {}
     $(event.target).find("[name]").each ->
       data[$(this).attr("name")] = $(this).attr("value")
+    data["format"] = "json"
     $.post($(event.target).attr("action"), data)
     $(".post_response_form").html("Response submitted.  Refresh the page to see it.")
 
@@ -31,7 +32,7 @@ pm_event_handler = (plus_or_minus) ->
         increment = -1
     event.stopPropagation()
     event.preventDefault()
-    $.post( $(this).attr("href") + "&format=json", success = (data) ->
+    $.post( $(this).attr("href"), data = {"format" : "json"}, success = (data) ->
       middle = widget.find(".udw-middle")
       if widget.find(".udw-" + opposite).hasClass("active")
         increment *= 2 
