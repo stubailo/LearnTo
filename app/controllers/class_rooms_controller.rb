@@ -153,7 +153,8 @@ class ClassRoomsController < ApplicationController
 	end
 
   def plus1
-    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:id]).first
+    class_room = ClassRoom.where(:id => params[:id]).first
+    rating = class_room.class_room_ratings.where(:user_id => current_user.id).first
     if rating == nil
       rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:id], :value => 1)
     elsif rating.value == 0
@@ -171,7 +172,8 @@ class ClassRoomsController < ApplicationController
   end
   
   def minus1
-    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:id]).first
+    class_room = ClassRoom.where(:id => params[:id]).first
+    rating = class_room.class_room_ratings.where(:user_id => current_user.id).first
     if rating == nil
       rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:id], :value => -1)
     elsif rating.value == 0
