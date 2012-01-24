@@ -27,44 +27,17 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
-  def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.json { render json: @post }
-    end
-  end
-
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
-  end
-  
-  def ajaxEdit
-    id = params[:id]
-    title = params[:title]
-    content = params[:content]
-    
-    @post = Post.find(params[:id])
-    @post.title = title
-    @post.content = content
-    @post.save
-    
     respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { render :json => {:post => @post } }
+      if @post.update_attributes(params[:post])
+        format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
+        format.json  { render :html => @post }
+      else
+        format.html  { render :back }
+        format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+      end
     end
-  end
-  
-  def ajaxDelete
-    @post = Post.find(params[:post_id])
-    if @post.user_id != current_user.id
-      redirect_to root_url
-    end
-    @post.destroy
-    return "ok"
   end
 
   # POST /posts
@@ -75,15 +48,23 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.forum_id = params[:forum_id]
     @post.last_updated = Time.now
-    @post.save    
-    redirect_to :back
+    @post.save
+    respond_to do |format|
+      if @post.save
+        format.html  { redirect_to(@post, :notice => 'Post was successfully created.') }
+        format.json  { render :html => @post }
+      else
+        format.html  { render :back }
+        format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
 
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:post_id])   
+    @post = Post.find(params[:id])   
     @forum_id = @post.forum_id 
     if @post.user_id != current_user.id
       redirect_to root_url
