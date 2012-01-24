@@ -1,6 +1,6 @@
-= @class_room.id
 .class_home
-  .response{:id => "forum_response_" + @class_room.id.to_s}
+
+  .rating_container
     .up-down-widget
       - rbu = @class_room.rating_by_user(current_user.id)
       = link_to "+", {:controller => :class_rooms, :action => 'plus1', :class_room_id => @class_room.id}, :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
