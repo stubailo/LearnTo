@@ -28,7 +28,7 @@
       = render 'new_announcement'
     -if @announcement
       .announcement
-        %h3= link_to @announcement.title, announcements_path(@announcement)
+        %h3= link_to @announcement.title, :controller => :announcements, :action => :show, :class_room_id => @class_room.id
         %p= @announcement.content
     -else
       .placeholder
