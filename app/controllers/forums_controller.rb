@@ -1,12 +1,11 @@
 class ForumsController < ApplicationController
   def show 
     @forum = Forum.find(params[:id])
+    @posts = @forum.posts.order("last_updated DESC")
     @class_room = @forum.class_room
     @tags = []
-    @ids = []
     set_vars
     
-    Post.select(:id).where(:forum_id => @forum.id).each { |x| @ids.push(x.id) }
     
     Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
      .where(:taggable_type => "Post")
@@ -18,7 +17,6 @@ class ForumsController < ApplicationController
     if @forum != nil && @user != nil
       @post = Post.new
       @comment = Comment.new
-      @posts = Post.where('forum_id = ?', @forum.id).order("last_updated DESC")
       render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
     else
       redirect_to :back
