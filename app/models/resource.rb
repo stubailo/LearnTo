@@ -8,7 +8,7 @@ class Resource < ActiveRecord::Base
   belongs_to :section
   has_one :document
   
-  if Rails.env == "Production"
+  if Rails.env == "production"
     has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }, 
       :storage => :s3, 
       :s3_credentials => "#{Rails.root}/config/s3.yml", 

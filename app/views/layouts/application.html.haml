@@ -23,8 +23,8 @@
               = link_to "Register", new_user_path, :class => "button"
           %div.search_box
             .search_field
-              = form_tag "/search", :method => "get" do
-                = text_field_tag :q, "", :class => "text"
+              = form_tag "/class_rooms/search", :method => "get" do
+                = text_field_tag :search_term, "", :class => "text"
                 = submit_tag "Search", :class => "button"
           %div.clear
     .top_level

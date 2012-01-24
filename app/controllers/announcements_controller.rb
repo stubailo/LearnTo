@@ -7,7 +7,11 @@ class AnnouncementsController < ApplicationController
   end
   
   def create
-    
+    @na = Announcement.new(params[:announcement])
+    @na.user_id = current_user.id
+    @na.class_room_id = params[:class_room_id]
+    @na.save
+    redirect_to :back
   end
   
   def ajaxDelete
