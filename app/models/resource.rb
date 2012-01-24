@@ -12,9 +12,9 @@ class Resource < ActiveRecord::Base
   validates :file_type, :presence => true
   validates :doc_id, :presence => true, :if => lambda { |res| res.try(:source_call) =="document" }
   validates :source_call, :presence => true
-  validates :hidden, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
   validates :order, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
   validates :section_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
+
 
   belongs_to :class_room
   belongs_to :user
