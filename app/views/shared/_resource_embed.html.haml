@@ -10,8 +10,9 @@
   - if style == "big_embed"
     %div.media-resource
       .title
-        %strong{:class => icon_class + " include-file-type-icon"}= res.name 
-        \-
+        -if res.name
+          %strong{:class => icon_class + " include-file-type-icon"}= res.name 
+          \-
         = link_to res.file_file_name, res.file.url
         = "(#{res.file.content_type})"
       -if res.caption != ""

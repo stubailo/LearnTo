@@ -38,7 +38,8 @@
         No announcements yet!  Click 'post new' above to make an announcement.
   
   - unless @class_room.resource.hidden && !@is_creator
+    %hr
     %div{:style => "margin: 0 30px"}
       - if @is_creator
-        = link_to "Edit Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description)
+        = link_to "Edit Class Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :id => "edit_class_description"
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "full_page" }
