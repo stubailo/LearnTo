@@ -11,7 +11,6 @@
   = label_tag(:new_tags, "Tags:")
   %br
   = text_field_tag :new_tags
-  = #select("post", "tag_list", @tags.collect{|c| [c.name, c.id]})
   = f.submit "Create"
   %br
   %br

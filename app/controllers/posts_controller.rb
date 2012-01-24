@@ -41,8 +41,9 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.forum_id = params[:forum_id]
     @post.user_id = current_user.id
-    @post.forum_id = params[:forum_id]
     @post.last_updated = Time.now
+    @post.tag_list = params[:new_tags].split(/[\s,]+/)
+    @post.save
     respond_to do |format|
       if @post.save
         format.html  { redirect_to(@post, :notice => 'Post was successfully created.') }
@@ -55,22 +56,23 @@ class PostsController < ApplicationController
     end
   end
   
-  def since_datetime
-    posts = []
-    current_user.class_rooms.each do |x|
-      posts += x.forum.posts.where("created_at > ?", DateTime.parse(params[:datetime]))
+  def posts_since_datetime
+    @ids = current_user.class_rooms.map {|x| x.id}
+    dateTime = DateTime.parse(params[:date_time])
+    @posts = Post.where("last_updated > ? AND id IN ?", dateTime, @ids).order(:created_at)
+    respond_to do |format|
+      format.json { render json: @posts }
     end
-    posts.sort_by! { |post| post.created_at}.reverse!
   end
 
   def destroy
-    @post = Post.find(params[:id])   
-    @forum_id = @post.forum_id 
+    @post = Post.find(params[:post_id]) 
+    @forum = @post.forum 
     if @post.user_id != current_user.id
       redirect_to root_url
     end
     @post.destroy
-    redirect_to forum_path(@forum_id)
+    redirect_to forum_path(@forum)
   end
   
 end
