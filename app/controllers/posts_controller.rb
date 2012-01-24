@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.json
+
   def index
     @posts = Post.all
 
@@ -10,8 +9,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
     @forum = Forum.find(@post.forum_id)
@@ -27,69 +24,52 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
-  def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.json { render json: @post }
-    end
-  end
-
-  # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
-  end
-  
-  def ajaxEdit
-    id = params[:id]
-    title = params[:title]
-    content = params[:content]
-    
-    @post = Post.find(params[:id])
-    @post.title = title
-    @post.content = content
-    @post.save
-    
     respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { render :json => {:post => @post } }
+      if @post.update_attributes(params[:post])
+        format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
+        partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
+        format.json  { render :json => {:updated_post => partial} }
+      else
+        format.html  { render :back }
+        format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+      end
     end
-  end
-  
-  def ajaxDelete
-    @post = Post.find(params[:post_id])
-    if @post.user_id != current_user.id
-      redirect_to root_url
-    end
-    @post.destroy
-    return "ok"
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(params[:post])
     @post.forum_id = params[:forum_id]
     @post.user_id = current_user.id
     @post.forum_id = params[:forum_id]
     @post.last_updated = Time.now
-    @post.save    
-    redirect_to :back
+    respond_to do |format|
+      if @post.save
+        format.html  { redirect_to(@post, :notice => 'Post was successfully created.') }
+        partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
+        format.json  { render :json => {:new_post => partial} }
+      else
+        format.html  { render :back }
+        format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def since_datetime
+    posts = []
+    current_user.class_rooms.each do |x|
+      posts += x.forum.posts.where("created_at > ?", DateTime.parse(params[:datetime]))
+    end
+    posts.sort_by! { |post| post.created_at}.reverse!
   end
 
-
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:post_id])   
+    @post = Post.find(params[:id])   
     @forum_id = @post.forum_id 
     if @post.user_id != current_user.id
       redirect_to root_url
     end
     @post.destroy
-    
     redirect_to forum_path(@forum_id)
   end
   

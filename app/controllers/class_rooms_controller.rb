@@ -146,45 +146,45 @@ class ClassRoomsController < ApplicationController
 			redirect_to class_room_path(@class_room), :flash => { :fail => "You do not have permission to modify this class." }
 		end
 	end
-	
-	def plus1
-		rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
-		if rating == nil
-			rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:class_room_id], :value => 1)
-		elsif rating.value = 0
-			rating.value = 1
-		elsif rating.value == 1
-			rating.value = 0
-		else
-			#some type of error
-		end
-		rating.save
-		respond_to do |format|
-			format.html { redirect_to :back }
-			format.json { render :json => {:rating => rating } }
-		end
-	end
-	
-	def minus1
-		rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
-		if rating == nil
-			rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:class_room_id], :value => -1)
-		elsif rating.value = 0
-			rating.value = -1
-		elsif rating.value == -1
-			rating.value = 0
-		else
-			#some type of error
-		end
-		rating.save
-		respond_to do |format|
-			format.html { redirect_to :back }
-			format.json { render :json => {:rating => rating } }
-		end
-	end
-	
-	def search
-		@class_rooms = ClassRoom.search(params[:search_term])
-	end
-	
+
+  def plus1
+    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:id]).first
+    if rating == nil
+      rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:id], :value => 1)
+    elsif rating.value == 0
+      rating.value = 1
+    elsif rating.value == 1
+      rating.value = 0
+    else
+      rating.value = 1
+    end
+    rating.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => rating } }
+    end
+  end
+  
+  def minus1
+    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:id]).first
+    if rating == nil
+      rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:id], :value => -1)
+    elsif rating.value == 0
+      rating.value = -1
+    elsif rating.value == -1
+      rating.value = 0
+    else
+      rating.value = -1
+    end
+    rating.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:rating => rating } }
+    end
+  end
+  
+  def search
+    @class_rooms = ClassRoom.search(params[:search_term])
+  end
+  
 end

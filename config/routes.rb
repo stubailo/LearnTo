@@ -1,7 +1,13 @@
 Classroom::Application.routes.draw do
-
-  get "documents/create_doc_rec"
-
+  
+  match "class_rooms/:id/plus1" => "class_rooms#plus1", :as => :class_rooms_plus1, :via => :post
+  
+  match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
+  
+  match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
+  
+  match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
+  
   get "students/show"
   
   get "forums/search_by_tag"
@@ -40,9 +46,7 @@ Classroom::Application.routes.draw do
 
   post "class_rooms/add_user"
   
-  post "class_rooms/plus1"
   
-  post "class_rooms/minus1"
   
   resources :user_permissions
 
@@ -63,13 +67,7 @@ Classroom::Application.routes.draw do
   
   resources :forums
   
-  resources :posts
-  
-  post "comments/plus1"
-  
-  post "comments/minus1"
-  
-  
+  resources :posts  
   
   resources :comments
   
