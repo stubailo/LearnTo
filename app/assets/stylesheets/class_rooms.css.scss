@@ -7,6 +7,16 @@
   padding: 0 20px;
   margin: 0 -20px;
 
+
+  .rating_container {
+    float: right;
+    margin-right: 30px;
+
+    .up-down-widget {
+      margin-top: 3px;
+    }
+  }
+
 }
 
 $orange: #f37800;

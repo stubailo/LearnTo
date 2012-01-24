@@ -19,6 +19,7 @@ ajax_response_submit_handler = (event) ->
 
 pm_event_handler = (plus_or_minus) ->
   (event) ->
+    widget = $(this).parents(".up-down-widget")
     switch plus_or_minus
       when "plus"
         bottom_or_top = "top"
@@ -30,12 +31,17 @@ pm_event_handler = (plus_or_minus) ->
         increment = -1
     event.stopPropagation()
     event.preventDefault()
-    response_id = $(event.target).parents(".response").attr("id").split("_")[2]
-    unless $("#forum_response_" + response_id).find(".udw-" + bottom_or_top).hasClass("active")
-      $.post( $(this).attr("href"), (data) ->
-        middle = $("#forum_response_" + response_id).find(".udw-middle")
-        increment *= 2 if $("#forum_response_" + response_id).find(".udw-" + opposite).hasClass("active")
-        middle.text(parseInt(middle.text()) + increment)
-        $("#forum_response_" + response_id).find(".udw-" + bottom_or_top).addClass("active")
-        $("#forum_response_" + response_id).find(".udw-" + opposite).removeClass("active")
-      )
+    $.post( $(this).attr("href") + "&format=json", success = (data) ->
+      middle = widget.find(".udw-middle")
+      if widget.find(".udw-" + opposite).hasClass("active")
+        increment *= 2 
+        widget.find(".udw-" + bottom_or_top).addClass("active")
+        widget.find(".udw-" + opposite).removeClass("active")
+      else if widget.find(".udw-" + bottom_or_top).hasClass("active")
+        increment = -1 * increment
+        widget.find(".udw-" + bottom_or_top).removeClass("active")
+      else
+        widget.find(".udw-" + bottom_or_top).addClass("active")
+        
+      middle.text(parseInt(middle.text()) + increment)
+    )
