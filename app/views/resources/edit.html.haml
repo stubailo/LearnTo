@@ -6,6 +6,7 @@
 
   - if @resource.file_type == "document"
     = render 'edit_form'
+    = link_to "put embedded resource", class_room_resource_page_section_resource_doc_rec_path(@class_room, @resource_page, @section, @resource, @document), :method => 'post'
   - else
     = render 'form',
           :locals => { :resource => @resource, :resource_page => @resource_page, :section => @section, 

@@ -1,5 +1,7 @@
 Classroom::Application.routes.draw do
 
+  get "documents/create_doc_rec"
+
   get "students/show"
   
   get "forums/search_by_tag"
@@ -47,7 +49,9 @@ Classroom::Application.routes.draw do
   resources :class_rooms do
     resources :resource_pages do
       resources :sections do
-        resources :resources
+        resources :resources do
+          match 'documents/:id/create_doc_rec' => "documents#create_doc_rec", :as => :doc_rec, :via => :post
+        end
         match 'resources/:id/change_hidden' => "resources#change_hidden", :as => :publish
         match 'resources/:id/change_order' => "resources#change_order", :as => :rearrange
       end

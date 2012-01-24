@@ -46,11 +46,13 @@ class ApplicationController < ActionController::Base
     @is_creator = is_creator(@class_room)
     @user = current_user
     @users = @class_room.users
-    if(@user.id != @class_room.user.id)
+    if(!@is_creator)
 			@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
 			if(!@user_permission)
 				@user_permission = UserPermission.new
 				@show_join = true
+			else
+				@user_type = @user_permission.permission_type
 			end
 		end
   end  
