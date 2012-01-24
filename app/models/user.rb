@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   has_many :authentications
   
-  ACCOUNT_TYPES = ["internal", "external"]
+  ACCOUNT_TYPES = ["internal", "both", "external"]
   
   def activate!
     self.active = true
