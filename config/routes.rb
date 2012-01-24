@@ -2,11 +2,11 @@ Classroom::Application.routes.draw do
   
   match "class_rooms/:id/plus1" => "class_rooms#plus1", :as => :class_rooms_plus1, :via => :post
   
-  get "class_rooms/:id/minus1"
+  match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
   
-  post "comments/plus1"
+  match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
   
-  post "comments/minus1"
+  match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
   
   get "students/show"
   

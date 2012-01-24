@@ -19,9 +19,9 @@
       .response{:id => "forum_response_" + comment.id.to_s}
         .up-down-widget
           - rbu = comment.rating_by_user(current_user.id)
-          = link_to "+", {:controller => :comments, :action => 'plus1', :comment_id => comment.id}, :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
+          = link_to "+", comments_plus1_path(comment), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
           %span.udw-middle= comment.rating
-          = link_to "-", {:controller => :comments, :action => 'minus1', :comment_id => comment.id}, :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
+          = link_to "-", comments_minus1_path(comment), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
         - if comment.user_id == current_user.id
           = #link_to "edit", {:controller => :comments, :action => 'ajaxEdit', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
           = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"

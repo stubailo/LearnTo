@@ -29,9 +29,20 @@
   background: #fff;
   border: 1px solid #ccc;
 
-  .user_nav li {
+  .user_nav li.user_nav_element {
     border-bottom: 1px solid #ccc;
     padding: 5px;
+
+    &.active {
+      font-weight: bold;
+    }
+
+    ul.user_nav_sublist {
+      font-weight: normal;
+      margin-top: 5px;
+      border-left: 1px dashed #ccc;
+      padding-left: 5px;
+    }
   }
 }
 

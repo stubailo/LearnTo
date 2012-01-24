@@ -15,7 +15,11 @@ class CommentsController < ApplicationController
       @rating.save
       @post.save
     end
-     redirect_to :back
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render :json => {:comment => @comment, :user_link => link_to(@comment.user) } }
+    end
   end
 
   def destroy
@@ -67,10 +71,10 @@ class CommentsController < ApplicationController
   end
   
   def plus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
     if rating == nil
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
-    elsif rating.value = 0
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
+    elsif rating.value == 0
       rating.value = 1
     elsif rating.value == 1
       rating.value = 0
@@ -85,10 +89,10 @@ class CommentsController < ApplicationController
   end
   
   def minus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:comment_id]).first
+    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
     if rating == nil
-      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:comment_id], :value => 1)
-    elsif rating.value = 0
+      rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
+    elsif rating.value == 0
       rating.value = -1
     elsif rating.value == -1
       rating.value = 0
