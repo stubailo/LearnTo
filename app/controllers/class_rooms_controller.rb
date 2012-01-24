@@ -156,7 +156,7 @@ class ClassRoomsController < ApplicationController
     elsif rating.value == 1
       rating.value = 0
     else
-      #some type of error
+      rating.value = 1
     end
     rating.save
     respond_to do |format|
@@ -174,7 +174,7 @@ class ClassRoomsController < ApplicationController
     elsif rating.value == -1
       rating.value = 0
     else
-      #some type of error
+      rating.value = -1
     end
     rating.save
     respond_to do |format|
