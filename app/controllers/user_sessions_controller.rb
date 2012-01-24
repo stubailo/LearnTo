@@ -21,7 +21,7 @@ class UserSessionsController < ApplicationController
 		flash[:notice] = "Sign in successful!"
 		@user = @user_session.user
 		redirect_back_or_default root_path
-	elsif @user_session
+	elsif @user_session.user && @user_session.user.account_type != "internal"
 	    @user_session.destroy
 	    redirect_to authentications_path, :flash => { :fail => 'Cannot submit local login form if your account was created using facebook'}
 	elsif @user_session.attempted_record && !@user_session.invalid_password? && !@user_session.attempted_record.active?
