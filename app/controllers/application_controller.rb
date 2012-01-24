@@ -45,12 +45,14 @@ class ApplicationController < ActionController::Base
     @creator = User.find(@class_room.user_id)
     @is_creator = is_creator(@class_room)
     @user = current_user
-    @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
     @users = @class_room.users
-    if(!@user_permission)
-      @user_permission = UserPermission.new
-      @show_join = true
-    end
+    if(@user.id != @class_room.user.id)
+			@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+			if(!@user_permission)
+				@user_permission = UserPermission.new
+				@show_join = true
+			end
+		end
   end  
 
     def require_no_user
