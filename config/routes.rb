@@ -1,5 +1,13 @@
 Classroom::Application.routes.draw do
-
+  
+  match "class_rooms/:id/plus1" => "class_rooms#plus1", :as => :class_rooms_plus1, :via => :post
+  
+  get "class_rooms/:id/minus1"
+  
+  post "comments/plus1"
+  
+  post "comments/minus1"
+  
   get "students/show"
   
   get "forums/search_by_tag"
@@ -38,9 +46,7 @@ Classroom::Application.routes.draw do
 
   post "class_rooms/add_user"
   
-  post "class_rooms/plus1"
   
-  post "class_rooms/minus1"
   
   resources :user_permissions
 
@@ -59,13 +65,7 @@ Classroom::Application.routes.draw do
   
   resources :forums
   
-  resources :posts
-  
-  post "comments/plus1"
-  
-  post "comments/minus1"
-  
-  
+  resources :posts  
   
   resources :comments
   

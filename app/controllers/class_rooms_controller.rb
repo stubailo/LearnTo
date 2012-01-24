@@ -148,9 +148,9 @@ class ClassRoomsController < ApplicationController
   end
   
   def plus1
-    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:class_room_id]).first
+    rating = ClassRoomRating.where("user_id = ? AND class_room_id = ?", current_user.id, params[:id]).first
     if rating == nil
-      rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:class_room_id], :value => 1)
+      rating = ClassRoomRating.new(:user_id => current_user.id, :class_room_id => params[:id], :value => 1)
     elsif rating.value = 0
       rating.value = 1
     elsif rating.value == 1

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   		@user = current_user
   		@class_rooms = @user.class_rooms.sort_by { |class_room| class_room.updated_at }.reverse
   		@user.class_rooms.each do |classroom|
-  		  @posts += classroom.forum.posts.limit(6) 
+  		  @posts += classroom.forum.posts.order('created_at DESC').limit(6) 
   		  @announcements += classroom.announcements.order('created_at DESC').limit(6)
   		end
   		@posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(6)
