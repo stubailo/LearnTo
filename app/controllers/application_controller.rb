@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     def require_enrolled(class_room)
 			user = current_user
 			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
-			unless user == class_room.user || user_permission == "student"
+			unless is_creator(class_room) || user_permission == "student"
 				redirect_back_or_default class_room
 			end
     end
@@ -21,10 +21,7 @@ class ApplicationController < ActionController::Base
     def is_enrolled(class_room)
       user = current_user
 			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
-			if user == class_room.user || user_permission == "student"
-				return true
-			end
-			return false
+			return is_creator(class_room) || user_permission == "student"
 	  end
     
     def current_user_session
@@ -51,10 +48,7 @@ class ApplicationController < ActionController::Base
     
     def is_creator(item)
       user = current_user
-      if user.id == item.user_id
-        return true
-      end
-      return false
+      return user.id == item.user_id
     end
   
   def set_vars

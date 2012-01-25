@@ -16,65 +16,53 @@ class ResourcesController < ApplicationController
     @resource_page = ResourcePage.find(params[:resource_page_id])
   end
 
-  # GET /resources/1
-  # GET /resources/1.json
+  # GET
   def show
     @resource = Resource.find(params[:id])
     get_path_vars
     set_vars
-    
-    if(@resource.file_type == "document")
-      @document = @resource.document
-      unless defined? @document.parsed_content and Rails.env == "production"
-        xml_doc = Nokogiri::HTML(@document.content)
-        xml_doc.css('a.media_replace').each do |link| 
-          res = Resource.find(link.attribute("href").value)
-          link.replace(
-            render_to_string :partial => "shared/embed",
-                :locals => {:res => res, :style => "big_embed", :hidden => false}
-          )
-        end
-      end
+    require_enrolled(@class_room)
+    if is_enrolled(@class_room)
+			if(@resource.file_type == "document")
+				@document = @resource.document
+				unless defined? @document.parsed_content and Rails.env == "production"
+					xml_doc = Nokogiri::HTML(@document.content)
+					xml_doc.css('a.media_replace').each do |link| 
+						res = Resource.find(link.attribute("href").value)
+						link.replace(
+							render_to_string :partial => "shared/embed",
+									:locals => {:res => res, :style => "big_embed", :hidden => false}
+						)
+					end
+				end
 
-      @document.parsed_content = xml_doc.to_s
-      @document.save
+				@document.parsed_content = xml_doc.to_s
+				@document.save
+		  end
     end
-
-
     respond_to do |format|
       format.html #{ render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
       format.json { render json: @resource }
     end
   end
 
-  # GET /resources/new
-  # GET /resources/new.json
-  def new
-	require_user
-	
-		if current_user
-			@resource = Resource.new
-
-			respond_to do |format|
-				format.html # new.html.erb
-				format.json { render json: @resource }
-			end
-		end
-  end
-
-  # GET /resources/1/edit
+  # GET
   def edit
     @resource = Resource.find(params[:id])
     get_path_vars
     set_vars
-    @sections = @class_room.sections
-    if(@resource.file_type == "document")
-      @document = @resource.document
-    end
-    respond_to do |format|
-	    format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
-	    format.json { render json: @resource }
-	  end
+    if @is_creator
+			@sections = @class_room.sections
+			if(@resource.file_type == "document")
+				@document = @resource.document
+			end
+			respond_to do |format|
+				format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
+				format.json { render json: @resource }
+			end
+	  else #user is not creator
+		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+		end
   end
 
   # POST /resources
