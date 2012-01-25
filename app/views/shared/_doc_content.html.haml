@@ -1,5 +1,5 @@
 .no_javascript
   Please enable JavaScript to see the preview.  If your browser doesn't support JavaScript, click the link above to download the file.
 .javascript_show 
-  %iframe{:width => "100%", :height => "500px", :frameBorder => 0, :src => "http://docs.google.com/viewer?embedded=true&url=" + u(root_url + url_for(res.file.url))}
+  %iframe{:width => "100%", :height => "500px", :frameBorder => 0, :src => "http://docs.google.com/viewer?embedded=true&url=" + u((Rails.env == "development" ? root_url : "") + url_for(res.file.url))}
 

@@ -20,33 +20,6 @@
   display: none;
 }
 
-.media-resource{
-  display: block;
-  margin: 10px;
-
-  border: 1px solid #ddd;
-  border-style: dashed none;
-
-  padding: 10px 0;
-  
-  
-
-  .title {
-    .resource-show-hide {
-      float: right;
-    }
-  }
-
-
-  .caption {
-    padding-top: 10px;
-  }
-
-  .inside {
-    padding-top: 10px;
-  }
-}
-
 .media-resource.media-image {
 }
 

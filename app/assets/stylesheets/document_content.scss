@@ -1,4 +1,5 @@
 
+
 body.mceContentBody, .document_content {
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -49,7 +50,6 @@ table {
     border-spacing: 0;
 }
     background: #fff;
-    padding: 10px;
     font-size: 14px;
    
     line-height: 1.5em;
@@ -175,6 +175,8 @@ table {
       font-family: monospace;
       line-height: 1em;
       border: 1px dashed #ddd;
+      display: block;
+      width: 99%;
     }
 
     .media_replace:before {
@@ -187,3 +189,6 @@ table {
 
 
 
+body.mceContentBody {
+  padding: 10px;
+}
