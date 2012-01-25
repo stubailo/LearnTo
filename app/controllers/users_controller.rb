@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     respond_to do |format|
-    @user.valid?
+      @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124142158) do
+ActiveRecord::Schema.define(:version => 20120125141422) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20120124142158) do
     t.boolean  "hidden"
     t.integer  "order"
     t.integer  "section_id"
+    t.string   "image_size"
   end
 
   add_index "resources", ["class_room_id"], :name => "index_resources_on_class_room_id"

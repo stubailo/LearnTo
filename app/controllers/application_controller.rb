@@ -10,6 +10,23 @@ class ApplicationController < ActionController::Base
       @website_name = "LearnTo"
     end
     
+    def require_enrolled(class_room)
+			user = current_user
+			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
+			unless user == class_room.user || user_permission == "student"
+				redirect_back_or_default class_room
+			end
+    end
+    
+    def is_enrolled(class_room)
+      user = current_user
+			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
+			if user == class_room.user || user_permission == "student"
+				return true
+			end
+			return false
+	  end
+    
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
       return @current_user_session if defined?(@current_user_session)
@@ -57,23 +74,23 @@ class ApplicationController < ActionController::Base
 		end
   end  
 
-    def require_no_user
-      logger.debug "ApplicationController::require_no_user"
-      if current_user
-        store_location
-        flash[:fail] = "You must be logged out to access this page."
-        redirect_to root_url
-        return false
-      end
+  def require_no_user
+    logger.debug "ApplicationController::require_no_user"
+    if current_user
+      store_location
+      flash[:fail] = "You must be logged out to access this page."
+      redirect_to root_url
+      return false
     end
+  end
 
-    def store_location
-      session[:return_to] = request.url
-    end
+  def store_location
+    session[:return_to] = request.url
+  end
 
-    def redirect_back_or_default(default)
-      redirect_to(session[:return_to] || default)
-      session[:return_to] = nil
-    end
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
 end
 
