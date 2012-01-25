@@ -91,7 +91,6 @@ class ResourcesController < ApplicationController
 					if @resource.file_type == "document"
 					@document = Document.new
 					@document.resource_id = @resource.id
-					@document.dirty = false
 					@document.save
 					redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
 				else
