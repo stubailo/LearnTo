@@ -42,7 +42,7 @@ class ResourcesController < ApplicationController
 
 
     respond_to do |format|
-      format.html #{ render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
+      format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
       format.json { render json: @resource }
     end
   end

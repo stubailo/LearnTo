@@ -3,8 +3,19 @@
   - icon_class = "file_#{file_extension}"
   - if style == "full_page"
     %div.document-resource
+      .doc_header
+        %h2= res.name
+        %p updated #{time_ago_in_words(res.updated_at)} ago by #{link_to res.user.login, res.user}
       .inside
         - if res.document.content
           .document_content
-            %h1= res.name
+            ~ res.document.parsed_content.html_safe
+  - if style == "big_embed"
+    %div.document-resource
+      .front_page_document
+        %h2= res.name
+        %p updated #{time_ago_in_words(res.updated_at)} ago by #{link_to res.user.login, res.user}
+      .inside
+        - if res.document.content
+          .document_content
             ~ res.document.parsed_content.html_safe

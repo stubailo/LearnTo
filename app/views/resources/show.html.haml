@@ -1,18 +1,13 @@
-.resource_show_page.full_width_page
-  = link_to "Back to #{@resource_page.section}", [@class_room, @resource_page]
+.resource_show_page
   - if @is_creator
     .actions
-      = link_to @resource.hidden ? 'Publish' : 'Take off display', class_room_resource_page_section_publish_path(@class_room, @resource_page, @section, @resource), :class => "button"
+      = link_to @resource.hidden ? "Publish To #{@resource_page.section}": "Hide From #{@resource_page.section} Page", class_room_resource_page_section_publish_path(@class_room, @resource_page, @section, @resource), :class => "button"
       = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
        :class => "button"
       = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
   .info
-    %div #{@resource_page.section.capitalize} #{">"} #{@section.title} #{">"} #{@resource.name}
-    %div
-      Created by #{link_to @resource.user.login, @resource.user} at #{l @resource.created_at.in_time_zone}
-      - if @resource.updated_at?
-        and updated at #{l @resource.updated_at}.
+    %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}
 
   -#
     :javascript
@@ -48,4 +43,4 @@
       %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
       .clear 
   
-  = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "big_embed", :hidden => false}
+  = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page", :hidden => false}
