@@ -110,6 +110,10 @@ class Resource < ActiveRecord::Base
           info[:media_type] = "video"
           video_id = CGI.parse(uri.query)["v"][0]
           info[:video] = {:source => "youtube", :id => video_id}
+        elsif uri.host.include? "vimeo.com" and uri.path[1..-1] =~ /^[0-9]+$/
+          info[:media_type] = "video"
+          video_id = uri.path[1..-1]
+          info[:video] = {:source => "vimeo", :id => video_id}
         else
           info[:media_type] = "unknown"
         end
