@@ -23,6 +23,22 @@ class ResourcesController < ApplicationController
     get_path_vars
     set_vars
     
+    if(@resource.file_type == "document")
+      @document = @resource.document
+      unless defined? @document.parsed_content and Rails.env == "production"
+        xml_doc = Nokogiri::HTML(@document.content)
+        xml_doc.css('a.media_replace').each do |link| 
+          res = Resource.find(link.attribute("href").value)
+          link.replace(
+            render_to_string :partial => "shared/embed",
+                :locals => {:res => res, :style => "big_embed", :hidden => false}
+          )
+        end
+      end
+
+      @document.parsed_content = xml_doc.to_s
+      @document.save
+    end
 
 
     respond_to do |format|
@@ -125,7 +141,7 @@ class ResourcesController < ApplicationController
               res = Resource.find(link.attribute("href").value)
               link.replace(
                 render_to_string :partial => "shared/embed",
-                    :locals => {:res => res, :info => @resource.get_info, :style => "big_embed", :hidden => false}
+                    :locals => {:res => res, :style => "big_embed", :hidden => false}
               )
             end
             
@@ -148,6 +164,8 @@ class ResourcesController < ApplicationController
 		   :flash => { :fail => "You must be the creator of the class to modify uploaded documents" }
 		end
   end
+
+
   
   def change_hidden
     #make sure we don't update updated_at when just changing order or publishing
