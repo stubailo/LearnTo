@@ -45,18 +45,15 @@ class ClassRoomsController < ApplicationController
 	# GET /class_rooms/1
 	# GET /class_rooms/1.json
 	def show
-		require_user
-		if current_user
-			@class_room = ClassRoom.find(params[:id])
-			@announcement = @class_room.announcements.order('created_at DESC').first
-			@new_announcement = Announcement.new
-			@description = @class_room.resource
-			set_vars
+		@class_room = ClassRoom.find(params[:id])
+		@announcement = @class_room.announcements.order('created_at DESC').first
+		@new_announcement = Announcement.new
+		@description = @class_room.resource
+		set_vars
 			
-			respond_to do |format|
-				format.html { render :layout => "show_class_room", :locals => {:which_tab => "home"} }
-				format.json { render json: @class_room }
-			end
+		respond_to do |format|
+			format.html { render :layout => "show_class_room", :locals => {:which_tab => "home"} }
+			format.json { render json: @class_room }
 		end
 	end
 

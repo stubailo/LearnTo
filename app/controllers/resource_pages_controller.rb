@@ -1,7 +1,10 @@
 class ResourcePagesController < ApplicationController
 
   def show
+    @class_room = ClassRoom.find(params[:class_room_id])
+    require_enrolled(@class_room)
 	if current_user
+	  errors = flash[:errors]
 	  @resource = Resource.new
 	  @section = Section.new
 	  @class_room = ClassRoom.find(params[:class_room_id])

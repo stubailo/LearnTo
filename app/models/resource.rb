@@ -1,10 +1,8 @@
 require 'uri'
+require 'open-uri'
 
 class Resource < ActiveRecord::Base
   validates :file_file_name, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
-  validates :file_content_type, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
-  validates :file_file_size, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
-  validates :file_updated_at, :presence => true, :if => lambda { |res| res.try(:file_type) =="upload" }
   validates :name, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
   validates :url, :presence => true, :if => lambda { |res| res.try(:source_call) =="link" }
   validates :user_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
@@ -14,14 +12,23 @@ class Resource < ActiveRecord::Base
   validates :source_call, :presence => true
   validates :order, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
   validates :section_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
+  validates_attachment_size :file, less_than: 10.megabyte
+  
+  validates_presence_of :image_remote_url, :if => :image_url_provided?, :message => 'is invalid or inaccessible'
+  
+  # never change these names, or the order, ever :D
+  TYPES = ['upload', 'link', 'document']  
+  IMAGE_SIZES = ['full_width', 'medium', 'thumb']
 
 
   belongs_to :class_room
   belongs_to :user
   belongs_to :document
-  belongs_to :resource
   belongs_to :section
   has_one :document
+  
+  before_validation :download_remote_image, :if => :image_url_provided?
+
   
   if Rails.env == "production"
     has_attached_file :file, :styles => Proc.new { |a| a.instance.file_styles(a) }, 
@@ -34,18 +41,12 @@ class Resource < ActiveRecord::Base
   
   def file_styles(a)
     type = a.content_type
-	if(type.start_with? "image")	
-	  return { :medium => "300x300>", :thumb => "100x100>" }
-	else
-	  return {}
-	end
+		if(type.start_with? "image")	
+			return { :full_width => "748x550>", :medium => "300x300>", :thumb => "100x100>" }
+		else
+			return {}
+		end
   end
- 
-  # never change these names, or the order, ever :D
-  TYPES = ['upload', 'link', 'document']
-
-
-  validates_attachment_size :file, less_than: 10.megabyte
 
   def get_info
 
@@ -131,5 +132,22 @@ class Resource < ActiveRecord::Base
 
     return info
   end
+  
+  private
+    def image_url_provided?
+			!self.try(:url).blank? && self.try(:source_call) == "document" && !self.try(:image_size).blank?
+		end
+		
+		def download_remote_image
+			self.file = do_download_remote_image
+			self.url = url
+		end
+		
+		def do_download_remote_image
+			io = open(URI.parse(url))
+			def io.original_filename; base_uri.path.split('/').last; end
+			io.original_filename.blank? ? nil : io
+		rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
+		end
 
 end

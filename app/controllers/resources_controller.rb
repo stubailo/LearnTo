@@ -84,6 +84,7 @@ class ResourcesController < ApplicationController
 		@class_room = ClassRoom.find(params[:class_room_id])
 		@resource_page = ResourcePage.find(params[:resource_page_id])
 		@section = Section.find(params[:section][:id])
+	  @sections = @resource_page.sections.sort_by { |sec| sec.order } # need this in case there are errors, to show on resource_pages/show
 	  set_vars
 	  if @is_creator
 			#set resource info not from form
@@ -100,11 +101,11 @@ class ResourcesController < ApplicationController
 			end
 				
 			#Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
-				if @resource.save
-					unless @resource.hidden
-						@class_room.update_attribute(:updated_at, Time.now.to_datetime)
-					end
-					if @resource.file_type == "document"
+			if @resource.save
+				unless @resource.hidden
+					@class_room.update_attribute(:updated_at, Time.now.to_datetime)
+				end
+				if @resource.file_type == "document"
 					@document = Document.new
 					@document.resource_id = @resource.id
 					@document.save
@@ -113,9 +114,9 @@ class ResourcesController < ApplicationController
 					redirect_to class_room_resource_page_path(@class_room, @resource_page)
 				end
 			else
-				redirect_to class_room_resource_page_path(@class_room, @resource_page)
+			  render :layout => "show_class_room", :template => 'resource_pages/show', :locals => {:which_tab => @resource_page.section} 
 			end
-		else
+		else #user is not creator
 		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
 		end
   end
