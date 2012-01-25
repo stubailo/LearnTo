@@ -2,7 +2,7 @@
 
 .forum_post_container
   .forum_post
-    = render :partial => "post", :locals => { :post => @post }
+    = render :partial => "post", :locals => { :post => @post, :forum => @forum }
   .forum_post_responses
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response{:id => "forum_response_" + comment.id.to_s}

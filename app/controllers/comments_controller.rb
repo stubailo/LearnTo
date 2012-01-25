@@ -51,7 +51,8 @@ class CommentsController < ApplicationController
   end
   
   def plus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
+    comment = Comment.where(:id => params[:id]).first
+    rating = comment.post_ratings.where(:user_id => current_user.id).first
     if rating == nil
       rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
     elsif rating.value == 0
@@ -64,12 +65,13 @@ class CommentsController < ApplicationController
     rating.save
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render :json => {:rating => rating } }
+      format.json { render :json => {:rating => comment.rating } }
     end
   end
   
   def minus1
-    rating = PostRating.where("user_id = ? AND comment_id = ?", current_user.id, params[:id]).first
+    comment = Comment.where(:id => params[:id]).first
+    rating = comment.post_ratings.where(:user_id => current_user.id).first
     if rating == nil
       rating = PostRating.new(:user_id => current_user.id, :comment_id => params[:id], :value => 1)
     elsif rating.value == 0
@@ -82,7 +84,7 @@ class CommentsController < ApplicationController
     rating.save
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render :json => {:rating => rating } }
+      format.json { render :json => {:rating => comment.rating } }
     end
   end
 end

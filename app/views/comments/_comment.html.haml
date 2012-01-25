@@ -7,7 +7,7 @@
   = #link_to "edit", {:controller => :comments, :action => 'ajaxEdit', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
   = link_to "delete", {:controller => :comments, :action => 'destroy', :comment_id => comment.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
 %h4 
-  = link_to @user.login, user_path(@user)
+  = link_to comment.user.login, user_path(comment.user)
 %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))
 
 .bottom #{time_ago_in_words(comment.created_at, include_seconds = true)} ago
