@@ -16,3 +16,6 @@
     - if info[:media_type] == "video" and info[:video][:source] == "youtube"
       .youtube_full_page_container
         %iframe{:width=>"640", :height=>"385", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
+    - if info[:media_type] == "video" and info[:video][:source] == "vimeo"
+      .youtube_full_page_container
+        %iframe{:src=>"http://player.vimeo.com/video/#{info[:video][:id].to_s}", :width=>"640", :height=>"385", :frameborder=>"0", :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen => true}

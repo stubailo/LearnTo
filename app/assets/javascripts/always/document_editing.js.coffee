@@ -20,9 +20,9 @@ $ ->
     return true
   if $("#insert_file").length > 0
     upload_object = new AjaxUpload('insert_file', {
-      action: $("#link_to_embed_in_document").attr("href") + ".json",
+      action: $("#link_to_embed_in_document").attr("href"),
       name: "resource[file]",
-      data: { "resource[file_type]": "upload" },
+      data: { "resource[file_type]": "upload", format:"json" },
       autoSubmit: true,
       responseType: "json",
       onSubmit: check_file,
@@ -62,10 +62,11 @@ $ ->
     $("#insert_link_form").dialog("close")
     url = $("#insert_link_form").find("input").val()
     if url
-      $.post( $("#link_to_embed_in_document").attr("href") + ".json",
+      $.post( $("#link_to_embed_in_document").attr("href"),
         data = { 
           "resource[file_type]": "link",
-          "resource[url]":url
+          "resource[url]":url,
+          "format":"json"
         },
         success = insert_embed_from_link(url)
       )
