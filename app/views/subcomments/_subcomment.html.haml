@@ -1,6 +1,6 @@
 = subcomment.content
 = " - "
-= link_to @user.login, user_path(@user)
+= link_to subcomment.user.login, user_path(subcomment.user)
 - if subcomment.user_id == @user.id
-  = link_to "Delete comment", {:controller => :subcomments, :action => 'destroy', :subcomment_id => subcomment.id}, :method => :delete
+  = link_to "delete", subcomment_path(subcomment), :method => :delete
 %br
