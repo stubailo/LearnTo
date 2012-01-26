@@ -1,8 +1,10 @@
 %h2.resource_page_title= @resource_page.section
 
-.admin_edit
-
-  -if @is_creator
+-if @is_creator
+  :javascript
+    allow_draggable = true
+  
+  .admin_edit
     - if @resource.errors.any?
       #error_explanation
       %h2 #{pluralize(@resource.errors.count, "error")} prohibited your new item from being saved:
@@ -48,10 +50,11 @@
         - if resources.length > 0
           - resources = resources.sort_by { |res| res.order }
           - resources.each do |resource|
-            %li{:id => "resource-" + resource.id.to_s}
-              - if !resource.hidden || @is_creator
+            - if !resource.hidden || @is_creator
+              %li{:id => "resource-" + resource.id.to_s}
                 .resource_list_name 
                   =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
+                  = "(draft)" if resource.hidden
                   %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
                   - if @is_creator
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|

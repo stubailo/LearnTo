@@ -45,7 +45,7 @@ $left-sidebar-width: 170px;
       margin-right: $left-bar-padding;
       padding: 10px;
       padding-left: 0;
-      margin-top: 10px;
+      margin-top: 20px;
       border-radius: 5px;
       -moz-border-radius: 5px;
     
@@ -79,7 +79,7 @@ $left-sidebar-width: 170px;
     }
 
     nav {
-        margin-top: 20px;
+        margin-top: 10px;
 
         li {
             padding-left: 20px;
@@ -279,5 +279,5 @@ $center-side-margins: 20px;
 {
   float:right;
   margin-top: 5px;
-  margin-right: 10px;
+  margin-right: 0;
 }

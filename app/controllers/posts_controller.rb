@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @forum = Forum.find(@post.forum_id)
+    @forum = @post.forum
     if @post
       @subcomment = Subcomment.new
       @comment = Comment.new
@@ -45,9 +45,9 @@ class PostsController < ApplicationController
     tag_list = params[:new_tags].split(/[\s,]+/)
     tag_list.map do |x|
       if x[0,1] == "#"
-        next
+        x = x.downcase
       else
-        x.insert(0,"#")
+        x = x.insert(0,"#").downcase
       end
     end
     @post.tag_list = tag_list
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   def posts_since_datetime
     @ids = current_user.class_rooms.map {|x| x.id}
     dateTime = DateTime.parse(params[:date_time])
-    @posts = Post.where("last_updated > ? AND id IN ?", dateTime, @ids).order(:created_at)
+    @posts = Post.where("last_updated > ? AND id IN (?)", dateTime, @ids).order(:created_at)
     respond_to do |format|
       format.json { render json: @posts }
     end

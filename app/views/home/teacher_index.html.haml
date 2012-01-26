@@ -1,0 +1,28 @@
+- content_for :sublist do
+  - current_user.taught_classes.each do |class_room|
+    %li= class_room.name
+
+- content_for :right_column do  
+  .new_posts
+    %h3 New Discussion Posts
+    - @posts.each do |post|
+      .forum_post_container
+        .forum_post
+          %h4
+            = link_to post.title, post_path(post)
+          %div.bottom
+            #{link_to post.user.login, post.user}
+            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+            #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
+  
+- content_for :center_column do
+  -#current_user.taught_classes.each do |class|
+    = #render 'class_rooms/new_announcement'
+          
+
+  = link_to 'Create a new class!', new_class_room_path
+  = link_to 'Browse existing classes', class_rooms_path      
+      
+  = #"Try a new class!"
+  = #link_to @random_class_room.name, @random_class_room
+
