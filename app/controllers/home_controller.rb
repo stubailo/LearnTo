@@ -25,14 +25,14 @@ class HomeController < ApplicationController
     	  @posts = Post.where(:forum_id => @ids).order('created_at DESC').limit(10)
     		@news_feed_posts.sort_by! { |x| x[:created_at]}.reverse!.first(20)
       end
+      @random_class_room = random
+      render :action => "user_index", :layout => "layouts/user_home"
     #There is no user logged in
     else
       @random_class_room = random
       render :action => "index"
       return
     end
-    @random_class_room = random
-    render :action => "user_index"
   end        
   
   def teacher_index
@@ -60,12 +60,12 @@ class HomeController < ApplicationController
       end
       @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
   		@news_feed_posts = @news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
+      render :action => "teacher_index", :layout => "layouts/user_home"
     #There is no user logged in
     else
       render :action => "index"
       return
     end
-    render :action => "teacher_index"
   end        
 
 

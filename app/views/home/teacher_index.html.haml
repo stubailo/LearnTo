@@ -1,26 +1,8 @@
-.user_home_top
-  %h2 Hi, #{current_user.login}!
+- content_for :sublist do
+  - current_user.taught_classes.each do |class_room|
+    %li= class_room.name
 
-.left_column
-  %ul.user_nav
-    %li.user_nav_element
-      %a
-        =link_to "Classes I'm taking", home_index_path
-    %li.user_nav_element.active
-      %a
-        =link_to "Classes I'm teaching", home_teacher_index_path
-      - if current_user.class_rooms
-        %ul.user_nav_sublist
-          - current_user.taught_classes.each do |class_room|
-            %li= class_room.name
-    %li.user_nav_element
-      %a{:href => "#"} Manage Classes
-    %li.user_nav_element
-      %a{:href => "#"} Friends
-    %li.user_nav_element
-      %a{:href => "#"} Teach a Class
-
-.right_column
+- content_for :left_column do  
   .new_posts
     %h3 New Discussion Posts
     - @posts.each do |post|
@@ -32,8 +14,8 @@
             #{link_to post.user.login, post.user}
             in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
             #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
-       
-.center_page
+  
+- content_for :center_column do
   -#current_user.taught_classes.each do |class|
     = #render 'class_rooms/new_announcement'
           
