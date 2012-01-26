@@ -45,8 +45,8 @@ class HomeController < ApplicationController
       if @ids.size > 0
         @posts = Post.where(:forum_id => @ids).order('created_at DESC').limit(10)
       end
-      @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
-  		@news_feed_posts = @news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
+      @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
+  		@news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
       render :action => "teacher_index", :layout => "layouts/user_home", :locals => {:which_tab => "teacher_index"}
       @random_class_room = random
     else
@@ -56,8 +56,9 @@ class HomeController < ApplicationController
   end
   
   def manage
-    @classes = current_user.class_rooms
-    @classes_taught = current_user.taught_classes
+    @class_rooms = current_user.class_rooms
+    @taught_classes = current_user.taught_classes
+    render :action => "manage", :layout => "layouts/user_home", :locals => {:which_tab => "manage"}
   end
 
   def please_register

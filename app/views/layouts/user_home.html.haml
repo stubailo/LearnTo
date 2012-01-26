@@ -26,6 +26,7 @@
         %li
           - current_user.class_rooms.sort_by { |class_room| class_room.updated_at }.reverse[0..num_class_rooms].each do |class_room|
             = link_to class_room.name, class_room
+
     .main_page
       .right_column
         = yield :right_column
