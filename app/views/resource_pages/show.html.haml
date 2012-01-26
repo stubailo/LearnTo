@@ -47,7 +47,7 @@
             = text_field(:section, :order)
           = f.submit "Change order"
         .rename_section_form_container
-          = form_for [@class_room, @resource_page, section] do |f|
+          = form_for section, :url => class_room_resource_page_update_path(@class_room, @resource_page, section) do |f|
             .field
               = f.label :section_title, :class => "main"
               = f.text_field :title, :class => "text"

@@ -187,7 +187,8 @@ class ClassRoomsController < ApplicationController
   end
   
   def search
-    @class_rooms = ClassRoom.search(params[:search_term], params[:search] ? params[:search][:category] : nil).sort_by { |class_room| class_room.updated_at }.reverse
+    @class_rooms = ClassRoom.search(params[:search_term], params[:search] ? params[:search][:category] : 
+    nil).sort_by { |class_room| class_room.updated_at }.reverse
   end
   
 end
