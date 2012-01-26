@@ -1,6 +1,0 @@
-- @subcomment = Subcomment.new
-= form_for @subcomment, :url => {:controller => "subcomments", :action => "create" } do |f|
-  = hidden_field_tag("comment_id", comment.id)
-  = f.text_area :content, :size => "20x2"
-  %br
-  = f.submit "Submit Comment"
