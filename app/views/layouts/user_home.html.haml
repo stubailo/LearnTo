@@ -1,33 +1,36 @@
 -content_for :content do
-  .full_width_page
+  .user_home
     .left_column
       = current_user.login
       -if current_user.account_type
         %p connected with Facebook.
 
       %ul.user_nav
-        %li.user_nav_element.active
+        %li.user_nav_element{ :class => (which_tab == "user_index" ? "active" : "") }
           %a
             =link_to "Classes I'm taking", home_index_path
-          - if content_for? :sublist
+          - if content_for? :sublist and which_tab == "user_index"
+            %ul.user_nav_sublist
+              = yield :sublist
+        %li.user_nav_element{ :class => (which_tab == "teacher_index" ? "active" : "") }
+          %a
+            =link_to "Classes I'm teaching", home_teacher_index_path
+          - if content_for? :sublist and which_tab == "teacher_index"
+            %ul.user_nav_sublist
+              = yield :sublist
+        %li.user_nav_element{ :class => (which_tab == "manage" ? "active" : "") }
+          %a{:href => "#"} Manage Classes
+          - if content_for? :sublist and which_tab == "manage"
             %ul.user_nav_sublist
               = yield :sublist
         %li.user_nav_element
-          %a
-            =link_to "Classes I'm teaching", home_teacher_index_path
-        %li.user_nav_element
-          %a{:href => "#"} Manage Classes
-        %li.user_nav_element
-          %a{:href => "#"} Friends
-        %li.user_nav_element
-          = link_to 'Create a new class!', new_class_room_path
+          = link_to 'Teach a class!', new_class_room_path
+    .main_page
+      .right_column
+        = yield :right_column
 
-    .right_column
-      = yield :right_column
-
-    .center_page
-      = yield :center_column
-      .clear
+      .center_page
+        = yield :center_column
     .clear
 
 = render :template => "layouts/application"

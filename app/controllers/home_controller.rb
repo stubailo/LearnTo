@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     		@news_feed_posts.sort_by! { |x| x[:created_at]}.reverse!.first(20)
       end
       @random_class_room = random
-      render :action => "user_index", :layout => "layouts/user_home"
+      render :action => "user_index", :layout => "layouts/user_home", :locals => {:which_tab => "user_index"}
     #There is no user logged in
     else
       @random_class_room = random
@@ -60,7 +60,7 @@ class HomeController < ApplicationController
       end
       @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
   		@news_feed_posts = @news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
-      render :action => "teacher_index", :layout => "layouts/user_home"
+      render :action => "teacher_index", :layout => "layouts/user_home", :locals => {:which_tab => "teacher_index"}
     #There is no user logged in
     else
       render :action => "index"
