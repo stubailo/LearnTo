@@ -47,10 +47,10 @@ class SectionsController < ApplicationController
   
   def update
     @section = Section.find(params[:id])
-    @class_room = ClassRoom.find(@resource.class_room_id)
+    @class_room = ClassRoom.find(params[:class_room_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
     if is_creator(@class_room)
-      if @resource.update_attributes(params[:section])
+      if @section.update_attributes(params[:section])
         redirect_back_or_default class_room_resource_page_path(class_room, resource_page)
       else
         redirect_back_or_default class_room_resource_page_path(class_room, resource_page), :flash => { :fail => "Error updating section" }
