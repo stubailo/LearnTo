@@ -1,7 +1,7 @@
 = form_for(@user) do |f|
   - if @user.errors.any?
     #error_explanation.ui-state-error.ui-corner-all
-    .ui-icon.ui-icon-alert.icon-in-info
+      .ui-icon.ui-icon-alert.icon-in-info
       %h2= "There are #{pluralize(@user.errors.count, "error")} in the form:"
       %ul
       - @user.errors.full_messages.each do |msg|
