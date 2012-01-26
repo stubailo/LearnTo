@@ -1,0 +1,67 @@
+.user_home_top
+  %h2 Hi, #{current_user.login}!
+
+.left_column
+  %ul.user_nav
+    %li.user_nav_element
+      %a
+        =link_to "Classes I'm taking", home_index_path
+    %li.user_nav_element.active
+      %a
+        =link_to "Classes I'm teaching", home_teacher_index_path
+      - if current_user.taught_classes
+        %ul.user_nav_sublist
+          - current_user.taught_classes.each do |class_room|
+            %li= class_room.name
+    %li.user_nav_element
+      %a{:href => "#"} Manage Classes
+    %li.user_nav_element
+      %a{:href => "#"} Friends
+    %li.user_nav_element
+      %a{:href => "#"} Teach a Class
+
+.right_column
+  .new_posts
+    %h3 New Discussion Posts
+    - @posts.each do |post|
+      .forum_post_container
+        .forum_post
+          %h4
+            = link_to post.title, post_path(post)
+          %div.bottom
+            #{link_to post.user.login, post.user}
+            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+            #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
+       
+.center_page
+  %h1 Class Updates
+  %ul
+    - @resources.each do |resource|
+      %li
+        - section = resource.section
+        - resource_page = section.resource_page
+        - class_room = resource_page.class_room
+        = link_to resource.name, [class_room, resource_page, section, resource]
+        = " - #{class_room.name}/#{resource_page.section}"
+
+  = link_to 'Create a new class!', new_class_room_path
+  = link_to 'Browse existing classes', class_rooms_path
+
+  = "Announcements in your classes:"
+  - @announcements.each do |announcement|
+    %h4
+      = link_to announcement.title, announcements_path(announcement)
+    %div.bottom
+      In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
+      %br
+      posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+  - if @user.account_type == "internal"
+    %h2 Connect to facebook!
+    %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+      = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
+      
+      
+  = #"Try a new class!"
+  = #link_to @random_class_room.name, @random_class_room
+
+
