@@ -28,7 +28,7 @@ class AuthenticationsController < ApplicationController
   	    @new_auth = Authentication.create_from_hash(omniauth, current_user) #Create a new user
   	    flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
     		UserSession.create(@new_auth.user, true) #Log the authorizing user in.
-    		redirect_to root_url
+    		redirect_back_or_default root_url
   	  end
     end
   end
