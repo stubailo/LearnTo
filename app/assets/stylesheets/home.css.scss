@@ -9,7 +9,7 @@
     padding: 10px;
     background: #fff;
     min-height: 500px;
-    margin-left: 185px;
+    margin-left: 170px;
     border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
 
@@ -25,35 +25,13 @@
 }
 
 .center_page {
-  margin: 10px;
   margin-right: 260px;
   background: #fff;
 
 }
 
 .left_column {
-  float: left;
-  width: 175px;
 
-  margin-left: 10px;
-
-  background: #fff;
-
-  .user_nav li.user_nav_element {
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
-
-    &.active {
-      font-weight: bold;
-    }
-
-    ul.user_nav_sublist {
-      font-weight: normal;
-      margin-top: 5px;
-      border-left: 1px dashed #ccc;
-      padding-left: 5px;
-    }
-  }
 }
 
 .right_column {
