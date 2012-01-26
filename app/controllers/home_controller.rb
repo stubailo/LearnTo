@@ -22,16 +22,16 @@ class HomeController < ApplicationController
               :type => "announcement",
               :created_at => announcement.created_at }
           end
-    	  @posts = Post.where(:class_room_id => @ids).order('created_at DESC').limit(10)
-    		#@new_feed_posts.sort_by! { |post| post.created_at}.reverse!.first(20)
+    	  @posts = Post.where(:forum_id => @ids).order('created_at DESC').limit(10)
+    		@news_feed_posts.sort_by! { |x| x[:created_at]}.reverse!.first(20)
       end
     #There is no user logged in
     else
-      #@random_class_room = random
+      @random_class_room = random
       render :action => "index"
       return
     end
-   #@random_class_room = random
+    @random_class_room = random
     render :action => "user_index"
   end        
   
