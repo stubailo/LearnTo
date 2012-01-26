@@ -1,3 +1,8 @@
+= form_tag "/class_rooms/search", :method => "get" do
+  = select(:search, :category, ClassRoom::CATEGORIES)
+  .search_field                
+    = text_field_tag :search_term, "", :class => "text"
+    = submit_tag "Search", :class => "button"
 - @class_rooms.each do |class_room|
   .forum_post_container
     .forum_post
