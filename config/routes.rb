@@ -60,6 +60,7 @@ Classroom::Application.routes.draw do
         match 'resources/:id/change_order' => "resources#change_order", :as => :rearrange
       end
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
+      match 'sections/:id/update' => "sections#update", :as => :update, :via => :post
     end
   end
   
