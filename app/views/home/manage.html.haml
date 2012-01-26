@@ -12,7 +12,7 @@
             = "There is "
           - else
             = "There are "
-          = link_to pluralize(taught_class.users.size, "student"), students_show_path(taught_class.id)
+          = link_to pluralize(taught_class.users.size, "student"), students_show_path(:class_room => taught_class.id)
           = " enrolled in this class"
           
   - if @class_rooms.size > 0 
@@ -31,5 +31,5 @@
               = "There is "
             - else
               = "There are "
-            = link_to pluralize(class_room.users.size, "student"), students_show_path(class_room.id)
+            = link_to pluralize(class_room.users.size, "student"), students_show_path(:class_room => class_room.id)
             = " enrolled in this class"
