@@ -1,1 +1,9 @@
-=
+- if @taught_classes.size > 0 
+  = "Classes you're teaching"
+  -@taught_classes.each do |taught_class|
+    = link_to taught_class.name, class_room_path(taught_class)
+    
+- if @class_rooms.size > 0 
+  = "Classes you're teaching"
+  -@class_rooms.each do |class_room|
+    = link_to class_room.name, class_room_path(class_room)

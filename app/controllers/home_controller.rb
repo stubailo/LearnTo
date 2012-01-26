@@ -56,8 +56,8 @@ class HomeController < ApplicationController
   end
   
   def manage
-    @classes = current_user.class_rooms
-    @classes_taught = current_user.taught_classes
+    @class_rooms = current_user.class_rooms
+    @taught_classes = current_user.taught_classes
   end
 
 
