@@ -54,6 +54,11 @@ class HomeController < ApplicationController
       return
     end
   end
+  
+  def manage
+    @classes = current_user.class_rooms
+    @classes_taught = current_user.taught_classes
+  end
 
 
   def media_test
