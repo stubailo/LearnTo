@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   def posts_since_datetime
     @ids = current_user.class_rooms.map {|x| x.id}
     dateTime = DateTime.parse(params[:date_time])
-    @posts = Post.where("last_updated > ? AND id IN ?", dateTime, @ids).order(:created_at)
+    @posts = Post.where("last_updated > ? AND id IN (?)", dateTime, @ids).order(:created_at)
     respond_to do |format|
       format.json { render json: @posts }
     end
