@@ -5,9 +5,7 @@ class HomeController < ApplicationController
     @announcements = []
     @resources = []
     
-    #If there is a user logged in
   	if current_user
-  	  @ids = []
   	  @ids = current_user.class_rooms.map { |x|  x.id }
   	  @news_feed_posts = []
   	  @posts = []
@@ -27,7 +25,6 @@ class HomeController < ApplicationController
       end
       @random_class_room = random
       render :action => "user_index", :layout => "layouts/user_home"
-    #There is no user logged in
     else
       @random_class_room = random
       render :action => "index"
@@ -40,33 +37,20 @@ class HomeController < ApplicationController
     @announcements = []
     @resources = []
     
-    #If there is a user logged in
     if current_user
-      @user = current_user
-      @class_rooms = @user.taught_classes.sort_by { |class_room| class_room.updated_at }.reverse
+      @ids = current_user.taught_classes.map { |x|  x.id }
       @news_feed_posts = []
-      @user.taught_classes.each do |classroom|
-  		  @posts += classroom.forum.posts.order('created_at DESC').limit(10)
-  		  @news_feed_posts += classroom.resources.limit(10).map do |resource|
-          { :resource => resource,
-            :type => "resource",
-            :created_at => resource.created_at }
-        end
-  		  @news_feed_posts += classroom.announcements.order('created_at DESC').limit(6).map do |announcement|
-          { :announcement => announcement,
-            :type => "announcement",
-            :created_at => announcement.created_at }
-        end
+      @posts = []
+      if @ids.size > 0
+        @posts = Post.where(:forum_id => @ids).order('created_at DESC').limit(10)
       end
-      @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
-  		@news_feed_posts = @news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
-      render :action => "teacher_index", :layout => "layouts/user_home"
-    #There is no user logged in
+      render :action => "user_index", :layout => "layouts/user_home"
+      @random_class_room = random
     else
       render :action => "index"
       return
     end
-  end        
+  end
 
 
   def media_test

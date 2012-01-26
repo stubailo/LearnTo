@@ -2,7 +2,7 @@
   - current_user.taught_classes.each do |class_room|
     %li= class_room.name
 
-- content_for :left_column do  
+- content_for :right_column do  
   .new_posts
     %h3 New Discussion Posts
     - @posts.each do |post|
