@@ -1,9 +1,12 @@
 -content_for :content do
   .user_home
     .left_column
-      = current_user.login
-      -if current_user.account_type
-        %p connected with Facebook.
+      .info_box
+        %strong= current_user.login
+        -if current_user.account_type
+          %p Connected with Facebook
+        %p Taking x classes
+        %p Teaching x classes
       %nav
         %ul.user_nav
           %li.main
@@ -16,8 +19,6 @@
               %span.sublink Classes I'm Teaching
           %li.main
             %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
-          %li.main
-            = link_to 'Teach a class!', new_class_room_path
     .main_page
       .right_column
         = yield :right_column
