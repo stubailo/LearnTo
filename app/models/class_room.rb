@@ -46,14 +46,14 @@ class ClassRoom < ActiveRecord::Base
     tokenize = tokenize.map {|x| '%' + x.strip.gsub(/"/, '') + '%'}
     tokenize.each do |x|
       if @ids.size != 0
-        temp =  ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ?', x.downcase, x.downcase)
+        temp =  ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
         .where('id NOT IN (?)', @ids)
         temp.each do |x|
           @ids.push(x.id)
         end
         @result += temp
       else
-        temp =  ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ?', x.downcase, x.downcase)
+        temp =  ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
         temp.each do |x|
           @ids.push(x.id)
         end
