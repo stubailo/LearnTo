@@ -20,7 +20,7 @@
               Teacher Feed
               %span.sublink Classes I'm Teaching
           %li.main
-            %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+            %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
       - num_class_rooms = 5
       %ul
         %li
