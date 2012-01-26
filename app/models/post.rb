@@ -22,17 +22,17 @@ class Post < ActiveRecord::Base
     tokenize.each do |x|
       if @ids.size != 0
         temp =  Post.where("forum_id = ?", forum_id)
-        .where('lower(title) LIKE ? OR lower(content) LIKE ?', x, x)
+        .where('lower(title) LIKE ? OR lower(content) LIKE ?', x.downcase, x.downcase)
         .where('id NOT IN (?)', @ids)
-        temp.each do |x|
-          @ids.push(x.id)
+        temp.each do |y|
+          @ids.push(y.id)
         end
         @result += temp
       else
         temp =  Post.where("forum_id = ?", forum_id)
-        .where('lower(title) Like ? OR lower(content) LIKE ?', x, x)
-        temp.each do |x|
-          @ids.push(x.id)
+        .where('lower(title) Like ? OR lower(content) LIKE ?', x.downcase, x.downcase)
+        temp.each do |y|
+          @ids.push(y.id)
         end
         @result += temp
       end

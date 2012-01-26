@@ -42,7 +42,15 @@ class PostsController < ApplicationController
     @post.forum_id = params[:forum_id]
     @post.user_id = current_user.id
     @post.last_updated = Time.now
-    @post.tag_list = params[:new_tags].split(/[\s,]+/)
+    tag_list = params[:new_tags].split(/[\s,]+/)
+    tag_list.map do |x|
+      if x[0,1] == "#"
+        next
+      else
+        x.insert(0,"#")
+      end
+    end
+    @post.tag_list = tag_list
     @post.save
     respond_to do |format|
       if @post.save
@@ -66,7 +74,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id]) 
+    @post = Post.find(params[:id]) 
     @forum = @post.forum 
     if @post.user_id != current_user.id
       redirect_to root_url

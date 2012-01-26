@@ -47,6 +47,5 @@ class User < ActiveRecord::Base
     user.reset_persistence_token! #set persistence_token else sessions will not be created
     user
   end
-  
 end
 

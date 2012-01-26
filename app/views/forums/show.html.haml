@@ -9,7 +9,7 @@
   .forum_post_container
     .forum_post
       - if post.user_id == current_user.id
-        = link_to "delete", {:controller => :posts, :action => 'destroy', :post_id => post.id, :forum_id => @forum.id }, :method => :delete, :class => "delete_link"
+        = link_to "delete", post_path(post), :method => :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
         = link_to post.title, post_path(post)
       %div.bottom
@@ -19,4 +19,4 @@
         -if post.tag_list.length > 0
           tags: 
           -post.tag_list.each do |x|
-            = link_to "#" + x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
+            = link_to x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)

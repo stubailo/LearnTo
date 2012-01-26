@@ -24,6 +24,7 @@ class ForumsController < ApplicationController
   end
   
   def search
+    @post = Post.new
     @posts = Post.search(params[:search_term], params[:forum_id])
     @forum = Forum.find(params[:forum_id])
     @class_room = @forum.class_room
