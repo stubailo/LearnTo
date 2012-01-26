@@ -18,6 +18,10 @@
       = f.label :short_description
       = f.text_area :summary
   .form_page.other_info
+    %h3 Step 3: Category
+    %p.class_create_hint This is the type of course you are going to teach.
+    .field
+      = f.select :category, ClassRoom::CATEGORIES
     %h3 Step 3: Official Name
     %p.class_create_hint This is the name that will show up for your class when people search.
     .field
