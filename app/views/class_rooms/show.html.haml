@@ -38,7 +38,7 @@
       .placeholder
         No announcements yet!  Click 'post new' above to make an announcement.
   
-  - unless @class_room.resource.hidden && !@is_creator
+  - if @class_room.resource && (!@class_room.resource.hidden || @is_creator)
     %hr
     %div{:style => "margin: 0 40px"}
       - if @is_creator
