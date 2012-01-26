@@ -16,8 +16,8 @@
             #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
   
 - content_for :center_column do
-  -#current_user.taught_classes.each do |class|
-    = #render 'class_rooms/new_announcement'
+  - current_user.taught_classes.each do |class_room|
+    = render 'class_rooms/new_announcement'
           
 
   = link_to 'Create a new class!', new_class_room_path
