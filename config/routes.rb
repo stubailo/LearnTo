@@ -84,6 +84,8 @@ Classroom::Application.routes.draw do
   get "home/index"
   
   get "home/manage"
+
+  get "home/please_register"
   
   resources :announcements
 

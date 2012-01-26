@@ -61,6 +61,9 @@ class HomeController < ApplicationController
     render :action => "manage", :layout => "layouts/user_home", :locals => {:which_tab => "manage"}
   end
 
+  def please_register
+  
+  end
 
   def media_test
   	if current_user

@@ -1,6 +1,56 @@
-.news_feed_item {
+
+.news_feed h1, .new_posts h3 {
+  
+    padding: 10px; 
+    background: #f9f9f9; 
+    border-radius: 3px; 
+    -moz-border-radius: 3px; 
+    border: 1px solid #ccc; 
+   
+    background: rgb(255,255,255); /* Old browsers */ 
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(249,249,249,1) 55%, rgba(242,242,242,1) 100%); /* FF3.6+ */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(55%,rgba(249,249,249,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */ 
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */ 
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */ 
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* IE10+ */ 
+    background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* W3C */ 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */ 
+  }
+
+.news_feed {
+  .news_feed_item {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 15px 0;
+    border-style: none none solid none;
+    margin: 0 10px;
+
+    h3 {
+      font-size: .8em;
+      margin-bottom: 7px;
+    }
+
+    h4 {
+      font-size: 1.2em;
+    }
+
+    p {
+      margin: 7px 0;
+    }
+
+    .bottom {
+      font-size: .8em;
+      color: #666;
+      margin-top: 7px;
+    }
+  }
+}
+
+.feed_forum_post {
   border: 1px solid #eee;
-  background: #fff;
-  padding: 15px 0;
-  border-style: none none solid none;
+
+  padding: 10px;
+
+  border-radius: 3px;
+  margin-top: 10px;
 }

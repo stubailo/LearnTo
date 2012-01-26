@@ -25,6 +25,9 @@ class ClassRoom < ActiveRecord::Base
 
   belongs_to :user
   
+  # never change these names, or the order, ever :D
+  CATEGORIES = [ 'Programming/Development', 'Academic', 'Other' ]  
+  
   
   def rating
     return self.class_room_ratings.sum(:value)
@@ -39,21 +42,27 @@ class ClassRoom < ActiveRecord::Base
     end
   end
   
-  def self.search(search)
+  def self.search(search, category)
     @result = []
     @ids = []
     tokenize = search.scan(/"[^"]*"|[^"'\s]+/)
     tokenize = tokenize.map {|x| '%' + x.strip.gsub(/"/, '') + '%'}
     tokenize.each do |x|
       if @ids.size != 0
-        temp =  ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+        temp =  category ? ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+        .where('id NOT IN (?)', @ids).where('category = ?', category)
+        :
+        ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
         .where('id NOT IN (?)', @ids)
         temp.each do |x|
           @ids.push(x.id)
         end
         @result += temp
       else
-        temp =  ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+        temp = category ? ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+        .where('category = ?', category)
+        :
+        ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
         temp.each do |x|
           @ids.push(x.id)
         end
