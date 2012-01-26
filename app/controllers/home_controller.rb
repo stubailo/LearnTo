@@ -77,7 +77,8 @@ class HomeController < ApplicationController
   
   def random
     @ids = []
-    ClassRoom.select(:id).map { |x| x.id }
+    @cur_ids = current_user.class_rooms.map { |x|  x.id }
+    ClassRoom.select(:id).where("id NOT IN (?)", @cur_ids).map { |x| x.id }
     return ClassRoom.where(:id => @ids.sample).first
   end
 
