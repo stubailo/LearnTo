@@ -6,22 +6,17 @@
         %p connected with Facebook.
       %nav
         %ul.user_nav
-          %li.user_nav_element
-            =link_to "Classes I'm taking", home_index_path, :class => (which_tab == "user_index" ? "active" : "")
-            - if content_for? :sublist and which_tab == "user_index"
-              %ul.user_nav_sublist
-                = yield :sublist
-          %li.user_nav_element
-            =link_to "Classes I'm teaching", home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")
-            - if content_for? :sublist and which_tab == "teacher_index"
-              %ul.user_nav_sublist
-                = yield :sublist
-          %li.user_nav_element
+          %li.main
+            %a{:href => home_index_path, :class => (which_tab == "user_index" ? "active" : "")}
+              Student Feed
+              %span.sublink Classes I'm Taking 
+          %li.main
+            %a{:href => home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")}
+              Teacher Feed
+              %span.sublink Classes I'm Teaching
+          %li.main
             %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
-            - if content_for? :sublist and which_tab == "manage"
-              %ul.user_nav_sublist
-                = yield :sublist
-          %li.user_nav_element
+          %li.main
             = link_to 'Teach a class!', new_class_room_path
     .main_page
       .right_column

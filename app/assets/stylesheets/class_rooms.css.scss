@@ -29,7 +29,11 @@ $left-bar-padding: 8px;
 
 $left-sidebar-width: 170px;
 
-#left-bar, .left_column
+#left-bar nav li a {
+  font-size: 1.2em;
+}
+
+#left-bar
 {
 
     margin-left: 10px;
@@ -81,17 +85,16 @@ $left-sidebar-width: 170px;
     nav {
         margin-top: 10px;
 
-        li {
+        li.main {
             padding-left: 20px;
             margin-left: -20px;
             overflow: hidden;
             margin-right: -1px;
         }
 
-        li a {
+        li.main a {
             display: block;
             padding: $left-bar-padding*.3 $left-bar-padding;
-            font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
@@ -105,7 +108,7 @@ $left-sidebar-width: 170px;
             }
         }
 
-        li a.active {
+        li.main a.active {
             padding: $left-bar-padding $left-bar-padding;
      
             border: 1px solid #bbb;
