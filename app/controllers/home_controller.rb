@@ -44,12 +44,22 @@ class HomeController < ApplicationController
     if current_user
       @user = current_user
       @class_rooms = @user.taught_classes.sort_by { |class_room| class_room.updated_at }.reverse
+      @news_feed_posts = []
       @user.taught_classes.each do |classroom|
-        @resources += classroom.resources.limit(10).sort_by { |res| res.updated_at }.reverse
-        @posts += classroom.forum.posts.order('created_at DESC').limit(10)
+  		  @posts += classroom.forum.posts.order('created_at DESC').limit(10)
+  		  @news_feed_posts += classroom.resources.limit(10).map do |resource|
+          { :resource => resource,
+            :type => "resource",
+            :created_at => resource.created_at }
+        end
+  		  @news_feed_posts += classroom.announcements.order('created_at DESC').limit(6).map do |announcement|
+          { :announcement => announcement,
+            :type => "announcement",
+            :created_at => announcement.created_at }
+        end
       end
       @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
-      @announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)      
+  		@news_feed_posts = @news_feed_posts.sort_by { |post| post[:created_at]}.reverse!  
     #There is no user logged in
     else
       render :action => "index"

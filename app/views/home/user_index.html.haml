@@ -38,7 +38,7 @@
   %ul
     - @news_feed_posts.each do |post|
       - if post[:type] == "resource"
-        %li
+        %li.news_feed_item
           - resource = post[:resource]
           - announcement = post[:resource]
           - section = resource.section
@@ -47,7 +47,7 @@
           = link_to resource.name, [class_room, resource_page, section, resource]
           = " - #{class_room.name}/#{resource_page.section}"
       - elsif post[:type] == "announcement"
-        %li
+        %li.news_feed_item
           - announcement = post[:announcement]
           %h4
             = link_to announcement.title, announcements_path(announcement)
@@ -59,11 +59,6 @@
 
   = link_to 'Create a new class!', new_class_room_path
   = link_to 'Browse existing classes', class_rooms_path
-
-  - if @user.account_type == "internal"
-    %h2 Connect to facebook!
-    %a{:href=>"/auth/facebook", :class=>"auth_provider"}
-      = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
       
       
   = #"Try a new class!"
