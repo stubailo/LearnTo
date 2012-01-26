@@ -30,6 +30,16 @@
     #insert_link_form{:title => "Paste Link Here", :style => "display: none"}
       %input{:style => "width: 100%"}
       %button Embed
+    #insert_image_form{:title => "Insert Image", :style => "display: none"}
+      %select
+        %option{:value => "full_width"} Fit to page
+        %option{:value => "medium"} Float in text
+        %option{:value => "thumb"} Thumbnail
+      %label paste link here
+      %input{:style => "width: 100%"}
+      %label of click below to upload file
+      %button#upload_image Insert
+      %button Embed
 
   - if @resource.file_type == "document"
     .field

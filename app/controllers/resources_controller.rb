@@ -97,6 +97,7 @@ class ResourcesController < ApplicationController
 					@document = Document.new
 					@document.resource_id = @resource.id
 					@document.save
+					flash[:fail] = "You need to publish this document before it's available to your class"
 					redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
 				else
 					redirect_to class_room_resource_page_path(@class_room, @resource_page)
@@ -222,9 +223,10 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     @resource.destroy
+    get_path_vars
 
     respond_to do |format|
-      format.html { redirect_to resources_url }
+      format.html { redirect_to class_room_resource_page_path(@class_room, @resource_page) }
       format.json { head :no_content }
     end
   end
