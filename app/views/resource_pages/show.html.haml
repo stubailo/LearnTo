@@ -64,11 +64,11 @@
                   = "(hidden)" if resource.hidden
                   %span.resource_list_timestamp
                     created #{time_ago_in_words resource.created_at} ago
-                    = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                     - if @is_creator
+                      = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                       = link_to resource.hidden ? "publish": "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource)
-                    - if resource != @class_room.resource
-                      = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: 'Are you sure?', method: :delete
+                      - if resource != @class_room.resource
+                        = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: "Are you sure you want to destroy this file?", method: :delete
 
                   - if @is_creator
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
