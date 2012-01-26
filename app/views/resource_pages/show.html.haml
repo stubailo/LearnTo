@@ -45,6 +45,11 @@
             = label_tag :section, :Location, :class => "main"
             = text_field(:section, :order)
           = f.submit "Change order"
+        = form_for [@class_room, @resource_page, section] do |f|
+          .field
+            = f.label :section_title, :class => "main"
+            = f.text_field :title, :class => "text"
+          = f.submit "Change Section Name"
       - resources = section.resources
       %ul.lists_to_connect{:id => "section-" + section.id.to_s}
         - if resources.length > 0
@@ -57,6 +62,11 @@
                   = "(draft)" if resource.hidden
                   %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
                   - if @is_creator
+                    = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource),
+       :class => "button"
+                    = link_to resource.hidden ? "Publish to class": "Hide from class", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "button"
+                    - if resource != @class_room.resource
+                      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: 'Are you sure?', method: :delete, :class => "button"
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
                       .field
                         = label_tag :resource, :Section, :class => "main"
