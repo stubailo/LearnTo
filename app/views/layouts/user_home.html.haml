@@ -8,10 +8,9 @@
       %li.user_nav_element.active
         %a
           =link_to "Classes I'm taking", home_index_path
-        - if current_user.class_rooms
+        - if content_for? :sublist
           %ul.user_nav_sublist
-            - current_user.class_rooms.each do |class_room|
-              %li= class_room.name
+            = yield :sublist
       %li.user_nav_element
         %a
           =link_to "Classes I'm teaching", home_teacher_index_path
