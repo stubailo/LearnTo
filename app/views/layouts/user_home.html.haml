@@ -4,27 +4,25 @@
       = current_user.login
       -if current_user.account_type
         %p connected with Facebook.
-
-      %ul.user_nav
-        %li.user_nav_element{ :class => (which_tab == "user_index" ? "active" : "") }
-          %a
-            =link_to "Classes I'm taking", home_index_path
-          - if content_for? :sublist and which_tab == "user_index"
-            %ul.user_nav_sublist
-              = yield :sublist
-        %li.user_nav_element{ :class => (which_tab == "teacher_index" ? "active" : "") }
-          %a
-            =link_to "Classes I'm teaching", home_teacher_index_path
-          - if content_for? :sublist and which_tab == "teacher_index"
-            %ul.user_nav_sublist
-              = yield :sublist
-        %li.user_nav_element{ :class => (which_tab == "manage" ? "active" : "") }
-          %a{:href => "#"} Manage Classes
-          - if content_for? :sublist and which_tab == "manage"
-            %ul.user_nav_sublist
-              = yield :sublist
-        %li.user_nav_element
-          = link_to 'Teach a class!', new_class_room_path
+      %nav
+        %ul.user_nav
+          %li.user_nav_element
+            =link_to "Classes I'm taking", home_index_path, :class => (which_tab == "user_index" ? "active" : "")
+            - if content_for? :sublist and which_tab == "user_index"
+              %ul.user_nav_sublist
+                = yield :sublist
+          %li.user_nav_element
+            =link_to "Classes I'm teaching", home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")
+            - if content_for? :sublist and which_tab == "teacher_index"
+              %ul.user_nav_sublist
+                = yield :sublist
+          %li.user_nav_element
+            %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+            - if content_for? :sublist and which_tab == "manage"
+              %ul.user_nav_sublist
+                = yield :sublist
+          %li.user_nav_element
+            = link_to 'Teach a class!', new_class_room_path
     .main_page
       .right_column
         = yield :right_column
