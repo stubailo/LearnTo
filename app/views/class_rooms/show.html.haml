@@ -2,10 +2,11 @@
 
   .rating_container
     .up-down-widget
-      - rbu = @class_room.rating_by_user(current_user.id)
-      = link_to "+", class_rooms_plus1_path(@class_room), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
-      %span.udw-middle= @class_room.rating
-      = link_to "-", class_rooms_minus1_path(@class_room), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
+      - if @permission_type == "student"
+        - rbu = @class_room.rating_by_user(current_user.id)
+        = link_to "+", class_rooms_plus1_path(@class_room), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
+        %span.udw-middle= @class_room.rating
+        = link_to "-", class_rooms_minus1_path(@class_room), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
   
   %h1
     %span.learn_to Learn To

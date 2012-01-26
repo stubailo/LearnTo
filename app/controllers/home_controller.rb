@@ -3,12 +3,14 @@ class HomeController < ApplicationController
   def index
     @posts = []
     @announcements = []
+    @resources = []
     
     #If there is a user logged in
   	if current_user
   		@user = current_user
   		@class_rooms = @user.class_rooms.sort_by { |class_room| class_room.updated_at }.reverse
   		@user.class_rooms.each do |classroom|
+  		  @resources += classroom.resources.limit(10).sort_by { |res| res.updated_at }.reverse
   		  @posts += classroom.forum.posts.order('created_at DESC').limit(10)
   		  @announcements += classroom.announcements.order('created_at DESC').limit(6)
   		end

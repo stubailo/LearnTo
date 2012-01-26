@@ -31,15 +31,14 @@
        
 .center_page
   %h1 Class Updates
-  - @class_rooms.each do |class_room|
-    = link_to class_room.name+":", class_room
-    <br />
-    - resources = class_room.resources.sort_by { |res| res.updated_at }.reverse
-    - resources = get_top_three(resources)
-    - resources.each do |rec_pair|
-      = link_to rec_pair[0].name, rec_pair[1]
-      = " - " + rec_pair[1][1].section
-      <br />
+  %ul
+    - @resources.each do |resource|
+      %li
+        - section = resource.section
+        - resource_page = section.resource_page
+        - class_room = resource_page.class_room
+        = link_to resource.name, [class_room, resource_page, section, resource]
+        = " - #{class_room.name}/#{resource_page.section}"
 
   = link_to 'Create a new class!', new_class_room_path
   = link_to 'Browse existing classes', class_rooms_path

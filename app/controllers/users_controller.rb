@@ -2,23 +2,26 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @is_me = @user == current_user
+    @taught_classes = @user.taught_classes
     @authentications = @user.authentications
+    @class_rooms = @user.class_rooms
   end
 
   def new
-	@user = User.new
+    @user = User.new
   end
   
   def resend_activation
-		if params[:login]
-			@user = User.find_by_login params[:login]
-			if @user && !@user.active?
-				@user.deliver_activation_instructions!
-				flash[:fail] = "Please check your e-mail for your account activation instructions"
-				redirect_to root_path
-			end
-		end
-	end
+    if params[:login]
+      @user = User.find_by_login params[:login]
+      if @user && !@user.active?
+        @user.deliver_activation_instructions!
+        flash[:fail] = "Please check your e-mail for your account activation instructions"
+        redirect_to root_path
+      end
+    end
+  end
 
 
   def create
@@ -39,30 +42,30 @@ class UsersController < ApplicationController
   end
 
   def edit_password
-	@user = current_user
+    @user = current_user
   end
   
   def edit_email
-	@user = current_user
+    @user = current_user
   end
   
   def update
-	@user = current_user
-	
-	respond_to do |format|
-	  if @user.update_attributes(params[:user])
-	    format.html	{ redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
-	    format.json { render :json => {}, :status => :ok }
-	  else
-	    format.html  { render :action => "edit" }
+    @user = current_user
+    
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
+        format.json { render :json => {}, :status => :ok }
+      else
+        format.html  { render :action => "edit" }
         format.json  { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   def destroy
-	@user = current_user
-	User.destroy(params[:id])
+    @user = current_user
+    User.destroy(params[:id])
 
     flash[:notice] = "Successfully deleted and logged out."
     redirect_to root_url

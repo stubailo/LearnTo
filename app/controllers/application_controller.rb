@@ -11,21 +11,23 @@ class ApplicationController < ActionController::Base
     end
     
     def require_enrolled(class_room)
-			user = current_user
-			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
-			unless user == class_room.user || user_permission == "student"
-				redirect_back_or_default class_room
-			end
+      user = current_user
+      user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type) : "none"
+      unless is_creator(class_room) || user_permission == "student"
+        flash[:fail] = "You must be enrolled to view this page"
+        redirect_back_or_default class_room
+      end
     end
     
     def is_enrolled(class_room)
-      user = current_user
-			user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
-			if user == class_room.user || user_permission == "student"
-				return true
-			end
-			return false
-	  end
+      if current_user
+        user = current_user
+        user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
+        return is_creator(class_room) || user_permission == "student"
+      else
+        return false
+      end
+    end
     
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
@@ -51,27 +53,28 @@ class ApplicationController < ActionController::Base
     
     def is_creator(item)
       user = current_user
-      if user.id == item.user_id
-        return true
-      end
-      return false
+      return current_user && user.id == item.user_id
     end
   
   def set_vars
     @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
     @creator = User.find(@class_room.user_id)
-    @is_creator = is_creator(@class_room)
-    @user = current_user
+    if current_user
+      @is_creator = is_creator(@class_room)
+      @user = current_user
+      @user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
+    end
     @users = @class_room.users
     if(!@is_creator)
-			@user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", @user.id, @class_room.id).first
-			if(!@user_permission)
-				@user_permission = UserPermission.new
-				@show_join = true
-			else
-				@user_type = @user_permission.permission_type
-			end
-		end
+      if(!@user_permission && current_user)
+        @user_permission = UserPermission.new
+        @show_join = true
+      elsif current_user
+        @user_type = @user_permission.permission_type
+      else
+        @user_type = "none"
+      end
+    end
   end  
 
   def require_no_user

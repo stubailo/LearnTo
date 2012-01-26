@@ -11,7 +11,7 @@
             -if @is_creator
               .clear
               %li= link_to "Delete class", class_room_path(@class_room), confirm: 'Are you sure you want to destroy this class and all of its contents?', method: :delete
-            - else 
+            - elsif current_user 
               -if @show_join
                 .enroll-button-container
                   = form_for @user_permission, :url => class_rooms_add_user_path, :method => :post do |f|

@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
-  has_many :taught_classes, :as => :class_rooms
   
   has_many :announcements
   has_many :posts
@@ -24,6 +23,10 @@ class User < ActiveRecord::Base
   def activate!
     self.active = true
     save(:validate => false)
+  end
+  
+  def taught_classes
+    return ClassRoom.where("user_id = ?", self.id)
   end
   
   def deliver_activation_instructions!
