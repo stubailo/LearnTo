@@ -13,7 +13,7 @@ class SubcommentsController < ApplicationController
   end
 
   def destroy
-    @subcomment = Subcomment.find(params[:subcomment_id])
+    @subcomment = Subcomment.find(params[:id])
     if @subcomment.user_id != current_user.id
       redirect_to root_url
     end

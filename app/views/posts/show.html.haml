@@ -7,9 +7,12 @@
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response{:id => "forum_response_" + comment.id.to_s}
         = render :partial => "comments/comment", :locals => {:comment => comment}
+        = render :partial => "comments/edit_comment", :locals => {:comment_id => @post.id}
         .sub_comments
           - comment.subcomments.order(:created_at).each do |subcomment|
             = render :partial => "subcomments/subcomment", :locals => {:subcomment => subcomment}
-          = render :partial => "newSubcomment", :locals => { :comment => comment }
+          = render :partial => "subcomments/newSubcomment", :locals => { :comment => comment }
     .post_response_form
-      = render :partial => "newComment", :locals => { :post => @post }
+      = render :partial => "comments/newComment", :locals => { :post => @post }
+      
+= render :partial => "posts/edit_post", :locals => {:post_id => @post.id}
