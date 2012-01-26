@@ -4,11 +4,15 @@
 .left_column
   %ul.user_nav
     %li.user_nav_element.active
-      %a{:href => "#"} Recent Updates
+      %a
+        =link_to "Classes I'm taking", home_index_path
       - if current_user.class_rooms
         %ul.user_nav_sublist
           - current_user.class_rooms.each do |class_room|
             %li= class_room.name
+    %li.user_nav_element
+      %a
+        =link_to "Classes I'm teaching", home_teacher_index_path
     %li.user_nav_element
       %a{:href => "#"} Manage Classes
     %li.user_nav_element

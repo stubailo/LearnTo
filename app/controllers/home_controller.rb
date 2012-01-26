@@ -34,6 +34,29 @@ class HomeController < ApplicationController
     @random_class_room = random
     render :action => "user_index"
   end        
+  
+  def teacher_index
+    @posts = []
+    @announcements = []
+    @resources = []
+    
+    #If there is a user logged in
+    if current_user
+      @user = current_user
+      @class_rooms = @user.taught_classes.sort_by { |class_room| class_room.updated_at }.reverse
+      @user.taught_classes.each do |classroom|
+        @resources += classroom.resources.limit(10).sort_by { |res| res.updated_at }.reverse
+        @posts += classroom.forum.posts.order('created_at DESC').limit(10)
+      end
+      @posts = @posts.sort_by! { |post| post.created_at}.reverse!.first(10)
+      @announcements = @announcements.sort_by! { |a| a.created_at}.reverse!.first(6)      
+    #There is no user logged in
+    else
+      render :action => "index"
+      return
+    end
+    render :action => "teacher_index"
+  end        
 
 
   def media_test

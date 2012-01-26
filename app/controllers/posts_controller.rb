@@ -45,9 +45,9 @@ class PostsController < ApplicationController
     tag_list = params[:new_tags].split(/[\s,]+/)
     tag_list.map do |x|
       if x[0,1] == "#"
-        next
+        x = x.downcase
       else
-        x.insert(0,"#")
+        x = x.insert(0,"#").downcase
       end
     end
     @post.tag_list = tag_list

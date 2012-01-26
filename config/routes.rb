@@ -46,8 +46,6 @@ Classroom::Application.routes.draw do
 
   post "class_rooms/add_user"
   
-  
-  
   resources :user_permissions
 
   resources :class_rooms do
@@ -78,6 +76,10 @@ Classroom::Application.routes.draw do
   get "user_sessions/new"
   
   get "user_sessions/new_ajax"
+  
+  get "home/teacher_index"
+  
+  get "home/index"
   
   resources :announcements
 
