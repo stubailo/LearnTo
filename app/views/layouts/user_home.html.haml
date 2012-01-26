@@ -1,0 +1,30 @@
+.full_width_page
+  .left_column
+    = current_user.login
+    -if current_user.account_type
+      %p connected with Facebook.
+
+    %ul.user_nav
+      %li.user_nav_element.active
+        %a
+          =link_to "Classes I'm taking", home_index_path
+        - if current_user.class_rooms
+          %ul.user_nav_sublist
+            - current_user.class_rooms.each do |class_room|
+              %li= class_room.name
+      %li.user_nav_element
+        %a
+          =link_to "Classes I'm teaching", home_teacher_index_path
+      %li.user_nav_element
+        %a{:href => "#"} Manage Classes
+      %li.user_nav_element
+        %a{:href => "#"} Friends
+      %li.user_nav_element
+        = link_to 'Create a new class!', new_class_room_path
+
+  .right_column
+    = yield :right_column
+
+  .center_page
+    = yield :center_column
+
