@@ -46,6 +46,8 @@ Classroom::Application.routes.draw do
 
   post "class_rooms/add_user"
   
+  get "class_rooms/del_user"
+  
   resources :user_permissions
 
   resources :class_rooms do
@@ -81,9 +83,9 @@ Classroom::Application.routes.draw do
   
   get "home/index"
   
+  get "home/manage"
+
   get "home/please_register"
-  
-  get "home/manage_classes"
   
   resources :announcements
 

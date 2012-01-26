@@ -18,7 +18,9 @@
               Teacher Feed
               %span.sublink Classes I'm Teaching
           %li.main
-            %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+            %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+          %li.main
+            = link_to 'Teach a class!', new_class_room_path
     .main_page
       .right_column
         = yield :right_column
