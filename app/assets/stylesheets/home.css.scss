@@ -16,8 +16,10 @@
 .center_page {
   margin-left: 195px;
   margin-right: 260px;
-  border: 1px solid #ccc;
   background: #fff;
+
+  border-left: 1px solid #eee;
+  padding-left: 10px;
 }
 
 .left_column {
@@ -27,7 +29,6 @@
   margin-left: 10px;
 
   background: #fff;
-  border: 1px solid #ccc;
 
   .user_nav li.user_nav_element {
     border-bottom: 1px solid #ccc;
@@ -76,6 +77,6 @@
     padding: 0;
   }
 
-  border: 1px solid #ccc;
+  border-left: 1px solid #eee;
 
 }
