@@ -42,7 +42,27 @@ $ ->
     modal: true,
     resizable: false
   })
+  
+  $("#insert_image_form").dialog({
+    autoOpen: false,
+    width: 600,
+    modal: true,
+    resizable: false
+  })
 
+  $("#insert_image").click ->
+    $("#insert_image_form").dialog("open")
+    image_upload_object = new AjaxUpload('upload_image', {
+      action: $("#link_to_embed_in_document").attr("href"),
+      name: "resource[file]",
+      data: { "resource[file_type]": "upload", format:"json", "resource[]" },
+      autoSubmit: false,
+      responseType: "json",
+      onSubmit: check_file,
+      onComplete: insert_embed_from_response
+    })
+  
+  
   $("#insert_code").click ->
     $("#insert_code_form").dialog("open")
     $("#insert_code_form").find("textarea").val("")

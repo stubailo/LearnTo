@@ -18,7 +18,7 @@ class DocumentsController < ApplicationController
 				if @new_resource.save
           respond_to do |format|
 					  format.html { redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @path_resource) }
-            format.json { render json: @new_resource }
+            format.json { render :json => @new_resource.to_json }
           end
 				end
 		  else
