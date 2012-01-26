@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @forum = Forum.find(@post.forum_id)
+    @forum = @post.forum
     if @post
       @subcomment = Subcomment.new
       @comment = Comment.new
