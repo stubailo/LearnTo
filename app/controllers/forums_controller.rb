@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   def show 
     @forum = Forum.find(params[:id])
-    @posts = @forum.posts.order("last_updated DESC")
+    @posts = @forum.posts.order("last_updated DESC").page(params[:page]).per(15)
     @class_room = @forum.class_room
     @tags = []
     set_vars
