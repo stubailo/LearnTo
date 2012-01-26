@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:id])
     if @comment.user_id != current_user.id
       redirect_to root_url
     end
