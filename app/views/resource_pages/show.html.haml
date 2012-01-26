@@ -46,11 +46,12 @@
             = label_tag :section, :Location, :class => "main"
             = text_field(:section, :order)
           = f.submit "Change order"
-        = form_for [@class_room, @resource_page, section] do |f|
-          .field
-            = f.label :section_title, :class => "main"
-            = f.text_field :title, :class => "text"
-          = f.submit "Change Section Name"
+        .rename_section_form_container
+          = form_for section, :url => class_room_resource_page_update_path(@class_room, @resource_page, section) do |f|
+            .field
+              = f.label :section_title, :class => "main"
+              = f.text_field :title, :class => "text"
+            = f.submit "Change Section Name"
       - resources = section.resources
       %ul.lists_to_connect{:id => "section-" + section.id.to_s}
         - if resources.length > 0

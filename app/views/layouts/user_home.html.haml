@@ -5,8 +5,10 @@
         %strong= current_user.login
         -if current_user.account_type
           %p Connected with Facebook
-        %p Taking x classes
-        %p Teaching x classes
+        %p 
+          = "Taking #{current_user.class_rooms.length} classes"
+        %p 
+          = "Teaching #{current_user.taught_classes.length} classes"
       %nav
         %ul.user_nav
           %li.main
@@ -18,9 +20,13 @@
               Teacher Feed
               %span.sublink Classes I'm Teaching
           %li.main
-            %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
-          %li.main
-            = link_to 'Teach a class!', new_class_room_path
+            %a{:href => "#", :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+      - num_class_rooms = 5
+      %ul
+        %li
+          - current_user.class_rooms.sort_by { |class_room| class_room.updated_at }.reverse[0..num_class_rooms].each do |class_room|
+            = link_to class_room.name, class_room
+
     .main_page
       .right_column
         = yield :right_column
