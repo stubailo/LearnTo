@@ -10,7 +10,10 @@
       %header
         .top_level
           = link_to "LearnTo", root_path, :class => "logo"
-          
+
+          %nav
+            = link_to "Browse Classes", class_rooms_path
+            = link_to "Teach a Class", new_class_room_path
           
           %div.user_nav
             - if current_user
@@ -31,10 +34,17 @@
           %div.clear
     .top_level
       %div#content
-        - if flash[:fail]
-          .flash.ui-state-highlight= flash[:fail]
+        -if not content_for? :content
+          .full_width_page
+            - if flash[:fail]
+              .flash.ui-state-highlight= flash[:fail]
                
-        = content_for?(:content) ? yield(:content) : yield
+            = yield
+        -else
+          - if flash[:fail]
+            .flash.ui-state-highlight= flash[:fail]
+               
+          = yield(:content)
 
 
     .footer

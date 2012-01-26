@@ -54,3 +54,61 @@
   border-radius: 3px;
   margin-top: 10px;
 }
+
+.teacher_feed_class {
+ 
+  margin-top: 10px;
+
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+
+  .info {
+    float: right;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 5px;
+  }
+
+  .section_links {
+   
+    li {
+      margin-bottom: 3px;
+    }
+
+    h4 {
+      margin-bottom: 5px;
+    }
+
+    float: left;
+    width: 100px;
+  }
+
+  .new_announcement_container {
+
+    h4 {
+      margin-bottom: 5px;
+    }
+
+    margin-left: 110px;
+
+    label {
+      display: block;
+      margin-top: 5px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 60px;
+      font-family: "Helvetice", "Arial", sans-serif;
+    }
+  }
+}
+
+
