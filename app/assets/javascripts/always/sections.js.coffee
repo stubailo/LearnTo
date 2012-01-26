@@ -5,7 +5,7 @@
 
 $ ->
 
-  if allow_draggable
+  if typeof allow_draggable != 'undefined'
     $(".list_of_sections").sortable({
       axis: "y",
       stop: (event, ui) ->

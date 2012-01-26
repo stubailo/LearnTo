@@ -136,12 +136,13 @@ $left-bar-padding: $global-padding;
 
     .logo {
       float: left;
-        text-transform: uppercase;
-        font-size: 1.2em;
+        font-size: 1.4em;
         font-weight: bold;
         text-decoration: none;
         color: $light-grey;
-        padding: $global-padding+3px;
+        padding: $global-padding;
+        margin-top: 3px;
+        margin-bottom: -10px;
         
         &:hover {
           text-decoration: underline;
