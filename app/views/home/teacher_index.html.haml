@@ -27,10 +27,6 @@
     = link_to "Students", students_show_path(:class_room => class_room.id)
     = render :partial => 'announcements/new_announcement', :locals => {:class_room => class_room}
           
-
-  = link_to 'Create a new class!', new_class_room_path
-  = link_to 'Browse existing classes', class_rooms_path      
-      
   = #"Try a new class!"
   = #link_to @random_class_room.name, @random_class_room
 
