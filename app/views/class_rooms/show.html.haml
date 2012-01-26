@@ -29,7 +29,7 @@
     .new_announcement_form
       -if @is_creator
         %h4 Editing New Announcement
-        = render 'new_announcement'
+        = render :partial => 'announcements/new_announcement', :locals => {:class_room => @class_room}
     -if @announcement
       .announcement
         %h3= link_to @announcement.title, :controller => :announcements, :action => :show, :class_room_id => @class_room.id

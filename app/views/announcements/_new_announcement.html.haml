@@ -1,5 +1,6 @@
+- @new_announcement = Announcement.new
 = form_for @new_announcement, :url => {:controller => "announcements", :action => "create" } do |f|
-  = hidden_field_tag("class_room_id", @class_room.id)
+  = hidden_field_tag("class_room_id", class_room.id)
   = label_tag :title, "Title", :class => "title"
   = f.text_field :title
   = label_tag(:content, "Content")

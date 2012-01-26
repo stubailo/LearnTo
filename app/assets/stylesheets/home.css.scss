@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$shadow-color: #999;
+$left-sidebar-width: 200px;
+$left-bar-padding: 10px;
+$orange: #f37800;
+$text-orange: saturate(darken($orange, 10%), 40%);
+$light-grey: #ccc;
+$dark-grey: #444;
+$shadow-color: rgba(0,0,0,.15);
+
 .user_home {
   .main_page {
     border: 1px solid #aaa;
@@ -9,11 +18,9 @@
     padding: 10px;
     background: #fff;
     min-height: 500px;
-    margin-left: 185px;
+    margin-left: $left-sidebar-width;
     border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
-
-    $shadow-color: #999;
 
     -moz-box-shadow: 0 0 8px $shadow-color;
     -webkit-box-shadow: 0 0 8px $shadow-color;
@@ -25,34 +32,154 @@
 }
 
 .center_page {
-  margin: 10px;
   margin-right: 260px;
   background: #fff;
 
 }
 
-.left_column {
-  float: left;
-  width: 175px;
+.left_column nav li a {
+  font-size: 1.2em;
+}
 
-  margin-left: 10px;
 
-  background: #fff;
+.left_column
+{
 
-  .user_nav li.user_nav_element {
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
+    margin-left: 10px;
 
-    &.active {
-      font-weight: bold;
+    height: 100%;
+    width: $left-sidebar-width - 10px;
+    float: left;
+
+    padding-left: 100px;
+    margin-left: -90px;
+
+    #class-name-info {
+      margin-right: $left-bar-padding;
+      padding: 10px;
+      padding-left: 0;
+      margin-top: 20px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+    
     }
 
-    ul.user_nav_sublist {
-      font-weight: normal;
-      margin-top: 5px;
-      border-left: 1px dashed #ccc;
-      padding-left: 5px;
+
+
+    h1 {
+        font-weight: bold;
+        font-size: 1.1em;
     }
+
+    p.subtitle {
+        padding: $left-bar-padding 0;
+        padding-top: 5px;
+    }
+
+    .enroll-button-container {
+      float: left;
+      margin-top: -4px;
+      margin-right: 5px;
+    }
+
+    ul.class-info {
+
+
+        li {
+            text-transform: lowercase;
+            padding: $left-bar-padding 0;
+        }
+    }
+
+    nav {
+        margin-top: 20px;
+
+        li.main {
+            padding-left: 20px;
+            margin-left: -20px;
+            overflow: hidden;
+            margin-right: -1px;
+        }
+
+        li.main a {
+            display: block;
+            padding: $left-bar-padding*.3 $left-bar-padding;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #222;
+
+            margin: $left-bar-padding*0.3 0;
+            margin-left: -10px;
+
+            &:hover {
+                color: $orange;
+            }
+
+            .sublink {
+              display: block;
+              font-size: .7em;
+              margin-top: 4px;
+              text-transform: none;
+              font-weight: normal;
+            }
+        }
+
+        li.main a.active {
+            padding: $left-bar-padding $left-bar-padding;
+     
+            border: 1px solid #bbb;
+            border-right-color: #fff;
+
+            margin-left: -11px;
+
+            margin-right: -1px;
+
+            border-radius: 3px 0 0 3px;
+            -moz-border-radius: 3px 0 0 3px;
+
+            -moz-box-shadow: 0 0 8px $shadow-color;
+            -webkit-box-shadow: 0 0 8px $shadow-color;
+            box-shadow: 0 0 8px $shadow-color;
+ 
+            $gradient-color: rgb(250,250,250);
+            $grad-stop-one: 4%;
+            $grad-stop-two: 26%;
+            
+            background: #fff;
+
+            background-image: linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -o-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -moz-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -webkit-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+            background-image: -ms-linear-gradient(right , rgb(255,255,255) $grad-stop-one, $gradient-color $grad-stop-two);
+
+            background-image: -webkit-gradient(
+                linear,
+                right bottom,
+                left bottom,
+                color-stop(0.04, rgb(255,255,255)),
+                color-stop(0.26, $gradient-color)
+            ); 
+        
+        }
+    }
+}
+
+nav ul.user_nav_sublist {
+
+  margin-top: -2px;
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 3px;
+  -moz-border-radius: 0 0 0 3px;
+  -webkit-border-radius: 0 0 0 3px;
+
+  margin-bottom: 5px;
+
+  li {
+    padding: 7px;
+
   }
 }
 

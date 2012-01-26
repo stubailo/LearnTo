@@ -81,6 +81,8 @@ Classroom::Application.routes.draw do
   
   get "home/index"
   
+  get "home/manage_classes"
+  
   resources :announcements
 
   resources :user_sessions

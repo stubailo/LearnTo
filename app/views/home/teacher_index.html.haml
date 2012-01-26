@@ -17,12 +17,16 @@
   
 - content_for :center_column do
   - current_user.taught_classes.each do |class_room|
-    = render 'class_rooms/new_announcement'
+    - resource_pages = class_room.resource_pages.sort_by {|x| x.id}
+    = class_room.name
+    = link_to "Lessons", class_room_resource_page_path(class_room, resource_pages[0])
+    = link_to "Homework", class_room_resource_page_path(class_room, resource_pages[1])
+    = link_to "Materials", class_room_resource_page_path(class_room, resource_pages[2])
+    = link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
+    = link_to "Discussion", class_room.forum
+    = link_to "Students", students_show_path(:class_room => class_room.id)
+    = render :partial => 'announcements/new_announcement', :locals => {:class_room => class_room}
           
-
-  = link_to 'Create a new class!', new_class_room_path
-  = link_to 'Browse existing classes', class_rooms_path      
-      
   = #"Try a new class!"
   = #link_to @random_class_room.name, @random_class_room
 
