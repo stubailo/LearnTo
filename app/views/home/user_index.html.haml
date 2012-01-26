@@ -1,67 +1,73 @@
-.user_home_top
-  %h2 Hi, #{current_user.login}!
+.full_width_page
+  .left_column
+    = current_user.login
+    -if current_user.account_type
+      %p connected with Facebook.
 
-.left_column
-  %ul.user_nav
-    %li.user_nav_element.active
-      %a
-        =link_to "Classes I'm taking", home_index_path
-      - if current_user.class_rooms
-        %ul.user_nav_sublist
-          - current_user.class_rooms.each do |class_room|
-            %li= class_room.name
-    %li.user_nav_element
-      %a
-        =link_to "Classes I'm teaching", home_teacher_index_path
-    %li.user_nav_element
-      %a{:href => "#"} Manage Classes
-    %li.user_nav_element
-      %a{:href => "#"} Friends
-    %li.user_nav_element
-      %a{:href => "#"} Teach a Class
+    %ul.user_nav
+      %li.user_nav_element.active
+        %a
+          =link_to "Classes I'm taking", home_index_path
+        - if current_user.class_rooms
+          %ul.user_nav_sublist
+            - current_user.class_rooms.each do |class_room|
+              %li= class_room.name
+      %li.user_nav_element
+        %a
+          =link_to "Classes I'm teaching", home_teacher_index_path
+      %li.user_nav_element
+        %a{:href => "#"} Manage Classes
+      %li.user_nav_element
+        %a{:href => "#"} Friends
+      %li.user_nav_element
+        = link_to 'Create a new class!', new_class_room_path
 
-.right_column
-  .new_posts
-    %h3 New Discussion Posts
-    - @posts.each do |post|
-      .forum_post_container
-        .forum_post
-          %h4
-            = link_to post.title, post_path(post)
-          %div.bottom
-            #{link_to post.user.login, post.user}
-            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-            #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
-       
-.center_page
-  %h1 Class Updates
-  %ul
-    - @news_feed_posts.each do |post|
-      - if post[:type] == "resource"
-        %li.news_feed_item
-          - resource = post[:resource]
-          - announcement = post[:resource]
-          - section = resource.section
-          - resource_page = section.resource_page
-          - class_room = resource_page.class_room
-          = link_to resource.name, [class_room, resource_page, section, resource]
-          = " - #{class_room.name}/#{resource_page.section}"
-      - elsif post[:type] == "announcement"
-        %li.news_feed_item
-          - announcement = post[:announcement]
-          %h4
-            = link_to announcement.title, announcements_path(announcement)
-          %div.bottom
-            In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
-            %br
-            posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
-          
+  .right_column
+    .new_posts
+      %h3 New Discussion Posts
+      - @posts.each do |post|
+        .forum_post_container
+          .forum_post
+            %h4
+              = link_to post.title, post_path(post)
+            %div.bottom
+              #{link_to post.user.login, post.user}
+              in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+              #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
+         
+  .center_page
+    %h1 Class Updates
+    %ul
+      - @news_feed_posts.each do |post|
+        - if post[:type] == "resource"
+          %li.news_feed_item
+            - resource = post[:resource]
+            - announcement = post[:resource]
+            - section = resource.section
+            - resource_page = section.resource_page
+            - class_room = resource_page.class_room
+            %h3= link_to class_room.name, class_room
+            %h4 
+              New #{resource_page.section.singularize.downcase}:
+              = link_to resource.name, [class_room, resource_page, section, resource]
+            .bottom
+              posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
+        - elsif post[:type] == "announcement"
+          %li.news_feed_item
+            - announcement = post[:announcement]
+            %h3 #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
+            %h4
+              New announcement:
+              = link_to announcement.title, announcements_path(announcement)
+            %p= announcement.content
+            %div.bottom
+              posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+            
 
-  = link_to 'Create a new class!', new_class_room_path
-  = link_to 'Browse existing classes', class_rooms_path
-      
-      
-  = #"Try a new class!"
-  = #link_to @random_class_room.name, @random_class_room
+    = link_to 'Browse existing classes', class_rooms_path
+        
+        
+    = #"Try a new class!"
+    = #link_to @random_class_room.name, @random_class_room
 
 
