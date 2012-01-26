@@ -10,6 +10,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    @edit_post = Post.new
+    @edit_comment = Comment.new
+    
     @post = Post.find(params[:id])
     @forum = @post.forum
     if @post
@@ -26,7 +29,7 @@ class PostsController < ApplicationController
 
   def edit
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(params[:post_id])
         format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
         partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
         format.json  { render :json => {:updated_post => partial} }

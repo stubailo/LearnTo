@@ -4,7 +4,7 @@
   = text_field_tag(:search_term)
   = submit_tag("Search")
   
-= render "newPost"
+= render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
     .forum_post

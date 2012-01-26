@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   
   def edit
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(params[:comment_id])
         format.html  { redirect_to(@comment, :notice => 'Comment was successfully updated.') }
         partial = render_to_string :partial => "comments/comment", :locals => {:comment => @comment}
         format.json  { render :json => {:updated_comment => partial} }
