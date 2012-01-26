@@ -1,9 +1,35 @@
-- if @taught_classes.size > 0 
-  = "Classes you're teaching"
-  -@taught_classes.each do |taught_class|
-    = link_to taught_class.name, class_room_path(taught_class)
-    
-- if @class_rooms.size > 0 
-  = "Classes you're teaching"
-  -@class_rooms.each do |class_room|
-    = link_to class_room.name, class_room_path(class_room)
+- content_for :center_column do
+  - if @taught_classes.size > 0
+    = "Classes you are teaching"
+    %p
+      -@taught_classes.each do |taught_class|
+        = link_to taught_class.name, class_room_path(taught_class)
+        = link_to "delete", taught_class, :method => :delete, :confirm => "Are you sure you want to destroy this class and all of its contents?"
+        %p
+          = taught_class.summary
+        %p
+          - if taught_class.users.size == 1
+            = "There is "
+          - else
+            = "There are "
+          = link_to pluralize(taught_class.users.size, "student"), students_show_path(taught_class)
+          = " enrolled in this class"
+          
+  - if @class_rooms.size > 0 
+    = "Classes you are taking"
+    %p
+    -@class_rooms.each do |class_room|
+      -if class_room
+        %p
+          - @user_permission = UserPermission.where(:user_id => current_user.id, :class_room_id => class_room.id).first
+          = link_to class_room.name, class_room_path(class_room.id)
+          = link_to "leave class", class_rooms_del_user_path(:perm_id => @user_permission.id), :confirm => "Are you sure you want to leave this class?"
+          %p
+            = class_room.summary
+          %p
+            - if class_room.users.size == 1
+              = "There is "
+            - else
+              = "There are "
+            = link_to pluralize(class_room.users.size, "student"), students_show_path(class_room)
+            = " enrolled in this class"

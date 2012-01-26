@@ -31,7 +31,7 @@ class ClassRoomsController < ApplicationController
 	end
 	
 	def del_user
-		@user_permission=UserPermission.find(params[:perm_id])
+		@user_permission = UserPermission.find(params[:perm_id])
 		@user = current_user
 		@class_room = ClassRoom.find(@user_permission.class_room_id)
 		if @user.id == @user_permission.user_id
