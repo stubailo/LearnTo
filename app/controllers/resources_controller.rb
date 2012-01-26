@@ -10,7 +10,7 @@ class ResourcesController < ApplicationController
     end
   end
 
-  def get_path_vars	
+  def get_path_vars 
     @class_room = ClassRoom.find(params[:class_room_id])
     @section = Section.find(params[:section_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
@@ -23,22 +23,22 @@ class ResourcesController < ApplicationController
     set_vars
     require_enrolled(@class_room)
     if is_enrolled(@class_room)
-			if(@resource.file_type == "document")
-				@document = @resource.document
-				unless defined? @document.parsed_content and Rails.env == "production"
-					xml_doc = Nokogiri::HTML(@document.content)
-					xml_doc.css('a.media_replace').each do |link| 
-						res = Resource.find(link.attribute("href").value)
-						link.replace(
-							render_to_string :partial => "shared/embed",
-									:locals => {:res => res, :style => "big_embed", :hidden => false}
-						)
-					end
-				end
+      if(@resource.file_type == "document")
+        @document = @resource.document
+        unless defined? @document.parsed_content and Rails.env == "production"
+          xml_doc = Nokogiri::HTML(@document.content)
+          xml_doc.css('a.media_replace').each do |link| 
+            res = Resource.find(link.attribute("href").value)
+            link.replace(
+              render_to_string :partial => "shared/embed",
+                  :locals => {:res => res, :style => "big_embed", :hidden => false}
+            )
+          end
+        end
 
-				@document.parsed_content = xml_doc.to_s
-				@document.save
-		  end
+        @document.parsed_content = xml_doc.to_s
+        @document.save
+      end
     end
     respond_to do |format|
       format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
@@ -52,62 +52,62 @@ class ResourcesController < ApplicationController
     get_path_vars
     set_vars
     if @is_creator
-			@sections = @class_room.sections
-			if(@resource.file_type == "document")
-				@document = @resource.document
-			end
-			respond_to do |format|
-				format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
-				format.json { render json: @resource }
-			end
-	  else #user is not creator
-		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
-		end
+      @sections = @class_room.sections
+      if(@resource.file_type == "document")
+        @document = @resource.document
+      end
+      respond_to do |format|
+        format.html { render :layout => "show_class_room", :locals => {:which_tab => @resource_page.section} }
+        format.json { render json: @resource }
+      end
+    else #user is not creator
+      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+    end
   end
 
   # POST /resources
   # POST /resources.json
-  def create	
-		@resource = Resource.new(params[:resource])
-		@class_room = ClassRoom.find(params[:class_room_id])
-		@resource_page = ResourcePage.find(params[:resource_page_id])
-		@section = Section.find(params[:section][:id])
-	  @sections = @resource_page.sections.sort_by { |sec| sec.order } # need this in case there are errors, to show on resource_pages/show
-	  set_vars
-	  if @is_creator
-			#set resource info not from form
-			@resource.source_call = @resource_page.section
-			@resource.user_id = @user.id 
-			@resource.class_room_id = @class_room.id
-			@resource.section_id = @section.id
-			@resource.hidden = false
-			@resource.order = @section.resources.length
-				
-			#handle documents
-			if @resource.file_type == "document"
-				@resource.hidden = true
-			end
-				
-			#Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
-			if @resource.save
-				unless @resource.hidden
-					@class_room.update_attribute(:updated_at, Time.now.to_datetime)
-				end
-				if @resource.file_type == "document"
-					@document = Document.new
-					@document.resource_id = @resource.id
-					@document.save
-					flash[:fail] = "You need to publish this document before it's available to your class"
-					redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
-				else
-					redirect_to class_room_resource_page_path(@class_room, @resource_page)
-				end
-			else
-			  render :layout => "show_class_room", :template => 'resource_pages/show', :locals => {:which_tab => @resource_page.section} 
-			end
-		else #user is not creator
-		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
-		end
+  def create  
+    @resource = Resource.new(params[:resource])
+    @class_room = ClassRoom.find(params[:class_room_id])
+    @resource_page = ResourcePage.find(params[:resource_page_id])
+    @section = Section.find(params[:section][:id])
+    @sections = @resource_page.sections.sort_by { |sec| sec.order } # need this in case there are errors, to show on resource_pages/show
+    set_vars
+    if @is_creator
+      #set resource info not from form
+      @resource.source_call = @resource_page.section
+      @resource.user_id = @user.id 
+      @resource.class_room_id = @class_room.id
+      @resource.section_id = @section.id
+      @resource.hidden = false
+      @resource.order = @section.resources.length
+        
+      #handle documents
+      if @resource.file_type == "document"
+        @resource.hidden = true
+      end
+        
+      #Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
+      if @resource.save
+        unless @resource.hidden
+          @class_room.update_attribute(:updated_at, Time.now.to_datetime)
+        end
+        if @resource.file_type == "document"
+          @document = Document.new
+          @document.resource_id = @resource.id
+          @document.save
+          flash[:fail] = "You need to publish this document before it's available to your class"
+          redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
+        else
+          redirect_to class_room_resource_page_path(@class_room, @resource_page)
+        end
+      else
+        render :layout => "show_class_room", :template => 'resource_pages/show', :locals => {:which_tab => @resource_page.section} 
+      end
+    else #user is not creator
+      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+    end
   end
   
   # PUT /resources/1
@@ -118,7 +118,7 @@ class ResourcesController < ApplicationController
     @resource_page = ResourcePage.find(params[:resource_page_id])
     @section = Section.find(params[:section_id])
 
-		if is_creator(@class_room)
+    if is_creator(@class_room)
       respond_to do |format|
         if @resource.update_attributes(params[:resource])
           if(@resource.file_type == "document")
@@ -137,7 +137,9 @@ class ResourcesController < ApplicationController
             @document.parsed_content = xml_doc.to_s
             @document.save
           end
-          unless @resource.hidden
+          if @resource.hidden
+            flash[:fail] = "Make sure to publish your document if you want your class to see it"
+          else
             @class_room.update_attribute(:updated_at, Time.now.to_datetime)
           end
           format.html { redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
@@ -148,10 +150,10 @@ class ResourcesController < ApplicationController
           format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
-		else
-		  redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
-		   :flash => { :fail => "You must be the creator of the class to modify uploaded documents" }
-		end
+    else
+      redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
+       :flash => { :fail => "You must be the creator of the class to modify uploaded documents" }
+    end
   end
 
 
@@ -171,7 +173,7 @@ class ResourcesController < ApplicationController
     #Turn timestamps back on    
     Resource.record_timestamps = true
     
-    redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource) 
+    redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource) 
   end
   
   def change_order

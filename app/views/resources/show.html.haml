@@ -4,7 +4,8 @@
       = link_to @resource.hidden ? "Publish To #{@resource_page.section}": "Hide From #{@resource_page.section} Page", class_room_resource_page_section_publish_path(@class_room, @resource_page, @section, @resource), :class => "button"
       = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
        :class => "button"
-      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
+      - if @resource != @class_room.resource
+        = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
   .info
     %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}

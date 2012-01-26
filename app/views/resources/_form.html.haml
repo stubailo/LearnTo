@@ -24,3 +24,6 @@
 
   .actions
     = f.submit "Save"
+    - if @resource != @class_room.resource && @resource.id
+      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
+

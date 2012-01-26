@@ -17,6 +17,8 @@
 
   .actions
     = f.submit "Save"
+    - if @resource != @class_room.resource
+      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
     %span.button#insert_image Insert Image
     %span.button#insert_link Embed Internet Media

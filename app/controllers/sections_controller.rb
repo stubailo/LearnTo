@@ -1,4 +1,4 @@
-class SectionsController < ApplicationController	
+class SectionsController < ApplicationController  
   
   def change_order
     #make sure we don't update updated_at when just changing order or publishing
@@ -28,21 +28,36 @@ class SectionsController < ApplicationController
   end
   
   def create
-	@section = Section.new(params[:section])
-	class_room = ClassRoom.find(params[:class_room_id])
-		if is_creator(class_room)
-			resource_page = ResourcePage.find(params[:resource_page_id])
-			sections = class_room.sections.sort_by { |sec| sec.order }
-			@section.order = sections.last.order + 1
-			@section.resource_page_id = params[:resource_page_id]
-			if(@section.save)
-				redirect_to class_room_resource_page_path(class_room, resource_page)
-			else
-				redirect_to class_room_resource_page_path(class_room, resource_page)
-			end
-		else
-		  redirect_back_or_default class_room_resource_page_path(class_room, resource_page), :flash => { :fail => "You must be the creator of the class to do that." }
-		end
+  @section = Section.new(params[:section])
+  class_room = ClassRoom.find(params[:class_room_id])
+    if is_creator(class_room)
+      resource_page = ResourcePage.find(params[:resource_page_id])
+      sections = class_room.sections.sort_by { |sec| sec.order }
+      @section.order = sections.last.order + 1
+      @section.resource_page_id = params[:resource_page_id]
+      if(@section.save)
+        redirect_to class_room_resource_page_path(class_room, resource_page)
+      else
+        redirect_to class_room_resource_page_path(class_room, resource_page)
+      end
+    else
+      redirect_back_or_default class_room_resource_page_path(class_room, resource_page), :flash => { :fail => "You must be the creator of the class to do that." }
+    end
+  end
+  
+  def update
+    @section = Section.find(params[:id])
+    @class_room = ClassRoom.find(@resource.class_room_id)
+    @resource_page = ResourcePage.find(params[:resource_page_id])
+    if is_creator(@class_room)
+      if @resource.update_attributes(params[:section])
+        redirect_back_or_default class_room_resource_page_path(class_room, resource_page)
+      else
+        redirect_back_or_default class_room_resource_page_path(class_room, resource_page), :flash => { :fail => "Error updating section" }
+      end
+    else
+      redirect_back_or_default class_room_resource_page_path(class_room, resource_page), :flash => { :fail => "You must be the creator of the class to do that." }
+    end
   end
   
   def destroy

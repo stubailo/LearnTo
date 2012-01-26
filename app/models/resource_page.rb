@@ -3,6 +3,7 @@ class ResourcePage < ActiveRecord::Base
 
   belongs_to :class_room
   has_many :sections, :dependent => :destroy
+  has_many :resources, :through => :sections
   
   SECTIONS = ['lessons', 'homework', 'materials', 'quizzes']
 end
