@@ -25,7 +25,7 @@ class Resource < ActiveRecord::Base
   belongs_to :user
   belongs_to :document
   belongs_to :section
-  has_one :document
+  has_one :document, :dependent => :destroy
   
   before_validation :download_remote_image, :if => :image_url_provided?
 
@@ -139,7 +139,7 @@ class Resource < ActiveRecord::Base
   
   private
     def image_url_provided?
-			!self.try(:url).blank? && self.try(:source_call) == "document" && !self.try(:image_size).blank?
+			!self.try(:url).blank? && self.try(:source_call) == "document" #&& !self.try(:image_size).blank? #uncomment last part if embedding image works
 		end
 		
 		def download_remote_image

@@ -1,4 +1,4 @@
-<% if @user.account_type == "internal" %>
+<% if current_user == @user && @user.account_type == "internal" %>
 	<p><strong> Link your account to your facebook page! <strong><p>
 	<a href="/auth/facebook" class="auth_provider">
 		<%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>

@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @is_me = @user == current_user
     @taught_classes = @user.taught_classes
-    @authentications = @user.authentications
     @class_rooms = @user.class_rooms
   end
 

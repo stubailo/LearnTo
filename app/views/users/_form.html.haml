@@ -22,8 +22,6 @@
     = f.label :password_confirmation, :class => "main"
     %p.hint Must match the previous password.
     = f.password_field :password_confirmation, :class => "required text"
-      
-  %br/
   .field
     %p.hint Please confim you're not a robot by typing the text below.
     = raw recaptcha_tags
@@ -33,4 +31,4 @@
   .actions
     = f.submit "Create Account"
 
-= recaptcha_tags
+  = recaptcha_tags
