@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!
-        format.html { redirect_to root_url, :flash => { :fail => 'Account created.  Please check your email for account activation instructions.' } }
+        format.html { redirect_to home_please_register_path }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

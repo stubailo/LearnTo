@@ -60,6 +60,9 @@ class HomeController < ApplicationController
     @classes_taught = current_user.taught_classes
   end
 
+  def please_register
+  
+  end
 
   def media_test
   	if current_user
