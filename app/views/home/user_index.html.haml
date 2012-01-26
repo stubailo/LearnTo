@@ -6,46 +6,41 @@
   .new_posts
     %h3 New Discussion Posts
     - @posts.each do |post|
-      .forum_post_container
-        .forum_post
-          %h4
-            = link_to post.title, post_path(post)
-          %div.bottom
-            #{link_to post.user.login, post.user}
-            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-            #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
+      .feed_forum_post
+        %h4
+          = link_to post.title, post_path(post)
+        %div.bottom
+          #{link_to post.user.login, post.user}
+          in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+          #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
         
 - content_for :center_column do
-  %h1 Class Updates
-  %ul
-    - @news_feed_posts.each do |post|
-      - if post[:type] == "resource"
-        %li.news_feed_item
-          - resource = post[:resource]
-          - announcement = post[:resource]
-          - section = resource.section
-          - resource_page = section.resource_page
-          - class_room = resource_page.class_room
-          %h3= link_to class_room.name, class_room
-          %h4 
-            New #{resource_page.section.singularize.downcase}:
-            = link_to resource.name, [class_room, resource_page, section, resource]
-          .bottom
-            posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
-      - elsif post[:type] == "announcement"
-        %li.news_feed_item
-          - announcement = post[:announcement]
-          %h3 #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
-          %h4
-            New announcement:
-            = link_to announcement.title, announcements_path(announcement)
-          %p= announcement.content
-          %div.bottom
-            posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
-          
-
-  = link_to 'Browse existing classes', class_rooms_path
-        
-        
-
-
+  .news_feed
+    %h1 Class Updates
+    %ul
+      - @news_feed_posts.each do |post|
+        - if post[:type] == "resource"
+          %li.news_feed_item
+            - resource = post[:resource]
+            - announcement = post[:resource]
+            - section = resource.section
+            - resource_page = section.resource_page
+            - class_room = resource_page.class_room
+            %h3 
+              New #{resource_page.section.singularize.downcase} in
+              = link_to class_room.name, class_room
+            %h4
+              = link_to resource.name, [class_room, resource_page, section, resource]
+            .bottom
+              posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
+        - elsif post[:type] == "announcement"
+          %li.news_feed_item
+            - announcement = post[:announcement]
+            %h3
+              New announcement in 
+              = link_to announcement.class_room.name, class_room_path(announcement.class_room.id)
+            %h4= link_to announcement.title, announcements_path(announcement)
+            %p= announcement.content
+            %div.bottom
+              posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+            
