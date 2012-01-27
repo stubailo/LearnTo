@@ -22,7 +22,6 @@
             - ClassRoom::CATEGORIES.each do |category|
               %li
                 =link_to category, class_rooms_search_path( { "search[category]" => category} )
-            If you have a more specific class in mind, type in the name or a keyword here:
       - else
         - @news_feed_posts.each do |post|
           - if post[:type] == "resource"
