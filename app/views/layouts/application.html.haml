@@ -9,7 +9,13 @@
     .header
       %header
         .top_level
-          = link_to "LearnTo", root_path, :class => "logo"
+          -if current_user
+            -if current_user.taught_classes.size > 0 and current_user.class_rooms.size == 0
+              = link_to "LearnTo", home_teacher_index_path, :class => "logo"
+            -else
+              = link_to "LearnTo", home_index_path, :class => "logo"
+          -else
+            = link_to "LearnTo", root_path, :class => "logo"
 
           %nav
             = link_to "Browse Classes", class_rooms_path

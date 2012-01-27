@@ -206,7 +206,7 @@ class ClassRoomsController < ApplicationController
     @classes = ClassRoom.where("lower(name) LIKE ?", term.downcase).limit(30)
     @classes_hash = []
     @classes.each do |x|
-      @classes_hash << {"name" => x.name}
+      @classes_hash << {"label" => x.name, "value" => class_room_path(x.id)}
     end
     render :json => @classes_hash
   end
