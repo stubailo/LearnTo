@@ -1,5 +1,6 @@
 -if style == "full_page"
-  =image_tag res.file.url
+  %div{:style => "text-align: center"}
+    =link_to (image_tag res.file.url(:full_width)), res.file.url
 -else
   %div{:style => "text-align: center"}
     .image_embed{:style => "text-align: center; display: inline-block; background: #fafafa; border: #ccc 1px solid; border-radius: 3px 3px 0 0; -moz-border-radius: 3px 3px 0 0 "}
