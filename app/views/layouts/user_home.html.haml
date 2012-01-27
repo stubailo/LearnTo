@@ -12,10 +12,10 @@
             %li.main
               %a{:href => home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")}
                 Teacher Feed
+                %span.sublink Classes I'm Teaching - #{current_user.taught_classes.length}
           -if current_user.taught_classes.length > 0 or current_user.class_rooms.length > 0
             %li.main
               %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
-                %span.sublink Classes I'm Teaching - #{current_user.taught_classes.length}
       - num_class_rooms = 5
       %ul
         %li
