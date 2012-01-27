@@ -26,8 +26,9 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:post_id])
     respond_to do |format|
-      if @post.update_attributes(params[:post_id])
+      if @post.update_attributes(params[:post])
         format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
         partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
         format.json  { render :json => {:updated_post => partial} }

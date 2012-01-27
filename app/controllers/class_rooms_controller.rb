@@ -189,4 +189,9 @@ class ClassRoomsController < ApplicationController
     nil).sort_by { |class_room| class_room.updated_at }.reverse
   end
   
+  #def class_names
+   # term = params[:term]
+    #@classes = ClassRoom.where(:name => )
+  #end
+  
 end
