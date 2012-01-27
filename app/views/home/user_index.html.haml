@@ -15,13 +15,14 @@
     %h1 Class Updates
     %ul
       - if @news_feed_posts.empty?
-        Search for a class in a category you're interested in!
-        = form_tag class_rooms_search_path, :method => "get" do
-          = select(:search, :category, ClassRoom::CATEGORIES)
-          If you have a more specific class in mind, type in the name or a keyword here:
-          .search_field                
-            = text_field_tag :search_term, "", :class => "text"
-            = submit_tag "Search", :class => "button"
+        .empty_news_feed
+          %h2 You're not in any classes yet!
+          Pick a category you're interested in below to browse classes:
+          %ul 
+            - ClassRoom::CATEGORIES.each do |category|
+              %li
+                =link_to category, class_rooms_search_path( { "search[category]" => category} )
+            If you have a more specific class in mind, type in the name or a keyword here:
       - else
         - @news_feed_posts.each do |post|
           - if post[:type] == "resource"

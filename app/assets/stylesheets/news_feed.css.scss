@@ -1,4 +1,21 @@
 
+.empty_news_feed {
+  margin: 20px;
+  border: 2px dashed #ffe0a5;
+  padding: 10px;
+
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+
+  h2 {
+    font-size: 1.4em;
+    color: #999;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+}
+
 .news_feed h1, .new_posts h3 {
   
     padding: 10px; 
