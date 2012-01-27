@@ -14,29 +14,38 @@
   .news_feed
     %h1 Class Updates
     %ul
-      - @news_feed_posts.each do |post|
-        - if post[:type] == "resource"
-          %li.news_feed_item
-            - resource = post[:resource]
-            - announcement = post[:resource]
-            - section = resource.section
-            - resource_page = section.resource_page
-            - class_room = resource_page.class_room
-            %h3 
-              New #{resource_page.section.singularize.downcase} in
-              = link_to class_room.name, class_room
-            %h4
-              = link_to resource.name, [class_room, resource_page, section, resource]
-            .bottom
-              posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
-        - elsif post[:type] == "announcement"
-          %li.news_feed_item
-            - announcement = post[:announcement]
-            %h3
-              New announcement in 
-              = link_to announcement.class_room.name, class_room_path(announcement.class_room.id)
-            %h4= link_to announcement.title, announcements_path(announcement)
-            %p= announcement.content
-            %div.bottom
-              posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
+      - if @news_feed_posts.empty?
+        Search for a class in a category you're interested in!
+        = form_tag class_rooms_search_path, :method => "get" do
+          = select(:search, :category, ClassRoom::CATEGORIES)
+          If you have a more specific class in mind, type in the name or a keyword here:
+          .search_field                
+            = text_field_tag :search_term, "", :class => "text"
+            = submit_tag "Search", :class => "button"
+      - else
+        - @news_feed_posts.each do |post|
+          - if post[:type] == "resource"
+            %li.news_feed_item
+              - resource = post[:resource]
+              - announcement = post[:resource]
+              - section = resource.section
+              - resource_page = section.resource_page
+              - class_room = resource_page.class_room
+              %h3 
+                New #{resource_page.section.singularize.downcase} in
+                = link_to class_room.name, class_room
+              %h4
+                = link_to resource.name, [class_room, resource_page, section, resource]
+              .bottom
+                posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
+          - elsif post[:type] == "announcement"
+            %li.news_feed_item
+              - announcement = post[:announcement]
+              %h3
+                New announcement in 
+                = link_to announcement.class_room.name, class_room_path(announcement.class_room.id)
+              %h4= link_to announcement.title, announcements_path(announcement)
+              %p= announcement.content
+              %div.bottom
+                posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
             
