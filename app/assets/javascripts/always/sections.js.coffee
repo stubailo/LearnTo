@@ -5,6 +5,28 @@
 
 $ ->
 
+  #make delete links ajaxy
+  $(".lists_to_connect a[data-method=delete]").each ->
+    $(this).click ->
+      event.preventDefault()
+      event.stopPropagation()
+
+      the_resource = $(this).parents("li[id^=resource]")
+
+      if $(this).hasClass("confirm_alert")
+        the_resource.slideUp()
+        $.ajax({
+          url: $(this).attr("href"),
+          type: 'DELETE'})
+      else 
+        delete_link = $(this)
+        delete_link.text("click again to delete")
+        delete_link.addClass("confirm_alert")
+
+        $("body").one "click", handler = ->
+          delete_link.removeClass("confirm_alert")
+          delete_link.text("delete")
+
   if typeof allow_draggable != 'undefined'
     $(".list_of_sections").sortable({
       axis: "y",
