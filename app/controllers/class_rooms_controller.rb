@@ -73,7 +73,7 @@ class ClassRoomsController < ApplicationController
 
   # GET /class_rooms/1/edit
   def edit
-		@class_room = ClassRoom.new
+		@class_room = ClassRoom.find(params[:id])
 		if is_creator(@class_room)
 			respond_to do |format|
 				format.html 

@@ -60,6 +60,7 @@ Classroom::Application.routes.draw do
     resources :resource_pages do
       resources :sections do
         resources :resources do
+          resources :resource_comments
           match 'documents/:id/create_doc_rec' => "documents#create_doc_rec", :as => :doc_rec, :via => :post
         end
         match 'resources/:id/change_hidden' => "resources#change_hidden", :as => :publish
@@ -79,8 +80,6 @@ Classroom::Application.routes.draw do
   resources :comments
   
   resources :subcomments
-  
-  resources :resource_comments
   
   resources :users
 

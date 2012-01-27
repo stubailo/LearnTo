@@ -1,7 +1,4 @@
 class ResourceCommentsController < ApplicationController
-  def new
-    @resource_comment = ResourceComment.new
-  end
 
   def create
     @resource_comment = ResourceComment.new(params[:resource_comment])
