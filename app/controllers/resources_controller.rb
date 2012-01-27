@@ -24,6 +24,7 @@ class ResourcesController < ApplicationController
     set_vars
     require_enrolled(@class_room)
     if is_enrolled(@class_room)
+      @resource_comment = ResourceComment.new
       if(@resource.file_type == "document")
         @document = @resource.document
         unless defined? @document.parsed_content and Rails.env == "production"

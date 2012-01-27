@@ -33,6 +33,9 @@
         %br
         %br
         -if @is_creator
+          = link_to "Edit class", edit_class_room_path(@class_room)
+          %br
+          %br
           = link_to "Delete class", class_room_path(@class_room), confirm: 'Are you sure you want to destroy this class and all of its contents?', method: :delete
         -if current_user and not @show_join and not @is_creator
 

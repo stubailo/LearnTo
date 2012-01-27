@@ -73,8 +73,18 @@ class ClassRoomsController < ApplicationController
 
   # GET /class_rooms/1/edit
   def edit
-    @class_room = ClassRoom.find(params[:id])
-  end
+		@class_room = ClassRoom.find(params[:id])
+		if is_creator(@class_room)
+			respond_to do |format|
+				format.html 
+				format.json { render json: @class_room }
+			end
+		else
+		  flash[:fail] = "You must be the creator to do that"
+      redirect_back_or_default @class_room
+		end
+	end
+
 
   # POST /class_rooms
   # POST /class_rooms.json
