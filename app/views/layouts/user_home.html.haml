@@ -15,10 +15,11 @@
             %a{:href => home_index_path, :class => (which_tab == "user_index" ? "active" : "")}
               Student Feed
               %span.sublink Classes I'm Taking 
-          %li.main
-            %a{:href => home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")}
-              Teacher Feed
-              %span.sublink Classes I'm Teaching
+          -if current_user.taught_classes.length > 0
+            %li.main
+              %a{:href => home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")}
+                Teacher Feed
+                %span.sublink Classes I'm Teaching
           %li.main
             %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
       - num_class_rooms = 5

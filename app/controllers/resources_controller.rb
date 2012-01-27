@@ -224,12 +224,16 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1.json
   def destroy
     @resource = Resource.find(params[:id])
-    @resource.destroy
     get_path_vars
-
-    respond_to do |format|
-      format.html { redirect_to class_room_resource_page_path(@class_room, @resource_page) }
-      format.json { head :no_content }
+    if is_creator(@class_room)
+			@resource.destroy
+			respond_to do |format|
+				format.html { redirect_to class_room_resource_page_path(@class_room, @resource_page) }
+				format.json { head :no_content }
+			end
+		else
+      redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),
+       :flash => { :fail => "You must be the creator of the class to modify uploaded documents" }
     end
   end
 end
