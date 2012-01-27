@@ -19,6 +19,7 @@ class ResourcesController < ApplicationController
   # GET
   def show
     @resource = Resource.find(params[:id])
+    @resource_comments = @resource.resource_comments
     get_path_vars
     set_vars
     require_enrolled(@class_room)
@@ -34,9 +35,9 @@ class ResourcesController < ApplicationController
                   :locals => {:res => res, :style => "big_embed", :hidden => false}
             )
           end
+          @document.parsed_content = xml_doc.to_s
         end
 
-        @document.parsed_content = xml_doc.to_s
         @document.save
       end
     end

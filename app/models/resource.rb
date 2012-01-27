@@ -26,6 +26,7 @@ class Resource < ActiveRecord::Base
   belongs_to :document
   belongs_to :section
   has_one :document, :dependent => :destroy
+  has_many :resource_comments, :dependent => :destroy
   
   before_validation :download_remote_image, :if => :image_url_provided?
 

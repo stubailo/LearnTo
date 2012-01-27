@@ -7,7 +7,7 @@
     - (@post.comments.sort { |c1, c2| c2.rating <=> c1.rating }).each do |comment|
       .response{:id => "forum_response_" + comment.id.to_s}
         = render :partial => "comments/comment", :locals => {:comment => comment}
-        = render :partial => "comments/edit_comment", :locals => {:comment_id => @post.id}
+        = render :partial => "comments/edit_comment", :locals => {:comment => comment}
         .sub_comments
           - comment.subcomments.order(:created_at).each do |subcomment|
             = render :partial => "subcomments/subcomment", :locals => {:subcomment => subcomment}

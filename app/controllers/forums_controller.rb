@@ -1,25 +1,29 @@
 class ForumsController < ApplicationController
-  def show 
+  def show
     @forum = Forum.find(params[:id])
-    @posts = @forum.posts.order("last_updated DESC").page(params[:page]).per(15)
     @class_room = @forum.class_room
-    @tags = []
-    set_vars
-    
-    
-    Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
-     .where(:taggable_type => "Post")
-     .where(:taggable_id => @ids)
-     .group("tag_id")
-     .order('created_at DESC')
-     .limit(6).each { |x| @tags.push(x.tag.name) }
+    if is_enrolled(@class_room)
+      @posts = @forum.posts.order("last_updated DESC").page(params[:page]).per(15)
+      @tags = []
+      set_vars
       
-    if @forum != nil && @user != nil
-      @post = Post.new
-      @comment = Comment.new
-      render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
+      
+      Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
+       .where(:taggable_type => "Post")
+       .where(:taggable_id => @ids)
+       .group("tag_id")
+       .order('created_at DESC')
+       .limit(6).each { |x| @tags.push(x.tag.name) }
+        
+      if @forum != nil && @user != nil
+        @post = Post.new
+        @comment = Comment.new
+        render :layout => "layouts/show_class_room", :locals => {:which_tab => "discussion"}
+      else
+        redirect_to :back
+      end
     else
-      redirect_to :back
+      redirect_to :controller => "class_rooms", :action => "show", :id => @class_room.id
     end
   end
   

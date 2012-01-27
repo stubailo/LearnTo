@@ -28,5 +28,4 @@ class DocumentsController < ApplicationController
 		  redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
 		end
   end
-
 end

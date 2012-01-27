@@ -1,14 +1,21 @@
-= form_tag('search', :method => :get) do
-  = hidden_field_tag(:forum_id, @forum.id)
-  = label_tag(:search_term, "Search forum:")
-  = text_field_tag(:search_term)
-  = submit_tag("Search")
-  
-= render "posts/newPost"
+%div{:style => "overflow: hidden"}
+  .forum_search_form
+    = form_tag('search', :method => :get) do
+      = hidden_field_tag(:forum_id, @forum.id)
+      = label_tag(:search_term, "Search forum:")
+      = text_field_tag(:search_term)
+      = submit_tag("Search")
+
+  %span.javascript_show
+    %a.button#new_post_button{:href=>"#"} New Post
+
+  .clear
+.no_javascript
+  = render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
     .forum_post
-      - if post.user_id == current_user.id
+      - if post.user_id == current_user.id or current_user.id == @post.forum.class_room.user.id
         = link_to "delete", post_path(post), :method => :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
         = link_to post.title, post_path(post)

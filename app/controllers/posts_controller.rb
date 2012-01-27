@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def index
     @posts = Post.all
 
@@ -12,7 +11,6 @@ class PostsController < ApplicationController
   def show
     @edit_post = Post.new
     @edit_comment = Comment.new
-    
     @post = Post.find(params[:id])
     @forum = @post.forum
     if @post
@@ -28,8 +26,9 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:post_id])
     respond_to do |format|
-      if @post.update_attributes(params[:post_id])
+      if @post.update_attributes(params[:post])
         format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
         partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
         format.json  { render :json => {:updated_post => partial} }
@@ -79,13 +78,12 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id]) 
     @forum = @post.forum 
-    if @post.user_id != current_user.id
+    if @post.user_id != current_user.id or current_user.id == @post.forum.class_room.user.id
       redirect_to root_url
     end
     @post.destroy
     redirect_to forum_path(@forum)
   end
-  
 end
 
 

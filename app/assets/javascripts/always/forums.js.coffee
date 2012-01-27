@@ -46,3 +46,10 @@ pm_event_handler = (plus_or_minus) ->
         
       middle.text(parseInt(middle.text()) + increment)
     )
+
+$ ->
+  $("#new_post").prepend("<a href='#' style='float:right' class='cancel_button'>cancel</a>")
+  $("#new_post").find(".cancel_button").click ->
+    $("#new_post").parent().slideUp()
+  $("#new_post_button").click ->
+    $("#new_post").parent().slideDown()
