@@ -9,7 +9,6 @@
 
   .info
     %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}
-
   -#
     :javascript
       $( function(){ 
@@ -20,8 +19,7 @@
           consumer_key: "jjCZcGGsUENc4vAX5ODwA",
           auto_play: true
         });
-
-    
+          
         var jtv = document.getElementById("stream_box"); 
         function setStartingSize() { 
           if (jtv.children.length == 0) { 
@@ -36,13 +34,13 @@
           player.width = 600; 
         } 
         setStartingSize(); 
-
+  
       });
 
-    %div{:style => "text-align: center"}
-      #stream_box{:style=>"float:left"}
-      %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
-      .clear 
+  %div{:style => "text-align: center"}
+    #stream_box{:style=>"float:left"}
+    %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
+    .clear 
   
   = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page", :hidden => false}
 
