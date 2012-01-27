@@ -19,6 +19,7 @@ class ResourcesController < ApplicationController
   # GET
   def show
     @resource = Resource.find(params[:id])
+    @resource_comments = @resource.resource_comments
     get_path_vars
     set_vars
     require_enrolled(@class_room)

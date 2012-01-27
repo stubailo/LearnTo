@@ -45,3 +45,11 @@
       .clear 
   
   = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page", :hidden => false}
+
+.sub_comments
+  - @resource_comments.each do |comment|
+    = render :partial => "resource_comments/resource_comment", :locals => {:resource_comment => comment}
+  = render :partial => "resource_comments/new_resource_comment", :locals => { :resource_id => @resource.id }
+  
+
+

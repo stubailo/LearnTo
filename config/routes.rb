@@ -74,6 +74,8 @@ Classroom::Application.routes.draw do
   
   resources :subcomments
   
+  resources :resource_comments
+  
   resources :users
 
   get "user_sessions/new"
