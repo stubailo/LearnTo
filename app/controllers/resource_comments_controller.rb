@@ -6,14 +6,20 @@ class ResourceCommentsController < ApplicationController
     @resource_comment.resource_id = @resource.id
     @resource_comment.user_id = current_user.id
     @resource_comment.save
-    
+   
+    @class_room = @resource_comment.resource.class_room
+    set_vars
+    @section = @resource.section
+    @resource_page = @section.resource_page
     
     
     user_notification("new_resource_comment","Resource",@resource.user,@resource.id)
    
     #return in json, with html for new form and for new comment, using the partials in resource comments
-
-    redirect_to :back
+    respond_to do |format|
+      format.json { render :json => { :comment_html => render_to_string( :partial => "resource_comment.html.haml", :locals => { :resource_comment => @resource_comment }  )} }
+      format.html { redirect_to :back }
+    end
   end
 
   def destroy
