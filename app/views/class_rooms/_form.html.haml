@@ -18,25 +18,25 @@
       = f.label :short_description
       = f.text_area :summary
   .form_page.other_info
-    %h3 Step 3: Category
-    %p.class_create_hint This is the type of course you are going to teach.
-    .field
-      = f.select :category, ClassRoom::CATEGORIES[1..-1]
     %h3 Step 3: Official Name
     %p.class_create_hint This is the name that will show up for your class when people search.
     .field
       = f.text_field :name, :class => "text"
     %div{:style => "display: hidden"}
       .field
-        = f.label :occupancy, "Maximum Enrollment", :class => "main"
-        %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
-        = f.number_field :occupancy, :value => 0, :class => "text"
+        = f.label :category, "Category", :class => "main"
+        %p.class_create_hint This is the type of course you are going to teach.
+        = f.select :category, ClassRoom::CATEGORIES[1..-1]
       .field
         = f.label :start_date, :class => "main"
         = f.date_select :start_date
       .field
         = f.label :end_date, :class => "main"
         = f.date_select :end_date
+      .field
+        = f.label :occupancy, "Maximum Enrollment", :class => "main"
+        %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
+        = f.number_field :occupancy, :value => 0, :class => "text"
       .field
         = f.label :price, :class => "main"
         $
