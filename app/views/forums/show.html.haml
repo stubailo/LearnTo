@@ -1,10 +1,17 @@
-= form_tag('search', :method => :get) do
-  = hidden_field_tag(:forum_id, @forum.id)
-  = label_tag(:search_term, "Search forum:")
-  = text_field_tag(:search_term)
-  = submit_tag("Search")
-  
-= render "posts/newPost"
+%div{:style => "overflow: hidden"}
+  .forum_search_form
+    = form_tag('search', :method => :get) do
+      = hidden_field_tag(:forum_id, @forum.id)
+      = label_tag(:search_term, "Search forum:")
+      = text_field_tag(:search_term)
+      = submit_tag("Search")
+
+  %span.javascript_show
+    %a.button#new_post_button{:href=>"#"} New Post
+
+  .clear
+.no_javascript
+  = render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
     .forum_post
