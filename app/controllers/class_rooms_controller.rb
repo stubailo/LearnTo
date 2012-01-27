@@ -191,9 +191,14 @@ class ClassRoomsController < ApplicationController
     @class_rooms = Kaminari.paginate_array(@class_rooms).page(params[:page]).per(15)
   end
   
-  #def class_names
-   # term = params[:term]
-    #@classes = ClassRoom.where(:name => )
-  #end
+  def class_names
+    term = "%" + params[:term] + "%"
+    @classes = ClassRoom.where("lower(name) LIKE ?", term.downcase).limit(30)
+    @classes_hash = []
+    @classes.each do |x|
+      @classes_hash << {"name" => x.name}
+    end
+    render :json => @classes_hash
+  end
   
 end

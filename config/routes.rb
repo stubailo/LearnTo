@@ -12,6 +12,8 @@ Classroom::Application.routes.draw do
   
   match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
   
+  get "class_rooms/class_names"
+  
   get "students/show"
   
   get "forums/search_by_tag"

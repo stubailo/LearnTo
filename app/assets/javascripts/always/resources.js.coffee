@@ -57,4 +57,3 @@ $ ->
     $("input:radio[value=" + val + "]").attr("checked", true)
     $("[id$=_tab_contents]").hide();
     $("#" + val + "_tab_contents").show();
-    
