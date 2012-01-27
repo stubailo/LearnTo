@@ -34,9 +34,9 @@ class ResourcesController < ApplicationController
                   :locals => {:res => res, :style => "big_embed", :hidden => false}
             )
           end
+          @document.parsed_content = xml_doc.to_s
         end
 
-        @document.parsed_content = xml_doc.to_s
         @document.save
       end
     end
