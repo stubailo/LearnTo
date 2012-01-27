@@ -26,7 +26,7 @@ class ClassRoom < ActiveRecord::Base
   belongs_to :user
   
   # never change these names, or the order, ever :D
-  CATEGORIES = [ 'Programming/Development', 'Academic', 'Other' ]  
+  CATEGORIES = [ 'All', 'Programming/Development', 'Academic', 'Other' ]  
   
   
   def rating
@@ -45,7 +45,11 @@ class ClassRoom < ActiveRecord::Base
   def self.search(search, category)
     @result = []
     @ids = []
-    if search == ""
+    if search == nil && category == nil
+      return @result
+    elsif(category == nil && search == "")
+      return ClassRoom.all
+    elsif search == "" || search == nil
       return ClassRoom.where('category = ?', category)
     else
 			tokenize = search.scan(/"[^"]*"|[^"'\s]+/)
