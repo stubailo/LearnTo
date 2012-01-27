@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.class_room_summary {
+
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  margin-top: 10px;
+
+  h2 {
+    .name {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    margin-bottom: 5px;
+  }
+}
 
 .class_page {
   padding: 0 20px;
