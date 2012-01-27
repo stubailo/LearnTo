@@ -17,11 +17,11 @@
       - if @news_feed_posts.empty?
         .empty_news_feed
           %h2 You're not in any classes yet!
-          Pick a category you're interested in below to browse classes:
+          Pick a category you're interested in to browse classes:
           %ul 
             - ClassRoom::CATEGORIES.each do |category|
               %li
-                =link_to category, class_rooms_search_path( { "search[category]" => category} )
+                =link_to category, class_rooms_search_path( { "search[category]" => category, "search_term" => ""} )
       - else
         - @news_feed_posts.each do |post|
           - if post[:type] == "resource"
