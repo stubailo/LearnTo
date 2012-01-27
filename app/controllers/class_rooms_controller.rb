@@ -114,9 +114,7 @@ class ClassRoomsController < ApplicationController
   # PUT /class_rooms/1.json
   def update
     @class_room = ClassRoom.find(params[:id])
-    
     if is_creator(@class_room)
-
       respond_to do |format|
         if @class_room.update_attributes(params[:class_room])
           format.html { redirect_to @class_room, notice: 'Class was successfully updated.' }

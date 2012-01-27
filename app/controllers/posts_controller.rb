@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def index
     @posts = Post.all
 
@@ -12,7 +11,6 @@ class PostsController < ApplicationController
   def show
     @edit_post = Post.new
     @edit_comment = Comment.new
-    
     @post = Post.find(params[:id])
     @forum = @post.forum
     if @post
@@ -85,7 +83,6 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to forum_path(@forum)
   end
-  
 end
 
 
