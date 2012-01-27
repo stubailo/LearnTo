@@ -1,0 +1,21 @@
+%h1= @user.login
+.info User since #{l @user.created_at.to_date}
+- if current_user == @user && @user.account_type == "internal"
+  %p
+    %strong Link your account to your facebook page!
+  %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+    = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook"
+    Facebook
+- unless @taught_classes.empty?
+  = "Classes #{@is_me ? "you are" : @user.login + " is"} teaching:"
+  %ul
+    - @taught_classes.each do |taught_class|
+      %li= link_to taught_class.name, class_room_path(taught_class)
+- if @class_rooms.empty?
+  %p #{@is_me ? "you are" : @user.login + "is"} not taking any classes.
+- else
+  = "Classes #{@is_me ? "you are" : @user.login + " is"} taking:"
+  %ul 
+    - @class_rooms.each do |class_room|
+      %li= link_to class_room.name, class_room_path(class_room)
+

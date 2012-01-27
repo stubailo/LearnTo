@@ -1,5 +1,5 @@
-= form_tag "/class_rooms/search", :method => "get" do
-  = select(:search, :category, ClassRoom::CATEGORIES)
+= form_tag class_rooms_search_path, :method => "get" do
+  = select_tag :category, options_for_select(ClassRoom::CATEGORIES, params[:category] ? params[:category] : "All")
   .search_field                
     = text_field_tag :search_term, "", :class => "text"
     = submit_tag "Search", :class => "button"

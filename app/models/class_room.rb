@@ -26,7 +26,7 @@ class ClassRoom < ActiveRecord::Base
   belongs_to :user
   
   # never change these names, or the order, ever :D
-  CATEGORIES = [ 'Programming/Development', 'Academic', 'Other' ]  
+  CATEGORIES = [ 'All', 'Programming/Development', 'Academic', 'Other' ]  
   
   
   def rating
@@ -45,31 +45,39 @@ class ClassRoom < ActiveRecord::Base
   def self.search(search, category)
     @result = []
     @ids = []
-    tokenize = search.scan(/"[^"]*"|[^"'\s]+/)
-    tokenize = tokenize.map {|x| '%' + x.strip.gsub(/"/, '') + '%'}
-    tokenize.each do |x|
-      if @ids.size != 0
-        temp =  category ? ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
-        .where('id NOT IN (?)', @ids).where('category = ?', category)
-        :
-        ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
-        .where('id NOT IN (?)', @ids)
-        temp.each do |x|
-          @ids.push(x.id)
-        end
-        @result += temp
-      else
-        temp = category ? ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
-        .where('category = ?', category)
-        :
-        ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
-        temp.each do |x|
-          @ids.push(x.id)
-        end
-        @result += temp
-      end
-    end
-    return @result
+    if search == nil && category == nil
+      return @result
+    elsif(category == nil && search == "")
+      return ClassRoom.all
+    elsif search == "" || search == nil
+      return ClassRoom.where('category = ?', category)
+    else
+			tokenize = search.scan(/"[^"]*"|[^"'\s]+/)
+			tokenize = tokenize.map {|x| '%' + x.strip.gsub(/"/, '') + '%'}
+			tokenize.each do |x|
+				if @ids.size != 0
+					temp =  category ? ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+					.where('id NOT IN (?)', @ids).where('category = ?', category)
+					:
+					ClassRoom.where('lower(name) LIKE ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+					.where('id NOT IN (?)', @ids)
+					temp.each do |x|
+						@ids.push(x.id)
+					end
+					@result += temp
+				else
+					temp = category ? ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+					.where('category = ?', category)
+					:
+					ClassRoom.where('lower(name) Like ? OR lower(tag_line) LIKE ? OR lower(summary) LIKE ?', x.downcase, x.downcase, x.downcase)
+					temp.each do |x|
+						@ids.push(x.id)
+					end
+					@result += temp
+				end
+			end
+			return @result
+		end
   end
   
 end

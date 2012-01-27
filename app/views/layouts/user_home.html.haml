@@ -4,11 +4,11 @@
       .info_box
         %strong= current_user.login
         -if current_user.account_type
-          %p Connected with Facebook
+          %p Signed in with Facebook
         %p 
-          = "Taking #{current_user.class_rooms.length} classes"
+          Taking #{pluralize current_user.class_rooms.length, "class"}
         %p 
-          = "Teaching #{current_user.taught_classes.length} classes"
+          Teaching #{pluralize current_user.taught_classes.length, "class"}
       %nav
         %ul.user_nav
           %li.main
