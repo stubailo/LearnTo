@@ -175,7 +175,7 @@ class ResourcesController < ApplicationController
     #Turn timestamps back on    
     Resource.record_timestamps = true
     
-    redirect_back_or_default class_room_resource_pagepath(@class_room, @resource_page) 
+    redirect_back_or_default class_room_resource_page_path(@class_room, @resource_page) 
   end
   
   def change_order

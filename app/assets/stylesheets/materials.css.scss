@@ -71,6 +71,11 @@
 
       background: #fff;
 
+      &.hidden {
+        background: #f5f5f5;
+        color: #555;
+      }
+
       .resource_list_name {
       }
 
