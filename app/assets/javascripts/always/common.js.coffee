@@ -1,5 +1,11 @@
 $ -> $(".button").button()
 
+$ ->
+  $("#search_term").live("autocompleteselect", (event, ui) ->
+    event.preventDefault()
+    window.location = ui.item.value
+  )
+
 ###
 $ -> 
   $("#login_dialog").dialog({
