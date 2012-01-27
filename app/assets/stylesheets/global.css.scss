@@ -141,20 +141,35 @@ $left-bar-padding: $global-padding;
         margin-left: 10px;
 
         background: url("owl.png") top left no-repeat;
-        width: 300px;
         height: 30px;
        
         color: #ddd;
         padding: 4px;
         padding-left: 26px;
+        padding-right: 10px;
         font-size: 1.3em;
 
         &:hover {
           text-decoration: none;
           color: #fff;
           background: url("white-owl.png") top left no-repeat;
+          text-shadow: rgba(255,255,255,.2) 0 0 3px;
         }
 
+    }
+
+    nav a {
+      float: left;
+      color: #ddd;
+      font-weight: bold;
+      padding: 16px 10px;
+      border-left: #555 1px solid;
+
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+        text-shadow: rgba(255,255,255,.2) 0 0 3px;
+      }
     }
 
     .user_nav {

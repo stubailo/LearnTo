@@ -1,28 +1,34 @@
 - content_for :right_column do  
   .new_posts
-    %h3 New Discussion Posts
+    %h3
+      New Discussion Posts
     - @posts.each do |post|
-      .forum_post_container
-        .forum_post
-          %h4
-            = link_to post.title, post_path(post)
-          %div.bottom
-            #{link_to post.user.login, post.user}
-            in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-            #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
+      .feed_forum_post  
+        %h4
+          = link_to post.title, post_path(post)
+        %div.bottom
+          #{link_to post.user.login, post.user}
+          in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+          #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
   
 - content_for :center_column do
-  - current_user.taught_classes.each do |class_room|
-    - resource_pages = class_room.resource_pages.sort_by {|x| x.id}
-    = link_to class_room.name, class_room_path(class_room)
-    = link_to "Lessons", class_room_resource_page_path(class_room, resource_pages[0])
-    = link_to "Homework", class_room_resource_page_path(class_room, resource_pages[1])
-    = link_to "Materials", class_room_resource_page_path(class_room, resource_pages[2])
-    = link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
-    = link_to "Discussion", class_room.forum
-    = link_to "Students", students_show_path(:class_room => class_room.id)
-    = render :partial => 'announcements/new_announcement', :locals => {:class_room => class_room}
+  .news_feed
+    %h1 Your Classes
+    - current_user.taught_classes.each do |class_room|
+      .teacher_feed_class
+        - resource_pages = class_room.resource_pages.sort_by {|x| x.id}
+        %span.info #{pluralize class_room.users.length, "student"}, rated #{class_room.rating}
+        %h3= link_to class_room.name, class_room_path(class_room)
+        .section_links
+          %h4 Quick Links
+          %ul
+            %li= link_to "Lessons", class_room_resource_page_path(class_room, resource_pages[0])
+            %li= link_to "Homework", class_room_resource_page_path(class_room, resource_pages[1])
+            %li= link_to "Materials", class_room_resource_page_path(class_room, resource_pages[2])
+            %li= link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
+            %li= link_to "Discussion", class_room.forum
+            %li= link_to "Students", students_show_path(:class_room => class_room.id)
+        .new_announcement_container
+          %h4 Post New Announcement
+          = render :partial => 'announcements/new_announcement', :locals => {:class_room => class_room}
           
-  = #"Try a new class!"
-  = #link_to @random_class_room.name, @random_class_room
-

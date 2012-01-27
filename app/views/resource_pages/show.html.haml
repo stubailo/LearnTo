@@ -61,14 +61,16 @@
               %li{:id => "resource-" + resource.id.to_s}
                 .resource_list_name 
                   =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
-                  = "(draft)" if resource.hidden
-                  %span.resource_list_timestamp #{time_ago_in_words resource.created_at} ago
+                  = "(hidden)" if resource.hidden
+                  %span.resource_list_timestamp
+                    created #{time_ago_in_words resource.created_at} ago
+                    - if @is_creator
+                      = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
+                      = link_to resource.hidden ? "publish": "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource)
+                      - if resource != @class_room.resource
+                        = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: "Are you sure you want to destroy this file?", method: :delete
+
                   - if @is_creator
-                    = link_to 'Edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource),
-       :class => "button"
-                    = link_to resource.hidden ? "Publish to class": "Hide from class", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "button"
-                    - if resource != @class_room.resource
-                      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: 'Are you sure?', method: :delete, :class => "button"
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
                       .field
                         = label_tag :resource, :Section, :class => "main"

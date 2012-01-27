@@ -22,14 +22,14 @@ class AuthenticationsController < ApplicationController
     else
       user = User.find_by_email(omniauth['info']['email'])
       if(user)
-		flash[:fail] = "Your facebook email is already tied to another account.  Recover that account and link your facebook through it."
-	    redirect_to root_path
-	  else
-	    @new_auth = Authentication.create_from_hash(omniauth, current_user) #Create a new user
-	    flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
-		UserSession.create(@new_auth.user, true) #Log the authorizing user in.
-		redirect_back_or_default root_url
-	  end
+		    flash[:fail] = "Your facebook email is already tied to another account.  Recover that account and link your facebook through it."
+	      redirect_to root_path
+  	  else
+  	    @new_auth = Authentication.create_from_hash(omniauth, current_user) #Create a new user
+  	    flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
+    		UserSession.create(@new_auth.user, true) #Log the authorizing user in.
+    		redirect_back_or_default root_url
+  	  end
     end
   end
  

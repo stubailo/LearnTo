@@ -1,19 +1,21 @@
-.full_width_page
-  .form_page
+.form_page
 
-    %h1 Create an Account
+  %h1 Create an Account
 
-    %p Get ready to join our vibrant learning community!
+  %p Get ready to join our vibrant learning community!
 
-    %hr
+  %hr
+  
+  %div{:style => "float: left; width: 25%"}
+   
+    %div{:style => "padding: 10px"}
+      %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+        = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
+      %p{:style => "line-height: 1.2em"} 
+        %strong> Click the button to register with Facebook
+        , or fill in the information on the right to create an independent account.
     
-    %p Register with Facebook
-    
-    %a{:href=>"/auth/facebook", :class=>"auth_provider"}
-      = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" 
-      
-    .clear
-    
-    %p or
-
-    = render :partial => "form"
+  %div{:style => "float: left; width: 74%; border-left: 1px dashed #ddd"}
+    %div{:style => "padding: 10px"}
+      = render :partial => "form"
+  .clear

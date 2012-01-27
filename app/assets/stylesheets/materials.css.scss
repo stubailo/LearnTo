@@ -1,8 +1,4 @@
 
-.ui-sortable-placeholder {
-  background: #faa;
-}
-
 .materials_section h3, .add_new_section {
 
   padding: 10px;
@@ -71,6 +67,7 @@
       padding: 10px;
       border-top: 1px solid #ccc;
       margin-top: -1px;
+      z-index: -10px;
 
       background: #fff;
 

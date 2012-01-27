@@ -10,7 +10,7 @@ class HomeController < ApplicationController
   	  @news_feed_posts = []
   	  @posts = []
   	  if @ids.size > 0
-    	  @news_feed_posts = Resource.where(:class_room_id => @ids).order('created_at DESC').limit(20).map do |resource|
+    	  @news_feed_posts = Resource.where(:class_room_id => @ids).order('created_at DESC').where(:hidden => "false").limit(20).map do |resource|
             { :resource => resource,
               :type => "resource",
               :created_at => resource.created_at }

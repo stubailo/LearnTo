@@ -12,14 +12,14 @@
         %ul
           %li Invalid username or password.
     .field
-      = f.label :email
+      = f.label :email, :class => "main"
       = f.text_field :email, :class => "text"
     .field
-      = f.label :password
+      = f.label :password, :class => "main"
       = f.password_field :password, :class => "text"
     .field
       = f.check_box :remember_me, :class => "checkbox"
-      = f.label :remember_me
+      = f.label :remember_me, :class => "main"
       %div.clear
     %div
       = f.submit "Submit", :class => "button"
