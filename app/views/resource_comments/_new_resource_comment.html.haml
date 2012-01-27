@@ -1,0 +1,6 @@
+- @resource_comment = ResourceComment.new
+= form_for @resource_comment, :url => {:controller => "resource_comments", :action => "create" } do |f|
+  = hidden_field_tag("resource_id", resource_id)
+  = f.text_area :content, :size => "20x1"
+  %br
+  = f.submit "Submit Comment"

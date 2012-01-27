@@ -3,6 +3,7 @@ class ClassRoomsController < ApplicationController
   # GET /class_rooms.json
   def index
     @class_rooms = ClassRoom.all
+    @class_rooms = Kaminari.paginate_array(@class_rooms).page(params[:page]).per(15)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @class_rooms }
@@ -187,6 +188,17 @@ class ClassRoomsController < ApplicationController
   def search
     @class_rooms = ClassRoom.search(params[:search_term], params[:search] ? params[:search][:category] : 
     nil).sort_by { |class_room| class_room.updated_at }.reverse
+    @class_rooms = Kaminari.paginate_array(@class_rooms).page(params[:page]).per(15)
+  end
+  
+  def class_names
+    term = "%" + params[:term] + "%"
+    @classes = ClassRoom.where("lower(name) LIKE ?", term.downcase).limit(30)
+    @classes_hash = []
+    @classes.each do |x|
+      @classes_hash << {"name" => x.name}
+    end
+    render :json => @classes_hash
   end
   
 end

@@ -51,3 +51,17 @@
       %footer
         .top_level
           created for 6.470 by Brodrick Childs, Sashko Stubailo, Jeffrey Warren
+          
+:javascript
+  $(function() {
+    $("#search_term").autocomplete({
+      source: "/class_rooms/class_names.json",
+      minLength: 3
+     });
+    });
+  $(function() {
+    $("#search_field").autocomplete({
+      source: "/class_rooms/class_names.json",
+      minLength: 3
+     });
+    });

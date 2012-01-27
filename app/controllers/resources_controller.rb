@@ -19,6 +19,7 @@ class ResourcesController < ApplicationController
   # GET
   def show
     @resource = Resource.find(params[:id])
+    @resource_comments = @resource.resource_comments
     get_path_vars
     set_vars
     require_enrolled(@class_room)
@@ -173,7 +174,7 @@ class ResourcesController < ApplicationController
     #Turn timestamps back on    
     Resource.record_timestamps = true
     
-    redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource) 
+    redirect_back_or_default class_room_resource_pagepath(@class_room, @resource_page) 
   end
   
   def change_order

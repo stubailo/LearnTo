@@ -4,9 +4,15 @@ Classroom::Application.routes.draw do
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
   
+  match "comments/:id/edit" => "comments#edit", :via => :put
+  
+  match "posts/:id/edit" => "posts#edit", :via => :put
+  
   match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
   
   match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
+  
+  get "class_rooms/class_names"
   
   get "students/show"
   
@@ -73,6 +79,8 @@ Classroom::Application.routes.draw do
   resources :comments
   
   resources :subcomments
+  
+  resources :resource_comments
   
   resources :users
 

@@ -1,0 +1,6 @@
+= resource_comment.content
+= " - "
+= link_to resource_comment.user.login, user_path(resource_comment.user)
+- if resource_comment.user_id == @user.id
+  = link_to "delete", resource_comment_path(resource_comment), :method => :delete
+%br

@@ -15,7 +15,7 @@
 - @posts.each do |post|
   .forum_post_container
     .forum_post
-      - if post.user_id == current_user.id
+      - if post.user_id == current_user.id or current_user.id == @post.forum.class_room.user.id
         = link_to "delete", post_path(post), :method => :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
         = link_to post.title, post_path(post)

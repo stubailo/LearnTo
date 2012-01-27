@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :subcomments
+  has_many :resource_comments
   
   has_many :post_ratings
   has_many :class_room_ratings
