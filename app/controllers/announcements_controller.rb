@@ -13,15 +13,6 @@ class AnnouncementsController < ApplicationController
     @na.save
     redirect_to :back
   end
-  
-  def ajaxDelete
-    @announcement = Announcement.find(params[:announcement_id])
-    if @post.user_id != current_user.id
-      redirect_to root_url
-    end
-    @post.destroy
-    return "ok"
-  end
 
   def destroy
     @announcement = Announcement.find(params[:announcement_id])
