@@ -20,10 +20,10 @@
       = render :partial => "shared/image_content", :locals => {:res => res, :style => style}
     - if info[:media_type] == "video" and info[:video][:source] == "youtube"
       .youtube_full_page_container
-        %iframe{:width=>"640", :height=>"385", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
+        %iframe{:width=>"735", :height=>"435", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
     - if info[:media_type] == "video" and info[:video][:source] == "vimeo"
       .youtube_full_page_container
-        %iframe{:src=>"http://player.vimeo.com/video/#{info[:video][:id].to_s}", :width=>"640", :height=>"385", :frameborder=>"0", :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen => true}
+        %iframe{:src=>"http://player.vimeo.com/video/#{info[:video][:id].to_s}", :width=>"853", :height=>"505", :frameborder=>"0", :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen => true}
   - if style == "big_embed"
     - if info[:media_type] == "unknown"
       .full_page_link_container
@@ -35,4 +35,4 @@
         %iframe{:width=>"640", :height=>"385", :src=>("http://www.youtube.com/embed/" + info[:video][:id].to_s + "?rel=0"), :frameborder=>"0", :allowfullscreen=>""}
     - if info[:media_type] == "video" and info[:video][:source] == "vimeo"
       .youtube_full_page_container
-        %iframe{:src=>"http://player.vimeo.com/video/#{info[:video][:id].to_s}", :width=>"640", :height=>"385", :frameborder=>"0", :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen => true}
+        %iframe{:src=>"http://player.vimeo.com/video/#{info[:video][:id].to_s}", :width=>"735", :height=>"435", :frameborder=>"0", :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen => true}

@@ -21,7 +21,7 @@
           %ul 
             - ClassRoom::CATEGORIES.each do |category|
               %li
-                =link_to category, class_rooms_search_path( { "search[category]" => category, "search_term" => ""} )
+                =link_to category, class_rooms_search_path( { "category" => category, "search_term" => ""} )
       - else
         - @news_feed_posts.each do |post|
           - if post[:type] == "resource"
