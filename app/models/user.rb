@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
   
+  has_many :notifications
+  
   has_many :announcements
   has_many :posts
   has_many :comments
