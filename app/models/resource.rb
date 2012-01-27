@@ -14,7 +14,7 @@ class Resource < ActiveRecord::Base
   validates :section_id, :presence => true, :if => lambda { |res| res.try(:source_call) !="document" }
   validates_attachment_size :file, less_than: 10.megabyte
   
-  validates_presence_of :image_remote_url, :if => :image_url_provided?, :message => 'is invalid or inaccessible'
+  validates_presence_of :url, :if => :image_url_provided?, :message => 'is invalid or inaccessible'
   
   # never change these names, or the order, ever :D
   TYPES = ['upload', 'link', 'document']  
@@ -42,11 +42,11 @@ class Resource < ActiveRecord::Base
   
   def file_styles(a)
     type = a.content_type
-		if(type.start_with? "image")	
-			return { :full_width => "748x550>", :medium => "300x300>", :thumb => "100x100>" }
-		else
-			return {}
-		end
+    if(type.start_with? "image")  
+      return { :full_width => "748x550>", :medium => "300x300>", :thumb => "100x100>" }
+    else
+      return {}
+    end
   end
 
   def get_info
@@ -140,19 +140,19 @@ class Resource < ActiveRecord::Base
   
   private
     def image_url_provided?
-			!self.try(:url).blank? && self.try(:source_call) == "document" #&& !self.try(:image_size).blank? #uncomment last part if embedding image works
-		end
-		
-		def download_remote_image
-			self.file = do_download_remote_image
-			self.url = url
-		end
-		
-		def do_download_remote_image
-			io = open(URI.parse(url))
-			def io.original_filename; base_uri.path.split('/').last; end
-			io.original_filename.blank? ? nil : io
-		rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
-		end
+      !self.try(:url).blank? && self.get_info[:media_type] == "image" #&& !self.try(:image_size).blank? #uncomment last part if embedding image works
+    end
+    
+    def download_remote_image
+      self.file = do_download_remote_image
+      self.url = url
+    end
+    
+    def do_download_remote_image
+      io = open(URI.parse(url))
+      def io.original_filename; base_uri.path.split('/').last; end
+      io.original_filename.blank? ? nil : io
+    rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
+    end
 
 end
