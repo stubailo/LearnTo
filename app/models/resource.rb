@@ -42,7 +42,7 @@ class Resource < ActiveRecord::Base
   def file_styles(a)
     type = a.content_type
 		if(type.start_with? "image")	
-			return { :full_width => "748x550>", :medium => "300x300>", :thumb => "100x100>" }
+			return { :full_width => "730x550>", :medium => "300x300>", :thumb => "100x100>" }
 		else
 			return {}
 		end
