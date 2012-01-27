@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   acts_as_taggable_on :tags
   
-  has_many :notifications, :as => :item
+  has_many :notifications, :as => :item, :dependent => :destroy
   
   belongs_to :user
   belongs_to :forum

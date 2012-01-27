@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(:version => 20120127194758) do
     t.string   "action"
     t.integer  "user_id"
     t.boolean  "dirty"
-    t.integer  "note_id"
-    t.string   "note_type"
+    t.integer  "item_id"
+    t.string   "item_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

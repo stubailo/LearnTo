@@ -1,10 +1,15 @@
 class ResourceCommentsController < ApplicationController
 
   def create
+    @resource = Resource.find(params[:resource_id])
     @resource_comment = ResourceComment.new(params[:resource_comment])
-    @resource_comment.resource_id = params[:resource_id]
+    @resource_comment.resource_id = @resource.id
     @resource_comment.user_id = current_user.id
     @resource_comment.save
+    
+    
+    
+    user_notification("new_resource_comment","Resource",@resource.user,@resource.id)
    
     #return in json, with html for new form and for new comment, using the partials in resource comments
 
