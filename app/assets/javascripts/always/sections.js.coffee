@@ -27,6 +27,26 @@ $ ->
           delete_link.removeClass("confirm_alert")
           delete_link.text("delete")
 
+  #make hide links ajaxy
+  $(".lists_to_connect a.hide_link").each ->
+    $(this).click ->
+      event.preventDefault()
+      event.stopPropagation()
+
+      the_resource = $(this).parents("li[id^=resource]")
+
+      if the_resource.hasClass("hidden")
+        $(this).text("hide")
+        the_resource.switchClass("hidden", "")
+        $.ajax({url: $(this).attr("href")})
+        the_resource.find(".hidden_indicator").text("")
+      else 
+        $(this).text("publish")
+        the_resource.switchClass("", "hidden")
+        $.ajax({url: $(this).attr("href")})
+        the_resource.find(".hidden_indicator").text("(hidden)")
+
+
   if typeof allow_draggable != 'undefined'
     $(".list_of_sections").sortable({
       axis: "y",

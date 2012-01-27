@@ -58,15 +58,15 @@
           - resources = resources.sort_by { |res| res.order }
           - resources.each do |resource|
             - if !resource.hidden || @is_creator
-              %li{:id => "resource-" + resource.id.to_s}
+              %li{:id => "resource-" + resource.id.to_s, :class => (resource.hidden ? "hidden" : "")}
                 .resource_list_name 
                   =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
-                  = "(hidden)" if resource.hidden
+                  %span.hidden_indicator= "(hidden)" if resource.hidden
                   %span.resource_list_timestamp
                     created #{time_ago_in_words resource.created_at} ago
                     - if @is_creator
                       = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
-                      = link_to resource.hidden ? "publish": "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource)
+                      = link_to resource.hidden ? "publish": "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "hide_link"
                       - if resource != @class_room.resource
                         = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: "Are you sure you want to destroy this file?", method: :delete
 
