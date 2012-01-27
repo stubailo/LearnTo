@@ -2,27 +2,20 @@
   .user_home
     .left_column
       .info_box
-        %strong= current_user.login
-        -if current_user.account_type
-          %p Signed in with Facebook
-        %p 
-          Taking #{pluralize current_user.class_rooms.length, "class"}
-        %p 
-          Teaching #{pluralize current_user.taught_classes.length, "class"}
       %nav
         %ul.user_nav
           %li.main
             %a{:href => home_index_path, :class => (which_tab == "user_index" ? "active" : "")}
               Student Feed
-              %span.sublink Classes I'm Taking 
+              %span.sublink Classes I'm Taking #{current_user.class_rooms.length>0 ? "-" + current_user.class_rooms.length.to_s : ""}
           -if current_user.taught_classes.length > 0
             %li.main
               %a{:href => home_teacher_index_path, :class => (which_tab == "teacher_index" ? "active" : "")}
                 Teacher Feed
-                %span.sublink Classes I'm Teaching
           -if current_user.taught_classes.length > 0 or current_user.class_rooms.length > 0
             %li.main
               %a{:href => home_manage_path, :class => (which_tab == "manage" ? "active" : "")} Manage Classes
+                %span.sublink Classes I'm Teaching - #{current_user.taught_classes.length}
       - num_class_rooms = 5
       %ul
         %li
