@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :login,  :presence => true
   validates :email, :presence => true
   validates :password, :presence => true,
-                    :length => { :minimum => 5 }
+                    :length => { :minimum => 6 }
 
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :class_room_ratings
   
   has_many :authentications
+  
+  has_and_belongs_to_many :resources
   
   ACCOUNT_TYPES = ["internal", "both", "external"]
   

@@ -27,6 +27,7 @@ class Resource < ActiveRecord::Base
   belongs_to :section
   has_one :document, :dependent => :destroy
   has_many :resource_comments, :dependent => :destroy
+  has_and_belongs_to_many :users
   
   has_many :notifications, :as => :item, :dependent => :destroy
   

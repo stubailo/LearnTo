@@ -12,12 +12,11 @@ class UsersController < ApplicationController
   end
   
   def resend_activation
-    if params[:login]
-      @user = User.find_by_login params[:login]
+    if params[:email]
+      @user = User.find_by_email params[:email]
       if @user && !@user.active?
         @user.deliver_activation_instructions!
-        flash[:fail] = "Please check your e-mail for your account activation instructions"
-        redirect_to root_path
+        render 'home/please_register', :layout => "application"
       end
     end
   end
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!
-        format.html { redirect_to home_please_register_path }
+        format.html { render 'home/please_register', :layout => "application" }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
