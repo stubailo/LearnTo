@@ -82,6 +82,9 @@ $ ->
   $(".list_of_sections").find("form").hide()
 
   $(".rename_section_link").click (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+
     the_heading = $(this).parents(".materials_section").find("h3")
     the_heading.prepend("<div class='rename_section_inputs'></div>")
     input_section = the_heading.find(".rename_section_inputs")
@@ -89,8 +92,17 @@ $ ->
     input_section.prepend("<input class='rename_section_field' />")
     input_section.find(".rename_section_submit").button()
     input_section.find(".rename_section_field").val(the_heading.find("span.name").text())
+    old_name = the_heading.find("span.name").text()
     the_heading.find("span.name").hide()
     the_heading.find(".rename_section_link").hide()
+
+    $("body").one "click", handler = (event) ->
+      event.stopPropagation()
+      the_heading.find("span.name").text(old_name)
+      the_heading.find("span.name").show()
+      input_section.remove()
+      the_heading.find(".rename_section_link").show()
+      
 
     submit_new_name = ->
       the_action = the_heading.parents(".materials_section").find(".rename_section_form_container").find("form").attr("action")
@@ -103,6 +115,9 @@ $ ->
 
     input_section.find(".rename_section_submit").click (event) ->
       submit_new_name()
+
+    input_section.click (event) ->
+      event.stopPropagation()
 
     input_section.find(".rename_section_field").keydown (event) ->
       if event.keyCode == 13
