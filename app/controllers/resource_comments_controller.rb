@@ -10,7 +10,7 @@ class ResourceCommentsController < ApplicationController
     set_vars
     @section = @resource_comment.resource.section
     @resource_page = @section.resource_page
-    
+    @resource = @resource_comment.resource 
     
     user_notification("new_resource_comment","ResourceComment",@resource_comment.resource.user,@resource_comment.id)
    
