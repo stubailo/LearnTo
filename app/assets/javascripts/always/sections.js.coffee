@@ -5,6 +5,19 @@
 
 $ ->
 
+
+  #make homework completed links into ajaxy checkboxes
+  $(".homework_completed_link").each ->
+    $(this).hide()
+    the_resource = $(this).parents("li[id^=resource]")
+    the_checkbox = $("<input type='checkbox' class='completed_checkbox' />")
+    the_resource.find(".resource_list_name").prepend(the_checkbox)
+    if the_resource.hasClass("completed") then the_checkbox.attr("checked", "checked")
+    url = $(this).attr("href")
+    the_checkbox.change ->
+      $.get(url)
+      if the_resource.hasClass("completed") then the_resource.switchClass("completed", "")  else the_resource.switchClass("", "completed")
+
   #make delete links ajaxy
   $(".lists_to_connect a[data-method=delete]").each ->
     $(this).click ->

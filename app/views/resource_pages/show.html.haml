@@ -28,7 +28,10 @@
       %div{:class => "add_resource_form " + (@resource.errors.any? ? "" : "no_javascript") }
         = render :partial => "resources/form",
           :locals => { :style => "small_resource_form"}
-        
+       
+-if @resource_page.section.downcase == "homework" and not @is_creator
+  %p{:style=>"margin: 10px 0; color: #444; font-size: .9em;"} Use the checkboxes to keep track of the work you've finished.
+
 %ul.list_of_sections
   - @sections.each do |section|  
     %li.materials_section
@@ -38,7 +41,8 @@
           = link_to "delete", [@class_room, @resource_page, section], 
             :confirm => "Are you sure you want to delete this section? This will delete all #{@resource_page.section} associated with this section.  Move them to a different section if you want to keep them.", 
             :method => :delete, :class => "delete_section_link"
-        %a{:class => "rename_section_link"} rename
+        - if @is_creator
+          %a{:class => "rename_section_link"} rename
 
       -if @is_creator
         = form_for section, :url => class_room_resource_page_rearrange_path(@class_room, @resource_page, section) do |f|
@@ -58,19 +62,19 @@
           - resources = resources.sort_by { |res| res.order }
           - resources.each do |resource|
             - if !resource.hidden || @is_creator
-              %li{:id => "resource-" + resource.id.to_s, :class => (resource.hidden ? "hidden" : "")}
+              %li{:id => "resource-" + resource.id.to_s, :class => (resource.hidden ? "hidden" : "") + (resource.users.include?(@user)?"completed" : "")}
                 .resource_list_name 
                   =link_to "#{resource.name}", class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                   %span.hidden_indicator= "(hidden)" if resource.hidden
                   %span.resource_list_timestamp
-                    created #{time_ago_in_words resource.created_at} ago
+                    posted #{time_ago_in_words resource.created_at} ago
                     - if @is_creator
                       = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
                       = link_to resource.hidden ? "publish" : "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "hide_link"
                       - if resource != @class_room.resource
                         = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: "Are you sure you want to destroy this file?", method: :delete
                     - if resource.source_call == "Homework" && !@is_creator
-                      = link_to resource.users.include?(@user) ? "mark as uncompleted" : "mark as completed", class_room_resource_page_section_completed_path(@class_room, @resource_page, section, resource)
+                      = link_to resource.users.include?(@user) ? "mark as uncompleted" : "mark as completed", class_room_resource_page_section_completed_path(@class_room, @resource_page, section, resource), :class => "homework_completed_link"
 
                   - if @is_creator
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
