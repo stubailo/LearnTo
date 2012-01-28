@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     @resources = []
     
     if current_user
-      @ids = current_user.taught_classes.map { |x|  x.id }
+      @ids = current_user.taught_classes.map { |x|  x.id if x.active }
       @news_feed_posts = []
       @posts = []
       if @ids.size > 0

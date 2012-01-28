@@ -72,6 +72,9 @@ Classroom::Application.routes.draw do
     end
   end
   
+  match 'class_rooms/:id/change_active' => "class_rooms#change_active", :as => :activate
+  match 'class_rooms/:id/begin_class' => "class_rooms#begin_class", :as => :begin
+  
   resources :authentications
   
   resources :forums
