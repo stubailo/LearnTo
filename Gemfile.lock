@@ -213,7 +213,6 @@ DEPENDENCIES
   mail
   mysql2
   nokogiri
-  oauth
   omniauth!
   omniauth-facebook
   omniauth-google

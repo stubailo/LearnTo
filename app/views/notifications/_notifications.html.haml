@@ -1,13 +1,16 @@
-- @notifications.each do |x|
-  - if x.item_type == "ResourceComment"
-    - count = x.count
-    - resource_comment = x.item
-    = render :partial => "notifications/resource_comment_notification", :locals => { :count => count, :resource_comment => resource_comment }
-  - elsif x.item_type == "Comment"
-    - count = x.count
-    - post_comment = x.item
-    = render :partial => "notifications/post_comment_notification", :locals => { :count => count, :post_comment => post_comment }
-  - elsif x.item_type == "Announcement"
-    - count = x.count
-    - announcement = x.item
-    = render :partial => "notifications/announcement_notification", :locals => { :count => count, :announcement => announcement }
+-if @array_of.first
+  = @array_of.first.length
+  - if false
+    - @notifications.each do |x|
+      - if x.item_type == "ResourceComment"
+        - count = 1
+        - resource_comment = x.item
+        = render :partial => "notifications/resource_comment_notification", :locals => { :count => count, :resource_comment => resource_comment }
+      - elsif x.item_type == "Comment"
+        - count = 1
+        - post_comment = x.item
+        = render :partial => "notifications/post_comment_notification", :locals => { :count => count, :post_comment => post_comment }
+      - elsif x.item_type == "Announcement"
+        - count = 1
+        - announcement = x.item
+        = render :partial => "notifications/announcement_notification", :locals => { :count => count, :announcement => announcement }

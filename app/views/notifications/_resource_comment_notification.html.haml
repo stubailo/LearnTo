@@ -1,6 +1,10 @@
-- if count == 1
-  = resource_comment.user.login + " commented on your document in " + resource_comment.resource.class_room.name
+- if count.to_i == 1
+  = link_to resource_comment.user.login, user_path(resource_comment.user)
+  = " commented on your document in "
+  = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
   %br
 - else
-  = count + " users commented on your document in " + resource_comment.resource.class_room.name
+  = count.to_s
+  = " users commented on your document in "
+  = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
   %br

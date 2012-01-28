@@ -1,6 +1,10 @@
-- if count == 1
-  = post_comment.user.login + " responded to your post in " + post_comment.post.forum.class_room.name
+- if count.to_i == 1
+  = link_to post_comment.user.login, user_path(post_comment.user)
+  = " responded to your post in "
+  = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
   %br
 - else
-  = count + " users responded to your post in " + post_comment.post.forum.class_room.name
+  = count.to_s
+  = " users responded to your post in " + post_comment.post.forum.class_room.name
+  = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
   %br

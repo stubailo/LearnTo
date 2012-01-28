@@ -49,6 +49,4 @@ gem "omniauth-facebook"
 gem "omniauth-google"
 gem "omniauth-twitter"
 
-gem "oauth"
-
 gem "nokogiri"
