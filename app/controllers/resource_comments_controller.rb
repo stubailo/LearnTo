@@ -8,7 +8,7 @@ class ResourceCommentsController < ApplicationController
    
     @class_room = @resource_comment.resource.class_room
     set_vars
-    @section = @resource.section
+    @section = @resource_comment.resource.section
     @resource_page = @section.resource_page
     
     

@@ -1,0 +1,6 @@
+- if count == 1
+  = resource_comment.user.login + " commented on your document in " + resource_comment.resource.class_room.name
+  %br
+- else
+  = count + " users commented on your document in " + resource_comment.resource.class_room.name
+  %br
