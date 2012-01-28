@@ -45,7 +45,7 @@
         -if current_user and not @show_join and not @is_creator
 
           .enroll-button-container
-            = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete 
+            = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
     %div#center-page
       = content_for?(:class_room_content) ? yield(:class_room_content) : yield

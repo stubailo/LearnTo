@@ -60,18 +60,6 @@ class ClassRoomsController < ApplicationController
     
     redirect_back_or_default class_room_path(@class_room)
   end
-  
-  def del_user
-    @user_permission=UserPermission.find(params[:perm_id])
-    @user = current_user
-    @class_room = ClassRoom.find(@user_permission.class_room_id)
-    if @user.id == @user_permission.user_id
-      @user_permission.destroy
-      redirect_to class_room_path(@class_room)
-    else
-      redirect_to class_room_path(@class_room), :flash => { :fail => "You can't remove other people from a class." }
-    end
-  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
