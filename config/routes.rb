@@ -57,6 +57,8 @@ Classroom::Application.routes.draw do
   resources :user_permissions
 
   resources :class_rooms do
+    resources :announcements do
+    end
     resources :resource_pages do
       resources :sections do
         resources :resources do
@@ -99,7 +101,7 @@ Classroom::Application.routes.draw do
 
   get "home/please_register"
   
-  resources :announcements
+  
 
   resources :user_sessions
 

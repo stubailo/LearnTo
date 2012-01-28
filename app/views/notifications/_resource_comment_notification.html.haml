@@ -1,10 +1,24 @@
-- if count.to_i == 1
-  = link_to resource_comment.user.login, user_path(resource_comment.user)
-  = " commented on your document in "
-  = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
-  %br
+- if read == true
+  .notification.read
+    - if count.to_i == 1
+      = link_to resource_comment.user.login, user_path(resource_comment.user)
+      = " commented on your document in "
+      = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
+      %br
+    - else
+      = count.to_s
+      = " users commented on your document in "
+      = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
+      %br
 - else
-  = count.to_s
-  = " users commented on your document in "
-  = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
-  %br
+  .notification.unread
+    - if count.to_i == 1
+      = link_to resource_comment.user.login, user_path(resource_comment.user)
+      = " commented on your document in "
+      = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
+      %br
+    - else
+      = count.to_s
+      = " users commented on your document in "
+      = link_to resource_comment.resource.class_room.name, class_room_path(resource_comment.resource.class_room)
+      %br

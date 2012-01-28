@@ -39,7 +39,7 @@
   .announcements_box
     %h4
       = "Most Recent Announcement"
-      = link_to "see all", :controller => :announcements, :action => :show, :class_room_id => @class_room.id
+      = link_to "see all",  class_room_announcements_path(@class_room)
       - if @is_creator
         %a{:href=>"#", :id => "post_new"} post new
     .new_announcement_form
@@ -48,7 +48,7 @@
         = render :partial => 'announcements/new_announcement', :locals => {:class_room => @class_room}
     -if @announcement
       .announcement
-        %h3= link_to @announcement.title, :controller => :announcements, :action => :show, :class_room_id => @class_room.id
+        %h3= link_to @announcement.title,  class_room_announcements_path(@class_room)
         %p= @announcement.content
     -elsif @is_creator
       .placeholder
