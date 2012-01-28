@@ -35,7 +35,7 @@
         %br
         %br
         -if @is_creator
-          = @class_room.active ? link_to("Activate class", activate_path(@class_room)) : link_to("Make class inactive", activate_path(@class_room), confirm: "Mark class inactive and stop receiving updates or notifications about it?")
+          = @class_room.active ? link_to("Make class inactive", activate_path(@class_room), confirm: "Mark class inactive and stop receiving updates or notifications about it?") : link_to("Activate class", activate_path(@class_room))
           %br
           %br
           = link_to "Edit class", edit_class_room_path(@class_room)
