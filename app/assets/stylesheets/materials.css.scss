@@ -71,6 +71,16 @@
 
       background: #fff;
 
+      .completed_checkbox {
+        padding: 0;
+        margin: 2px 5px -2px 0;
+      }
+
+      &.completed {
+        background: #f5f5f5;
+        color: #555;
+      }
+
       &.hidden {
         background: #f5f5f5;
         color: #555;

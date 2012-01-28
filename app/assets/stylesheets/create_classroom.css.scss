@@ -1,33 +1,68 @@
 
-.create_class h1 {
-  font-size: 3em;
-  font-weight: bold;
-  margin: 10px 60px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ccc;
+#error_explanation {
+  width: 400px;
+  margin: 10px;
+}
+
+.create_class {
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 20px 10px;
+  }
+
+  margin: 10px;
+
+  .field {
+  width: 500px;
+    position: relative;
+  }
 }
 
 $orange: #f37800;
+
+.other_info h3, .new_class_header  h3 {
+  margin: 20px -10px;
+  margin-top: 30px;
+    
+ font-size: 1.1em;
+
+  padding: 10px;
+  background: #f9f9f9;
+  font-weight: bold;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 1px solid #ccc;
+
+  background: rgb(255,255,255); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(249,249,249,1) 55%, rgba(242,242,242,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(55%,rgba(249,249,249,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* IE10+ */
+  background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(249,249,249,1) 55%,rgba(242,242,242,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+
+
+}
 
 .new_class_header {
 
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
-  h3 {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 0 7px 0;
-  }
 
   p.hint {
     color: #444;
-    padding: 0 0 20px 0;
+    line-height: 1.25em;
+    position: absolute;
+    left: 520px;
+    width: 360px;
+    padding: 10px;
   }
 
   .learn_to_big, .summary_big {
     position: relative;
-    margin: 20px 40px;
-    padding: 20px;
+    margin: 10px;
   }
 
   .learn_to_big label {
@@ -50,7 +85,7 @@ $orange: #f37800;
 
     color: $orange;
 
-    font-size: 4em;
+    font-size: 3em;
     font-weight: bold;
     display: block;
     width: 100%;
@@ -63,7 +98,7 @@ $orange: #f37800;
 
     color: #777;
 
-    font-size: 1.5em;
+    font-size: 1.3em;
     display: block;
     width: 100%;
     height: 100px;
@@ -72,16 +107,15 @@ $orange: #f37800;
 }
 
 .other_info {
-  h3 {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 0 7px 0;
+
+  label.main {
+    margin-top: 15px;
   }
 
   p.class_create_hint {
     color: #444;
-    padding: 0 0 20px 0;
+    margin: 5px 0;
   }
 
-  margin: 20px 50px;
+  margin: 10px 0;
 }

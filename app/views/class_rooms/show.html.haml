@@ -1,4 +1,7 @@
 .class_home
+  %h1
+    -unless @class_room.started
+      = "This class will start on #{@class_room.start_date}"
 
   .rating_container
     .up-down-widget

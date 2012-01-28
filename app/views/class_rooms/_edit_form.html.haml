@@ -29,12 +29,13 @@
       .field
         = f.label :end_date, :class => "main"
         = f.date_select :end_date
-      .field
-        = f.label :occupancy, "Maximum Enrollment", :class => "main"
-        = f.number_field :occupancy, :value => 0, :class => "text"
-      .field
-        = f.label :price, :class => "main"
-        $
-        = f.text_field :price, :value => "0.00", :class => "text"
+      %div{:style => "display: none"}
+        .field
+          = f.label :occupancy, "Maximum Enrollment", :class => "main"
+          = f.number_field :occupancy, :value => 0, :class => "text"
+        .field
+          = f.label :price, :class => "main"
+          $
+          = f.text_field :price, :value => "0.00", :class => "text"
     .actions
       = f.submit "Update your class!"

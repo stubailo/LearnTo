@@ -30,6 +30,37 @@ class ClassRoomsController < ApplicationController
     end
   end
   
+  def change_active
+    #make sure we don't update updated_at when just changing order or publishing
+    ClassRoom.record_timestamps = false
+    
+    @class_room = ClassRoom.find(params[:id])
+    if @class_room.active
+      @class_room.update_attribute(:active, false)
+    else
+      @class_room.update_attribute(:active, true)
+    end
+    
+    #Turn timestamps back on    
+    ClassRoom.record_timestamps = true
+    
+    redirect_back_or_default class_room_path(@class_room)
+  end
+  
+  def begin_class
+    #make sure we don't update updated_at when just changing order or publishing
+    ClassRoom.record_timestamps = false
+    
+    @class_room = ClassRoom.find(params[:id])
+
+    @class_room.started ? @class_room.update_attribute(:started, false) : @class_room.update_attribute(:started, true)
+
+    #Turn timestamps back on    
+    ClassRoom.record_timestamps = true
+    
+    redirect_back_or_default class_room_path(@class_room)
+  end
+  
   def del_user
     @user_permission=UserPermission.find(params[:perm_id])
     @user = current_user
@@ -92,6 +123,8 @@ class ClassRoomsController < ApplicationController
     @user = current_user
     @class_room = ClassRoom.new(params[:class_room])
     @class_room.user_id = @user.id
+    @class_room.started = false
+    @class_room.active = true
     @class_room.tag_line = @class_room.tag_line.upcase
     
     respond_to do |format|

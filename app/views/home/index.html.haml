@@ -1,62 +1,7 @@
-.topper
-  .left
-    %h1 Find an Online Class
-    %p #{@website_name}
-  .right
-    %h1 Teach an Online Class
-    %p About any subject
-  .clear
-
-
-
-- if current_user
-  %h1 Most recent updates:
-  - @class_rooms.each do |class_room|
-    = link_to class_room.name+":", class_room
-    <br />
-    - resources = class_room.resources.sort_by { |res| res.updated_at }.reverse
-    - resources = get_top_three(resources)
-    - resources.each do |rec_pair|
-      = link_to rec_pair[0].name, rec_pair[1]
-      = " - " + rec_pair[1][1].section
-      <br />
-
-  = link_to 'Create a new class!', new_class_room_path
-  
-- else
-  %div Register using facebook or create a new account in the top right
+%div Register using facebook or create a new account in the top right
 
 = link_to 'Browse existing classes', class_rooms_path
 
-
-%br
-%br
-%br
-= "Posts in your classes:"
-- @posts.each do |post|
-  .forum_post_container
-    .forum_post
-      %h3
-        = link_to post.title, post_path(post)
-      %div.bottom
-        In #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-        %br
-        last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago
-        
-%br
-%br
-%br
-= "Announcements in your classes:"
-- @announcements.each do |announcement|
-  .forum_post_container
-    .forum_post
-      %h3
-        = link_to announcement.title, announcements_path(announcement)
-      %div.bottom
-        In #{ link_to announcement.class_room.name, class_room_path(announcement.class_room.id)}
-        %br
-        posted #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago
-        
         
 =# "Try a new class!"
 =# link_to @random_class_room.name, @random_class_room

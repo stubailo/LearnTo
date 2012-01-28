@@ -37,6 +37,8 @@
                 = link_to class_room.name, class_room
               %h4
                 = link_to resource.name, [class_room, resource_page, section, resource]
+              - if resource.caption != ""
+                %p= resource.caption
               .bottom
                 posted by #{link_to resource.user.login, resource.user} #{time_ago_in_words resource.created_at} ago
           - elsif post[:type] == "announcement"

@@ -5,6 +5,8 @@
     %h2
       = link_to class_room.name, class_room, :class => "name"
       taught by #{link_to class_room.user.login, class_room.user}
+      -unless classroom.started
+        = "This class will start on #{class_room.start_date}"
     %strong Learn to #{class_room.tag_line.downcase}
     = class_room.summary
 

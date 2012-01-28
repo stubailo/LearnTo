@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128021635) do
+
+
+ActiveRecord::Schema.define(:version => 20120128075716) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20120128021635) do
     t.string   "tag_line"
     t.integer  "user_id"
     t.string   "category"
+    t.boolean  "started"
+    t.boolean  "active"
   end
 
   add_index "class_rooms", ["user_id"], :name => "index_class_rooms_on_user_id"
