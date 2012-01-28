@@ -5,7 +5,7 @@
   = submit_tag("Search")
 - if @posts.size == 0
   = "Didn't find what you were looking for?  Start a new discussion:"
-  = render "newPost"
+  = render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
     .forum_post
