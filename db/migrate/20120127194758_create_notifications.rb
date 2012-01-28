@@ -3,7 +3,7 @@ class CreateNotifications < ActiveRecord::Migration
     create_table :notifications do |t|
       t.string :action
       t.references :user
-      t.boolean :dirty
+      t.boolean :read
       t.integer :item_id
       t.string :item_type
       t.timestamps
