@@ -23,7 +23,7 @@ class ResourceCommentsController < ApplicationController
 
   def destroy
     @resource_comment = ResourceComment.find(params[:id])
-    if @resource_comment.user_id != current_user.id
+    if @resource_comment.user_id != current_user.id or current_user.id != @post.forum.class_room.user.id
       redirect_to root_url
     end
     @resource_comment.destroy

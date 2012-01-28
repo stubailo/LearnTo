@@ -1,4 +1,4 @@
-- if post.user_id == current_user.id
+- if post.user_id == current_user.id or current_user.id == @post.forum.class_room.user.id
   = link_to "delete", post, :method => :delete, :class => "delete_link"
 %h3
   = link_to post.title, post_path(post)
