@@ -1,5 +1,5 @@
 .new_resource_comment_form
-  = form_for @resource_comment, :url => class_room_resource_page_section_resource_resource_comment_path(@class_room, @resource_page, @section, @resource, @resource_comment), :method => :post do |f|
+  = form_for @resource_comment, :url => class_room_resource_page_section_resource_resource_comments_path(@class_room, @resource_page, @section, @resource), :method => :post do |f|
     = f.text_area :content, :size => "20x1"
     %div
       = f.submit "Submit Comment"

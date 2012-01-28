@@ -37,7 +37,7 @@ update_comment_count = ->
   container.find("h3").text(new_text)
 
 activate_delete_links = ->
-  $("a[data-method=delete]").click (event) ->
+  $(".resource_comment a[data-method=delete]").click (event) ->
     event.preventDefault()
     event.stopPropagation()
     $.ajax($(this).attr("href"), {type: 'DELETE'})

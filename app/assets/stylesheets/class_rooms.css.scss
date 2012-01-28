@@ -4,33 +4,54 @@
 
 .class_room_will_start {
 
-border: 1px solid #95c52e;
-border-radius: 3px;
--moz-border-radius: 3px;
-padding: 10px;
-margin-top: -10px;
-margin-bottom: 30px;
+  border: 1px solid #95c52e;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 10px;
+  margin-top: -10px;
+  margin-bottom: 30px;
 
-background: rgb(221,239,179); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(221,239,179,1) 0%, rgba(187,224,107,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,239,179,1)), color-stop(100%,rgba(187,224,107,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* IE10+ */
-background: linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddefb3', endColorstr='#bbe06b',GradientType=0 ); /* IE6-9 */
+  background: rgb(221,239,179); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(221,239,179,1) 0%, rgba(187,224,107,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,239,179,1)), color-stop(100%,rgba(187,224,107,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* IE10+ */
+  background: linear-gradient(top, rgba(221,239,179,1) 0%,rgba(187,224,107,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddefb3', endColorstr='#bbe06b',GradientType=0 ); /* IE6-9 */
+}
 
-/*
-background: rgb(207,243,130); 
-background: -moz-linear-gradient(top, rgba(207,243,130,1) 0%, rgba(170,225,52,1) 100%); 
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(207,243,130,1)), color-stop(100%,rgba(170,225,52,1)));  Chrome,Safari4+ 
-background: -webkit-linear-gradient(top, rgba(207,243,130,1) 0%,rgba(170,225,52,1) 100%);  Chrome10+,Safari5.1+ 
-background: -o-linear-gradient(top, rgba(207,243,130,1) 0%,rgba(170,225,52,1) 100%);  Opera 11.10+ 
-background: -ms-linear-gradient(top, rgba(207,243,130,1) 0%,rgba(170,225,52,1) 100%);  IE10+ 
-background: linear-gradient(top, rgba(207,243,130,1) 0%,rgba(170,225,52,1) 100%);  W3C 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cff382', endColorstr='#aae134',GradientType=0 );  IE6-9 
-*/
+.class_room_start_bar {
+  padding: 10px;
+   
+background: rgb(255,250,188); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(255,250,188,1) 0%, rgba(255,251,135,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,250,188,1)), color-stop(100%,rgba(255,251,135,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* IE10+ */
+background: linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffabc', endColorstr='#fffb87',GradientType=0 ); /* IE6-9 */  
 
+border: #ddd 1px solid;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  
+  h3 {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #442;
+    border-bottom: #aa9 1px dashed;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #442;
+    margin: 5px 0;
+    line-height: 1.2em;
+  }
 }
 
 .create_class {

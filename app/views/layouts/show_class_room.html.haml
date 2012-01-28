@@ -6,8 +6,6 @@
         %p.subtitle
           by
           = link_to @creator.login, user_path(@creator)
-          -if @is_creator
-            = link_to @class_room.started ? "Take class off-line" : "Begin class!", begin_path(@class_room)
           -if (not @is_creator) and current_user 
             -if @show_join
               .enroll-button-container
@@ -34,6 +32,8 @@
             = link_to "Students", students_show_path(:class_room => @class_room.id), :class => which_tab == "students" ? "active" : ""
         %br
         %br
+        -if @is_creator and @class_room.started?
+          = link_to  "Hide class", begin_path(@class_room)
         -if @is_creator
           = @class_room.active ? link_to("Make class inactive", activate_path(@class_room), confirm: "Mark class inactive and stop receiving updates or notifications about it?") : link_to("Activate class", activate_path(@class_room))
           %br
@@ -45,7 +45,7 @@
         -if current_user and not @show_join and not @is_creator
 
           .enroll-button-container
-            = link_to "Leave Class", @user_permission, confirm: 'Are you sure you want to leave this class?', method: :delete 
+            = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
     %div#center-page
       = content_for?(:class_room_content) ? yield(:class_room_content) : yield
