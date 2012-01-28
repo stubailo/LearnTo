@@ -1,43 +1,44 @@
 = form_for(@class_room) do |f|
   - if @class_room.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@class_room.errors.count, "error")} prohibited this class_room from being saved:"
+    #error_explanation.ui-state-error.ui-corner-all
+      %h2= "#{pluralize(@class_room.errors.count, "error")} prohibited this class from being created:"
       %ul
       - @class_room.errors.full_messages.each do |msg|
         %li= msg
 
   .new_class_header
+    %h3 Step 1: Pick a Tagline
     .field.learn_to_big
-      %h3 Step 1: Pick a Tagline
-      %p.hint What will I learn from your class?  Don't worry about grammar - phrases like "learn to math" are perfectly fine.
+      %p.hint{:style => "margin-top: 20px"} What will I learn from your class?  Don't worry about grammar - phrases like "learn to math" are perfectly fine.
       = f.label :tag_line, "Learn To"
       = f.text_field :tag_line
+    %h3 Step 2: Write a Short Description
     .field.summary_big
-      %h3 Step 2: Write a Short Description
-      %p.hint Now that I'm hooked, give me some details about what I should expect.  You could start with a phrase like "This class will cover..." or "This class will teach you how to..."
+      %p.hint Now that I'm hooked, give me some details about what I should expect.  You could start with a phrase like "This class will cover..." or "This class will teach you how to...".  Don't make it too detailed - you'll get a chance to add more specific information later.
       = f.label :short_description
       = f.text_area :summary
   .form_page.other_info
-    %h3 Step 3: Official Name
-    %p.class_create_hint This is the name that will show up for your class when people search.
+    %h3 Step 3: Other Info
     .field
+      = f.label :name, "Official Name", :class => "main"
+      %p.class_create_hint This is the name that will show up for this class when people search.
       = f.text_field :name, :class => "text"
-    %div{:style => "display: hidden"}
+    .field
+      = f.label :category, "Category", :class => "main"
+      %p.class_create_hint In which category does this class best fit?
+      = f.select :category, ClassRoom::CATEGORIES[1..-1]
+    .field
+      = f.label :start_date, :class => "main"
+      %p.class_create_hint When are you planning open this class to students?  (Leave it as today's date to start right away!)
+      = f.date_select :start_date
+    -#
       .field
-        = f.label :category, "Category", :class => "main"
-        %p.class_create_hint This is the type of course you are going to teach.
-        = f.select :category, ClassRoom::CATEGORIES[1..-1]
+        = f.label :occupancy, "Maximum Enrollment", :class => "main"
+        %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
+        = f.number_field :occupancy, :value => 0, :class => "text"
       .field
-        = f.label :start_date, :class => "main"
-        = f.date_select :start_date
-      -#
-        .field
-          = f.label :occupancy, "Maximum Enrollment", :class => "main"
-          %p.hint Specify the maximum number of people that can sign up for your class.  Leave it as 0 for unlimited.
-          = f.number_field :occupancy, :value => 0, :class => "text"
-        .field
-          = f.label :price, :class => "main"
-          $
-          = f.text_field :price, :value => "0.00", :class => "text"
+        = f.label :price, :class => "main"
+        $
+        = f.text_field :price, :value => "0.00", :class => "text"
     .actions
       = f.submit "Create your class!"
