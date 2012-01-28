@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
        if @comment.save
         format.html  { redirect_to(@comment, :notice => 'Comment was successfully created.') }
-        partial = render_to_string :partial => "comments/comment", :locals => {:comment => @comment}
+        partial = render_to_string :partial => "comments/comment.html.haml", :locals => {:comment => @comment}
         format.json  { render :json => {:new_comment => partial} }
       else
         format.html  { render :back }
