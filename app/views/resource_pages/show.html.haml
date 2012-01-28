@@ -66,9 +66,11 @@
                     created #{time_ago_in_words resource.created_at} ago
                     - if @is_creator
                       = link_to 'edit', edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource)
-                      = link_to resource.hidden ? "publish": "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "hide_link"
+                      = link_to resource.hidden ? "publish" : "hide", class_room_resource_page_section_publish_path(@class_room, @resource_page, section, resource), :class => "hide_link"
                       - if resource != @class_room.resource
                         = link_to 'delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, section, resource), confirm: "Are you sure you want to destroy this file?", method: :delete
+                    - if resource.source_call == "Homework"
+                      = link_to resource.users.include?(@user) ? "mark as uncompleted" : "mark as completed", class_room_resource_page_section_completed_path(@class_room, @resource_page, section, resource)
 
                   - if @is_creator
                     = form_for resource, :url => class_room_resource_page_section_rearrange_path(@class_room, @resource_page, section, resource) do |f|
