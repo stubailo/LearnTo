@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
   end
     
   def get_notifications
-    notifications = current_user.notifications.select('action, max(user_id) as user_id, read, item_type, item_id, max(created_at) as created_at').group('action, read, item_type, item_id').order('read').order('created_at DESC')
+    notifications = current_user.notifications.select('action, read, item_type, item_id, max(created_at) as created_at').group('action, read, item_type, item_id').order('read').order('created_at DESC')
     id_type_set = {}
     notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
     @array_of = []
@@ -113,14 +113,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       return false
     end
-  end
-  
-  def get_notifications
-    @notifications = current_user.notifications
-    .select('action, max(user_id) as user_id, read, item_type, item_id, count(*) as count, max(created_at) as created_at')
-    .group('action, read, item_type, item_id')
-    .order('read')
-    .order('created_at DESC')
   end
 
   def store_location
