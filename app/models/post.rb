@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   acts_as_taggable_on :tags
   
+  
   belongs_to :user
   belongs_to :forum
   has_many :comments, :dependent => :destroy

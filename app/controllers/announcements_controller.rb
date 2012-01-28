@@ -11,6 +11,7 @@ class AnnouncementsController < ApplicationController
     @na.user_id = current_user.id
     @na.class_room_id = params[:class_room_id]
     @na.save
+    class_notification("new_announcement","Announcement",@na.class_room,@na.id)
     redirect_to :back
   end
 

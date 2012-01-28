@@ -7,6 +7,8 @@ class Comment < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :content, :presence => true
   
+  has_many :notifications, :as => :item, :dependent => :destroy
+  
   def rating
     return self.post_ratings.sum(:value)
   end

@@ -29,6 +29,8 @@ class Resource < ActiveRecord::Base
   has_many :resource_comments, :dependent => :destroy
   has_and_belongs_to_many :users
   
+  has_many :notifications, :as => :item, :dependent => :destroy
+  
   before_validation :download_remote_image, :if => :image_url_provided?
 
   

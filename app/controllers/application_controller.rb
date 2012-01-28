@@ -76,6 +76,20 @@ class ApplicationController < ActionController::Base
       end
     end
   end  
+  
+  def class_notification(action, note_type, class_room, item_id)
+    #note type must be post (for now) then resource
+    class_room.users.each do |user|
+      notification = Notification.new(:action => action, :item_type => note_type, :user_id => user.id, :dirty => false, :item_id => item_id)
+      notification.save
+    end
+  end
+  
+  def user_notification(action, note_type, user, item_id)
+    #note type must be post (for now) then resource
+    notification = Notification.new(:action => action, :item_type => note_type, :user_id => user.id, :dirty => false, :item_id => item_id)
+    notification.save
+  end
 
   def require_no_user
     logger.debug "ApplicationController::require_no_user"

@@ -9,39 +9,7 @@
 
   .info
     %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}
-  -#
-    :javascript
-      $( function(){ 
-        jtv_api.new_player( "stream_box",
-        {
-          channel: "djmashko",
-          //stream_key: "live_23830113_38mnbJR22bRomDPk2AxKjxXpPCXw14",
-          consumer_key: "jjCZcGGsUENc4vAX5ODwA",
-          auto_play: true
-        });
-          
-        var jtv = document.getElementById("stream_box"); 
-        function setStartingSize() { 
-          if (jtv.children.length == 0) { 
-            setTimeout(setStartingSize, 1000); 
-            return; 
-          } 
-          var player = jtv.children[0]; 
-          jtv.removeChild(player); 
-          player.type = 'application/x-shockwave-flash'; 
-          jtv.appendChild(player); 
-          player.height = 450; 
-          player.width = 600; 
-        } 
-        setStartingSize(); 
-  
-      });
-
-  %div{:style => "text-align: center"}
-    #stream_box{:style=>"float:left"}
-    %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
-    .clear 
-  
+      
   = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page", :hidden => false}
 
 .resource_sub_comments
@@ -52,3 +20,34 @@
   
 
 
+-#
+  :javascript
+    $( function(){ 
+    jtv_api.new_player( "stream_box",
+    {
+      channel: "djmashko",
+      //stream_key: "live_23830113_38mnbJR22bRomDPk2AxKjxXpPCXw14",
+      consumer_key: "jjCZcGGsUENc4vAX5ODwA",
+      auto_play: true
+    });
+      
+    var jtv = document.getElementById("stream_box"); 
+    function setStartingSize() { 
+      if (jtv.children.length == 0) { 
+        setTimeout(setStartingSize, 1000); 
+        return; 
+      } 
+      var player = jtv.children[0]; 
+      jtv.removeChild(player); 
+      player.type = 'application/x-shockwave-flash'; 
+      jtv.appendChild(player); 
+      player.height = 450; 
+      player.width = 600; 
+    } 
+    setStartingSize(); 
+  
+  });
+  %div{:style => "text-align: center"}
+    #stream_box{:style=>"float:left"}
+    %iframe{:src => "http://www.justin.tv/chat/embed?channel=djmashko", :style=>"float:left", :width => 340, :height => 450}
+    .clear 
