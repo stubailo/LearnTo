@@ -117,6 +117,9 @@ class ClassRoomsController < ApplicationController
     
     respond_to do |format|
       if @class_room.save
+        if @class_room.start_date >= Date.today
+          @class_room.update_attribute(:started, true)
+        end
         ResourcePage::SECTIONS.each do |type|
           resource_page = ResourcePage.new(:class_room_id => @class_room.id, :section => type.capitalize)
           resource_page.save
