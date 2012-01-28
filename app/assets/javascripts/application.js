@@ -11,4 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require always
+//= require jquery_ujs
 //= require tinymce
+
