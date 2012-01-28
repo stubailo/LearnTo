@@ -69,7 +69,7 @@ class ClassRoomsController < ApplicationController
       @user_permission.destroy
       redirect_to class_room_path(@class_room)
     else
-      redirect_to class_room_path(@class_room), :flash => { :fail => 'You can only remove yourself from a class' }
+      redirect_to class_room_path(@class_room), :flash => { :fail => "You can't remove other people from a class." }
     end
   end
 
@@ -111,7 +111,7 @@ class ClassRoomsController < ApplicationController
 				format.json { render json: @class_room }
 			end
 		else
-		  flash[:fail] = "You must be the creator to do that"
+		  flash[:fail] = "You must be the creator to do edit the class."
       redirect_back_or_default @class_room
 		end
 	end

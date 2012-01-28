@@ -20,6 +20,7 @@ class ForumsController < ApplicationController
 
     @forum = Forum.find(params[:id])
     @class_room = @forum.class_room
+    require_enrolled(@class_room)
     if is_enrolled(@class_room)
       @posts = @forum.posts.order("last_updated DESC").page(params[:page]).per(15)
       @tags = []
@@ -40,8 +41,6 @@ class ForumsController < ApplicationController
       else
         redirect_to :back
       end
-    else
-      redirect_to :controller => "class_rooms", :action => "show", :id => @class_room.id
     end
   end
   

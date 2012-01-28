@@ -58,6 +58,39 @@ $orange: #f37800;
     left: 520px;
     width: 360px;
     padding: 10px;
+
+    background: #fffadf;
+    border: 1px solid #ffd967;
+   
+    &:before {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;           /* Go big on the size, and let overflow hide */
+      border-bottom: 12px solid transparent;
+      border-right: 12px solid #ffd967;
+      position: absolute;
+      top: 50%;
+      margin-top: -12px;
+      right: 100%;
+      z-index: 2;
+    }
+
+    &:after {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;           /* Go big on the size, and let overflow hide */
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid #fffadf;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+      right: 100%;
+      z-index: 2;
+    }
   }
 
   .learn_to_big, .summary_big {

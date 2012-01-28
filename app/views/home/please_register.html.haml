@@ -1,13 +1,11 @@
 %div{:style=>"position: relative;"}
-  %div{ :style => "position: absolute; top: 160px; left: 30px; width: 240px; padding: 10px; font-size: 1.2em; color: #444; background: #fff; border: 1px solid #ccc; border-radius: 5px; -moz-border-radius: 5px;"}
+  %div{ :style => "position: absolute; top: 160px; left: 30px; width: 240px; padding: 10px; font-size: 1.2em; color: #444; background: #fff; border: 1px solid #aaa; border-radius: 5px; -moz-border-radius: 5px;"}
     Please check your email for account activation instructions.
     %br
     %br
     You should receive a link that will allow you to sign in.
-    %br
-    %br
-    If there's still no email after a few minutes,
-    = link_to 'Resend confirmation email', users_resend_activation_path(:email => @user.email)
+    = link_to 'Click here', users_resend_activation_path(:email => @user.email)
+    to resend the activation email.
     %br
     %br
     If problems persist, please register again to make sure you used the correct email or register with facebook.
