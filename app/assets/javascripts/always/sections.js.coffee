@@ -20,7 +20,9 @@ $ ->
 
   #make delete links ajaxy
   $(".lists_to_connect a[data-method=delete]").each ->
-    $(this).click ->
+
+    $(this).click
+    ->
       event.preventDefault()
       event.stopPropagation()
 

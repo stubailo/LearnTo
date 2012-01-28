@@ -1,8 +1,20 @@
 .class_home
   %h1
-    -unless @class_room.started
+    -if not @class_room.started and not @is_creator
       .class_room_will_start
-        = "This class will start on #{l @class_room.start_date}.  Enroll to be notified!"
+        The teacher has indicated that this class will start on
+        ="<strong>#{l @class_room.start_date}</strong>.".html_safe
+        Enroll to be notified!
+    -if not @class_room.started and @is_creator
+      .class_room_start_bar
+        %h3 Class Not Started
+        %p
+          Class materials are currently hidden from students because the class hasn't started.  
+          You specified that the class will start on 
+          ="<strong>#{l @class_room.start_date}</strong>.".html_safe
+        %p Click the button to start the class and make the materials public.
+        = link_to "Begin class!", begin_path(@class_room)
+
 
   .rating_container
     .up-down-widget

@@ -5,7 +5,7 @@ en:
   hello: "Hello world"
   date:
     formats:
-      default: "%d/%m/%y"
+      default: "%m/%d/%y"
   time:
     formats:
       default: "%H:%M:%S on %m/%d/%y"
