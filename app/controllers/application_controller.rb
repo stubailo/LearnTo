@@ -86,7 +86,19 @@ class ApplicationController < ActionController::Base
       notification.save
     end
   end
-  
+    
+  def get_notifications
+    notifications = current_user.notifications.order('read').order('created_at DESC')
+    id_type_set = {}
+    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
+    @array_of = []
+    id_type_set.keys.each do |key| 
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
+      @array_of.push(matching_notifications)
+    end
+    
+  end
+
   def user_notification(action, item_type, user, item_id)
     #note type must be post (for now) then resource
     notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, :read => false, :item_id => item_id)
@@ -102,14 +114,6 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
-  def get_notifications
-    @notifications = current_user.notifications
-    .select('action, max(user_id) as user_id, read, item_type, item_id, count(*) as count, max(created_at) as created_at')
-    .group('action, read, item_type, item_id')
-    .order('read')
-    .order('created_at DESC')
-  end
 
   def store_location
     session[:return_to] = request.url
@@ -120,4 +124,3 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 end
-

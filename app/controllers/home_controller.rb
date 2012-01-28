@@ -33,7 +33,7 @@ class HomeController < ApplicationController
       return
     end
   end        
-  
+
   def teacher_index
     @posts = []
     @announcements = []
