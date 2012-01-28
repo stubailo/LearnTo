@@ -4,7 +4,7 @@
 
 $ -> $("#new_user").validate(
   rules: {
-    "user[password]": { minlength: 8 },
+    "user[password]": { minlength: 6 },
     "user[password_confirmation]": { equalTo: "#user_password" },
     "recaptcha_response_field": "required" 
   },

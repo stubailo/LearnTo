@@ -1,6 +1,8 @@
 .resource_comment
   %div{:style => "float: right"}
-    - if resource_comment.user_id == @user.id
+    - if resource_comment.user_id == @user.id or current_user.id == @class_room.user.id
       = link_to "delete", [@class_room, @resource_page, @section, @resource, resource_comment], :method => :delete
-  %h4= link_to resource_comment.user.login, user_path(resource_comment.user)
+  %h4
+    = link_to resource_comment.user.login, user_path(resource_comment.user)
+    %small #{time_ago_in_words resource_comment.created_at} ago
   = resource_comment.content

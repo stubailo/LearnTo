@@ -100,6 +100,10 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  
+  def get_notifications
+    current_user.notifications.al
+  end
 
   def store_location
     session[:return_to] = request.url
