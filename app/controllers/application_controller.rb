@@ -13,34 +13,36 @@ class ApplicationController < ActionController::Base
     def require_enrolled(class_room)
       user = current_user
       user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type) : "none"
-      unless is_creator(class_room) || user_permission == "student"
-        flash[:fail] = "You must be enrolled to view class materials."
+      unless is_enrolled(class_room)
+        flash[:fail] = "In order to view this page you must be enrolled and the class must have started"
         redirect_back_or_default class_room
       end
     end
     
-      def is_enrolled(class_room)
-        if current_user
-          user = current_user
-          user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
-          return is_creator(class_room) || (user_permission == "student" && class_room.started)
-        else
+    def is_enrolled(class_room)
+      if current_user
+        user = current_user
+        user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
+        unless is_creator(class_room) || (user_permission == "student" && class_room.started)
           return false
+        else
+          return true
         end
       end
+    end
       
     def current_user_session
       logger.debug "ApplicationController::current_user_session"
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
     end
-    
+      
     def current_user
       logger.debug "ApplicationController::current_user"
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.user
     end
-    
+      
     def require_user
       logger.debug "ApplicationController::require_user"
       unless current_user
