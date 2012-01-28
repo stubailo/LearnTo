@@ -64,6 +64,7 @@ Classroom::Application.routes.draw do
           match 'documents/:id/create_doc_rec' => "documents#create_doc_rec", :as => :doc_rec, :via => :post
         end
         match 'resources/:id/change_hidden' => "resources#change_hidden", :as => :publish
+        match 'resources/:id/change_completed' => "resources#change_completed", :as => :completed
         match 'resources/:id/change_order' => "resources#change_order", :as => :rearrange
       end
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange

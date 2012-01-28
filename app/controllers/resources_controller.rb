@@ -15,6 +15,24 @@ class ResourcesController < ApplicationController
     @section = Section.find(params[:section_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
   end
+  
+  def change_completed
+    #make sure we don't update updated_at when just changing order or publishing
+    Resource.record_timestamps = false
+    
+    get_path_vars
+    @resource = Resource.find(params[:id])
+    if @resource.users.include?(current_user)
+      @resource.users.delete(current_user)
+    else
+      @resource.users << current_user
+    end
+    
+    #Turn timestamps back on    
+    Resource.record_timestamps = true
+    
+    redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
+  end
 
   # GET
   def show
@@ -175,7 +193,7 @@ class ResourcesController < ApplicationController
     #Turn timestamps back on    
     Resource.record_timestamps = true
     
-    redirect_back_or_default class_room_resource_page_path(@class_room, @resource_page) 
+    redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
   end
   
   def change_order
