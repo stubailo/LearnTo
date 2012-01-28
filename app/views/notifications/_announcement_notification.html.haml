@@ -1,0 +1,6 @@
+- if count == 1
+  = "There is " + count.to_s + " new announcement in "
+  = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+- else
+  = "There are " + count.to_s + " new announcements in "
+  = link_to announcement.class_room.name, class_room_path(announcement.class_room)
