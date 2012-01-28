@@ -1,7 +1,7 @@
 = form_for(@class_room) do |f|
   - if @class_room.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@class_room.errors.count, "error")} prohibited this class_room from being saved:"
+    #error_explanation.ui-state-error.ui-corner-all{:style => "margin: 0 60px;"}
+      %h2= "#{pluralize(@class_room.errors.count, "error")} prohibited this class from being created:"
       %ul
       - @class_room.errors.full_messages.each do |msg|
         %li= msg
@@ -22,11 +22,11 @@
     %p.class_create_hint This is the name that will show up for your class when people search.
     .field
       = f.text_field :name, :class => "text"
-    %div{:style => "display: hidden"}
-      .field
-        = f.label :category, "Category", :class => "main"
-        %p.class_create_hint This is the type of course you are going to teach.
-        = f.select :category, ClassRoom::CATEGORIES[1..-1]
+    .field
+      = f.label :category, "Category", :class => "main"
+      %p.class_create_hint This is the type of course you are going to teach.
+      = f.select :category, ClassRoom::CATEGORIES[1..-1]
+    %div{:style => "display: none"}
       .field
         = f.label :start_date, :class => "main"
         = f.date_select :start_date
