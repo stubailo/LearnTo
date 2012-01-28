@@ -16,9 +16,7 @@ Classroom::Application.routes.draw do
   
   get "students/show"
   
-  get "forums/search_by_tag"
-  
-  get "forums/search" 
+
   
   get "class_rooms/search"
 
@@ -70,21 +68,22 @@ Classroom::Application.routes.draw do
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
       match 'sections/:id/update' => "sections#update", :as => :update, :via => :post
     end
+    get "forums/search_by_tag"
+    get "forums/search" 
+    resources :forums do
+      resources :posts do
+        resources :comments do
+          resources :subcomments
+        end
+      end
+    end
   end
   
   match 'class_rooms/:id/change_active' => "class_rooms#change_active", :as => :activate
   match 'class_rooms/:id/begin_class' => "class_rooms#begin_class", :as => :begin
   
   resources :authentications
-  
-  resources :forums
-  
-  resources :posts  
-  
-  resources :comments
-  
-  resources :subcomments
-  
+
   resources :users
 
   get "user_sessions/new"
