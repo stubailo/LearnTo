@@ -48,8 +48,12 @@ pm_event_handler = (plus_or_minus) ->
     )
 
 $ ->
-  $("#new_post").prepend("<a href='#' style='float:right' class='cancel_button'>cancel</a>")
-  $("#new_post").find(".cancel_button").click ->
+  cancel_button = $("<a href='#' style='float:right' class='cancel_button'>cancel</a>")
+  $(".new_post_container").prepend(cancel_button)
+  cancel_button.hide()
+  cancel_button.click ->
     $("#new_post").parent().slideUp()
+    cancel_button.hide()
   $("#new_post_button").click ->
     $("#new_post").parent().slideDown()
+    cancel_button.show()
