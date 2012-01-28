@@ -142,7 +142,7 @@
   }
 }
 
-#new_post {
+.new_post_container {
   border: 1px solid #ddd;
   border-radius: 3px;
   -moz-border-radius: 3px;
@@ -163,11 +163,3 @@
 
 }
 
-.forum_search_form {
-  float: left;
-}
-
-#new_post_button {
-  float: left;
-  margin-left: 10px;
-}
