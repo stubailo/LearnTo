@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
     #note type must be post (for now) then resource
     class_room.users.each do |user|
 			notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
-			:read => false, :item_id => item_id, :item_user_id => item_user_id)
+			:read => false, :item_id => item_id)
 			notification.save
     end
   end
@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
     @notifications = []
     id_type_set.keys.each do |key| 
       matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
-      n.item_type == key[2] and n.item_id == key[3] and n.item_user_id != current_user.id}
+      n.item_type == key[2] and n.item_id == key[3]}
       if matching_notifications.length > 0
         @notifications.push(matching_notifications)
       end
@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
     array_of = []
     id_type_set.keys.each do |key| 
       matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
-      n.item_type == key[2] and n.item_id == key[3] and n.item_user_id != current_user.id}
+      n.item_type == key[2] and n.item_id == key[3]}
       if matching_notifications.length > 0
         array_of.push(matching_notifications)
       end
@@ -127,7 +127,7 @@ class ApplicationController < ActionController::Base
     #note type must be post (for now) then resource
     if item_user_id != user.id
 			notification = Notification.new(:action => action, :item_type => item_type, 
-			:user_id => user.id, :read => false, :item_id => item_id, :item_user_id => item_user_id)
+			:user_id => user.id, :read => false, :item_id => item_id)
 			notification.save
 		end
   end
