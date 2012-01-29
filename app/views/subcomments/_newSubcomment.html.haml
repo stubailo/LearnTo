@@ -1,5 +1,5 @@
 - @subcomment = Subcomment.new
-= form_for @subcomment, :url => class_room_forum_post_comment_subcomments_path(@class_room, @forum, @post, comment, @subcomment) do |f|
+= form_for @subcomment, :url => [@class_room, @forum, @post, comment, @subcomment] do |f|
   = f.text_area :content, :size => "20x1"
   %br
   = f.submit "Submit Comment"

@@ -15,15 +15,15 @@
   .forum_post_container
     .forum_post
       - if post.user_id == current_user.id or current_user.id == post.forum.class_room.user.id
-        = link_to "delete", class_room_forum_post_path(@class_room, @forum, post), :method => :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
+        = link_to "delete", class_room_forum_post_path(@class_room, @forum, post), method: :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
         = link_to post.title, class_room_forum_post_path(@class_room, @forum, post)
       %div.bottom
         posted by #{link_to post.user.login, post.user}, 
         last activity #{ time_ago_in_words(post.last_updated, include_seconds = true)} ago.
-        = link_to(pluralize(post.comments.count, "response"), post_path(post)) + (post.tag_list.length > 0 ? ", " : "")
+        = link_to(pluralize(post.comments.count, "response"), class_room_forum_post_path(@class_room, @forum, post)) + (post.tag_list.length > 0 ? ", " : "")
         -if post.tag_list.length > 0
           tags: 
           -post.tag_list.each do |x|
-            = link_to x, forums_search_by_tag_path(:tag_term => x, :forum_id => @forum.id)
+            = link_to x, class_room_search_by_tag_path(@class_room, @forum, :tag_term => x)
 = paginate @posts

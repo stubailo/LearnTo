@@ -15,6 +15,6 @@
   = render :partial => "comments/edit_comment.html.haml", :locals => {:comment => comment}
   .sub_comments
     - comment.subcomments.order(:created_at).each do |subcomment|
-      = render :partial => "subcomments/subcomment.html.haml", :locals => {:subcomment => subcomment}
+      = render :partial => "subcomments/subcomment.html.haml", :locals => { :subcomment => subcomment, :comment => comment }
     = render :partial => "subcomments/newSubcomment.html.haml", :locals => { :comment => comment }
 
