@@ -111,6 +111,7 @@ class ApplicationController < ActionController::Base
     return @notifications_number
   end
 
+  #Send a notification to a particular 
   def user_notification(action, item_type, user, item_id)
     #note type must be post (for now) then resource
     notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, :read => false, :item_id => item_id)

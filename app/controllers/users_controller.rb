@@ -67,10 +67,4 @@ class UsersController < ApplicationController
     flash[:notice] = "Successfully deleted and logged out."
     redirect_to root_url
   end
-  
-  def notifications
-    user_notifications #application controller method
-    user_notifications_number
-    render :layout => false
-  end
 end
