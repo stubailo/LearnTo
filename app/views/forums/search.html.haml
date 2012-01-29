@@ -15,7 +15,7 @@
       %p= simple_format(post.content)
       %div.bottom 
         last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago,
-        = link_to(pluralize(post.comments.count, "response"), post_path(post)) + ", "
+        = link_to(pluralize(post.comments.count, "response"), class_room_forum_post_path(@class_room, @forum, post)) + ", "
         tags: 
         -post.tag_list.each do |x|
           = link_to x, class_room_search_by_tag_path(:tag_term => x, :id => @forum.id, :class_room_id => @class_room.id)
