@@ -22,8 +22,6 @@ Classroom::Application.routes.draw do
  
   get "users/edit_password"
   
-  get "users/edit_email"
-  
   get "users/resend_activation"
   
   resources :users do

@@ -9,15 +9,7 @@
   .field
     = f.label :login, "Display Name", :class => "main"
     %p.hint We recommend that users enter their real name to foster an honest community.
-    = f.text_field :login, :class => "required text"
-  .field
-    = f.label :update_password, :class => "main"
-    %p.hint Must be at least 6 characters long.
-    = f.password_field :password, :class => "required text"
-  .field
-    = f.label :password_confirmation, :class => "main"
-    %p.hint Must match the previous password.
-    = f.password_field :password_confirmation, :class => "required text"
+    = f.text_field :login
   .field
     = f.label :biography, :class => "main"
     %p.hint Enter a quick biography here to tell other users about your previous academic experiences.
@@ -27,3 +19,5 @@
   %br/
   .actions
     = f.submit "Update Account"
+    
+= link_to "Cancel", user_path(@user)

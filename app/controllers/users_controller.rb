@@ -42,6 +42,10 @@ class UsersController < ApplicationController
     @user = current_user
   end
   
+  def edit_password
+    @user = current_user
+  end
+  
   def update
     @user = current_user
     
@@ -50,7 +54,7 @@ class UsersController < ApplicationController
         format.html { redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
         format.json { render :json => {}, :status => :ok }
       else
-        format.html  { render :action => "edit" }
+        format.html  { render :action => "edit_password" }
         format.json  { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
