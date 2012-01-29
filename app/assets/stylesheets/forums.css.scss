@@ -27,11 +27,11 @@
     margin-top: 10px;
   }
 
-  background: #fff;
+  background: #fafafa;
 
   padding: 10px;
 
-  border: #ddd 1px solid;
+  border: #e5e5e5 1px solid;
   moz-border-radius: 3px;
   border-radius: 3px;
 }
@@ -39,7 +39,7 @@
 .forum_post_responses {
   margin-left: 4em;
   margin-right: 2em;
-  background: #fafafa;
+  background: #fdfdfd;
   border: #eee 1px solid;
   border-top: none;
 }
@@ -51,7 +51,7 @@
   }
 
   p {
-    font-size: .9em;
+    line-height: 1.2em;
   }
 
   .bottom {
@@ -64,15 +64,54 @@
 
   padding-left: 50px;
 
+  .edit_comment {
+    display: none;
+  }
+
   .sub_comments {
+
+    border-top: #ddd 1px solid;
+
     margin-top: 10px;
-    border-left: #aaa 1px solid;
-    padding-left: 10px;
+    font-size: .9em;
+    
+
+    .title {
+      padding: 5px 10px;
+      background: #fafafa;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .subcomment {
+      border-top: 1px solid #fff;
+      border-bottom: 1px solid #eee;
+      padding: 4px 10px;
+      background: #fafafa;
+
+      line-height: 1.5em;
+      color: #222;
+    
+      small {
+        font-size: .9em;
+        color: #555;
+      }
+
+      &:first-child {
+        border-top: none;
+      }
+    }
+
+    form {
+      background: #fafafa;
+      padding: 5px 10px;
+      border-top: #fff 1px solid;
+      border-bottom: #eee 1px solid;
+    }
 
     textarea {
       font-family: "Helvetica", "Arial", sans-serif;
-    
-      font-size: .9em;
+   
+      border: #ddd 1px solid;
 
       width: 300px;
 

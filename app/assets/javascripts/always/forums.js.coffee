@@ -23,31 +23,40 @@ new_comment_callback = (response) ->
   init_comments()
 
 init_comments = ->
-  subcomment_form = $(".sub_comments").find("form")
-  subcomment_form.find("[type=submit]").hide()
-  text_area = subcomment_form.find("textarea")
-  text_area.height("3em")
-  text_area.addClass("inactive")
-  
-  textarea_default_text = "Write a comment..."
+  $(".sub_comments a[data-method=delete]").click (event)->
+    event.preventDefault()
+    event.stopPropagation()
+    $.ajax($(this).attr("href"), {type:"delete"})
+    $(this).parents(".subcomment").fadeOut()
 
-  text_area.val(textarea_default_text)
 
-  text_area.focus ->
-    text_area.val("") if text_area.val() == textarea_default_text
-    text_area.removeClass("inactive")
-  text_area.blur ->
-    if text_area.val() == ""
-      text_area.val(textarea_default_text) 
-      text_area.addClass("inactive")
+  $(".sub_comments").find("form").each ->
+    subcomment_form = $(this)
+    subcomment_form.find("[type=submit]").hide()
+    text_area = subcomment_form.find("textarea")
+    text_area.height("2em")
+    text_area.addClass("inactive")
+    
+    textarea_default_text = "Write a comment..."
 
-  text_area.keydown (event) ->
-    if event.keyCode == 13
-      event.preventDefault()
-      $.post(subcomment_form.attr("action"), {"subcomment[content]":text_area.val(), "format":"json"}, subcomment_callback)
+    text_area.val(textarea_default_text)
 
-  subcomment_callback = (response) ->
-    subcomment_form.before(eval(response).new_subcomment)
+    text_area.focus ->
+      text_area.val("") if text_area.val() == textarea_default_text
+      text_area.removeClass("inactive")
+    text_area.blur ->
+      if text_area.val() == ""
+        text_area.val(textarea_default_text) 
+        text_area.addClass("inactive")
+
+    text_area.keydown (event) ->
+      if event.keyCode == 13
+        event.preventDefault()
+        $.post(subcomment_form.attr("action"), {"subcomment[content]":text_area.val(), "format":"json"}, subcomment_callback)
+        text_area.val("")
+
+    subcomment_callback = (response) ->
+      subcomment_form.before(eval(response).new_subcomment)
     
 
 pm_event_handler = (plus_or_minus) ->
