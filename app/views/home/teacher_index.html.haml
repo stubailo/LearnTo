@@ -1,24 +1,11 @@
-- content_for :right_column do  
-  .new_posts
-    %h3
-      New Discussion Posts
-    - @posts.each do |post|
-      .feed_forum_post  
-        %h4
-          = link_to post.title, post_path(post)
-        %div.bottom
-          #{link_to post.user.login, post.user}
-          in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
-          #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
-  
-- content_for :center_column do
+-content_for :right_column do  
   .news_feed
     %h1 Your Classes
     - current_user.taught_classes.each do |class_room|
       .teacher_feed_class
         - resource_pages = class_room.resource_pages.sort_by {|x| x.id}
-        %span.info #{pluralize class_room.users.length, "student"}, rated #{class_room.rating}
         %h3= link_to class_room.name, class_room_path(class_room)
+        .info #{pluralize class_room.users.length, "student"}, rated #{class_room.rating}
         .section_links
           %h4 Quick Links
           %ul
@@ -28,7 +15,24 @@
             %li= link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
             %li= link_to "Discussion", class_room.forum
             %li= link_to "Students", students_show_path(:class_room => class_room.id)
-        .new_announcement_container
-          %h4 Post New Announcement
-          = render :partial => 'announcements/new_announcement', :locals => {:class_room => class_room}
-          
+        .clear 
+  
+- content_for :center_column do
+  .new_posts.teacher_post_feed
+    %h3
+      Recent Discussion Posts in your Classes
+    - @posts.each do |post|
+      .feed_forum_post  
+        %h4
+          = link_to post.title, post_path(post)
+          in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
+        - tokens = post.content.split()
+        %p{:style => "margin: 5px 0"}
+          - num_words = 40
+          = tokens.first((tokens.length > num_words*2) ? num_words : num_words*2).join(" ")
+          - if tokens.length > num_words*2
+            = link_to "more...", post_path(post), :class => "more_link"
+            %span.more= tokens[num_words..-1].join(" ")
+        %div.bottom
+          #{link_to post.user.login, post.user}
+          #{ time_ago_in_words(post.created_at, include_seconds = true)} ago

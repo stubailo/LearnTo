@@ -53,6 +53,8 @@
           = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
     %div#center-page
+      - if flash[:fail]
+        .flash.ui-state-highlight.ui-corner-all= flash[:fail]
       = content_for?(:class_room_content) ? yield(:class_room_content) : yield
   .clear
 

@@ -7,13 +7,13 @@
         Enroll to be notified!
     -if not @class_room.started and @is_creator
       .class_room_start_bar
-        %h3 Class Not Started
+        %h3 Class Hidden
         %p
           Class materials are currently hidden from students because the class hasn't started.  
           You specified that the class will start on 
           ="<strong>#{l @class_room.start_date}</strong>.".html_safe
         %p Click the button to start the class and make the materials public.
-        = link_to "Begin class!", begin_path(@class_room)
+        = link_to "Begin class!", begin_path(@class_room), :class => "button"
 
 
   .rating_container
@@ -35,28 +35,28 @@
   .below_tagline
     .info
       Taught by #{link_to @class_room.user.login, @class_room.user}, #{pluralize @class_room.users.length, "student"} enrolled
-  
-  .announcements_box
-    %h4
-      = "Most Recent Announcement"
-      = link_to "see all",  class_room_announcements_path(@class_room)
-      - if @is_creator
-        %a{:href=>"#", :id => "post_new"} post new
-    .new_announcement_form
-      -if @is_creator
-        %h4 Editing New Announcement
-        = render :partial => 'announcements/new_announcement', :locals => {:class_room => @class_room}
-    -if @announcement
-      .announcement
-        %h3= link_to @announcement.title,  class_room_announcements_path(@class_room)
-        %p= @announcement.content
-    -elsif @is_creator
-      .placeholder
-        No announcements yet!  Click 'post new' above to make an announcement.
-  
+  -if @announcement or @is_creator 
+    .announcements_box
+      %h4
+        = "Most Recent Announcement"
+        = link_to "see all",  class_room_announcements_path(@class_room)
+        - if @is_creator
+          %a{:href=>"#", :id => "post_new"} post new
+      .new_announcement_form
+        -if @is_creator
+          %h4 Editing New Announcement
+          = render :partial => 'announcements/new_announcement', :locals => {:class_room => @class_room}
+      -if @announcement
+        .announcement
+          %h3= link_to @announcement.title,  class_room_announcements_path(@class_room)
+          %p= @announcement.content
+      -elsif @is_creator
+        .placeholder
+          No announcements yet!  Click 'post new' above to make an announcement.
+    
   - if @class_room.resource && (!@class_room.resource.hidden || @is_creator)
-    %hr
-    %div{:style => "margin: 0 40px"}
+    %hr{:style => (@announcement or @is_creator ? "" : "margin-top: 30px")}
+    %div
       - if @is_creator
         = link_to "Edit Class Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :id => "edit_class_description"
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "big_embed" }

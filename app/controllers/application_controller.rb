@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
       notification.save
     end
   end
-    
+   
   def get_notifications
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}

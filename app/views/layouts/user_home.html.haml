@@ -29,6 +29,8 @@
         = yield :right_column
 
       .center_page
+        - if flash[:fail]
+          .flash.ui-state-highlight.ui-corner-all{:style => "margin-bottom: 10px;"}= flash[:fail]
         = yield :center_column
       .clear
 

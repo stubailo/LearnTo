@@ -90,6 +90,19 @@
   }
 }
 
+.teacher_post_feed {
+
+  p {
+    line-height: 1.2em;
+    font-size: .95em;
+    color: #444;
+  }
+
+  .more {
+    display: none;
+  }
+}
+
 .teacher_feed_class {
  
   margin: 10px 0;
@@ -101,16 +114,20 @@
   border-radius: 3px;
   -moz-border-radius: 3px;
 
+  overflow: hidden;
+
   .info {
-    float: right;
+
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 5px;
+  
+    margin-bottom: 10px;
   }
 
   h3 {
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 10px;
-    border-bottom: 1px dashed #ddd;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
   }
 
   .section_links {
@@ -123,8 +140,6 @@
       margin-bottom: 5px;
     }
 
-    float: left;
-    width: 100px;
   }
 
   .new_announcement_container {

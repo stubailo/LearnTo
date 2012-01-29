@@ -48,8 +48,6 @@
                
             = yield
         -else
-          - if flash[:fail]
-            .flash.ui-state-highlight= flash[:fail]
                
           = yield(:content)
 

@@ -1,3 +1,4 @@
+
 .resource_show_page
   - if @is_creator
     .actions
@@ -9,6 +10,8 @@
 
   .info
     %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}
+  - if @resource.hidden
+    .ui-state-highlight.ui-corner-all.flash This #{@resource_page.section.singularize.downcase} is hidden.  Click publish above to make it visible.
       
   = render :partial => "shared/embed", :locals => {:res => @resource, :info => @resource.get_info, :style => "full_page", :hidden => false}
 
