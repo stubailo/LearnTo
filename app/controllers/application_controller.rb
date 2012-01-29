@@ -82,7 +82,8 @@ class ApplicationController < ActionController::Base
   def class_notification(action, item_type, class_room, item_id)
     #note type must be post (for now) then resource
     class_room.users.each do |user|
-      notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, :read => false, :item_id => item_id)
+      notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
+      :read => false, :item_id => item_id)
       notification.save
     end
   end
