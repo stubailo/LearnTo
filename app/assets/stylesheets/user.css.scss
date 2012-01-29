@@ -1,3 +1,53 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user_page {
+
+  min-height: 400px;
+
+  .user_info {
+  
+    float:left;
+    width: 30%;
+
+    margin-left: 20px;
+
+    margin-top: 30px;
+
+    h1 {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .info {
+      margin-top: 5px;
+    }
+
+
+  }
+
+  .user_inside {
+    margin-left: 34%;
+
+    padding: 10px;
+
+
+    ul {
+      margin-left: 10px;
+    
+      li {
+        margin: 5px;
+      }
+    }
+
+    h2 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      margin-top: 20px;
+    }
+  }
+
+}
