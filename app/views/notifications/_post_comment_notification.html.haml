@@ -1,10 +1,24 @@
-- if count.to_i == 1
-  = link_to post_comment.user.login, user_path(post_comment.user)
-  = " responded to your post in "
-  = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
-  %br
+- if read == true
+  .notification.read
+    - if count.to_i == 1
+      = link_to post_comment.user.login, user_path(post_comment.user)
+      = " responded to your post in "
+      = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
+      %br
+    - else
+      = count.to_s
+      = " users responded to your post in "
+      = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
+      %br
 - else
-  = count.to_s
-  = " users responded to your post in "
-  = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
-  %br
+  .notification.unread
+    - if count.to_i == 1
+      = link_to post_comment.user.login, user_path(post_comment.user)
+      = " responded to your post in "
+      = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
+      %br
+    - else
+      = count.to_s
+      = " users responded to your post in "
+      = link_to post_comment.post.forum.class_room.name, class_room_path(post_comment.post.forum.class_room)
+      %br
