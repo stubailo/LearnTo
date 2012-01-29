@@ -2,10 +2,9 @@
   - resource = resource_comment.resource
   - class_room = resource.class_room
   - resource_page = resource.section.resource_page
+  - type = resource_page.section.downcase.singularize
   - section = resource.section
   - if count.to_i == 1
-    = link_to resource_comment.user.login + " commented on your document in " + class_room.name, class_room_resource_page_section_resource_path(class_room, resource_page, section, resource_comment.resource)
-    %br
+    = link_to resource_comment.user.login + " commented on your #{type} in " + class_room.name, class_room_resource_page_section_resource_path(class_room, resource_page, section, resource_comment.resource) + "."
   - else
-    = link_to count.to_s + " users commented on your document in " + class_room.name, class_room_resource_page_section_resource_path(class_room, resource_page, section, resource_comment.resource) 
-    %br
+    = link_to count.to_s + " users commented on your #{type} in " + class_room.name, class_room_resource_page_section_resource_path(class_room, resource_page, section, resource_comment.resource) + "."

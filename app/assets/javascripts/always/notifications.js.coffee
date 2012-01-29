@@ -10,25 +10,25 @@ $ ->
 
   create_notifications_window()
 
-
+  
 create_notifications_window = ->
   nw = $("<div></div>").addClass("notifications_window")
-  nw.height(300)
   nw.hide()
-  nw.css("top",$("header").innerHeight()+1)
-  $("header .top_level").css("position", "relative")
-  $("header .top_level").append(nw)
+  nw.css("top",$("header").innerHeight())
+  $(".header .top_level").css("position", "relative")
+  $(".header .top_level").append(nw)
 
 open_notifications = ->
   $(".notifications").addClass("opened")
-  nw.slideDown()
+  $.get( $(".notifications a").attr("href"), {"format":"json"}, success = load_notifications_callback )
+
+load_notifications_callback = (data) ->
+  nw.html(eval(data).notifications_html)
   $(".notifications a").text("X").addClass("has_notifications")
-  $.get( $(".notifications a").attr("href"), {"format":"json"}, load_notifications_callback )
+  nw.slideDown()
+  $("body").one("click", handler = -> $(".notifications a").click() )
 
-  load_notifications_callback = (response) ->
-    nw.html(eval(response).notifications_html)
-
-close_notifications = ->
+close_notifications = (event) ->
   $(".notifications").removeClass("opened")
   nw.slideUp()
   $(".notifications a").text("0").removeClass("has_notifications")

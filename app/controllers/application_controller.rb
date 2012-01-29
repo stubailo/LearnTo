@@ -90,10 +90,10 @@ class ApplicationController < ActionController::Base
   def user_notifications
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}
-    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
+    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type, notification.item_id]] = 1}
     @notifications = []
     id_type_set.keys.each do |key| 
-      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2] and n.item_id == key[3]}
       @notifications.push(matching_notifications)
     end
   end
@@ -101,10 +101,10 @@ class ApplicationController < ActionController::Base
   def user_notifications_number
     notifications = current_user.notifications.where('read = ?', false).order('created_at DESC')
     id_type_set = {}
-    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
+    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type, notification.item_id]] = 1}
     array_of = []
     id_type_set.keys.each do |key| 
-      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2] and n.item_id == key[3]}
       array_of.push(matching_notifications)
     end
     @notifications_number = array_of.length

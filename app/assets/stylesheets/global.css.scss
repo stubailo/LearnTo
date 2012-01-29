@@ -77,11 +77,6 @@ a {
     }
 }
 
-.auth_provider:hover {
-  text-decoration: none;
-  text-indent: -1000px;
-}
-
 iframe {
   border: none;
 }
@@ -104,6 +99,10 @@ $left-bar-padding: $global-padding;
 }
 
 .header {
+    .overflow_control {
+      overflow:hidden;
+    }
+
     position: relative;
     z-index: 5;
 
@@ -156,7 +155,6 @@ $left-bar-padding: $global-padding;
     nav a {
       float: left;
       color: #ddd;
-      font-weight: bold;
       padding: 16px 10px;
       border-left: #555 1px solid;
 
@@ -167,33 +165,37 @@ $left-bar-padding: $global-padding;
       }
     }
 
-    .user_nav {
+    .user_nav a {
       float: right;
-      padding: 9px 9px 9px 9px;
-      border-left: #555 1px solid;
-      .auth_provider {
-        img {
-          margin-bottom: -6px;
-        }
-        margin-right: 3px;
-      }
+    }
+
+    .auth_provider {
+      margin: -3px 0 -10px 0;
     }
 
     .notifications {
       float: right;
 
+      border-left: #555 1px solid;
+
+      margin-right: 1px;
+  
       &.opened {
-        background: #eee;
+        background: #fcfcfc;
       }
 
 
       a {
+
+        width: 27px;
+        text-align: center;
+
         display: block;
         background: #666;
         color: #fff;
-        font-weight: bold;
-        padding: 4px 9px;
+        padding: 4px 0;
         margin: 9px;
+        margin-top: 11px;
         border-radius: 3px;
         -moz-border-radius: 3px;
         border: 1px solid #333;
@@ -204,6 +206,7 @@ $left-bar-padding: $global-padding;
 
         &.has_notifications {
         border-color: #400;
+        font-weight: bold;
 
 background: rgb(209,21,65); /* Old browsers */
 background: -moz-linear-gradient(top, rgba(209,21,65,1) 0%, rgba(190,18,58,1) 44%, rgba(165,13,49,1) 100%); /* FF3.6+ */
@@ -225,9 +228,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d11541', end
     .search_box {
       float: right;
       padding: $global-padding;
-      border-right: 1px solid #555;
 
       .search_field {
+        margin-top: 1px;
+        height: 1.5em;
         margin-right: 0;
         background: #eee;
 

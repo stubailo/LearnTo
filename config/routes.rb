@@ -25,6 +25,10 @@ Classroom::Application.routes.draw do
   get "users/edit_email"
   
   get "users/resend_activation"
+  
+  resources :users do
+    resources :notifications
+  end
 
   post "class_rooms/add_user"
   
@@ -66,9 +70,6 @@ Classroom::Application.routes.draw do
   
   resources :authentications
 
-  resources :users do
-    resources :notifications
-  end
   
 
   get "user_sessions/new"

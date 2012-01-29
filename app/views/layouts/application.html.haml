@@ -9,36 +9,39 @@
     .header
       %header
         .top_level
-          -if current_user
-            -if current_user.taught_classes.size > 0 and current_user.class_rooms.size == 0
-              = link_to "LearnTo", home_teacher_index_path, :class => "logo"
+          .overflow_control
+            -if current_user
+              -if current_user.taught_classes.size > 0 and current_user.class_rooms.size == 0
+                = link_to "LearnTo", home_teacher_index_path, :class => "logo"
+              -else
+                = link_to "LearnTo", home_index_path, :class => "logo"
             -else
-              = link_to "LearnTo", home_index_path, :class => "logo"
-          -else
-            = link_to "LearnTo", root_path, :class => "logo"
+              = link_to "LearnTo", root_path, :class => "logo"
 
-          %nav
-            = link_to "Browse Classes", class_rooms_path
-            = link_to "Teach a Class", new_class_room_path
-          %div.user_nav
-            - if current_user
-              - @user = current_user
-              = link_to current_user.login, user_path(@user), :class => "button"
-              = link_to "Sign out", logout_path, :class => "button"
-            - else
-              %a{:href=>"/auth/facebook", :class=>"auth_provider"}
-                = image_tag "facebooklogin.png", :alt => "Facebook Login" 
-              
-              = link_to "Sign in", login_path, :id => "sign_in_button", :class => "button"
-              = link_to "Register", new_user_path, :class => "button"
-          .notifications
-            = link_to user_notifications_number, user_notifications_path
-          %div.search_box
-            = form_tag class_rooms_search_path, :method => "get" do
-              .search_field                
-                = text_field_tag :search_term, "", :class => "text"
-                = submit_tag "Search", :class => "button"
-          %div.clear
+            %nav
+              = link_to "Browse Classes", class_rooms_path
+              = link_to "Teach a Class", new_class_room_path
+            -if current_user
+              .notifications
+                - num_notifications = user_notifications_number
+                = link_to num_notifications, user_notifications_path(current_user), :class => (num_notifications > 0 ? "has_notifications" : "")
+            %nav.user_nav
+              - if current_user
+                - @user = current_user
+                = link_to "Sign out", logout_path
+                = link_to current_user.login, user_path(@user)
+              - else
+                
+                = link_to "Register", new_user_path
+                = link_to "Sign in", login_path
+                %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+                  = image_tag "facebooklogin.png", :alt => "Facebook Login" 
+            .search_box
+              = form_tag class_rooms_search_path, :method => "get" do
+                .search_field                
+                  = text_field_tag :search_term, "", :class => "text"
+                  = submit_tag "Search", :class => "button"
+            %div.clear
     .top_level
       %div#content
         -if not content_for? :content
