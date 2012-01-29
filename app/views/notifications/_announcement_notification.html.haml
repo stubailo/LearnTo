@@ -1,7 +1,28 @@
-- if count.to_i == 1
-  = "There is " + count.to_s + " new announcement in "
-  = link_to announcement.class_room.name, class_room_path(announcement.class_room)
-  %br
+- if read == true
+  .notification.read
+    - if count.to_i == 1
+      = "New announcement posted in"
+      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+      = ": "
+      = link_to announcement.title, class_room_announcements_path(announcement.class_room), :class => "notification_url"
+      %br
+    - else
+      = link_to "", class_room_announcements_path(announcement.class_room), :class => "notification_url"
+      = count
+      = "new announcements posted in "
+      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+      %br
 - else
-  = "There are " + count.to_s + " new announcements in "
-  = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+  .notification.unread
+    - if count.to_i == 1
+      = "New announcement posted in"
+      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+      = ": "
+      = link_to announcement.title, class_room_announcement_path(announcement.class_room), :class => "notification_url"
+      %br
+    - else
+      = link_to "", class_room_announcements_path(announcement.class_room), :class => "notification_url"
+      = count
+      = "new announcements posted in "
+      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
+      %br

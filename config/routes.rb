@@ -4,6 +4,8 @@ Classroom::Application.routes.draw do
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
   
+  get "users/notifications"
+  
   get "class_rooms/class_names"
   
   get "students/show"
@@ -33,6 +35,8 @@ Classroom::Application.routes.draw do
   resources :user_permissions
 
   resources :class_rooms do
+    resources :announcements do
+    end
     resources :resource_pages do
       resources :sections do
         resources :resources do
@@ -77,8 +81,6 @@ Classroom::Application.routes.draw do
   get "home/manage"
 
   get "home/please_register"
-  
-  resources :announcements
 
   resources :user_sessions
 

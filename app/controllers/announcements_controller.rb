@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  def show
+  def index
     @class_room = ClassRoom.find(params[:class_room_id])
     set_vars
     @announcements = @class_room.announcements

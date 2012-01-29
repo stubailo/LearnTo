@@ -11,7 +11,6 @@
           #{ time_ago_in_words(post.created_at, include_seconds = true)} ago
         
 - content_for :center_column do
-  = render :partial => 'notifications/notifications'
   .news_feed
     %h1 Class Updates
     %ul
@@ -47,7 +46,7 @@
               %h3
                 New announcement in 
                 = link_to announcement.class_room.name, class_room_path(announcement.class_room.id)
-              %h4= link_to announcement.title, announcements_path(announcement)
+              %h4= link_to announcement.title, class_room_announcements_path(announcement.class_room)
               %p= announcement.content
               %div.bottom
                 posted by #{link_to announcement.user.login, announcement.user} #{ time_ago_in_words(announcement.created_at.to_time, include_seconds = true)} ago

@@ -16,7 +16,7 @@
   %br
 
   .actions
-    = f.submit "Save"
+    = f.submit "Save", :class => "button"
     - if @resource != @class_room.resource
       = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
 
@@ -25,10 +25,10 @@
     %span.button#insert_code Insert Code
 
     #insert_code_form{:title => "Paste Code Here", :style => "display: none"}
-      %textarea{:style => "width: 100%; font-family: monospace", :rows => "10"}
+      %textarea{:style => "width: 98%; font-family: monospace", :rows => "10"}
       %button Insert
     #insert_link_form{:title => "Paste Link Here", :style => "display: none"}
-      %p Currently we support images and video from YouTube and Vimeo.
+      %p We support embedding of video from YouTube and Vimeo and images from any source.
       %input{:style => "width: 100%"}
       %button Embed
 
