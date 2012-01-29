@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @post = Post.find(params[:post_id])
+    @forum = @post.forum
+    @class_room = @forum.class_room
     @comment.post_id = @post.id
     @comment.user_id = current_user.id
     
@@ -14,7 +16,7 @@ class CommentsController < ApplicationController
       @rating = PostRating.new(:user_id => current_user.id, :comment_id => @comment.id, :value => 0)
       @rating.save
       @post.save
-      user_notification("new_comment","Comment", @post.user, @comment.id, @post.id)
+      user_notification("new_comment","Comment",@post.user,@comment.id, @post.id)
     end
     
     respond_to do |format|

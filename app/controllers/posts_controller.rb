@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     @edit_comment = Comment.new
     @post = Post.find(params[:id])
     @forum = @post.forum
+    @class_room = @forum.class_room
     if @post
       @subcomment = Subcomment.new
       @comment = Comment.new
