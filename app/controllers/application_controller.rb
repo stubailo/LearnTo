@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     user = current_user
     user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type) : "none"
     unless is_enrolled(class_room)
-      flash[:fail] = (user_permission == "student") ? "In order to view this page the class must have started" : "In order to view this page you must be enrolled"
+      flash[:fail] = (user_permission == "student") ? "You'll be able to view this page once the class has started." : "Enroll in the class to view this page."
       redirect_back_or_default class_room
     end
   end

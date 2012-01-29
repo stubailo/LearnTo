@@ -5,6 +5,9 @@
     = stylesheet_link_tag(:application)
     = javascript_include_tag(:application)
     = stylesheet_link_tag(:document_content)
+    - if current_user
+      - num_not = user_notifications_number
+    %title #{('(' + num_not.to_s + ')') if current_user and num_not > 0} LearnTo
   %body
     .header
       %header
@@ -23,7 +26,7 @@
               = link_to "Teach a Class", new_class_room_path
             -if current_user
               .notifications
-                - num_notifications = user_notifications_number
+                - num_notifications = num_not
                 = link_to num_notifications, user_notifications_path(current_user), :class => (num_notifications > 0 ? "has_notifications" : "")
             %nav.user_nav
               - if current_user

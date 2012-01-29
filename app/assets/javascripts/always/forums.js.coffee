@@ -47,7 +47,8 @@ init_comments = ->
       $.post(subcomment_form.attr("action"), {"subcomment[content]":text_area.val(), "format":"json"}, subcomment_callback)
 
   subcomment_callback = (response) ->
-    alert(response)
+    subcomment_form.before(eval(response).new_subcomment)
+    
 
 pm_event_handler = (plus_or_minus) ->
   (event) ->

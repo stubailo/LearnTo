@@ -18,7 +18,8 @@ create_notifications_window = ->
   $(".header .top_level").css("position", "relative")
   $(".header .top_level").append(nw)
 
-open_notifications = ->
+open_notifications = (event) ->
+  event.stopPropagation()
   $(".notifications").addClass("opened")
   $.get( $(".notifications a").attr("href"), {"format":"json"}, success = load_notifications_callback )
 
@@ -29,6 +30,7 @@ load_notifications_callback = (data) ->
   $("body").one("click", handler = -> $(".notifications a").click() )
 
 close_notifications = (event) ->
+  event.stopPropagation()
   $(".notifications").removeClass("opened")
   nw.slideUp()
   $(".notifications a").text("0").removeClass("has_notifications")
