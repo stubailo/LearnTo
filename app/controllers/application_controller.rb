@@ -82,21 +82,21 @@ class ApplicationController < ActionController::Base
   end  
 
   #Send a notification to a class
-  def class_notification(action, item_type, class_room, item_id)
+  def class_notification(action, item_type, class_room, item_id, parent_id)
     #note type must be post (for now) then resource
     class_room.users.each do |user|
 			notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
-			:read => false, :item_id => item_id)
+			:read => false, :item_id => item_id, :parent_id => parent_id)
 			notification.save
     end
   end
   
   #Send a notification to a particular user
-  def user_notification(action, item_type, user, item_id)
+  def user_notification(action, item_type, user, item_id, parent_id)
     #note type must be post (for now) then resource
     if current_user.id != user.id
-      notification = Notification.new(:action => action, :item_type => item_type, 
-      :user_id => user.id, :read => false, :item_id => item_id)
+      notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
+      :read => false, :item_id => item_id, :parent_id => parent_id)
       notification.save
     end
   end
@@ -106,16 +106,15 @@ class ApplicationController < ActionController::Base
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}
     notifications.each {|notification| id_type_set[[notification.action, notification.read, 
-    notification.item_type, notification.item_id]] = 1}
+    notification.item_type, notification.parent_id]] = 1}
     
     @notifications = []
     id_type_set.keys.each do |key| 
       matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
-      n.item_type == key[2] and n.item_id == key[3]}
-      if matching_notifications.length > 0
-        @notifications.push(matching_notifications)
-      end
+      n.item_type == key[2] and n.parent_id == key[3]}
+      @notifications.push(matching_notifications)
     end
+    #@notifications = matching_notifications
   end
   
   def user_notifications_number

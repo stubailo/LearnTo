@@ -12,7 +12,8 @@ class ResourceCommentsController < ApplicationController
     @resource_page = @section.resource_page
     @resource = @resource_comment.resource 
     
-    user_notification("new_resource_comment","ResourceComment", @resource_comment.resource.user, @resource_comment.id)
+    user_notification("new_resource_comment","ResourceComment", @resource_comment.resource.user, 
+      @resource_comment.id, @resource_comment.resource.id)
    
     #return in json, with html for new form and for new comment, using the partials in resource comments
     respond_to do |format|
