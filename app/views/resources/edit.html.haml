@@ -1,3 +1,7 @@
+-if @resource.hidden
+  .flash.ui-corner-all.ui-state-highlight
+    This document is hidden.  You'll need to publish it after editing so people can see it.
+
 .form_page
   %h1  Editing #{@resource_page.section.singularize}
   %p.hint Located at: #{@section.title} #{">"} #{@resource.name} 

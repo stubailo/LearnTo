@@ -22,8 +22,10 @@
     = f.text_field :url, :class => "text"
   .field#document_tab_contents
 
+  %hr
+
   .actions
-    = f.submit "Save"
+    = f.submit "Save", :class => "button"
     - if @resource != @class_room.resource && @resource.id
-      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
+      = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: "Are you sure you want to delete this #{@resource_page.section.singularize.downcase}?", method: :delete, :class => "button", :style => "float: right"
 

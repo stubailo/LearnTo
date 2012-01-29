@@ -1,12 +1,12 @@
 - if post.user_id == current_user.id or current_user.id == @post.forum.class_room.user.id
-  = link_to "delete", post, :method => :delete, :class => "delete_link"
+  = link_to "delete", class_room_forum_post_path(@class_room, @forum, @post), method: :delete, :class => "delete_link"
 %h3
-  = link_to post.title, post_path(post)
+  = link_to post.title, class_room_forum_post_path(@class_room, @forum, @post)
 %p
   = simple_format(post.content)
 %div.bottom 
   posted #{time_ago_in_words(post.created_at.to_time, include_seconds = true)} ago by #{link_to post.user.login, post.user},
   tags: 
   - post.tag_list.each do |x|
-    = link_to x, forums_search_by_tag_path(:tag_term => x, :forum_id => post.forum.id)
+    = link_to x, class_room_search_by_tag_path(@class_room, @forum, :tag_term => x)
     
