@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       @rating = PostRating.new(:user_id => current_user.id, :comment_id => @comment.id, :value => 0)
       @rating.save
       @post.save
-      user_notification("new_comment","Comment",@post.user,@comment.id)
+      user_notification("new_comment","Comment", @post.user, @post.id, current_user.id)
     end
     
     respond_to do |format|

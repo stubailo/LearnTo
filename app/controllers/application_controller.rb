@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   
   def require_enrolled(class_room)
     user = current_user
-    user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type) : "none"
+    user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, 
+    class_room.id).first.try(:permission_type) : "none"
     unless is_enrolled(class_room)
       flash[:fail] = (user_permission == "student") ? "You'll be able to view this page once the class has started." : "Enroll in the class to view this page."
       redirect_back_or_default class_room
@@ -22,7 +23,8 @@ class ApplicationController < ActionController::Base
   def is_enrolled(class_room)
     if current_user
       user = current_user
-      user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, class_room.id).first.try(:permission_type)
+      user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, 
+      class_room.id).first.try(:permission_type)
       unless is_creator(class_room) || (user_permission == "student" && class_room.started)
         return false
       else
@@ -79,23 +81,30 @@ class ApplicationController < ActionController::Base
     end
   end  
 
-  def class_notification(action, item_type, class_room, item_id)
+  def class_notification(action, item_type, class_room, item_id, item_user_id)
     #note type must be post (for now) then resource
     class_room.users.each do |user|
-      notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
-      :read => false, :item_id => item_id)
-      notification.save
+      if item_user_id != user.id 
+        notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, 
+        :read => false, :item_id => item_id, :item_user_id => item_user_id)
+        notification.save
+      end
     end
   end
     
   def user_notifications
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}
-    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type, notification.item_id]] = 1}
+    notifications.each {|notification| id_type_set[[notification.action, notification.read, 
+    notification.item_type, notification.item_id]] = 1}
+    
     @notifications = []
     id_type_set.keys.each do |key| 
-      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2] and n.item_id == key[3]}
-      @notifications.push(matching_notifications)
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
+      n.item_type == key[2] and n.item_id == key[3] and n.item_user_id != current_user.id}
+      if matching_notifications.length > 0
+        @notifications.push(matching_notifications)
+      end
     end
   end
   
@@ -105,18 +114,24 @@ class ApplicationController < ActionController::Base
     notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type, notification.item_id]] = 1}
     array_of = []
     id_type_set.keys.each do |key| 
-      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2] and n.item_id == key[3]}
-      array_of.push(matching_notifications)
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
+      n.item_type == key[2] and n.item_id == key[3] and n.item_user_id != current_user.id}
+      if matching_notifications.length > 0
+        array_of.push(matching_notifications)
+      end
     end
     @notifications_number = array_of.length
     return @notifications_number
   end
 
   #Send a notification to a particular 
-  def user_notification(action, item_type, user, item_id)
+  def user_notification(action, item_type, user, item_id, item_user_id)
     #note type must be post (for now) then resource
-    notification = Notification.new(:action => action, :item_type => item_type, :user_id => user.id, :read => false, :item_id => item_id)
-    notification.save
+    if item_user_id != user.id
+			notification = Notification.new(:action => action, :item_type => item_type, 
+			:user_id => user.id, :read => false, :item_id => item_id, :item_user_id => item_user_id)
+			notification.save
+		end
   end
 
   def require_no_user
