@@ -1,0 +1,53 @@
+.notifications_window {
+  width: 250px;
+  background-color: #fcfcfc;
+  border: 1px solid #777;
+  border-top: none;
+  position: absolute;
+  right: 0px;
+
+  color: #000;
+
+  border-radius: 3px 0 3px 3px;
+  -moz-border-radius: 3px 0 3px 3px;
+
+  box-shadow: 0 0 8px rgba(0,0,0,.3); 
+  -moz-box-shadow: 0 0 8px rgba(0,0,0,.3); 
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,.3); 
+
+  .notification {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+
+    &:first-child {
+      border-top: none;
+      a {
+        border-radius: 3px 0 0 0;
+        -moz-border-radius: 3px 0 0 0;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+      a {
+        border-radius: 0 0 3px 3px;
+        -moz-border-radius: 0 0 3px 3px;
+      }
+    }
+
+    &.unread a {
+      border-left: #F37800 2px solid;
+    }
+
+    a {
+      color: #444;
+
+      display: block;
+      padding: 10px;
+
+      &:hover {
+        background: #eee;
+      }
+    }
+  }
+}
