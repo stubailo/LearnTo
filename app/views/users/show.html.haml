@@ -9,8 +9,14 @@
           %div{:style => "margin: 5px 0"}
             %a{:href=>"/auth/facebook", :class=>"auth_provider"}
               = image_tag "facebooklogin.png", :alt => "Connect with Facebook"
-    - else current_user == @user and @user.account_type != "internal"
+    - elsif @user.account_type != "internal"
       .info Connected to Facebook
+    -if @user.biography
+      .info 
+        = @user.biography
+    -if @user == current_user
+      = link_to "Edit account info or add a biography", edit_user_path(@user)
+      = link_to "Change password", users_edit_password_path
   .user_inside
     - unless @taught_classes.empty?
       %h2= "Classes #{@is_me ? "you are" : @user.login + " is"} teaching:"
