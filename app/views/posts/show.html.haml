@@ -8,7 +8,7 @@
       = render :partial => "comments/comment", :locals => {:comment => comment}
     .post_response_form
       = render :partial => "comments/newComment", :locals => { :post => @post }
-
-  .no_javascript
-    %h2 Edit your post:
-    = render :partial => "posts/edit_post", :locals => {:post_id => @post.id}
+  - if @post.user_id == current_user.id
+    .no_javascript
+      %h2 Edit your post:
+      = render :partial => "posts/edit_post", :locals => {:post_id => @post.id}
