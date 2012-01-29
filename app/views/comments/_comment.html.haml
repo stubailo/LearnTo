@@ -11,8 +11,10 @@
     = link_to comment.user.login, user_path(comment.user)
   %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))
 
+
   .bottom #{time_ago_in_words(comment.created_at, include_seconds = true)} ago
-  = render :partial => "comments/edit_comment.html.haml", :locals => {:comment => comment}
+  - if comment.user_id == current_user.id
+    = render :partial => "comments/edit_comment.html.haml", :locals => {:comment => comment}
   .sub_comments
     - comment.subcomments.order(:created_at).each do |subcomment|
       = render :partial => "subcomments/subcomment.html.haml", :locals => { :subcomment => subcomment, :comment => comment }

@@ -3,12 +3,12 @@ Classroom::Application.routes.draw do
   match "class_rooms/:id/plus1" => "class_rooms#plus1", :as => :class_rooms_plus1, :via => :post
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
-  
-  get "users/notifications"
-  
+
   get "class_rooms/class_names"
   
   get "students/show"
+  
+  match "users/:id/notifications/notifications" => "notifications#notifications", :as => :user_notifications
  
   get "class_rooms/search"
 
@@ -68,7 +68,10 @@ Classroom::Application.routes.draw do
   
   resources :authentications
 
-  resources :users
+  resources :users do
+    resources :notifications
+  end
+  
 
   get "user_sessions/new"
   
