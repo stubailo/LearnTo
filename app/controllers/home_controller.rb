@@ -6,7 +6,6 @@ class HomeController < ApplicationController
     @resources = []
     
   	if current_user
-  	  get_notifications
   	  @ids = current_user.class_rooms.map { |x|  x.id }
   	  @news_feed_posts = []
   	  @posts = []
