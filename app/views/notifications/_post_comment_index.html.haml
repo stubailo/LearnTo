@@ -1,0 +1,7 @@
+.notification{ :class => (read ? "read" : "unread")}
+  - if count.to_i == 1
+    = link_to post_comment.user.login + " responded to your post in " + post_comment.post.forum.class_room.name, post_path(post_comment.post), :class => "notification_url"
+    %br
+  - else
+    = link_to count.to_s + " users responded to your post in " + post_comment.post.forum.class_room.name, post_path(post_comment.post), :class => "notification_url"
+    %br

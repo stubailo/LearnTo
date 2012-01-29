@@ -81,6 +81,7 @@ class ApplicationController < ActionController::Base
     end
   end  
 
+  #Send a notification to a class
   def class_notification(action, item_type, class_room, item_id)
     #note type must be post (for now) then resource
     class_room.users.each do |user|
@@ -89,7 +90,18 @@ class ApplicationController < ActionController::Base
 			notification.save
     end
   end
-    
+  
+  #Send a notification to a particular user
+  def user_notification(action, item_type, user, item_id)
+    #note type must be post (for now) then resource
+    if current_user.id != user.id
+      notification = Notification.new(:action => action, :item_type => item_type, 
+      :user_id => user.id, :read => false, :item_id => item_id)
+      notification.save
+    end
+  end
+  
+  
   def user_notifications
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}
@@ -120,16 +132,6 @@ class ApplicationController < ActionController::Base
     end
     @notifications_number = array_of.length
     return @notifications_number
-  end
-
-  #Send a notification to a particular 
-  def user_notification(action, item_type, user, item_id)
-    #note type must be post (for now) then resource
-    if current_user.id != user.id
-			notification = Notification.new(:action => action, :item_type => item_type, 
-			:user_id => user.id, :read => false, :item_id => item_id)
-			notification.save
-		end
   end
 
   def require_no_user
