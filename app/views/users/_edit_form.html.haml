@@ -1,0 +1,29 @@
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    #error_explanation.ui-state-error.ui-corner-all
+      .ui-icon.ui-icon-alert.icon-in-info
+      %h2= "Could not register: #{pluralize(@user.errors.count, "error")} in the form"
+      %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+  .field
+    = f.label :login, "Display Name", :class => "main"
+    %p.hint We recommend that users enter their real name to foster an honest community.
+    = f.text_field :login, :class => "required text"
+  .field
+    = f.label :update_password, :class => "main"
+    %p.hint Must be at least 6 characters long.
+    = f.password_field :password, :class => "required text"
+  .field
+    = f.label :password_confirmation, :class => "main"
+    %p.hint Must match the previous password.
+    = f.password_field :password_confirmation, :class => "required text"
+  .field
+    = f.label :biography, :class => "main"
+    %p.hint Enter a quick biography here to tell other users about your previous academic experiences.
+    = f.text_area :biography
+      
+  %br/
+  %br/
+  .actions
+    = f.submit "Update Account"
