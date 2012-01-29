@@ -87,16 +87,28 @@ class ApplicationController < ActionController::Base
     end
   end
     
-  def get_notifications
+  def user_notifications
     notifications = current_user.notifications.order('read').order('created_at DESC')
     id_type_set = {}
     notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
-    @array_of = []
+    @notifications = []
     id_type_set.keys.each do |key| 
       matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
-      @array_of.push(matching_notifications)
+      @notifications.push(matching_notifications)
     end
-    
+  end
+  
+  def user_notifications_number
+    notifications = current_user.notifications.where('read = ?', false).order('created_at DESC')
+    id_type_set = {}
+    notifications.each {|notification| id_type_set[[notification.action, notification.read, notification.item_type]] = 1}
+    array_of = []
+    id_type_set.keys.each do |key| 
+      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
+      array_of.push(matching_notifications)
+    end
+    @notifications_number = array_of.size
+    return @notifications_number
   end
 
   def user_notification(action, item_type, user, item_id)
@@ -117,6 +129,21 @@ class ApplicationController < ActionController::Base
 
   def store_location
     session[:return_to] = request.url
+  end
+  
+  def activity_by_user_and_class_id(user_id, class_room_id)
+    @list = []
+    #new responses in forum
+    #we can make this more efficient but its fine for now
+    ClassRoom.first.forum.posts.each do |x|
+      @list.push(x.comments.where("created_at >= ?", Date.today - 30.days).where(:user_id => user_id).count(:order => 'DATE(created_at)', :group => ["DATE(created_at)"]))
+    end
+
+    #new announcements
+    @list.push(Announcement.where("created_at >= ?", Date.today - 30.days).where('user_id = ?', user_id).where('class_room_id = ?', class_room_id).count(:order => 'DATE(created_at)', :group => ["DATE(created_at)"]))
+
+    #new resources
+    @list.push(Resource.where("created_at >= ?", Date.today - 30.days).where('user_id = ?', 1).where('class_room_id = ?', 1).count(:order => 'DATE(created_at)', :group => ["DATE(created_at)"]))
   end
 
   def redirect_back_or_default(default)

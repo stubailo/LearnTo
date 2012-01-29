@@ -34,6 +34,7 @@ class HomeController < ApplicationController
   end        
 
   def teacher_index
+    activity_by_user_and_class_id(1,1)
     @posts = []
     @announcements = []
     @resources = []

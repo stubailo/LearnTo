@@ -12,6 +12,8 @@ Classroom::Application.routes.draw do
   
   match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
   
+  get "users/notifications"
+  
   get "class_rooms/class_names"
   
   get "students/show"
@@ -100,8 +102,6 @@ Classroom::Application.routes.draw do
   get "home/manage"
 
   get "home/please_register"
-  
-  
 
   resources :user_sessions
 
