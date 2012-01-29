@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129172258) do
+ActiveRecord::Schema.define(:version => 20120129211426) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20120129172258) do
     t.string   "item_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "parent_id"
   end
 
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
@@ -238,6 +239,7 @@ ActiveRecord::Schema.define(:version => 20120129172258) do
     t.boolean  "active",             :default => false, :null => false
     t.string   "perishable_token",   :default => "",    :null => false
     t.string   "account_type"
+    t.text     "biography"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
