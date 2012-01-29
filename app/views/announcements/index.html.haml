@@ -1,6 +1,6 @@
 - @announcements.each do |announcement|
   - if announcement.user_id == current_user.id
-    = link_to "delete", {:controller => :announcements, :action => 'destroy', :announcement_id => announcement.id }, :method => :delete, :class => "delete_link"
+    = link_to "delete", class_room_announcement_path(announcement.class_room, announcement), :method => :delete, :class => "delete_link"
   %h3
     = announcement.title
     %br

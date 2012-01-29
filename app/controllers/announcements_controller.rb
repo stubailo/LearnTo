@@ -16,7 +16,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    @announcement = Announcement.find(params[:announcement_id])
+    @announcement = Announcement.find(params[:id])
     if @announcement.user_id != current_user.id
       redirect_to root_url
     end
