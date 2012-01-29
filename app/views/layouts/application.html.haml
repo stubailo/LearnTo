@@ -27,7 +27,8 @@
             -if current_user
               .notifications
                 - num_notifications = num_not
-                = link_to num_notifications, user_notifications_path(current_user), :class => (num_notifications > 0 ? "has_notifications" : "")
+                = link_to num_notifications, user_notifications_path(current_user), 
+                :class => (num_notifications > 0 ? "has_notifications" : "")
             %nav.user_nav
               - if current_user
                 - @user = current_user
