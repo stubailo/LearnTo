@@ -4,22 +4,12 @@ Classroom::Application.routes.draw do
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
   
-  match "comments/:id/edit" => "comments#edit", :via => :put
-  
-  match "posts/:id/edit" => "posts#edit", :via => :put
-  
-  match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
-  
-  match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
+  get "users/notifications"
   
   get "class_rooms/class_names"
   
   get "students/show"
-  
-  get "forums/search_by_tag"
-  
-  get "forums/search" 
-  
+ 
   get "class_rooms/search"
 
   match '/auth/:provider/callback' => 'authentications#create'
@@ -29,18 +19,6 @@ Classroom::Application.routes.draw do
   get "authentications/create"
 
   get "authentications/destroy"
-
-  get "document/show"
-
-  get "document/edit"
-
-  get "document/update"
-
-  get "document/new"
-
-  get "document/create"
-
-  get "document/destroy"
 
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
  
@@ -72,21 +50,24 @@ Classroom::Application.routes.draw do
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
       match 'sections/:id/update' => "sections#update", :as => :update, :via => :post
     end
+    match 'forums/:id/search_by_tag' => "forums#search_by_tag", :as => :search_by_tag, :via => :get 
+    match 'forums/:id/search' => "forums#search", :as => :search, :via => :get 
+    resources :forums do
+      resources :posts do
+        match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
+        match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
+        resources :comments do
+          resources :subcomments
+        end
+      end
+    end
   end
   
   match 'class_rooms/:id/change_active' => "class_rooms#change_active", :as => :activate
   match 'class_rooms/:id/begin_class' => "class_rooms#begin_class", :as => :begin
   
   resources :authentications
-  
-  resources :forums
-  
-  resources :posts  
-  
-  resources :comments
-  
-  resources :subcomments
-  
+
   resources :users
 
   get "user_sessions/new"
@@ -100,8 +81,6 @@ Classroom::Application.routes.draw do
   get "home/manage"
 
   get "home/please_register"
-  
-  
 
   resources :user_sessions
 

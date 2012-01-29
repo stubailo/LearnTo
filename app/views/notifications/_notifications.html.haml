@@ -1,5 +1,5 @@
--if @array_of
-  - @array_of.each do |notification|
+-if @notifications
+  - @notifications.each do |notification|
     - if notification[0].item_type == "ResourceComment"
       - read = notification[0].read
       - count = notification.length

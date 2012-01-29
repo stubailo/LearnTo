@@ -27,7 +27,7 @@
               - if @is_creator || resource_page.resources.length > 0
                 = link_to resource_page.section, class_room_resource_page_path(@class_room, resource_page), :class => which_tab == resource_page.section ? "active" : ""
           %li.main
-            = link_to "Discussion", @class_room.forum, :class => which_tab == "discussion" ? "active" : ""
+            = link_to "Discussion", [@class_room, @class_room.forum], :class => which_tab == "discussion" ? "active" : ""
           %li.main
             = link_to "Students", students_show_path(:class_room => @class_room.id), :class => which_tab == "students" ? "active" : ""
       - if @is_creator

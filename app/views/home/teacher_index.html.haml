@@ -13,7 +13,7 @@
             %li= link_to "Homework", class_room_resource_page_path(class_room, resource_pages[1])
             %li= link_to "Materials", class_room_resource_page_path(class_room, resource_pages[2])
             %li= link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
-            %li= link_to "Discussion", class_room.forum
+            %li= link_to "Discussion", [class_room, class_room.forum]
             %li= link_to "Students", students_show_path(:class_room => class_room.id)
         .clear 
   
