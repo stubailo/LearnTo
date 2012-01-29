@@ -197,7 +197,11 @@ $left-bar-padding: $global-padding;
         border-radius: 3px;
         -moz-border-radius: 3px;
         border: 1px solid #333;
-        
+       
+        &:hover {
+          text-decoration: none;
+        }
+
         &.has_notifications {
         border-color: #400;
 

@@ -32,7 +32,7 @@
               = link_to "Sign in", login_path, :id => "sign_in_button", :class => "button"
               = link_to "Register", new_user_path, :class => "button"
           .notifications
-            = link_to user_notifications_number, "#"
+            = link_to user_notifications_number, user_notifications_path
           %div.search_box
             = form_tag class_rooms_search_path, :method => "get" do
               .search_field                
