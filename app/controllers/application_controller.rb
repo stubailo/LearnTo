@@ -123,9 +123,9 @@ class ApplicationController < ActionController::Base
   end
 
   #Send a notification to a particular 
-  def user_notification(action, item_type, user, item_id, item_user_id)
+  def user_notification(action, item_type, user, item_id)
     #note type must be post (for now) then resource
-    if item_user_id != user.id
+    if current_user.id != user.id
 			notification = Notification.new(:action => action, :item_type => item_type, 
 			:user_id => user.id, :read => false, :item_id => item_id)
 			notification.save
