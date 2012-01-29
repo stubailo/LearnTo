@@ -1,28 +1,7 @@
-- if read == true
-  .notification.read
-    - if count.to_i == 1
-      = "New announcement posted in"
-      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
-      = ": "
-      = link_to announcement.title, class_room_announcements_path(announcement.class_room), :class => "notification_url"
-      %br
-    - else
-      = link_to "", class_room_announcements_path(announcement.class_room), :class => "notification_url"
-      = count
-      = "new announcements posted in "
-      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
-      %br
-- else
-  .notification.unread
-    - if count.to_i == 1
-      = "New announcement posted in"
-      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
-      = ": "
-      = link_to announcement.title, class_room_announcement_path(announcement.class_room), :class => "notification_url"
-      %br
-    - else
-      = link_to "", class_room_announcements_path(announcement.class_room), :class => "notification_url"
-      = count
-      = "new announcements posted in "
-      = link_to announcement.class_room.name, class_room_path(announcement.class_room)
-      %br
+.notification{ :class => (read ? "read" : "unread")}
+  - if count.to_i == 1
+    = link_to "New announcement posted in" + announcement.class_room.name + ": " + announcement.title, class_room_announcements_path(announcement.class_room), :class => "notification_url"
+    %br
+  - else
+    = link_to count.to_s + " new announcements posted in " + announcement.class_room.name, class_room_announcements_path(announcement.class_room), :class => "notification_url"
+    %br
