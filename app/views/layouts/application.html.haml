@@ -20,8 +20,6 @@
           %nav
             = link_to "Browse Classes", class_rooms_path
             = link_to "Teach a Class", new_class_room_path
-            = link_to "Notifications - ", "#"
-          
           %div.user_nav
             - if current_user
               - @user = current_user
@@ -33,6 +31,8 @@
               
               = link_to "Sign in", login_path, :id => "sign_in_button", :class => "button"
               = link_to "Register", new_user_path, :class => "button"
+          .notifications
+            = link_to user_notifications_number, "#"
           %div.search_box
             = form_tag class_rooms_search_path, :method => "get" do
               .search_field                

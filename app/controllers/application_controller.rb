@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :user_notifications_number
 
   private
     before_filter :global_vars
@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
       matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and n.item_type == key[2]}
       array_of.push(matching_notifications)
     end
-    @notifications_number = array_of.size
+    @notifications_number = array_of.length
     return @notifications_number
   end
 
