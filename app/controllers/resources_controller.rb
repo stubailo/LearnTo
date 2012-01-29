@@ -81,7 +81,7 @@ class ResourcesController < ApplicationController
         format.json { render json: @resource }
       end
     else #user is not creator
-      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources."}
     end
   end
 
@@ -117,7 +117,6 @@ class ResourcesController < ApplicationController
           @document = Document.new
           @document.resource_id = @resource.id
           @document.save
-          flash[:fail] = "You need to publish this document before it's available to your class"
           redirect_to edit_class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
         else
           redirect_to class_room_resource_page_path(@class_room, @resource_page)

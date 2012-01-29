@@ -58,29 +58,6 @@ strong {
     font-weight: bold;
 }
 
-.ui-button-text-only, .ui-button-text {
-    padding: 0;
-}
-
-.ui-icon.float-left {
-    float:left;
-    margin-top: -1px;
-    margin-left:-4px;
-    padding:0;
-}
-
-.ui-autocomplete {
-  margin-top: 5px;
-}
-
-.button {
-  font-size: .8em;
-  margin-top: -2px;
-}
-
-.ui-button {
-  font-size: .8em;
-}
 
 body
 {
@@ -192,7 +169,7 @@ $left-bar-padding: $global-padding;
 
     .user_nav {
       float: right;
-      padding: $global-padding;
+      padding: 9px 9px 0 9px;
       .auth_provider {
         img {
           margin-bottom: -6px;

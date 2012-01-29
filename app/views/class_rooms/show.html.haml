@@ -6,14 +6,14 @@
         ="<strong>#{l @class_room.start_date}</strong>.".html_safe
         Enroll to be notified!
     -if not @class_room.started and @is_creator
-      .class_room_start_bar
+      .class_room_start_bar.ui-state-highlight.ui-corner-all
+        = link_to "Begin class!", begin_path(@class_room), :class => "button", :style => "float: right; margin-top: -5px;"
         %h3 Class Hidden
         %p
           Class materials are currently hidden from students because the class hasn't started.  
           You specified that the class will start on 
           ="<strong>#{l @class_room.start_date}</strong>.".html_safe
         %p Click the button to start the class and make the materials public.
-        = link_to "Begin class!", begin_path(@class_room), :class => "button"
 
 
   .rating_container

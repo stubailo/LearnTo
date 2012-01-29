@@ -24,19 +24,6 @@
 .class_room_start_bar {
   padding: 10px;
    
-background: rgb(255,250,188); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(255,250,188,1) 0%, rgba(255,251,135,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,250,188,1)), color-stop(100%,rgba(255,251,135,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* IE10+ */
-background: linear-gradient(top, rgba(255,250,188,1) 0%,rgba(255,251,135,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffabc', endColorstr='#fffb87',GradientType=0 ); /* IE6-9 */  
-
-border: #ddd 1px solid;
-
-  border-radius: 5px;
-  -moz-border-radius: 5px;
   
   h3 {
     font-weight: bold;
