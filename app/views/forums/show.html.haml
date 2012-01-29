@@ -3,11 +3,11 @@
     = form_tag class_room_search_path(@class_room, @forum), :method => :get do |f|
       .search_field                
         = text_field_tag :search_term, "", :class => "text"
-        = submit_tag "Search", :class => "button"
+        = submit_tag "Search for Posts", :class => "button"
 
 .new_post_container
   .new_post_title.javascript_show
-    %a#new_post_button{:href=>"#"} New Post
+    %a#new_post_button{:href=>"#"} Write New Post
 
   .no_javascript
     = render "posts/newPost"

@@ -30,10 +30,6 @@ load_notifications_callback = (data) ->
   nw.html(eval(data).notifications_html)
   $(".notifications a").text("X").addClass("has_notifications")
   nw.slideDown()
-  $("body").one("click", handler = (event) ->
-    event.stopPropagation()
-    close_notifications(event)
-  )
 
 close_notifications = (event) ->
   event.preventDefault()
