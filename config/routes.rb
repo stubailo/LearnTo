@@ -7,8 +7,6 @@ Classroom::Application.routes.draw do
   get "class_rooms/class_names"
   
   get "students/show"
-  
-  match "users/:id/notifications/notifications" => "notifications#notifications", :as => :user_notifications
  
   get "class_rooms/search"
 
