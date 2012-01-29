@@ -4,20 +4,10 @@ Classroom::Application.routes.draw do
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
   
-  match "comments/:id/edit" => "comments#edit", :via => :put
-  
-  match "posts/:id/edit" => "posts#edit", :via => :put
-  
-  match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
-  
-  match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
-  
   get "class_rooms/class_names"
   
   get "students/show"
-  
-
-  
+ 
   get "class_rooms/search"
 
   match '/auth/:provider/callback' => 'authentications#create'
@@ -27,18 +17,6 @@ Classroom::Application.routes.draw do
   get "authentications/create"
 
   get "authentications/destroy"
-
-  get "document/show"
-
-  get "document/edit"
-
-  get "document/update"
-
-  get "document/new"
-
-  get "document/create"
-
-  get "document/destroy"
 
   match 'activate(/:activation_code)' => "activations#create", :as => :activate_account
  
@@ -68,10 +46,12 @@ Classroom::Application.routes.draw do
       match 'sections/:id/change_order' => "sections#change_order", :as => :rearrange
       match 'sections/:id/update' => "sections#update", :as => :update, :via => :post
     end
-    get "forums/search_by_tag"
-    get "forums/search" 
+    match 'forums/:id/search_by_tag' => "forums#search_by_tag", :as => :search_by_tag, :via => :get 
+    match 'forums/:id/search' => "forums#search", :as => :search, :via => :get 
     resources :forums do
       resources :posts do
+        match "comments/:id/plus1" => "comments#plus1", :as => :comments_plus1, :via => :post
+        match "comments/:id/minus1" => "comments#minus1", :as => :comments_minus1, :via => :post
         resources :comments do
           resources :subcomments
         end

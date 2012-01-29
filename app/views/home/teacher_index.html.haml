@@ -5,7 +5,7 @@
     - @posts.each do |post|
       .feed_forum_post  
         %h4
-          = link_to post.title, post_path(post)
+          = link_to post.title, class_room_forum_post_path(post.forum.class_room, post.forum, post)
         %div.bottom
           #{link_to post.user.login, post.user}
           in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
@@ -26,7 +26,7 @@
             %li= link_to "Homework", class_room_resource_page_path(class_room, resource_pages[1])
             %li= link_to "Materials", class_room_resource_page_path(class_room, resource_pages[2])
             %li= link_to "Tests/Quizzes", class_room_resource_page_path(class_room, resource_pages[3])
-            %li= link_to "Discussion", class_room.forum
+            %li= link_to "Discussion", [class_room, class_room.forum]
             %li= link_to "Students", students_show_path(:class_room => class_room.id)
         .new_announcement_container
           %h4 Post New Announcement

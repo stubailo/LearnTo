@@ -38,11 +38,14 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
   
-  def edit
-    @comment = Comment.find(params[:comment_id])
+  def update
+    @class_room = ClassRoom.find(params[:class_room_id])
+    @forum = Forum.find(params[:forum_id])
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html  { redirect_to(@comment, :notice => 'Comment was successfully updated.') }
+        format.html  { redirect_to([@class_room, @forum, @post], :notice => 'Comment was successfully updated.') }
         partial = render_to_string :partial => "comments/comment", :locals => {:comment => @comment}
         format.json  { render :json => {:updated_comment => partial} }
       else

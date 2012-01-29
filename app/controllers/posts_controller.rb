@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:id])
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id]) 
     @forum = @post.forum 
-    if @post.user_id != current_user.id or current_user.id != @post.forum.class_room.user.id
+    if @post.user_id != current_user.id && current_user.id != @post.forum.class_room.user.id
       redirect_to root_url
     end
     @post.destroy

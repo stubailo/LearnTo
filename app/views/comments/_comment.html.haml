@@ -1,12 +1,12 @@
 .response{:id => "forum_response_" + comment.id.to_s}
   .up-down-widget
     - rbu = comment.rating_by_user(current_user.id)
-    = link_to "+", comments_plus1_path(comment), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
+    = link_to "+", class_room_forum_post_comments_plus1_path(@class_room, @forum, @post, comment), :method => :post, :class => "udw-top" + (rbu==1 ? " active" : "")
     %span.udw-middle= comment.rating
-    = link_to "-", comments_minus1_path(comment), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
+    = link_to "-", class_room_forum_post_comments_minus1_path(@class_room, @forum, @post, comment), :method => :post, :class => "udw-bottom" + (rbu==-1 ? " active" : "")
   - if comment.user_id == current_user.id
     = #link_to "edit", {:controller => :comments, :action => 'ajaxEdit', :comment_id => comment.id, :forum_id => @forum.id }, :method => :post, :class => "edit_link"
-    = link_to "delete", comment_path(comment), :method => :delete, :confirm => 'Are you sure you want to destroy this response and all of its comments? This action cannot be undone.', :class => "delete_link"
+    = link_to "delete", class_room_forum_post_comment_path(@class_room, @forum, @post, comment), :method => :delete, :confirm => 'Are you sure you want to destroy this response and all of its comments? This action cannot be undone.', :class => "delete_link"
   %h4 
     = link_to comment.user.login, user_path(comment.user)
   %p= simple_format(comment.content.gsub(/ (?= )/, '&nbsp;'))

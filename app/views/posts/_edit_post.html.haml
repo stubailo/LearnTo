@@ -1,4 +1,4 @@
-= form_for @post, :url => {:controller => "posts", :action => "edit" } do |f|
+= form_for @post, :url => [@class_room, @forum, @post] do |f|
   = hidden_field_tag("post_id", post_id)
   = label_tag(:title, "Title:")
   = f.text_field :title

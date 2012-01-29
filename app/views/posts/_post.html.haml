@@ -1,7 +1,7 @@
 - if post.user_id == current_user.id or current_user.id == @post.forum.class_room.user.id
-  = link_to "delete", post, :method => :delete, :class => "delete_link"
+  = link_to "delete", class_room_forum_posts_path(@class_room, @forum, @post), :method => :delete, :class => "delete_link"
 %h3
-  = link_to post.title, post_path(post)
+  = link_to post.title, class_room_forum_posts_path(@class_room, @forum, @post)
 %p
   = simple_format(post.content)
 %div.bottom 
