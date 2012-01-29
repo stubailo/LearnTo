@@ -37,20 +37,19 @@
           %li
             -if @class_room.started?
               = link_to  "Hide class", begin_path(@class_room)
-            %p.hint Temporarily hide this class.
+            -else
+              = link_to "Begin class", begin_path(@class_room)
           %li
             = @class_room.active ? link_to("Archive class", activate_path(@class_room), confirm: "Mark class inactive and stop receiving updates or notifications about it?") : link_to("Activate class", activate_path(@class_room))
-            %p.hint Indicate that you will no longer update class materials.
           %li  
             = link_to "Edit class", edit_class_room_path(@class_room)
-            %p.hint Edit class information.
           %li
             = link_to "Delete class", class_room_path(@class_room), confirm: 'Are you sure you want to destroy this class and all of its contents?', method: :delete
-            %p.hint Delete this class and all materials.  Cannot be undone.
-      -if current_user and not @show_join and not @is_creator
-
-        .enroll-button-container
-          = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
+      -else
+        %ul.class_actions
+          -if current_user and not @show_join and not @is_creator
+            %li
+              = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
     %div#center-page
       - if flash[:fail]

@@ -1,14 +1,15 @@
 .class_home
-  %h1
-    -if not @class_room.started and not @is_creator
-      .class_room_will_start
-        The teacher has indicated that this class will start on
-        ="<strong>#{l @class_room.start_date}</strong>.".html_safe
-        Enroll to be notified!
-    -if not @class_room.started and @is_creator
-      .class_room_start_bar.ui-state-highlight.ui-corner-all
-        = link_to "Begin class!", begin_path(@class_room), :class => "button", :style => "float: right; margin-top: -5px;"
-        %h3 Class Hidden
+  -if not @class_room.started and not @is_creator
+    .class_room_will_start
+      The teacher has indicated that this class will start on
+      ="<strong>#{l @class_room.start_date}</strong>.".html_safe
+      Enroll to be notified!
+  -if not @class_room.started and @is_creator
+    .class_room_start_bar.ui-state-highlight.ui-corner-all
+      = link_to "Begin class!", begin_path(@class_room), :class => "button", :style => "float: right; margin-top: -5px;"
+      %h3
+        Class Hidden
+      .hidden_explanation.no_javascript
         %p
           Class materials are currently hidden from students because the class hasn't started.  
           You specified that the class will start on 
