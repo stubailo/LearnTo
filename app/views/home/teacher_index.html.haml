@@ -24,14 +24,14 @@
     - @posts.each do |post|
       .feed_forum_post  
         %h4
-          = link_to post.title, post_path(post)
+          = link_to post.title, class_room_forum_post_path(post.forum.class_room, post.forum, post)
           in #{ link_to post.forum.class_room.name, class_room_path(post.forum.class_room.id)}
         - tokens = post.content.split()
         %p{:style => "margin: 5px 0"}
           - num_words = 40
           = tokens.first((tokens.length > num_words*2) ? num_words : num_words*2).join(" ")
           - if tokens.length > num_words*2
-            = link_to "more...", post_path(post), :class => "more_link"
+            = link_to "more...", class_room_forum_post_path(post.forum.class_room, post.forum, post), :class => "more_link"
             %span.more= tokens[num_words..-1].join(" ")
         %div.bottom
           #{link_to post.user.login, post.user}
