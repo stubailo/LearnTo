@@ -27,5 +27,14 @@
         - notification.each do |x|
           - x.read = true
           - x.save!
+    - elsif notification[0].item_type == "Subcomment"
+      - read = notification[0].read
+      - count = notification.length
+      - subcomment = notification[0].item
+      = render :partial => "notifications/comment_subcomment_notification.html.haml", :locals => { :count => count, :subcomment => subcomment, :read => read }
+      - if read == false
+        - notification.each do |x|
+          - x.read = true
+          - x.save!
 - else
   .empty_notifications No notifications yet!

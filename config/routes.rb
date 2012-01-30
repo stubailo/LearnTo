@@ -33,6 +33,8 @@ Classroom::Application.routes.draw do
   get "class_rooms/del_user"
   
   resources :user_permissions
+  
+  match 'class_rooms/:id/students' => "class_rooms#students", :as => :class_room_students
 
   resources :class_rooms do
     resources :announcements do

@@ -62,6 +62,16 @@ class ClassRoomsController < ApplicationController
     
     redirect_back_or_default class_room_path(@class_room)
   end
+  
+  def students
+    @class_room = ClassRoom.find(params[:id])
+    @students = []
+    UserPermission.where("class_room_id = ?", @class_room.id).each do |x|
+      @students << User.find(x.user_id)
+    end      
+    set_vars
+    render :layout => "layouts/show_class_room", :locals => {:which_tab => "students"}
+  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
