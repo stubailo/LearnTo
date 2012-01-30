@@ -15,6 +15,9 @@
           You specified that the class will start on 
           ="<strong>#{l @class_room.start_date}</strong>.".html_safe
         %p Click the button to start the class and make the materials public.
+        %p 
+          Also, if you haven't done so yet, make sure to edit or hide the class description in the
+          materials page so that users know what your class is about (or at least don't see it)
 
 
   .rating_container
@@ -61,4 +64,5 @@
     %div
       - if @is_creator
         = link_to "Edit Class Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :id => "edit_class_description"
+        = link_to @description.hidden ? "Show Class Description" : "Hide Class Description", class_room_resource_page_section_publish_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :class => "hide_link"
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "big_embed" }

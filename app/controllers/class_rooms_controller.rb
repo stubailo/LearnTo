@@ -24,11 +24,11 @@ class ClassRoomsController < ApplicationController
         if @user_permission.save
           format.html { redirect_to class_room_path(@class_room) , notice: 'Class joined successfully!' }
         else
-          format.html { redirect_to class_rooms_path , flash => { :fail => 'Error joining class.' } }
+          format.html { redirect_to class_room_path(@class_room) , flash => { :fail => 'Error joining class.' } }
         end
       end
     else
-      redirect_to class_rooms_path , :flash => { :fail => 'You can\'t join a class more than once!' }
+      redirect_to class_room_path(@class_room) , :flash => { :fail => 'You can\'t join a class more than once!' }
     end
   end
   
@@ -46,7 +46,7 @@ class ClassRoomsController < ApplicationController
     #Turn timestamps back on    
     ClassRoom.record_timestamps = true
     
-    redirect_back_or_default class_room_path(@class_room)
+    redirect_to class_room_path(@class_room)
   end
   
   def begin_class
@@ -60,7 +60,7 @@ class ClassRoomsController < ApplicationController
     #Turn timestamps back on    
     ClassRoom.record_timestamps = true
     
-    redirect_back_or_default class_room_path(@class_room)
+    redirect_to class_room_path(@class_room)
   end
   
   def students

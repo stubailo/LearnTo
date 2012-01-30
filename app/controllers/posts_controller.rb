@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
+        format.html  { redirect_to class_room_forum_post_path(params[:class_room_id], params[:forum_id], @post), :notice => 'Post was successfully updated.' }
         partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
         format.json  { render :json => {:updated_post => partial} }
       else
@@ -80,11 +80,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id]) 
     @forum = @post.forum 
     @class_room = @forum.class_room
-    if @post.user_id != current_user.id && current_user.id != @post.forum.class_room.user.id
+    if @post.user_id != current_user.id && !is_creator(@class_room)
+      flash[:fail] = "You do not have permission to delete that"
       redirect_to root_url
-    end
-    @post.destroy
-    redirect_to class_room_forum_path(@class_room, @forum)
+    else
+			@post.destroy
+			redirect_to class_room_forum_path(@class_room, @forum)
+		end
   end
 end
 

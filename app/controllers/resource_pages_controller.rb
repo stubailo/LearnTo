@@ -7,6 +7,7 @@ class ResourcePagesController < ApplicationController
       @sections = @resource_page.sections.sort_by { |sec| sec.order }
   	  errors = flash[:errors]
   	  @resource = Resource.new
+  	  @resource.hidden = 1
   	  @section = Section.new
   	  set_vars
       respond_to do |format|

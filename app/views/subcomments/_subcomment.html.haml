@@ -3,5 +3,5 @@
   %small
     &nbsp;
     #{time_ago_in_words subcomment.created_at} ago
-    - if subcomment.user_id == current_user.id
+    - if subcomment.user_id == current_user.id || @class_room.user.id == current_user.id
       = link_to "delete", class_room_forum_post_comment_subcomment_path(@class_room, @forum, @post, comment, subcomment), :method => :delete

@@ -33,11 +33,14 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.user_id != current_user.id
+    @class_room = ClassRoom.find(params[:class_room_id])
+    if @comment.user_id != current_user.id && !is_creator(@class_room)
+      flash[:fail] = "You do not have permission to delete that"
       redirect_to root_url
+    else
+      @comment.destroy
+      redirect_to :back
     end
-    @comment.destroy
-    redirect_to :back
   end
   
   def update
