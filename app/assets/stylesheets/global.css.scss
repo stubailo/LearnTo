@@ -255,6 +255,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d11541', end
           outline: none;
           background: none;
 
+          width: 100%;
+          font-size: 1em;
+
           padding: 0 3px;
 
           &.inactive {

@@ -89,15 +89,16 @@ $ ->
     the_heading = $(this).parents(".materials_section").find("h3")
     the_heading.prepend("<div class='rename_section_inputs'></div>")
     input_section = the_heading.find(".rename_section_inputs")
+    input_section.prepend("<a href='#' class='rename_section_cancel button'>Cancel</a>")
     input_section.prepend("<a href='#' class='rename_section_submit button'>Save</a>")
     input_section.prepend("<input class='rename_section_field' />")
-    input_section.find(".rename_section_submit").button()
+    input_section.find(".button").button()
     input_section.find(".rename_section_field").val(the_heading.find("span.name").text())
     old_name = the_heading.find("span.name").text()
     the_heading.find("span.name").hide()
     the_heading.find(".rename_section_link").hide()
 
-    $("body").one "click", handler = (event) ->
+    input_section.find(".rename_section_cancel").click (event) ->
       event.stopPropagation()
       the_heading.find("span.name").text(old_name)
       the_heading.find("span.name").show()

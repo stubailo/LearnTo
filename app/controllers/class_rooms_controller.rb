@@ -220,8 +220,9 @@ class ClassRoomsController < ApplicationController
   end
   
   def search
-    @class_rooms = ClassRoom.search(params[:search_term], (params[:category] && params[:category] != "All") ? 
-    params[:category] : nil).sort_by { |class_room| class_room.updated_at }.reverse
+    @search_term = params[:search_term]
+    @category = params[:category]
+    @class_rooms = ClassRoom.search(@search_term, (@category && @category != "All") ? @category : nil).sort_by { |class_room| class_room.updated_at }.reverse
     @class_rooms = Kaminari.paginate_array(@class_rooms).page(params[:page]).per(15)
   end
   

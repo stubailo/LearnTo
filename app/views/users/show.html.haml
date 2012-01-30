@@ -15,8 +15,10 @@
       .info 
         = @user.biography
     -if @user == current_user
-      = link_to "Edit account info or add a biography", edit_user_path(@user)
-      = link_to "Change password", users_edit_password_path
+      .info
+        = link_to "Edit account info #{@user.biography ? "" : "or add a biography"}", edit_user_path(@user)
+      .info
+        = link_to "Change password", users_edit_password_path
   .user_inside
     - unless @taught_classes.empty?
       %h2= "Classes #{@is_me ? "you are" : @user.login + " is"} teaching:"
@@ -25,7 +27,7 @@
           %li= link_to taught_class.name, class_room_path(taught_class)
     %h2= "Classes #{@is_me ? "you are" : @user.login + " is"} taking:"
     - if @class_rooms.empty?
-      %p{:style => "margin-left: 15px; color: #555;"} #{@is_me ? "You are" : @user.login + "is"} not taking any classes.
+      %p{:style => "margin-left: 15px; color: #555;"} #{@is_me ? "You are" : @user.login + " is"} not taking any classes.
     - else
       %ul 
         - @class_rooms.each do |class_room|

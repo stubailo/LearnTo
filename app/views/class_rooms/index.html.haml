@@ -1,15 +1,7 @@
 %h1 Classes
 
 - @class_rooms.each do |class_room|
-  .class_room_summary  
-    %h2
-      = link_to class_room.name, class_room, :class => "name"
-      taught by #{link_to class_room.user.login, class_room.user}
-      -unless class_room.started
-        = "This class will start on #{class_room.start_date}"
-    %strong Learn to #{class_room.tag_line.downcase}
-    = class_room.summary
-
+  =render :partial => "list_display", :locals => {:class_room => class_room}
 = paginate @class_rooms
 
 = link_to 'New Class room', new_class_room_path

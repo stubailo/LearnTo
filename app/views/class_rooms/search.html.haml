@@ -1,18 +1,25 @@
-= form_tag class_rooms_search_path, :method => "get" do
-  = select_tag :category, options_for_select(ClassRoom::CATEGORIES, params[:category] ? params[:category] : "All")
-  .search_field                
-    = text_field_tag :search_term, "", :class => "text"
-    = submit_tag "Search", :class => "button"
-- @class_rooms.each do |class_room|
-  .forum_post_container
-    .forum_post
-      %h3
-        = link_to class_room.name, class_room_path(class_room.id)
-        = " - Learn to " + class_room.tag_line
-        -unless class_room.started
-          = "This class will start on #{class_room.start_date}"
-      %div.bottom 
-        =#last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago,
-        = #link_to(pluralize(post.comments.count, "response"), post_path(post)) + ", "
-= paginate @class_rooms
+.search_results_page
+  = form_tag class_rooms_search_path, :method => "get" do
+    .search_field                
+      = label_tag :category, "Category:"
+      = select_tag :category, options_for_select(ClassRoom::CATEGORIES, params[:category] ? params[:category] : "All")
+      &nbsp;
+      = label_tag :category, "Search text:"
+      = text_field_tag :search_term, "", :class => "text"
+      &nbsp;
+      = submit_tag "Search", :class => "button"
+    %hr
+    - if @search_term and @search_term != ""
+      %h1
+        Search results for 
+        %strong #{@search_term}
+        -if @category and @category != "" and @category != "All"
+          in #{@category}
+    - elsif  @category and @category != "" and @category != "All"
+      %h1 Listing of classes in #{@category}
+    - elsif @category and @category == "All"
+      %h1 List of all classes
+  - @class_rooms.each do |class_room|
+    =render :partial => "list_display", :locals => {:class_room => class_room}
+  = paginate @class_rooms
        

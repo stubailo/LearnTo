@@ -9,15 +9,12 @@
   .field
     = f.label :login, "Display Name", :class => "main"
     %p.hint We recommend that users enter their real name to foster an honest community.
-    = f.text_field :login
+    = f.text_field :login, :class => "text"
   .field
     = f.label :biography, :class => "main"
     %p.hint Enter a quick biography here to tell other users about your previous academic experiences.
-    = f.text_area :biography
+    = f.text_area :biography, :style => "font-family: sans-serif;",  :size => "80x10"
       
-  %br/
-  %br/
   .actions
-    = f.submit "Update Account"
-    
-= link_to "Cancel", user_path(@user)
+    = f.submit "Update Account"  
+    = link_to "Cancel", user_path(@user)

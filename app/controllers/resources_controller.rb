@@ -125,7 +125,7 @@ class ResourcesController < ApplicationController
         render :layout => "show_class_room", :template => 'resource_pages/show', :locals => {:which_tab => @resource_page.section} 
       end
     else #user is not creator
-      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources"}
+      redirect_to class_room_resource_page_path(@class_room, @resource_page), :flash => { :fail => "You must be the owner of this class to upload resources."}
     end
   end
   
@@ -156,9 +156,7 @@ class ResourcesController < ApplicationController
             @document.parsed_content = xml_doc.to_s
             @document.save
           end
-          if @resource.hidden
-            flash[:fail] = "Make sure to publish your document if you want your class to see it"
-          else
+          unless @resource.hidden
             @class_room.update_attribute(:updated_at, Time.now.to_datetime)
           end
           format.html { redirect_to class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource),

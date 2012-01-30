@@ -17,7 +17,7 @@ ajax_response_submit_handler = (event) ->
       data[$(this).attr("name")] = $(this).attr("value")
     data["format"] = "json"
     $.post($(event.target).attr("action"), data, new_comment_callback)
-    $(event.target).find("textarea").val()
+    $(event.target).find("textarea").val("")
 
 new_comment_callback = (response) ->
   $(".forum_post_responses").find(".post_response_form").before(eval(response).new_comment)
