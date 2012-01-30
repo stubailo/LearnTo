@@ -57,12 +57,23 @@ class UsersController < ApplicationController
     @user = current_user
     
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
-        format.json { render :json => {}, :status => :ok }
+      if params[:old_password]
+        if @user.valid_password?(params[:old_password]) && @user.update_attributes(params[:user])
+          format.html { redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
+          format.json { render :json => {}, :status => :ok }
+        else
+          flash[:fail] = "Old password entered incorrectly, please try again"
+          format.html  { render :action => "edit_password" }
+          format.json  { render :json => @user.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html  { render :action => "edit_password" }
-        format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+        if @user.update_attributes(params[:user])
+          format.html { redirect_to(user_path(@user), :notice => 'Credentials updated successfully.') }
+          format.json { render :json => {}, :status => :ok }
+        else
+          format.html  { render :action => "edit" }
+          format.json  { render :json => @post.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end

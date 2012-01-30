@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   validates :login,  :presence => true
   validates :email, :presence => true, :on => :create
   validates :password, :presence => true,
-                    :length => { :minimum => 6 }, :on => :create
-  validates :password, :length => { :minimum => 6 }
+                    :length => { :minimum => 6 }, :if => :password_changed?
 
   has_many :user_permissions
   has_many :class_rooms, :through => :user_permissions
