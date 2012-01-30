@@ -28,6 +28,10 @@ open_notifications = (event) ->
 
 load_notifications_callback = (data) ->
   nw.html(eval(data).notifications_html)
+  sa = $("<div></div>").addClass("see_all")
+  link = $("<a>see all</a>").attr("href", $(".notifications a").attr("href"))
+  sa.append(link)
+  nw.append(sa) unless nw.find(".empty_notifications").size() > 0
   $(".notifications a").text("X").addClass("has_notifications")
   nw.slideDown()
 

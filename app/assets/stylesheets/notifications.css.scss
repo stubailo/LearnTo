@@ -35,6 +35,26 @@
   -moz-box-shadow: 0 0 8px rgba(0,0,0,.3); 
   -webkit-box-shadow: 0 0 8px rgba(0,0,0,.3); 
 
+  .empty_notifications {
+    display: block;
+    padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .see_all a{
+    display: block;
+    padding: 5px;
+    text-align: center;
+    &:hover {
+      background: #eee;
+    }
+  }
+
   .notification {
     border-top: 1px solid #fff;
     border-bottom: 1px solid #ddd;
