@@ -36,10 +36,13 @@ class SubcommentsController < ApplicationController
 
   def destroy
     @subcomment = Subcomment.find(params[:id])
-    if @subcomment.user_id != current_user.id
+    @class_room = ClassRoom.find(params[:class_room_id])
+    if @subcomment.user_id != current_user.id && !is_creator(@class_room)
+      flash[:fail] = "You do not have permission to delete that"
       redirect_to root_url
-    end
-    @subcomment.destroy
-    redirect_to :back
+    else
+			@subcomment.destroy
+			redirect_to :back
+		end
   end
 end
