@@ -1,7 +1,0 @@
-.notification{ :class => (read ? "read" : "unread")}
-  - if count.to_i == 1
-    = link_to "New announcement posted in" + announcement.class_room.name + ": " + announcement.title, class_room_announcements_path(announcement.class_room), :class => "notification_url"
-    %br
-  - else
-    = link_to count.to_s + " new announcements posted in " + announcement.class_room.name, class_room_announcements_path(announcement.class_room), :class => "notification_url"
-    %br
