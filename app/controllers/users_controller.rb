@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
         @class_room = ClassRoom.find(1)
-        if @class_room && Rails.env == "production"
+        if @class_room && Rails.env == "production" && @class_room.user.email == "jtwarren@mit.edu"
           user_permission = UserPermission.new(:user_id => @user.id, :class_room_id => @class_room.id, :permission_type => "student")
           user_permission.save
         end

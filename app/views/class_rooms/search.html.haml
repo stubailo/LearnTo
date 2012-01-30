@@ -20,6 +20,6 @@
     - elsif @category and @category == "All"
       %h1 List of all classes
   - @class_rooms.each do |class_room|
-    =render :partial => "list_display", :locals => {:class_room => class_room}
+    = render :partial => "list_display", :locals => {:class_room => class_room}
   = paginate @class_rooms
        

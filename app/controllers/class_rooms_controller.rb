@@ -62,6 +62,10 @@ class ClassRoomsController < ApplicationController
     
     redirect_back_or_default class_room_path(@class_room)
   end
+  
+  def students
+    @students = User.where("class_room_id == ?", params[:class_room_id])
+  end
 
   # GET /class_rooms/1
   # GET /class_rooms/1.json
