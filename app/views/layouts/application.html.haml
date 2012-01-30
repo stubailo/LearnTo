@@ -22,7 +22,7 @@
               = link_to "LearnTo", root_path, :class => "logo"
 
             %nav
-              = link_to "Browse Classes", class_rooms_path
+              = link_to "Browse Classes", class_rooms_search_path(:search_term => "", :category => "All")
               = link_to "Teach a Class", new_class_room_path
             -if current_user
               .notifications

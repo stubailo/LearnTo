@@ -5,6 +5,7 @@ class ClassRoom < ActiveRecord::Base
   #validates_numericality_of :price
   #validates_numericality_of :occupancy
   validates :start_date, :presence => true
+  validates :category, :presence => true
   #validates :end_date, :presence => true
   validates :tag_line, :length => { :maximum => 150 }
   

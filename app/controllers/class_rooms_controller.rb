@@ -1,6 +1,8 @@
 class ClassRoomsController < ApplicationController
   # GET /class_rooms
   # GET /class_rooms.json
+  before_filter :store_location
+  
   def index
     @class_rooms = ClassRoom.all
     @class_rooms = Kaminari.paginate_array(@class_rooms).page(params[:page]).per(15)

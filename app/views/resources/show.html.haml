@@ -7,6 +7,10 @@
        :class => "button"
       - if @resource != @class_room.resource
         = link_to 'Delete', class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource), confirm: 'Are you sure?', method: :delete, :class => "button"
+  
+  -if @resource_page.section.downcase == "homework" and not @is_creator
+    = @resource.users.include?(current_user) ? "Congratulations, you've finished this assignment." : "Mark this assignment as completed after you've finished."
+    = link_to 'Toggle completed', class_room_resource_page_section_completed_path(@class_room, @resource_page, @section, @resource)
 
   .info
     %div #{link_to @resource_page.section.capitalize, [@class_room, @resource_page]} #{">"} #{@section.title} #{">"} #{@resource.name}
