@@ -10,6 +10,7 @@ class SubcommentsController < ApplicationController
         
     respond_to do |format|
        if @subcomment.save
+        user_notification("new_subcomment","Subcomment",@subcomment.comment.user,@subcomment.id, @subcomment.comment.id)
         format.html  { redirect_to(@subcomment, :notice => 'Comment was successfully created.') }
         partial = render_to_string :partial => "subcomments/subcomment.html.haml", :locals => 
         {:subcomment => @subcomment, :comment => @subcomment.comment}
