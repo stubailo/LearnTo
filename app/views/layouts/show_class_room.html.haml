@@ -16,6 +16,9 @@
               %div{:style => "margin-top: 5px"}
                 %span.ui-icon.ui-icon-check{:style => "float: left; margin-right: 5px; margin-top: -1px"}
                 enrolled
+          -elsif not current_user
+            .enroll-button-container
+              =link_to "Sign In to Join", "/login", :class => "button"
       %nav
         - if not defined? which_tab
           - which_tab = "none"

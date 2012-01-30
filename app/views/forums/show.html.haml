@@ -1,9 +1,11 @@
-%div{:style => "overflow: hidden"}
+
+%div{:style => "overflow: hidden; float: right"}
   .forum_search_form
     = form_tag class_room_search_path(@class_room, @forum), :method => :get do |f|
       .search_field                
         = text_field_tag :search_term, "", :class => "text"
         = submit_tag "Search for Posts", :class => "button"
+%h2{:style => "font-size: 2.5em"} Discussion
 
 .new_post_container
   .new_post_title.javascript_show
@@ -13,7 +15,7 @@
     = render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
-    .forum_post
+    .forum_post_list_item
       - if post.user_id == current_user.id or current_user.id == post.forum.class_room.user.id
         = link_to "delete", class_room_forum_post_path(@class_room, @forum, post), method: :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
