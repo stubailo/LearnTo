@@ -1,8 +1,8 @@
 -if @notifications.length > 0
   - @notifications.each do |notification|
+    - read = notification[0].read
+    - count = notification.length
     - if notification[0].action == "new_resource_comment"
-      - read = notification[0].read
-      - count = notification.length
       - resource_comment = notification[0].item
       = render :partial => "notifications/resource_comment_notification.html.haml", :locals => { :count => count, :resource_comment => resource_comment, :read => read }
       - if read == false
@@ -10,8 +10,6 @@
           - x.read = true
           - x.save!
     - elsif notification[0].action == "new_comment"
-      - read = notification[0].read
-      - count = notification.length
       - post_comment = notification[0].item
       = render :partial => "notifications/post_comment_notification.html.haml", :locals => { :count => count, :post_comment => post_comment, :read => read }
       - if read == false
@@ -19,8 +17,6 @@
           - x.read = true
           - x.save!
     - elsif notification[0].action == "new_announcement"
-      - read = notification[0].read
-      - count = notification.length
       - announcement = notification[0].item
       = render :partial => "notifications/announcement_notification.html.haml", :locals => { :count => count, :announcement => announcement, :read => read }
       - if read == false
@@ -28,8 +24,6 @@
           - x.read = true
           - x.save!
     - elsif notification[0].action == "new_subcomment"
-      - read = notification[0].read
-      - count = notification.length
       - subcomment = notification[0].item
       = render :partial => "notifications/comment_subcomment_notification.html.haml", :locals => { :count => count, :subcomment => subcomment, :read => read }
       - if read == false
@@ -37,8 +31,6 @@
           - x.read = true
           - x.save!
     - elsif notification[0].action == "also_resource_comment"
-      - read = notification[0].read
-      - count = notification.length
       - resource_comment = notification[0].item
       = render :partial => "notifications/also_resource_comment_notification.html.haml", :locals => { :count => count, :resource_comment => resource_comment, :read => read }
       - if read == false
