@@ -1,0 +1,14 @@
+.class_list_item
+  .title
+    .left
+      %h3
+        %strong= link_to class_room.name, class_room
+    .right
+      by #{link_to class_room.user.login, class_room.user}
+      in #{class_room.category},
+      #{pluralize class_room.users.length, "student"}
+  .middle
+    Learn To #{class_room.tag_line.split().map{|x| x.capitalize()}.join(" ")}:
+    =class_room.summary
+      
+
