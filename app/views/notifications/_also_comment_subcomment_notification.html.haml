@@ -1,0 +1,6 @@
+.notification{ :class => (read ? "read" : "unread")}
+  - name = subcomment.comment.post.user.login
+  - if count.to_i == 1
+    = link_to subcomment.user.login + " also commented on a response by #{name} to  \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
+  - else
+    = link_to "#{count} comments also made on a response by #{name} to \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
