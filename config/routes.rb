@@ -25,6 +25,7 @@ Classroom::Application.routes.draw do
   get "users/resend_activation"
   
   resources :users do
+    match 'notifications/count' => 'notifications#count'
     resources :notifications
   end
 
