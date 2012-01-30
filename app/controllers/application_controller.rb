@@ -114,7 +114,6 @@ class ApplicationController < ActionController::Base
       n.item_type == key[2] and n.parent_id == key[3]}
       @notifications.push(matching_notifications)
     end
-    #@notifications = matching_notifications
   end
   
   def user_notifications_number

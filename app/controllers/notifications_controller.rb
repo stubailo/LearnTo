@@ -6,9 +6,7 @@ class NotificationsController < ApplicationController
         partial = render_to_string "notifications/notifications.html.haml"
         render :json => {:notifications_html => partial}
       end
-      format.html do
-        render :layout => false
-      end
+      format.html
     end
   end
 end
