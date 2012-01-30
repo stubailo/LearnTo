@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :store_location
+
   def show
     @user = User.find(params[:id])
     @is_me = @user == current_user
