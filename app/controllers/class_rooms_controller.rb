@@ -64,7 +64,13 @@ class ClassRoomsController < ApplicationController
   end
   
   def students
-    @students = User.where("class_room_id == ?", params[:class_room_id])
+    @class_room = ClassRoom.find(params[:id])
+    @students = []
+    UserPermission.where("class_room_id = ?", @class_room.id).each do |x|
+      @students << User.find(x.user_id)
+    end      
+    set_vars
+    render :layout => "layouts/show_class_room", :locals => {:which_tab => "students"}
   end
 
   # GET /class_rooms/1
