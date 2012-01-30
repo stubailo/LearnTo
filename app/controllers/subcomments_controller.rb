@@ -7,6 +7,9 @@ class SubcommentsController < ApplicationController
     @subcomment = Subcomment.new(params[:subcomment])
     @subcomment.comment_id = params[:comment_id]
     @subcomment.user_id = current_user.id
+    @post = @subcomment.comment.post
+    @forum = @post.forum
+    @class_room = @forum.class_room
         
     respond_to do |format|
        if @subcomment.save

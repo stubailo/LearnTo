@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comment])
-    @post = comment.post
+    @post = Post.find(params[:post_id])
     @forum = @post.forum
     @class_room = @forum.class_room
     @comment.post_id = @post.id

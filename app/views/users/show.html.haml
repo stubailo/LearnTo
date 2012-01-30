@@ -9,8 +9,6 @@
           %div{:style => "margin: 5px 0"}
             %a{:href=>"/auth/facebook", :class=>"auth_provider"}
               = image_tag "facebooklogin.png", :alt => "Connect with Facebook"
-    - elsif @user.account_type != "internal"
-      .info Connected to Facebook
     -if @user.biography
       .info 
         = @user.biography

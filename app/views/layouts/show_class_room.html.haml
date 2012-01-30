@@ -32,7 +32,7 @@
           %li.main
             = link_to "Discussion", [@class_room, @class_room.forum], :class => which_tab == "discussion" ? "active" : ""
           %li.main
-            = link_to "Students", students_show_path(:class_room => @class_room.id), :class => which_tab == "students" ? "active" : ""
+            = link_to "Students", class_room_students_path(@class_room), :class => which_tab == "students" ? "active" : ""
       - if @is_creator
         %ul.class_actions
           %h3 Actions:
