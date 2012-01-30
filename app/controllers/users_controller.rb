@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
+        @class_room = ClassRoom.find(1)
+        if @class_room && Rails.env == "production"
+          user_permission = UserPermission.new(:user_id => @user.id, :class_room_id => @class_room.id, :permission_type => "student")
+          user_permission.save
+        end
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!
         format.html { render 'home/please_register', :layout => "application" }

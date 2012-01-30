@@ -26,7 +26,7 @@ class ClassRoom < ActiveRecord::Base
   belongs_to :user
   
   # never change these names, or the order, ever :D
-  CATEGORIES = [ 'All', 'Humanities', 'Science/Engineering', 'Life Skills', 'Other' ]  
+  CATEGORIES = [ 'All', 'Humanities', 'Science', 'Math/Engineering', 'Music', 'Entertainment', 'Athletics', 'Life Skills', 'Other' ]  
   
   
   def rating
