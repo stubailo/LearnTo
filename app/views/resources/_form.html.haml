@@ -10,6 +10,9 @@
     = f.label :caption, :class => "main"
     = f.text_field :caption, :class => "text"
   .field
+    = f.label :hidden_from_class, :class => "main"
+    = f.check_box :hidden
+  .field
     = f.label :type, "Content Type", :class => "main"
     .type_radio_buttons
       = Resource::TYPES.map { |type| (f.radio_button :file_type, type, :value => type) + (label_tag "resource_file_type_" + type, type) }.join.html_safe

@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html  { redirect_to(@post, :notice => 'Post was successfully updated.') }
+        format.html  { redirect_to class_room_forum_post_path(params[:class_room_id], params[:forum_id], @post), :notice => 'Post was successfully updated.' }
         partial = render_to_string :partial => "posts/post", :locals => {:post => @post}
         format.json  { render :json => {:updated_post => partial} }
       else

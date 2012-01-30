@@ -7,7 +7,7 @@
     - if @post.user_id == current_user.id
       .no_javascript
         %h2 Edit your post:
-        = render :partial => "posts/edit_post", :locals => {:post_id => @post.id}
+        = render :partial => "posts/edit_post", :locals => {:post => @post}
   .forum_post_responses
     - (@post.comments.sort_by { |c| [0 - c.rating, c.updated_at] }).each do |comment|
       = render :partial => "comments/comment", :locals => {:comment => comment}
