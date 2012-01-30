@@ -2,6 +2,7 @@ class ResourceCommentsController < ApplicationController
 
   def create
     @resource_comment = ResourceComment.new(params[:resource_comment])
+    comments = Resource.find(params[:resource_id]).resource_comments
     @resource_comment.resource_id = params[:resource_id]
     @resource_comment.user_id = current_user.id
     @resource_comment.save
@@ -12,8 +13,15 @@ class ResourceCommentsController < ApplicationController
     @resource_page = @section.resource_page
     @resource = @resource_comment.resource 
     
+    comments.each do |comment|
+      if comment.user_id != @class_room.user_id && comment.user_id != current_user.id
+        user_notification("also_resource_comment","ResourceComment", comment.user, 
+          @resource_comment.id, @resource_comment.resource_id)
+      end
+    end
+    
     user_notification("new_resource_comment","ResourceComment", @resource_comment.resource.user, 
-      @resource_comment.id, @resource_comment.resource.id)
+          @resource_comment.id, @resource_comment.resource.id)
    
     #return in json, with html for new form and for new comment, using the partials in resource comments
     respond_to do |format|
@@ -24,7 +32,7 @@ class ResourceCommentsController < ApplicationController
 
   def destroy
     @resource_comment = ResourceComment.find(params[:id])
-    if @resource_comment.user_id != current_user.id or current_user.id != @post.forum.class_room.user.id
+    if @resource_comment.user_id != current_user.id and current_user.id != @resource_comment.resource.class_room.user_id
       redirect_to root_url
     end
     @resource_comment.destroy

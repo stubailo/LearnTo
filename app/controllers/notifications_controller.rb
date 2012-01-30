@@ -9,4 +9,14 @@ class NotificationsController < ApplicationController
       format.html
     end
   end
+  
+  def count
+    respond_to do |format|
+      format.json do
+        count = user_notifications_number
+        render :json => {:count => count}
+      end
+    end
+  end
+  
 end
