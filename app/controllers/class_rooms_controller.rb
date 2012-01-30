@@ -131,7 +131,7 @@ class ClassRoomsController < ApplicationController
             resource = Resource.new(:name => "Class Description", :user_id => @user.id, :class_room_id => @class_room.id,
               :file_type => "document", :source_call => "materials", :hidden => false, :order => 0, :section_id => section.id)
             resource.save
-            document = Document.new(:resource_id => resource.id, :content => "Edit this document with a description of your class!", :parsed_content => "Edit this document with a description of your class!")
+            document = Document.new(:resource_id => resource.id, :content => "<p>Edit this document with a description of your class!</p>", :parsed_content => "<p>Edit this document with a description of your class!</p>")
             document.save
             @class_room.update_attribute(:description_id, resource.id)
           end

@@ -1,7 +1,13 @@
-- @announcements.each do |announcement|
-  - if announcement.user_id == current_user.id
-    = link_to "delete", class_room_announcement_path(announcement.class_room, announcement), :method => :delete, :class => "delete_link"
-  %h3
-    = announcement.title
-    %br
-    = announcement.content
+.announcements_page
+  %h2 Announcements
+  -if @announcements.length > 0
+    - @announcements.each do |announcement|
+      .announcement
+        - if announcement.user_id == current_user.id
+          = link_to "delete", class_room_announcement_path(announcement.class_room, announcement), :method => :delete, :class => "delete_link"
+        %h3= announcement.title
+        %p= announcement.content
+        .bottom #{time_ago_in_words announcement.created_at} ago by #{link_to announcement.user.login, announcement.user}
+  -else
+    .no_announcements
+      This class doesn't have any announcements.

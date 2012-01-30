@@ -49,8 +49,9 @@
           = render :partial => 'announcements/new_announcement', :locals => {:class_room => @class_room}
       -if @announcement
         .announcement
-          %h3= link_to @announcement.title,  class_room_announcements_path(@class_room)
+          %h3= @announcement.title
           %p= @announcement.content
+          .bottom #{time_ago_in_words @announcement.created_at} ago by #{link_to @announcement.user.login, @announcement.user}
       -elsif @is_creator
         .placeholder
           No announcements yet!  Click 'post new' above to make an announcement.
