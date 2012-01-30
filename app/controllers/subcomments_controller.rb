@@ -19,7 +19,7 @@ class SubcommentsController < ApplicationController
         subcomments.each do |subcomment|
           if subcomment.user != @post.user and subcomment.user != current_user and not users_notified.include? subcomment.user
             user_notification("also_comment_subcomment","Subcomment",subcomment.user,@subcomment.id, @subcomment.comment.id)
-            users_notified[comment.user] = comment.user
+            users_notified[subcomment.user] = subcomment.user
           end 
         end
         user_notification("new_subcomment","Subcomment",@subcomment.comment.user,@subcomment.id, @subcomment.comment.id)
