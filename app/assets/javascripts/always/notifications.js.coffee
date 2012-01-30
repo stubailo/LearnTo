@@ -1,5 +1,10 @@
 nw = ""
 
+sleep = (options..., callback) ->
+    [period, repeat] = options
+    method = if repeat then setInterval else setTimeout
+    method callback, period or 0
+
 $ ->
   $(".notifications a").click( open_notifications )
   tab = $(".notifications")
@@ -9,6 +14,32 @@ $ ->
   $(".notifications").css("position", "relative")
 
   create_notifications_window()
+
+  sleep 10000, yes, check_for_notifications
+
+check_for_notifications = ->
+  unless $(".notifications").hasClass("opened")
+    $.get("/users/1/notifications/count.json", update_notification_number)
+
+set_titlebar_number = (n) ->
+  if document.title[0] == "("
+    if n > 0 
+      document.title = "(" +n+ ") " + document.title.split(" ")[1]
+    else
+      document.title = document.title.split(" ")[1]
+  else
+    if n > 0
+      document.title = "(" +n+ ") " + document.title
+
+update_notification_number = (response) ->
+  n = eval(response).count
+  unless $(".notifications").hasClass("opened")
+    $(".notifications a").text(n)
+    set_titlebar_number(n)
+    if n > 0
+      $(".notifications a").addClass("has_notifications")
+    else
+      $(".notifications a").removeClass("has_notifications")
 
   
 create_notifications_window = ->
@@ -40,5 +71,6 @@ close_notifications = (event) ->
   $(".notifications").removeClass("opened")
   nw.slideUp()
   $(".notifications a").text("0").removeClass("has_notifications")
+  set_titlebar_number(0)
   $(".notifications a").unbind("click")
   $(".notifications a").click( open_notifications )
