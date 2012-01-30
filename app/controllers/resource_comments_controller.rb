@@ -13,11 +13,13 @@ class ResourceCommentsController < ApplicationController
     @resource_page = @section.resource_page
     @resource = @resource_comment.resource 
     
+    users_notified = {}
     comments.each do |comment|
-      if comment.user_id != @class_room.user_id && comment.user_id != current_user.id
+      if comment.user != @class_room.user and comment.user != current_user and not users_notified.include? comment.user
         user_notification("also_resource_comment","ResourceComment", comment.user, 
           @resource_comment.id, @resource_comment.resource_id)
-      end
+        users_notified[comment.user] = comment.user
+      end 
     end
     
     user_notification("new_resource_comment","ResourceComment", @resource_comment.resource.user, 

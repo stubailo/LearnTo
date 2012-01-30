@@ -2,4 +2,7 @@
   - if count.to_i == 1
     = link_to subcomment.user.login + " commented on your response to \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
   - else
-    = link_to count.to_s + " users commented on your response to \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
+    - if read
+      = link_to "#{count} comments on your response to \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
+    - else
+      = link_to "#{count} new comments on your response to \"#{subcomment.comment.post.title}\" in " + subcomment.comment.post.forum.class_room.name + ".", class_room_forum_post_path(subcomment.comment.post.forum.class_room, subcomment.comment.post.forum, subcomment.comment.post), :class => "notification_url"
