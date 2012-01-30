@@ -2,7 +2,7 @@
   = link_to "delete", class_room_forum_post_path(@class_room, @forum, @post), method: :delete, :class => "delete_link"
 %h3
   = link_to post.title, class_room_forum_post_path(@class_room, @forum, @post)
-%p
+.post_content
   = simple_format(post.content)
 %div.bottom 
   posted #{time_ago_in_words(post.created_at.to_time, include_seconds = true)} ago by #{link_to post.user.login, post.user},

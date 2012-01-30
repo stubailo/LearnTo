@@ -1,7 +1,8 @@
 = form_for @post, :url => class_room_forum_post_path(@class_room, @forum, @post) do |f|
   = hidden_field_tag("post_id", post_id)
-  = label_tag(:title, "Title:")
-  = f.text_field :title
-  = label_tag(:content, "Post Content:")
-  = f.text_area :content, :size => "60x12"
-  = f.submit "Create"
+  %div
+    = label_tag(:content, "Edit Post Content:")
+  %div
+    = f.text_area :content, :size => "60x12"
+  %div
+    = f.submit "Save", :class=> "button"
