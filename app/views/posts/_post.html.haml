@@ -5,8 +5,8 @@
 .post_content
   = simple_format(post.content)
 %div.bottom 
-  posted #{time_ago_in_words(post.created_at.to_time, include_seconds = true)} ago by #{link_to post.user.login, post.user},
-  tags: 
-  - post.tag_list.each do |x|
-    = link_to x, class_room_search_by_tag_path(@class_room, @forum, :tag_term => x)
+  posted #{time_ago_in_words(post.created_at.to_time, include_seconds = true)} ago by #{link_to post.user.login, post.user}
+  -#tags: 
+    - post.tag_list.each do |x|
+      = link_to x, class_room_search_by_tag_path(@class_room, @forum, :tag_term => x)
     

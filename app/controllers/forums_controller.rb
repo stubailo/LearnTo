@@ -46,6 +46,7 @@ class ForumsController < ApplicationController
   end
   
   def search
+    @search_term = params[:search_term]
     @post = Post.new
     @posts = Post.search(params[:search_term], params[:id])
     @forum = Forum.find(params[:id])

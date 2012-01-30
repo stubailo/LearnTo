@@ -52,10 +52,8 @@
           .full_width_page
             - if flash[:fail]
               .flash.ui-state-highlight= flash[:fail]
-               
             = yield
         -else
-               
           = yield(:content)
 
 
@@ -68,6 +66,7 @@
   $(function() {
     $("#search_term").autocomplete({
       source: "/class_rooms/class_names.json",
-      minLength: 3
+      minLength: 3,
+      focus: function () { return false;}
      });
     });

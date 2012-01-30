@@ -22,6 +22,7 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-size: 1em;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -53,6 +54,11 @@ $orange: #f37800;
 $text-orange: saturate(darken($orange, 10%), 40%);
 $light-grey: #ccc;
 $dark-grey: #444;
+
+textarea {
+  font-size: 1em;
+  font-family: "Helvetica", "Arial", sans-serif;
+}
 
 strong {
     font-weight: bold;
@@ -229,11 +235,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d11541', end
       float: right;
       padding: $global-padding;
 
+
       .search_field {
-        margin-top: 1px;
-        height: 1.5em;
+        overflow: hidden;
         margin-right: 0;
         background: #eee;
+
+        margin-bottom: -10px;
+        margin-top: 1px;
 
         padding: 1px;
 
@@ -258,7 +267,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d11541', end
           width: 100%;
           font-size: 1em;
 
-          padding: 0 3px;
+
+          padding: 1px 5px;
 
           &.inactive {
             color: #777;
