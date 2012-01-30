@@ -1,0 +1,20 @@
+= form_for @user, :url => password_reset_path(@id), :html => { :method => "put" } do |f|
+  - if @user.errors.any?
+    #error_explanation.ui-state-error.ui-corner-all
+      .ui-icon.ui-icon-alert.icon-in-info
+      %h2= "Could not register: #{pluralize(@user.errors.count, "error")} in the form"
+      %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+  .field
+    = f.label :password, :class => "main"
+    %p.hint Must be at least 6 characters long.
+    = f.password_field :password, :class => "required text"
+  .field
+    = f.label :password_confirmation, :class => "main"
+    %p.hint Must match the previous password.
+    = f.password_field :password_confirmation, :class => "required text"
+
+  %br/
+  .actions
+    = f.submit "Create New Password"

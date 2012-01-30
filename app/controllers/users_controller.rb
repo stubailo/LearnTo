@@ -19,6 +19,8 @@ class UsersController < ApplicationController
       if @user && !@user.active?
         @user.deliver_activation_instructions!
         render 'home/please_register', :layout => "application"
+      else
+        redirect_to new_user_session_path
       end
     end
   end
@@ -29,11 +31,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
-        @class_room = ClassRoom.find(1)
-        if @class_room && Rails.env == "production" && @class_room.user.email == "jtwarren@mit.edu"
-          user_permission = UserPermission.new(:user_id => @user.id, :class_room_id => @class_room.id, :permission_type => "student")
-          user_permission.save
-        end
+				if ClassRoom.exists?(1)	
+					@class_room = ClassRoom.find(1)
+					if @class_room && Rails.env == "production" && @class_room.user.email == "jtwarren@mit.edu"
+						user_permission = UserPermission.new(:user_id => @user.id, :class_room_id => @class_room.id, :permission_type => "student")
+						user_permission.save
+					end
+				end
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!
         format.html { render 'home/please_register', :layout => "application" }
@@ -80,7 +84,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = current_user
-    User.destroy(params[:id])
+    @user.update_attributes(:biography => "", :account_type => "deleted", :email => @user.id.to_s+"a@a.a", :login => @user.login + "(deleted)", :active => false)
 
     flash[:notice] = "Successfully deleted and logged out."
     redirect_to root_url

@@ -25,10 +25,10 @@ class ApplicationController < ActionController::Base
       user = current_user
       user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, 
       class_room.id).first.try(:permission_type)
-      unless is_creator(class_room) || (user_permission == "student" && class_room.started)
-        return false
-      else
+      if is_creator(class_room) || (user_permission == "student" && class_room.started)
         return true
+      else
+        return false
       end
     end
   end

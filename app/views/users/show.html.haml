@@ -17,6 +17,8 @@
         = link_to "Edit account info #{@user.biography ? "" : "or add a biography"}", edit_user_path(@user)
       .info
         = link_to "Change password", users_edit_password_path
+      .info
+        = link_to "Delete account", user_path, method: :delete, :confirm => "Are you sure? Deleting your account is irreversible"
   .user_inside
     - unless @taught_classes.empty?
       %h2= "Classes #{@is_me ? "you are" : @user.login + " is"} teaching:"

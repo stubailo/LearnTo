@@ -1,0 +1,6 @@
+= form_tag(password_resets_path) do 
+  %div
+    = label_tag 'email', 'Enter your email here'
+    = text_field_tag 'email'
+  %div
+    = submit_tag 'Send password reset email'
