@@ -47,6 +47,11 @@ class User < ActiveRecord::Base
     Notifier.welcome(self).deliver
   end
   
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    Notifier.password_reset_instructions(self).deliver
+  end  
+  
   def self.create_from_hash(auth_hash)
     puts hash.to_yaml
     user = User.new(:login => auth_hash['info']['name'], :email => auth_hash['info']['email'], :crypted_password => "000", 

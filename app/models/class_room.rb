@@ -21,6 +21,8 @@ class ClassRoom < ActiveRecord::Base
   has_many :class_room_ratings
   
   has_one :forum, :dependent => :destroy
+  
+  has_one :premium_class, :dependent => :destroy
 
   belongs_to :resource, :foreign_key => "description_id"
 

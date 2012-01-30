@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129211426) do
+ActiveRecord::Schema.define(:version => 20120131000841) do
 
   create_table "announcements", :force => true do |t|
     t.integer  "user_id"
@@ -119,6 +119,17 @@ ActiveRecord::Schema.define(:version => 20120129211426) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.datetime "last_updated"
+  end
+
+  create_table "premium_classes", :force => true do |t|
+    t.integer  "class_room_id"
+    t.datetime "premium"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "resource_comments", :force => true do |t|

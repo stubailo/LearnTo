@@ -10,6 +10,18 @@ class ApplicationController < ActionController::Base
     @website_name = "LearnTo"
   end
   
+  def is_admin #lulz
+    user = current_user
+    return current_user && (user.email == "brodrick.childs@gmail.com" || user.email == "jtwarren@mit.edu" || user.email == "sashko@mit.edu")
+  end
+  
+  def require_admin
+    unless is_admin
+      flash[:fail] = "You must be the site administrator to do that"
+      redirect_to root_path
+    end
+  end
+  
   def require_enrolled(class_room)
     user = current_user
     user_permission = current_user ? UserPermission.where("user_id = ? AND class_room_id = ?", user.id, 
@@ -25,10 +37,10 @@ class ApplicationController < ActionController::Base
       user = current_user
       user_permission = UserPermission.where("user_id = ? AND class_room_id = ?", user.id, 
       class_room.id).first.try(:permission_type)
-      unless is_creator(class_room) || (user_permission == "student" && class_room.started)
-        return false
-      else
+      if is_creator(class_room) || (user_permission == "student" && class_room.started)
         return true
+      else
+        return false
       end
     end
   end
@@ -61,6 +73,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_vars
+    @is_admin = is_admin
     @resource_pages = @class_room.resource_pages.sort_by {|x| x.id}
     @creator = User.find(@class_room.user_id)
     if current_user

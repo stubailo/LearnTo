@@ -1,6 +1,13 @@
 - content_for :content do
   .class_page
     %div#left-bar
+      
+      -if @is_admin
+        = link_to "make premium", new_class_room_premium_class_path(@class_room)
+        %br
+        - if @class_room.premium_class
+          = link_to "view premium", class_room_premium_class_path(@class_room, @class_room.premium_class)
+              
       #class-name-info{ :class => which_tab == "home" ? "home_page" : "" }
         %h1= @class_room.name
         %p.subtitle

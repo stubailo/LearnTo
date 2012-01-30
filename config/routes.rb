@@ -1,5 +1,5 @@
 Classroom::Application.routes.draw do
-  
+
   match "class_rooms/:id/plus1" => "class_rooms#plus1", :as => :class_rooms_plus1, :via => :post
   
   match "class_rooms/:id/minus1" => "class_rooms#minus1", :as => :class_rooms_minus1, :via => :post
@@ -24,6 +24,8 @@ Classroom::Application.routes.draw do
   
   get "users/resend_activation"
   
+  resources :password_resets
+  
   resources :users do
     match 'notifications/count' => 'notifications#count'
     resources :notifications
@@ -38,6 +40,7 @@ Classroom::Application.routes.draw do
   match 'class_rooms/:id/students' => "class_rooms#students", :as => :class_room_students
 
   resources :class_rooms do
+    resources :premium_classes
     resources :announcements do
     end
     resources :resource_pages do

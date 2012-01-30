@@ -139,7 +139,7 @@ class ClassRoomsController < ApplicationController
           section.save
           if type == "materials"
             resource = Resource.new(:name => "Class Description", :user_id => @user.id, :class_room_id => @class_room.id,
-              :file_type => "document", :source_call => "materials", :hidden => false, :order => 0, :section_id => section.id)
+              :file_type => "document", :source_call => "materials", :hidden => true, :order => 0, :section_id => section.id)
             resource.save
             document = Document.new(:resource_id => resource.id, :content => "<p>Edit this document with a description of your class!</p>", :parsed_content => "<p>Edit this document with a description of your class!</p>")
             document.save
