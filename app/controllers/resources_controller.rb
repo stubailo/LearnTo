@@ -87,8 +87,7 @@ class ResourcesController < ApplicationController
 
   # POST /resources
   # POST /resources.json
-  def create  
-    break
+  def create
     @resource = Resource.new(params[:resource])
     @class_room = ClassRoom.find(params[:class_room_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
