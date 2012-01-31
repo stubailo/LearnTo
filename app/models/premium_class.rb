@@ -7,7 +7,7 @@ class PremiumClass < ActiveRecord::Base
       :s3_credentials => "#{Rails.root}/config/s3.yml", 
       :path => "/:style/:id/:filename"
   else
-    has_attached_file :file, :styles => Proc.new :styles => { :full_width => "940x400^"}
+    has_attached_file :image, :styles => { :full_width => "940x400^"}
   end
 
 end
