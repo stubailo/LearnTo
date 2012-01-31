@@ -24,16 +24,7 @@ class ForumsController < ApplicationController
     require_enrolled(@class_room)
     if is_enrolled(@class_room)
       @posts = @forum.posts.order("last_updated DESC").page(params[:page]).per(15)
-      @tags = []
       set_vars
-      
-      
-      Tagging.select("\"tag_id\" as tag_id, max(\"created_at\") as created_at,max(\"taggable_type\") as taggable_type,max(\"context\") as context")
-       .where(:taggable_type => "Post")
-       .where(:taggable_id => @ids)
-       .group("tag_id")
-       .order('created_at DESC')
-       .limit(6).each { |x| @tags.push(x.tag.name) }
         
       if @forum != nil && @user != nil
         @post = Post.new

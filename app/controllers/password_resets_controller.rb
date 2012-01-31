@@ -14,7 +14,7 @@ class PasswordResetsController < ApplicationController
 			"Please check your email."  
 			render 'home/please_reset_password', :layout => "application"
 		else  
-			flash[:notice] = "No user was found with that email address"  
+			flash[:fail] = "No user was found with that email address"  
 			render :action => :new  
 		end  
 	end

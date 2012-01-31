@@ -3,8 +3,5 @@
   = f.text_field :title
   = label_tag(:content, "Post Content:")
   = f.text_area :content, :size => "60x12"
-  %div{:style => "display: none"}
-    = label_tag(:new_tags, "Tags:")
-    = text_field_tag :new_tags
   %div
     = f.submit "Submit Post"

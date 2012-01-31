@@ -45,15 +45,6 @@ class PostsController < ApplicationController
     @post.forum_id = params[:forum_id]
     @post.user_id = current_user.id
     @post.last_updated = Time.now
-    tag_list = params[:new_tags].split(/[\s,]+/)
-    tag_list.map do |x|
-      if x[0,1] == "#"
-        x = x.downcase
-      else
-        x = x.insert(0,"#").downcase
-      end
-    end
-    @post.tag_list = tag_list
     @post.save
     respond_to do |format|
       if @post.save
