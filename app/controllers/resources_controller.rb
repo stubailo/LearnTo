@@ -88,6 +88,7 @@ class ResourcesController < ApplicationController
   # POST /resources
   # POST /resources.json
   def create  
+    break
     @resource = Resource.new(params[:resource])
     @class_room = ClassRoom.find(params[:class_room_id])
     @resource_page = ResourcePage.find(params[:resource_page_id])
@@ -101,13 +102,12 @@ class ResourcesController < ApplicationController
       @resource.class_room_id = @class_room.id
       @resource.section_id = @section.id
       @resource.order = @section.resources.length
-      
-      unless @resoure.file_type == "document"
-        @resource.hidden = false
-      end
         
       #Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
       if @resource.save
+				unless @resoure.file_type == "document"
+					@resource.hidden = false
+				end
         unless @resource.hidden
           @class_room.update_attribute(:updated_at, Time.now.to_datetime)
         end
