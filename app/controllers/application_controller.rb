@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   
   def is_creator(item)
     user = current_user
-    return current_user && user.id == item.user_id
+    return (current_user && user.id == item.user_id) || is_admin
   end
 
   def set_vars

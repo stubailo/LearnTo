@@ -13,7 +13,6 @@
     = f.label :type, "Content Type", :class => "main"
     .type_radio_buttons
       = Resource::TYPES.map { |type| (f.radio_button :file_type, type, :value => type) + (label_tag "resource_file_type_" + type, type) }.join.html_safe
- 
   .field#upload_tab_contents
     = f.label :file, "Upload File", :class => "main"
     = f.file_field :file
