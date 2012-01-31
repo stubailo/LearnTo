@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user.valid?
       if (verify_recaptcha(:model => @user, :message => "Captcha entered incorrectly")) && @user.save_without_session_maintenance
+=begin
 				if ClassRoom.exists?(1)	
 					@class_room = ClassRoom.find(1)
 					if @class_room && Rails.env == "production" && @class_room.user.email == "jtwarren@mit.edu"
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
 						user_permission.save
 					end
 				end
+=end
         @user.update_attribute(:account_type, "internal")
         @user.deliver_activation_instructions!
         format.html { render 'home/please_register', :layout => "application" }
