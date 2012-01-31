@@ -1,18 +1,27 @@
-= form_tag('search', :method => :get) do
-  = label_tag(:search_term, "Search forum:")
-  = text_field_tag(:search_term)
-  = submit_tag("Search")
+%div{:style => "overflow: hidden; float: right"}
+  .forum_search_form
+    = form_tag class_room_search_path(@class_room, @forum), :method => :get do |f|
+      .search_field
+        = text_field_tag :search_term, "", :class => "text"
+        = submit_tag "Search for Posts", :class => "button"
+%h2{:style => "font-size: 2.5em"} Search Results
+%h2{:style => "margin: 10px 0; border: 1px solid #eee; border-radius: 3px; -moz-border-radius: 3px; padding: 10px;"}
+  You searched for 
+  %strong "#{@search_term}"
+
 - if @posts.size == 0
-  = "Didn't find what you were looking for?  Start a new discussion:"
-  = render "posts/newPost"
+  %hr
+  = "Didn't find what you were looking for?  Start a new topic:"
+  .new_post_container
+    .new_post_title New Post
+    = render "posts/newPost"
 - @posts.each do |post|
   .forum_post_container
-    .forum_post
+    .forum_post_list_item
       - if post.user_id == current_user.id
         = link_to "delete", class_room_forum_posts_path(@class_room, @forum, post), :method => :delete, :confirm => 'Are you sure you want to destroy this post and all of its reponses? This action cannot be undone.', :class => "delete_link"
       %h3
         = link_to post.title, class_room_forum_post_path(@class_room, @forum, post)
-      %p= simple_format(post.content)
       %div.bottom 
         last activity #{ time_ago_in_words(post.last_updated.to_time, include_seconds = true)} ago,
         = link_to(pluralize(post.comments.count, "response"), class_room_forum_post_path(@class_room, @forum, post)) + ", "

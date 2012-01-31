@@ -1,4 +1,5 @@
 = form_for @comment, :url => [@class_room, @forum, @post, @comment] do |f|
   = f.text_area :content, :size => "20x4"
   %br
-    = f.submit "Submit Response"
+    = f.submit "Submit Response", :class => "button"
+

@@ -29,7 +29,7 @@ class HomeController < ApplicationController
       render :action => "user_index", :layout => "layouts/user_home", :locals => {:which_tab => "user_index"}
     #There is no user logged in
     else
-      @random_class_room = random
+      @features = PremiumClass.first(3)
       render :action => "index"
       return
     end
