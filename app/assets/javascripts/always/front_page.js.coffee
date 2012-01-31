@@ -14,6 +14,7 @@ $ ->
  
     current_tab = which_tab
 
+    $(".img_container img").stop()
     float(my_img)
 
   next_tab = ->
