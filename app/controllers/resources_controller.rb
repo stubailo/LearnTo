@@ -104,7 +104,7 @@ class ResourcesController < ApplicationController
         
       #Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
       if @resource.save
-				unless @resoure.file_type == "document"
+				unless @resource.file_type == "document"
 					@resource.hidden = false
 				end
         unless @resource.hidden
