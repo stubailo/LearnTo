@@ -26,6 +26,8 @@ Classroom::Application.routes.draw do
   
   resources :password_resets
   
+  match 'password_resets/:id/please_register' => "password_resets#please_register", :as => :resend
+  
   resources :users do
     match 'notifications/count' => 'notifications#count'
     resources :notifications
