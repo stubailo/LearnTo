@@ -20,7 +20,7 @@
           -if @class_room
             Check out our tutorial class:
             %ul
-              = link_to "Learn to use this site!", class_room_path(@class_room)
+              = link_to "Learn to #{@class_room.tag_line}!", class_room_path(@class_room)
           
           = @class_room ? "Or pick " : "Pick "
           a category you're interested in to browse classes:

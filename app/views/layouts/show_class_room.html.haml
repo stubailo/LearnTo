@@ -60,6 +60,8 @@
               = link_to "view premium", class_room_premium_class_path(@class_room, @class_room.premium_class)
             - else
               = link_to "make premium", new_class_room_premium_class_path(@class_room)
+          %li
+            = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
     %div#center-page
       - if flash[:fail]
