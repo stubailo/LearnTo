@@ -173,10 +173,7 @@ class ResourcesController < ApplicationController
 
 
   
-  def change_hidden
-    #make sure we don't update updated_at when just changing order or publishing
-    Resource.record_timestamps = false
-    
+  def change_hidden    
     get_path_vars
     @resource = Resource.find(params[:id])
     if @resource.hidden
@@ -184,10 +181,9 @@ class ResourcesController < ApplicationController
     else
       @resource.update_attribute(:hidden, true)
     end
-    
-    #Turn timestamps back on    
-    Resource.record_timestamps = true
-    
+    unless @resource.hidden
+      @class_room.update_attribute(:updated_at, Time.now.to_datetime)
+    end
     redirect_back_or_default class_room_resource_page_section_resource_path(@class_room, @resource_page, @section, @resource)
   end
   

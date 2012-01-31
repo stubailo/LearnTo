@@ -8,6 +8,13 @@ class HomeController < ApplicationController
     @resources = []
     
   	if current_user
+			if ClassRoom.exists?(1)	
+				@class_room = ClassRoom.find(1)
+				unless @class_room && @class_room.user.email == "jtwarren@mit.edu"
+				  @class_room = nil
+				end
+			end	
+			
   	  @ids = current_user.class_rooms.map { |x|  x.id }
   	  @news_feed_posts = []
   	  @posts = []
