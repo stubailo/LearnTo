@@ -1,5 +1,8 @@
 %h2{:style => "font-size: 2.5em"} Students
-- @students.each do |student|
-  .student_list_item
-    %h4
-      = link_to student.login, user_path(student)
+- if @students.length > 0
+  - @students.each do |student|
+    .student_list_item
+      %h4
+        = link_to student.login, user_path(student)
+- else
+  %p{:style => "margin: 10px 0; color: #555"} No students yet!
