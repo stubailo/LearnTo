@@ -15,7 +15,8 @@ $ ->
 
   create_notifications_window()
 
-  sleep 10000, yes, check_for_notifications
+  if $(".notifications").size() > 0
+    sleep 10000, yes, check_for_notifications
 
 check_for_notifications = ->
   unless $(".notifications").hasClass("opened")

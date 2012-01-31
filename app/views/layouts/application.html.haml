@@ -51,7 +51,7 @@
         -if not content_for? :content
           .full_width_page
             - if flash[:fail]
-              .flash.ui-state-highlight= flash[:fail]
+              .flash.ui-state-highlight.ui-corner-all= flash[:fail]
             = yield
         -else
           = yield(:content)

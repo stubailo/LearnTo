@@ -1,7 +1,28 @@
-%div Register using facebook or create a new account in the top right
+.display_case
+  .img_container
+    - @features.each_with_index do |feature, index|
+      = image_tag feature.image(:full_width), :id => "img_" +  index.to_s
 
-= link_to 'Browse existing classes', class_rooms_path
+  %ul.featured_class_tabs
+    - @features.each_with_index do |feature, index|
+      %li{:class => (index == 0 ? "active" : ""), :id => "tab_" + index.to_s}
+        .mini_tagline
+          .learn_to
+            Learn To
+          - size = [7-feature.class_room.tag_line.length/7, 3].max*0.3
+          .text{:style => "font-size: #{size}em"}
+            =feature.class_room.tag_line
 
-        
-=# "Try a new class!"
-=# link_to @random_class_room.name, @random_class_room
+.info_container
+  - @features.each_with_index do |feature, index|
+    %div.featured_class_info{:id => "class_" + index.to_s, :style => (index == 0?"":"display: none;")}
+      .featured_when Featured This Week
+      %h3 #{link_to feature.class_room.name, feature.class_room}, taught by #{feature.class_room.user.login}
+      %p= feature.class_room.summary
+
+%hr
+
+.info_section
+  %h3 LearnTo is a platform for anyone to teach an online class, on any topic.
+  %p We want to create a community of learning where people can share their knowledge in the form of structured online classes.  Everyone is an expert on something, be it playing Starcraft, counting cards, designing websites, composing music, or writing poems.  We want to encourage people to share their insights about the world so that their experience may benefit others.
+  %p Sign in and join a class to see what it's all about.

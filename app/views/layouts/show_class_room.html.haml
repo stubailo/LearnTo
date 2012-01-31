@@ -2,11 +2,6 @@
   .class_page
     %div#left-bar
       
-      -if @is_admin
-        = link_to "make premium", new_class_room_premium_class_path(@class_room)
-        %br
-        - if @class_room.premium_class
-          = link_to "view premium", class_room_premium_class_path(@class_room, @class_room.premium_class)
               
       #class-name-info{ :class => which_tab == "home" ? "home_page" : "" }
         %h1= @class_room.name
@@ -40,8 +35,8 @@
             = link_to "Discussion", [@class_room, @class_room.forum], :class => which_tab == "discussion" ? "active" : ""
           %li.main
             = link_to "Students", class_room_students_path(@class_room), :class => which_tab == "students" ? "active" : ""
-      - if @is_creator
-        %ul.class_actions
+      %ul.class_actions
+        - if @is_creator
           %h3 Actions:
           
           %li
@@ -55,11 +50,16 @@
             = link_to "Edit class", edit_class_room_path(@class_room)
           %li
             = link_to "Delete class", class_room_path(@class_room), confirm: 'Are you sure you want to destroy this class and all of its contents?', method: :delete
-      -else
-        %ul.class_actions
+        -else
           -if current_user and not @show_join and not @is_creator
             %li
               = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
+        -if @is_admin
+          %li 
+            - if @class_room.premium_class
+              = link_to "view premium", class_room_premium_class_path(@class_room, @class_room.premium_class)
+            - else
+              = link_to "make premium", new_class_room_premium_class_path(@class_room)
 
     %div#center-page
       - if flash[:fail]
