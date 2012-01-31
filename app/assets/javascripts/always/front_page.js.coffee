@@ -27,8 +27,8 @@ $ ->
     element.css("top", 0)
     element.animate( {top: -(my_height - container_height)}, 30000, 'linear', next_tab)
   
-  $(window).ready -> 
-    $("img").load -> switch_to_tab(0)
+  $(window).load ->
+    switch_to_tab(0)
     $(".featured_class_tabs li").each ->
       tab_id = $(this).attr("id").split("_")[1]
       $(this).click ->

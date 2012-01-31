@@ -4,6 +4,10 @@
     Don't have an account yet?
     = link_to "Click here to register.", new_user_path
   %hr
+  %p
+    %a{:href=>"/auth/facebook", :class=>"auth_provider"}
+      = image_tag "facebooklogin.png", :alt => "Facebook Login"
+  %p or
   = form_for @user_session, :url => {:action => "create"} do |f|
     - if @user_session.errors.any?
       #error_explanation.ui-state-error.ui-corner-all
@@ -27,8 +31,4 @@
     %div{:style => "margin-top: 10px;"}
       = link_to "Forgot password?", new_password_reset_path
 
-%h3 - Or - 
-%br 
-%a{:href=>"/auth/facebook", :class=>"auth_provider"}
-  = image_tag "facebooklogin.png", :alt => "Facebook Login" 
 
