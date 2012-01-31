@@ -13,7 +13,8 @@
     = f.label :caption, :class => "main"
     = f.text_field :caption, :class => "text"
   .field
-    = f.label :hidden_from_class, :class => "main"
+    = f.label "Hidden from students", :class => "main"
+    %p.hint Use this to keep drafts that you aren't ready to post yet.
     = f.check_box :hidden
 
   %br

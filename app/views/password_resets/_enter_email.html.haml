@@ -1,6 +1,6 @@
 = form_tag(password_resets_path) do 
-  %div
-    = label_tag 'email', 'Enter your email here'
-    = text_field_tag 'email'
-  %div
-    = submit_tag 'Send password reset email'
+  .field
+    = label_tag 'email', 'Enter your email here', :class => "main"
+    = text_field_tag 'email',"", :class => "text"
+  .field
+    = submit_tag 'Send password reset email', :class => "button"
