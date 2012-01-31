@@ -2,7 +2,7 @@
   - if count.to_i == 1
     = link_to "New announcement posted in " + announcement.class_room.name + ": \"" + announcement.title + "\"", class_room_announcements_path(announcement.class_room), :class => "notification_url"
   - else
-  - if read
-    = link_to "#{count} announcements posted in " + announcement.class_room.name + ".", class_room_announcements_path(announcement.class_room), :class => "notification_url"
-  - else
-    = link_to "#{count} new announcements posted in " + announcement.class_room.name + ".", class_room_announcements_path(announcement.class_room), :class => "notification_url"
+    - if read
+      = link_to "#{count} announcements posted in " + announcement.class_room.name + ".", class_room_announcements_path(announcement.class_room), :class => "notification_url"
+    - else
+      = link_to "#{count} new announcements posted in " + announcement.class_room.name + ".", class_room_announcements_path(announcement.class_room), :class => "notification_url"
