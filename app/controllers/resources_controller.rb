@@ -101,6 +101,10 @@ class ResourcesController < ApplicationController
       @resource.class_room_id = @class_room.id
       @resource.section_id = @section.id
       @resource.order = @section.resources.length
+      
+      unless @resoure.file_type == "document"
+        @resource.hidden = false
+      end
         
       #Makes the document-resource relationship if the document and resource are both valid -- need to put in validations
       if @resource.save
