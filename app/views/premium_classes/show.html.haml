@@ -7,3 +7,6 @@ The name of the uploaded file for this premium class is
 = @premium_class.image_file_name
 %br
 =link_to "update picture", edit_class_room_premium_class_path(@class_room, @premium_class)
+%br
+%br
+= link_to "Remove premium", class_room_premium_class_path(@class_room, @premium_class), method: :delete

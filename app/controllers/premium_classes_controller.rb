@@ -39,5 +39,8 @@ class PremiumClassesController < ApplicationController
   end
 
   def destroy
+    @premium_class = PremiumClass.find(params[:id])
+    @premium_class.destroy
+    redirect_to class_room_path(params[:class_room_id])
   end
 end
