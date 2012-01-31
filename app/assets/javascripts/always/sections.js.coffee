@@ -66,7 +66,8 @@ $ ->
       axis: "y",
       stop: (event, ui) ->
         action_path = ui.item.find("form").attr("action")
-        index = $(ui.item.parent()).find("li").index(ui.item)
+        index = $(ui.item.parent()).children("li").index(ui.item)
+          
         $.post(action_path, {"section[order]" : index})
     });
 
@@ -76,7 +77,7 @@ $ ->
       stop: (event, ui) ->
         action_path = ui.item.find("form").attr("action")
         section_id = $(ui.item.parent()).attr("id").split("-")[1]
-        index = $(ui.item.parent()).find("li").index(ui.item)
+        index = $(ui.item.parent()).children("li").index(ui.item)
         $.post(action_path, {"section[id]" : section_id, "resource[order]" : index})
     })
   
