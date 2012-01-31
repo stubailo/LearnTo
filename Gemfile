@@ -22,7 +22,6 @@ gem 'mail'
 gem "paperclip", "~> 2.0"
 gem 'aws-s3'
 gem 'aws-sdk'
-gem 'acts-as-taggable-on', '~>2.2.0'
 
 gem 'kaminari'
 
