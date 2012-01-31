@@ -3,7 +3,7 @@ class Notifier < ActionMailer::Base
   
   def activation_instructions(user)
     @url = activate_account_url(user.perishable_token)
-    mail(:to => user.email, :subject => "Activation Instructions", :date => Time.now)
+    mail(:to => user.email, :subject => "Activation Instructions", :date => Time.now, :from => "noreply@learnto.com")
   end
 
   def welcome(user)
@@ -13,7 +13,7 @@ class Notifier < ActionMailer::Base
   
   def password_reset_instructions(user) 
     @url = edit_password_reset_url(user.perishable_token)
-    mail(:to => user.email, :subject => "Password Reset Instructions", :date => Time.now)       
+    mail(:to => user.email, :subject => "Password Reset Instructions", :date => Time.now, :from => "noreply@learnto.com")       
 	end  
 
 end
