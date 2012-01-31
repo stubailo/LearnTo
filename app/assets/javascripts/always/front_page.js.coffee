@@ -1,5 +1,5 @@
 $ ->
-  num_tabs = 2
+  num_tabs = $(".featured_class_tabs li").length
 
   current_tab = 0 
 
@@ -32,3 +32,5 @@ $ ->
       tab_id = $(this).attr("id").split("_")[1]
       $(this).click ->
         switch_to_tab(tab_id)
+      if $(".featured_class_tabs").innerHeight() < $(this).innerHeight()
+        $(".featured_class_tabs").height($(this).innerHeight())

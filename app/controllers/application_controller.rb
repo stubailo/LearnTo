@@ -116,22 +116,28 @@ class ApplicationController < ActionController::Base
   
   
   def user_notifications
-    notifications = current_user.notifications.order('read').order('created_at DESC')
-    id_type_set = {}
-    notifications.each {|notification| id_type_set[[notification.action, notification.read, 
-    notification.item_type, notification.parent_id]] = 1}
-    
     @notifications = []
-    id_type_set.keys.each do |key| 
-      matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
-      n.item_type == key[2] and n.parent_id == key[3]}
-      @notifications.push(matching_notifications)
+    if current_user
+      notifications = current_user.notifications.order('read').order('created_at DESC')
+      id_type_set = {}
+      notifications.each {|notification| id_type_set[[notification.action, notification.read, 
+      notification.item_type, notification.parent_id]] = 1}
+      
+      id_type_set.keys.each do |key| 
+        matching_notifications = notifications.select {|n| n.action == key[0] and n.read == key[1] and 
+        n.item_type == key[2] and n.parent_id == key[3]}
+        @notifications.push(matching_notifications)
+      end
     end
   end
   
   def user_notifications_number
-    user_notifications
-    return @notifications_number = @notifications.select {|n| n.first.read == false}.length
+    if current_user
+      user_notifications
+      return @notifications_number = @notifications.select {|n| n.first.read == false}.length
+    else
+      return 0
+    end
   end
 
   def require_no_user

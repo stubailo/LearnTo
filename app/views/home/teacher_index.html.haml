@@ -5,7 +5,7 @@
       .teacher_feed_class
         - resource_pages = class_room.resource_pages.sort_by {|x| x.id}
         %h3= link_to class_room.name, class_room_path(class_room)
-        .info #{pluralize class_room.users.length, "student"}, rated #{class_room.rating}
+        .info #{pluralize class_room.users.length, "student"}
         .section_links
           %h4 Quick Links
           %ul
