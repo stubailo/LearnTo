@@ -24,9 +24,5 @@
       %div.bottom
         posted by #{link_to post.user.login, post.user}, 
         last activity #{ time_ago_in_words(post.last_updated, include_seconds = true)} ago.
-        = link_to(pluralize(post.comments.count, "response"), class_room_forum_post_path(@class_room, @forum, post)) + (post.tag_list.length > 0 ? ", " : "")
-        -if post.tag_list.length > 0
-          tags: 
-          -post.tag_list.each do |x|
-            = link_to x, class_room_search_by_tag_path(@class_room, @forum, :tag_term => x)
+        = link_to(pluralize(post.comments.count, "response"), class_room_forum_post_path(@class_room, @forum, post))
 = paginate @posts
