@@ -14,15 +14,35 @@
   .news_feed
     %h1 Class Updates
     %ul
-      - if @news_feed_posts.empty?
+      - if current_user.class_rooms.length < 1
         .empty_news_feed
           %h2 You're not in any classes yet!
-          Pick a category you're interested in to browse classes:
+          -if @class_room
+            Check out our tutorial class:
+            %ul
+              = link_to "Learn to use this site!", class_room_path(@class_room)
+          
+          = @class_room ? "Or pick " : "Pick "
+          a category you're interested in to browse classes:
           %ul 
             - ClassRoom::CATEGORIES.each do |category|
               %li
                 =link_to category, class_rooms_search_path( { "category" => category, "search_term" => ""} )
-      - else
+      - elsif @news_feed_posts.empty?
+        .empty_news_feed
+          %h2 There's nothing to see in any of your classes!
+          -if @class_room
+            Check out our tutorial class:
+            %ul
+              = link_to "Learn to use this site!", class_room_path(@class_room)
+          
+          = @class_room ? "Or pick " : "Pick "
+          a category you're interested in to browse classes:
+          %ul 
+            - ClassRoom::CATEGORIES.each do |category|
+              %li
+                =link_to category, class_rooms_search_path( { "category" => category, "search_term" => ""} )
+      -else
         - @news_feed_posts.each do |post|
           - if post[:type] == "resource"
             %li.news_feed_item
