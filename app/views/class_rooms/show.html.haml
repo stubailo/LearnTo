@@ -63,5 +63,5 @@
     %div
       - if @is_creator
         = link_to "Edit Class Description", edit_class_room_resource_page_section_resource_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :id => "edit_class_description"
-        = link_to @description.hidden ? "Show Class Description" : "Hide Class Description", class_room_resource_page_section_publish_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :class => "hide_link"
+        = link_to @description.hidden ? "Show Class Description To Students" : "Hide Class Description From Students", class_room_resource_page_section_publish_path(@description.section.resource_page.class_room, @description.section.resource_page, @description.section, @description), :class => "hide_link"
       = render :partial => "shared/document_embed", :locals => { :res => @class_room.resource, :style => "big_embed" }

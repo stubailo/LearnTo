@@ -1,7 +1,10 @@
 class ClassRoomsController < ApplicationController
   # GET /class_rooms
   # GET /class_rooms.json
-  before_filter :store_location
+  before_filter do |controller|
+    store_location unless controller.request.format.json?
+  end
+
   
   def index
     @class_rooms = ClassRoom.all
