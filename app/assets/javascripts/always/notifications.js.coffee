@@ -24,12 +24,12 @@ check_for_notifications = ->
 
 set_titlebar_number = (n) ->
   if document.title[0] == "("
-    if n > 0 
+    if n != 0 
       document.title = "(" +n+ ") " + document.title.split(" ")[1]
     else
       document.title = document.title.split(" ")[1]
   else
-    if n > 0
+    if n != 0
       document.title = "(" +n+ ") " + document.title
 
 update_notification_number = (response) ->
@@ -37,7 +37,7 @@ update_notification_number = (response) ->
   unless $(".notifications").hasClass("opened")
     $(".notifications a").text(n)
     set_titlebar_number(n)
-    if n > 0
+    if n != 0
       $(".notifications a").addClass("has_notifications")
     else
       $(".notifications a").removeClass("has_notifications")

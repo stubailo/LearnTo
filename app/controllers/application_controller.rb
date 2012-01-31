@@ -135,7 +135,7 @@ class ApplicationController < ActionController::Base
     if current_user
       user_notifications
       @notifications_number = @notifications.select {|n| n.first.read == false}.length
-      @notifications_number = @notifications_number > 10 ? "10+" : @notifications_number
+      @notifications_number = @notifications_number > 9 ? "9+" : @notifications_number
     else
       return 0
     end

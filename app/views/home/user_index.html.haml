@@ -52,7 +52,8 @@
               - resource_page = section.resource_page
               - class_room = resource_page.class_room
               %h3 
-                New #{resource_page.section.singularize.downcase} in
+                =(resource.created_at == resource.updated_at ? "New" : "Updated")
+                #{resource_page.section.singularize.downcase} in
                 = link_to class_room.name, class_room
               %h4
                 = link_to resource.name, [class_room, resource_page, section, resource]
