@@ -20,4 +20,4 @@ $ ->
         container.find(".image_container").animate( {height: 100} )
         the_image.animate( {marginTop: the_image.innerHeight() * -0.5 + 100})
       
-      $(this).parents(".image_embed").find(".expand_image_preview").toggle(image_open, image_close)
+      container.find(".expand_image_preview").toggle(image_open, image_close)

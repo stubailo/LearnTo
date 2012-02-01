@@ -36,7 +36,7 @@ class HomeController < ApplicationController
       render :action => "user_index", :layout => "layouts/user_home", :locals => {:which_tab => "user_index"}
     #There is no user logged in
     else
-      @features = PremiumClass.first(3)
+      @features = PremiumClass.first(4)
       render :action => "index"
       return
     end
