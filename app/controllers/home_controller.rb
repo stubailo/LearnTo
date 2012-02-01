@@ -36,7 +36,7 @@ class HomeController < ApplicationController
       render :action => "user_index", :layout => "layouts/user_home", :locals => {:which_tab => "user_index"}
     #There is no user logged in
     else
-      @features = PremiumClass.first(4)
+      @features = PremiumClass.first(4).sort_by { |x| x.created_at }.reverse
       render :action => "index"
       return
     end
