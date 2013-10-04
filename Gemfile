@@ -8,8 +8,9 @@ gem 'rails', '>= 3.1'
 gem 'thin'
 gem 'heroku'
 
-gem 'mysql2'
-gem 'pg'
+group :development do
+  gem 'sqlite3'
+end
 
 gem "authlogic"
 #gem "devise"
@@ -18,6 +19,7 @@ gem 'haml'
 gem 'execjs'
 gem 'therubyracer'
 gem 'mail'
+gem 'jquery-rails'
 
 gem "paperclip", "~> 2.0"
 gem 'aws-s3'
@@ -35,10 +37,9 @@ group :assets do
 end
 
 group :production do
+  gem 'pg'
   gem 'rack-google_analytics', :require => "rack/google_analytics"
 end
-
-gem 'jquery-rails'
 
 gem "recaptcha", :require => "recaptcha/rails"
 
