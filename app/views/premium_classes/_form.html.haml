@@ -1,4 +1,4 @@
-= form_for premium_class, :url => class_room_premium_class_path(@class_room, premium_class), :html => { :multipart => true } do |f|
+= form_for premium_class, :url => class_room_premium_class_path(@class_room.id, premium_class), :html => { :multipart => true } do |f|
   = f.file_field :image
   
   = f.submit "Update Premium"
