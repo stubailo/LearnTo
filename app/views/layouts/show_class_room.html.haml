@@ -60,7 +60,7 @@
               = link_to "Edit Featured", class_room_premium_class_path(@class_room, @class_room.premium_class)
             - else
               = link_to "Make Featured", new_class_room_premium_class_path(@class_room)
-          -if !@show_join
+          -if !@show_join and !@is_creator
             %li
               = link_to "Leave Class", user_permission_path(@user_permission), confirm: 'Are you sure you want to leave this class?', method: :delete
 
