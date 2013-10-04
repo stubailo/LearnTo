@@ -1,12 +1,12 @@
 development:
   bucket: LearnTo-dev
-  access_key_id: AKIAJMRGW7JB4EKDMTHA
-  secret_access_key: 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
+  access_key_id: ENV["S3_KEY"] 
+  secret_access_key: ENV["S3_SECRET"]
 test:
   bucket: LearnTo-test
-  access_key_id: AKIAJMRGW7JB4EKDMTHA
-  secret_access_key: 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
+  access_key_id: ENV["S3_KEY"]
+  secret_access_key: ENV["S3_SECRET"]
 production:
-  bucket: LearnTo-prod
-  access_key_id: AKIAJMRGW7JB4EKDMTHA
-  secret_access_key: 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
+  bucket: LearnTo-production
+  access_key_id: ENV["S3_KEY"]
+  secret_access_key: ENV["S3_SECRET"]
